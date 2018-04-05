@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite redirection to initial language.
+Application: SIARD Suite 2.0
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+  <title>SIARD Suite</title>
+    <script language="JavaScript">
+    <!--
+      var sLANGUAGE_EN = "en";
+      var sLANGUAGE_DE = "de";
+      var sLANGUAGE_FR = "fr";
+      var sLANGUAGE_IT = "it";
+      var asLANGUAGES = [sLANGUAGE_DE, sLANGUAGE_FR, sLANGUAGE_IT, sLANGUAGE_EN];
+      var sLanguage = null;
+      /* navigator language is platform language, not browser language */
+      if (navigator.language)
+        sLanguage = navigator.language;
+      /* could be something like "en-US" */
+      if (sLanguage && (sLanguage.length > 2))
+        sLanguage = sLanguage.substring(0,2);
+      /* must have exactly two characters */
+      if ((sLanguage) || (sLanguage.length == 2))
+      {
+        /* if language is not supported, use "en" */
+        if (asLANGUAGES.indexOf(sLanguage) < 0)
+          sLanguage = sLANGUAGE_EN;
+      }
+      var sRedirection = sLanguage+"/index.html";
+      location.replace(sRedirection);
+    // -->
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

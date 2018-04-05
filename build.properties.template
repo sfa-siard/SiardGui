@@ -1,0 +1,36 @@
+#== build.properties ===================================================
+# Properties of Ant build files of SiardGui
+# Application : SIARD Suite 2.0
+# Description : user-specific build properties of SiardGui
+#-----------------------------------------------------------------------
+# Copyright  : 2016, Enter AG, Rüti ZH, Switzerland
+# Created    : 11.10.2015, Hartwig Thomas
+#=======================================================================
+
+#-----------------------------------------------------------------------
+# DO NOT USE WHITESPACES IN PATHS; JAVA DOES NOT LIKE THEM:
+# Windows developers:
+# If you want to use backslashes (\) then you must repeat them twice, e.g.
+# c:\\foo\\bar
+# or - in path names - you can just use slashes, e.g.
+# c:/foo/bar
+#-----------------------------------------------------------------------
+#-----------------------------------------------------------------------
+# The deployment folder to which the binaries are to be unzipped.
+dirdeploy=/Users/Hartwig/test
+#dirdeploy=/home/hartwig/test
+#dirdeploy=D:/Temp
+
+#-----------------------------------------------------------------------
+# The bootstrap class (run-time jar) for compiling code compatible with JSE 1.7.
+java7rtjar=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre/lib/rt.jar
+#java7rtjar=C:/Program Files/Java/jdk1.7.0_79/jre/lib/rt.jar
+#java7rtjar=/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar
+
+#-----------------------------------------------------------------------
+# The following property definition signals, that git can be 
+# called with "git commit", "git pull" and "git push" from the project's
+# root folder. If that is not the case, it must be commented out.
+# (Setting it to "false" is not sufficient!)  
+git=/usr/bin/git
+#git=C:/Program Files/Git/bin/git.exe

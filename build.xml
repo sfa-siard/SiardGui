@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- build.xml =========================================================
+ANT build file of SiardGui
+Application: SIARD Suite 2.0
+Description: ANT build file of SiardGui
+Platform   : JAVA, ANT
+========================================================================
+Copyright  : 2016, Enter AG, Rüti ZH, Switzerland
+Created    : 01.06.2017, Hartwig Thomas
+==================================================================== -->
+<project basedir="." default="build" name="siardgui" xmlns:if="ant:if" xmlns:unless="ant:unless">
+  <!-- build properties contain local settings. They must reside in
+	   the same folder as this build.xml. Use build.properties.template
+	   as a guide for creating the local copy.
+  -->
+  <property file="build.properties"/>
+  <property name="debuglevel" value="source,lines,vars"/>
+  <property name="target" value="1.7"/>
+  <property name="source" value="1.7"/>
+  <!-- the main folders of the project -->
+  <property name="dirsrc" value="src"/>
+  <property name="dirtest" value="test/"/>
+  <property name="dirbin" value="bin"/>
+  <property name="dirlib" value="lib"/>
+  <property name="dirdoc" value="doc"/>
+  <property name="diretc" value="etc"/>
+  <property name="dirhxd" value="hxd"/>
+  <property name="dirtestfiles" value="testfiles"/>
+  <property name="dirtmp" value="tmp"/>
+  <property name="dirdist" value="dist"/>
+  <property name="dirgui" value="ch/admin/bar/siard2/gui"/>
+  <property name="dirres" value="${dirsrc}/${dirgui}/res"/>
+
+  <!-- enterutils jar -->
+  <property name="jarenterutils" value="enterutils.jar"/>
+  <property name="cpenterutils" value="${dirlib}/${jarenterutils}"/> 
+  <!-- antlr 4 jar -->
+  <property name="jarantlr4runtime" value="antlr-runtime-4.5.2.jar"/>
+  <property name="cpantlr" value="${dirlib}/${jarantlr4runtime}"/>
+  <!-- sqlparser jar -->
+  <property name="jarsqlparser" value="sqlparser.jar"/>
+  <property name="cpsqlparser" value="${dirlib}/${jarsqlparser}"/> 
+  <!-- JAXB jars -->
+  <property name="jarjaxbapi" value="jaxb-api.jar"/>
+  <property name="jarjaxbcore" value="jaxb-core.jar"/>
+  <property name="jarjaxbimpl" value="jaxb-impl.jar"/>
+  <property name="cpjaxb" value="${dirlib}/${jarjaxbapi};${dirlib}/${jarjaxbcore};${dirlib}/${jarjaxbimpl}"/> 
+  <!-- zip64 jar -->
+  <property name="jarzip64" value="zip64.jar"/>
+  <property name="cpzip64" value="${dirlib}/${jarzip64}"/> 
+  <!-- woodstox -->
+  <property name="jarstax2api" value="stax2-api-3.1.1.jar"/>
+  <property name="jarwoodstoxcore" value="woodstox-core-lgpl-4.1.2.jar"/>
+  <property name="cpwoodstox" value="${dirlib}/${jarstax2api};${dirlib}/${jarwoodstoxcore}"/>
+  <!-- msv -->
+  <property name="jarmsvcore" value="msv-core-2010.2.jar"/>
+  <property name="jarxsdlib" value="xsdlib-2010.1.jar"/>
+  <property name="jarwoodstoxmsv" value="woodstox-msv-rng-datatype-20020414.jar"/>
+  <property name="cpmsv" value="${dirlib}/${jarmsvcore};${dirlib}/${jarxsdlib};${dirlib}/${jarwoodstoxmsv}"/>
+  <!-- jdbcbase jars -->
+  <property name="jarjdbcbase" value="jdbcbase.jar"/>
+  <property name="jarjdbcbasetest" value="jdbcbase-test.jar"/>
+  <property name="cpjdbcbase" value="${dirlib}/${jarjdbcbase}"/> 
+  <property name="cpjdbcbase-test" value="${dirlib}/${jarjdbcbasetest}"/>
+  <!-- sunjdbc -->
+  <property name="jarsunjdbc" value="sunjdbc.jar"/>
+  <property name="cpsunjdbc" value="${dirlib}/${jarsunjdbc}"/>
+  <!-- JTS -->
+  <property name="jarjts" value="jts-1.14.jar"/>
+  <property name="cpjts" value="${dirlib}/${jarjts}"/>
+  <!-- jdbcaccess jars -->
+  <property name="jarjdbcaccess" value="jdbcaccess.jar"/>
+  <property name="jarjdbcaccesstest" value="jdbcaccess-test.jar"/>
+  <property name="jarjackcess" value="jackcess-2.1.6a.jar"/>
+  <property name="jarcommonslang" value="commons-lang-2.6.jar"/>
+  <property name="jarcommonslogging" value="commons-logging-1.1.3.jar"/>
+  <property name="cpjdbcaccess" value="${dirlib}/${jarjdbcaccess};${dirlib}/${jarjackcess};${dirlib}/${jarcommonslang};${dirlib}/${jarcommonslogging}"/>
+  <property name="cpjdbcaccess-test" value="${dirlib}/${jarjdbcaccesstest}"/>
+  <!-- jdbcdb2 jars -->
+  <property name="jarjdbcdb2" value="jdbcdb2.jar"/>
+  <property name="jarjdbcdb2test" value="jdbcdb2-test.jar"/>
+  <property name="jardb2jdbc" value="db2jcc4.jar"/>
+  <property name="cpjdbcdb2" value="${dirlib}/${jarjdbcdb2};${dirlib}/${jardb2jdbc}"/>
+  <property name="cpjdbcdb2-test" value="${dirlib}/${jarjdbcdb2test}"/>
+  <!-- jdbch2 jars -->
+  <property name="jarh2jdbc" value="h2-1.3.176.jar"/>
+  <property name="jarjdbch2" value="jdbch2.jar"/>
+  <property name="jarjdbch2test" value="jdbch2-test.jar"/>
+  <property name="cpjdbch2" value="${dirlib}/${jarjdbch2};${dirlib}/${jarh2jdbc}"/> 
+  <property name="cpjdbch2-test" value="${dirlib}/${jarjdbch2test}"/>
+  <!-- jdbcmssql jars -->
+  <property name="jarmssqljdbc" value="sqljdbc41.jar"/>
+  <property name="jarjdbcmssql" value="jdbcmssql.jar"/>
+  <property name="jarjdbcmssqltest" value="jdbcmssql-test.jar"/>
+  <property name="cpjdbcmssql" value="${dirlib}/${jarjdbcmssql};${dirlib}/${jarmssqljdbc}"/>
+  <property name="cpjdbcmssql-test" value="${dirlib}/${jarjdbcmssqltest}"/>
+  <!-- jdbcoracle jars -->
+  <property name="jarojdbc" value="ojdbc6.jar"/>
+  <property name="jarxdb" value="xdb6.jar"/>
+  <property name="jarxmlparser" value="xmlparserv2.jar"/>
+  <property name="jarjdbcoracle" value="jdbcoracle.jar"/>
+  <property name="jarjdbcoracletest" value="jdbcoracle-test.jar"/>
+  <property name="cpjdbcoracle" value="${dirlib}/${jarjdbcoracle};${dirlib}/${jarojdbc};${dirlib}/${jarxdb};${dirlib}/${jarxmlparser}"/> 
+  <property name="cpjdbcoracle-test" value="${dirlib}/${jarjdbcoracletest}"/>
+  <!-- jdbcmysql jars -->
+  <property name="jarmysqljdbc" value="mysqljdbc5_1_40.jar"/>
+  <property name="jarjdbcmysql" value="jdbcmysql.jar"/>
+  <property name="jarjdbcmysqltest" value="jdbcmysql-test.jar"/>
+  <property name="cpjdbcmysql" value="${dirlib}/${jarjdbcmysql};${dirlib}/${jarmysqljdbc}"/>
+  <property name="cpjdbcmysql-test" value="${dirlib}/${jarjdbcmysqltest}"/>
+  <!-- siardapi -->
+  <property name="jarsiardapi" value="siardapi.jar"/>
+  <property name="cpsiardapi" value="${dirlib}/${jarsiardapi}"/> 
+  <!-- siardcmd -->
+  <property name="jarsiardcmd" value="siardcmd.jar"/>
+  <property name="cpsiardcmd" value="${dirlib}/${jarsiardcmd}"/>
+  <!-- ini4j -->
+  <property name="jarini4j" value="ini4j-0.5.4.jar"/>
+  <property name="cpini4j" value="${dirlib}/${jarini4j}"/>
+  <!-- mslinks -->
+  <property name="jarmslinks" value="mslinks.jar"/>
+  <property name="cpmslinks" value="${dirlib}/${jarmslinks}"/>
+  <!-- JavaFX -->
+  <property name="jarjfxrt" value="jfxrt.jar"/>
+  <property name="cpjfxrt" value="${dirlib}/${jarjfxrt}"/>
+	<!-- junit -->
+	<property name="jarhamcrest" value="hamcrest-core-1.3.jar"/>
+	<property name="jarjunit4" value="junit-4.12.jar"/>
+  <property name="cpjunit" value="${dirlib}/${jarhamcrest};${dirlib}/${jarjunit4}"/>
+
+  <!-- delete build folders -->
+  <property name="dirbuild" value="build"/>
+  <property name="dirbuildclasses" value="${dirbuild}/classes"/>
+  <property name="dirbuildtests" value="${dirbuild}/tests"/>
+  <target name="clean">
+    <echo message="${ant.project.name}: clean"/>
+    <delete dir="${dirbuildclasses}"/>
+    <delete dir="${dirbuildtests}"/>
+    <delete dir="${dirtmp}"/>
+    <delete dir="${dirdist}"/>
+  </target>
+  
+  <!-- create build folders -->
+  <target name="init" depends="clean">
+    <echo message="${ant.project.name}: init"/>
+    <mkdir dir="${dirbuildclasses}"/>
+    <mkdir dir="${dirbuildtests}"/>
+    <mkdir dir="${dirtmp}"/>
+    <mkdir dir="${dirdist}"/>
+  </target>
+  
+  <!-- check if mainfest and local build properties are available -->
+  <property name="filemanifest" value="${dirsrc}/META-INF/MANIFEST.MF"/>
+  <property name="filerevoldproperties" value="${dirtmp}/revold.properties"/>
+  <property name="filegithead" value=".git/HEAD"/>
+  <property name="filebranchproperties" value="${dirtmp}/branch.properties"/>
+  <target name="check" depends="init">
+    <!-- get current date -->
+    <tstamp>
+      <format property="builtdate" pattern="dd. MMM yyyy" locale="en,CH"/>
+    </tstamp>
+    <echo message="builddate: ${builtdate}"/>
+    <!-- current version and revision are taken from manifest -->
+    <copy file="${filemanifest}" tofile="${filerevoldproperties}"/>
+    <!-- reduce it to version and revision properties --> 
+    <replaceregexp file="${filerevoldproperties}" 
+      match=".*Implementation-Version: (\d+\.\d+)\.(\d+).*" 
+      replace="version=\1&#x000A;revold=\2"
+      flags="gms"/>
+    <!-- load the properties -->
+    <property file="${filerevoldproperties}"/>
+    <property name="zipfolder" value="siard_suite-${version}"/>
+    <echo message="version: ${version}"/>
+    <echo message="revold: ${revold}"/>
+    <echo message="distribution: ${distribution}"/>
+    <echo message="zipfolder: ${zipfolder}"/>
+    <!-- fail if build.properties are not configured -->
+    <fail  message="External build.properties not configured correctly!">
+      <condition>
+        <not>
+          <and>
+            <isset property="version"/>
+            <isset property="revold"/>
+            <isset property="java7rtjar"/>
+          </and>
+        </not>
+      </condition>
+    </fail>
+    <!-- check .git/HEAD for active branch name -->
+    <copy file="${filegithead}" tofile="${filebranchproperties}"/>
+    <!-- reduce it to branch property -->
+    <replaceregexp file="${filebranchproperties}" 
+      match="^ref: refs/heads/(.*)$" 
+      replace="branch=\1"
+      flags="gms"/>
+    <!-- load the property -->
+    <property file="${filebranchproperties}"/>
+    <!-- compute branch.master -->
+    <condition property="branch.master">
+      <and>
+        <not><isset property="submit"/></not> 
+        <equals arg1="${branch}" arg2="master"/>
+      </and>
+    </condition>
+    <echo message="branch: ${branch}"/>
+    <echo message="branch.master: ${branch.master}"/>
+    <echo message="build.properties.configured: ${build.properties.configured}"/>
+  </target>
+  
+  <!-- commit local work -->
+  <property name="fileadd" value="${dirtmp}/add.txt"/>
+  <property name="filecommit" value="${dirtmp}/commit.txt"/>
+  <target name="commit" depends="check" if="git">
+    <echo message="get recent SIARD JARs"/>
+    <!-- TODO: get most recently released version of enterutils.jar -->
+    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of sqlparser.jar -->
+    <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of zip64.jar -->
+    <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of siardapi.jar -->
+    <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of siardcmd.jar -->
+    <copy file="../SiardCmd/dist/siardcmd.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcbase.jar -->
+    <copy file="../JdbcBase/dist/jdbcbase.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcaccess.jar -->
+    <copy file="../JdbcAccess/dist/jdbcaccess.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcdb2.jar -->
+    <copy file="../JdbcDb2/dist/jdbcdb2.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbch2.jar -->
+    <copy file="../JdbcH2/dist/jdbch2.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcmssql.jar -->
+    <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcmysql.jar -->
+    <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcoracle.jar -->
+    <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- stage all changes -->
+    <echo message="${ant.project.name}: git add -A"/>
+    <exec executable="${git}" output="${fileadd}" failonerror="true">
+      <arg value="add"/>
+      <arg value="-A"/>
+    </exec>
+    <!-- commit all changes -->
+    <echo message="${ant.project.name}: git commit -am &quot;${version}.${revold}&quot;"/>
+    <exec executable="${git}" output="${filecommit}" resultproperty="resultcommit">
+      <arg value="commit"/>
+      <arg value="-am" />
+      <arg value="${version}.${revold}" />
+    </exec>
+    <fail message="git commit failed!">
+      <condition>
+        <not>
+          <or>
+            <equals arg1="${resultcommit}" arg2="0"/>
+            <!-- warning, that nothing needed to be committed: -->
+            <equals arg1="${resultcommit}" arg2="1"/>
+          </or>
+        </not>
+      </condition>
+    </fail>
+  </target>
+  
+  <!-- update from remote master -->
+  <property name="filepull" value="${dirtmp}/pull.txt"/>
+  <target name="pull" depends="commit" if="git">
+    <!-- pull master branch
+    <echo message="${ant.project.name}: git pull origin master"/>
+    <exec executable="${git}" output="${filepull}">
+      <arg value="pull"/>
+      <arg value="origin"/>
+      <arg value="master"/>
+    </exec>
+    -->
+  <!-- pull dev branch -->
+    <echo message="${ant.project.name}: git pull origin ${branch}"/>
+    <exec executable="${git}" output="${filepull}" failonerror="true">
+      <arg value="pull"/>
+      <arg value="origin"/>
+      <arg value="${branch}"/>
+    </exec>
+  </target>
+  
+  <!-- increment revision and update manifest -->
+  <property name="filerevisionproperties" value="${dirtmp}/revision.properties"/> 
+  <target name="revision" depends="pull">
+    <echo message="${ant.project.name}: revision"/>
+    <copy file="${filerevoldproperties}" tofile="${filerevisionproperties}" overwrite="true"/>
+    <replaceregexp file="${filerevisionproperties}" 
+      match="^revold=(.*)$" 
+      replace="revision=\1"
+      flags="gm"/>
+    <propertyfile file="${filerevisionproperties}">
+      <entry key="revision" type="int" operation="+" value="1"/>
+    </propertyfile>
+    <property file="${filerevisionproperties}"/>
+    <echo message="revision: ${revision}" />
+    <property name="distribution" value="SIARD-Suite-${version}.${revision}.zip"/>
+    <replaceregexp file="${filemanifest}" 
+      match="^Implementation-Version: .*$" 
+      replace="Implementation-Version: ${version}.${revision}"
+      flags="gm"/>
+    <replaceregexp file="${filemanifest}" 
+      match="^Built-Date: .*$" 
+      replace="Built-Date: ${builtdate}"
+      flags="gm"/>
+  </target>
+  
+  <!-- build the SiardGui classes -->
+  <property name="dirbuildgui" value="${dirbuildclasses}/${dirgui}"/>
+  <property name="dirbuildres" value="${dirbuildgui}/res"/>
+  <target name="build" depends="init,revision">
+    <echo message="${ant.project.name}: build"/>
+    <!-- without this, the package-info class is not generated! -->
+    <touch>
+      <fileset dir="${dirsrc}" includes="**/*.*"/>
+    </touch>
+    <javac debug="true" debuglevel="${debuglevel}"
+      includeantruntime="false"
+      bootclasspath="${java7rtjar}"
+      source="${source}" 
+      target="${target}"
+      encoding="UTF-8"
+      srcdir="${dirsrc}"
+      destdir="${dirbuildclasses}">
+    	<classpath>
+        <pathelement path="${cpini4j}"/>
+        <pathelement path="${cpmslinks}"/>
+        <pathelement path="${cpjfxrt}"/>
+        <pathelement path="${cpsiardcmd}"/>
+        <pathelement path="${cpsiardapi}"/>
+        <pathelement path="${cpjdbcaccess}"/>
+        <pathelement path="${cpjdbcmysql}"/>
+        <pathelement path="${cpjdbcdb2}"/>
+        <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcmssql}"/>
+        <pathelement path="${cpjdbch2}"/>
+        <pathelement path="${cpjdbcbase}"/>
+        <pathelement path="${cpsqlparser}"/>
+        <pathelement path="${cpenterutils}"/>
+    	</classpath>
+    </javac>
+    <!-- add resources -->
+    <copy todir="${dirbuildres}">
+      <fileset dir="${dirres}"/>
+    </copy>
+  </target>
+  
+  <!-- create the JAR file containing all classes -->
+  <property name="jarfile" value="${ant.project.name}.jar"/>
+  <target name="jar" depends="build">
+    <echo message="${ant.project.name}: jar"/>
+    <jar jarfile="${dirdist}/${jarfile}"
+       manifest="${filemanifest}">
+      <fileset dir="${dirbuildclasses}">
+        <include name="**/*.class"/>
+        <include name="**/res/*.*"/>
+      </fileset>
+    </jar>
+  </target>
+	
+  <!-- run tests and create splash.png -->
+  <target name="test" depends="jar">
+    <!-- build the tests -->
+    <echo message="${ant.project.name}: tests"/>
+    <!-- build the tests -->
+    <javac debug="true" debuglevel="${debuglevel}"
+      includeantruntime="false"
+      bootclasspath="${java7rtjar}"
+      source="${source}" 
+      target="${target}"
+      encoding="UTF-8"
+      srcdir="${dirtest}"
+      destdir="${dirbuildtests}">
+      <classpath>
+        <pathelement path="${dirdist}/${jarfile}"/>
+      	<pathelement path="${cpjunit}"/>
+        <pathelement path="${cpini4j}"/>
+        <pathelement path="${cpmslinks}"/>
+        <pathelement path="${cpjfxrt}"/>
+        <pathelement path="${cpsiardcmd}"/>
+        <pathelement path="${cpsiardapi}"/>
+        <pathelement path="${cpjdbcaccess}"/>
+        <pathelement path="${cpjdbcmysql}"/>
+        <pathelement path="${cpjdbcdb2}"/>
+        <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcmssql}"/>
+        <pathelement path="${cpjdbch2}"/>
+        <pathelement path="${cpjdbcbase}"/>
+        <pathelement path="${cpsqlparser}"/>
+        <pathelement path="${cpenterutils}"/>
+      </classpath>
+    </javac>
+    <!-- run the tests -->
+    <echo message="running SplashPaneTester with exit argument"/>
+  	<java classname="ch.admin.bar.siard2.gui.SplashPaneTester" 
+  		fork="true"> <!-- fork is necessary fpr any JavaFX Application! -->
+  		<arg value="exit"/>
+      <classpath>
+        <pathelement path="${dirbuildtests}"/>
+        <pathelement path="${dirdist}/${jarfile}"/>
+        <pathelement path="${cpini4j}"/>
+        <pathelement path="${cpmslinks}"/>
+        <pathelement path="${cpjfxrt}"/>
+        <pathelement path="${cpsiardcmd}"/>
+        <pathelement path="${cpsiardapi}"/>
+        <pathelement path="${cpjdbcaccess}"/>
+        <pathelement path="${cpjdbcmysql}"/>
+        <pathelement path="${cpjdbcdb2}"/>
+        <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcmssql}"/>
+        <pathelement path="${cpjdbch2}"/>
+        <pathelement path="${cpjdbcbase}"/>
+        <pathelement path="${cpsqlparser}"/>
+        <pathelement path="${cpenterutils}"/>
+      </classpath>
+  	</java>
+  </target>
+
+  <!-- create the ZIP file with binaries for Windows and LINUX -->
+  <!-- folders in the distribution -->
+  <target name="zip" depends="test">
+    <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
+    <zip zipfile="${dirdist}/${distribution}">
+      <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
+        <include name="${jarfile}"/>
+      </zipfileset>
+      <zipfileset dir="${dirlib}" prefix="${zipfolder}/${dirlib}">
+      	<exclude name="${jarhamcrest}"/>
+      	<exclude name="${jarjunit4}"/>
+      </zipfileset>
+      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+        <include name="**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
+        <include name="**/*.*"/>
+        <exclude name="developer/**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirhxd}" prefix="${zipfolder}/${dirhxd}">
+        <exclude name="*.ini"/>
+      </zipfileset>
+      <zipfileset dir="${diretc}" prefix="${zipfolder}/${diretc}">
+        <exclude name="debug.properties"/>
+        <exclude name="testing.properties"/>
+      </zipfileset>
+      <zipfileset dir="${dirtestfiles}" prefix="${zipfolder}/${dirtestfiles}">
+        <include name="*.siard"/>
+      </zipfileset>
+      <zipfileset dir="." prefix="${zipfolder}">
+        <include name="*.txt"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <!-- push to remote dev branch -->
+  <property name="filepush" value="${dirtmp}/push.txt"/>
+  <target name="push" depends="zip" if="git" unless="branch.master">
+    <!-- commit -->
+    <echo message="${ant.project.name}: git commit -am &quot;Build: ${version}.${revision}&quot;"/>
+    <exec executable="${git}" output="${filecommit}" failonerror="true">
+      <arg value="commit"/>
+      <arg value="-am" />
+      <arg value="Build: ${version}.${revision}" />
+    </exec>
+    <!-- push to remote -->
+    <echo message="${ant.project.name}: git push origin ${branch}"/>
+    <exec executable="${git}" output="${filepush}" failonerror="true">
+      <arg value="push"/>
+      <arg value="origin"/>
+      <arg value="${branch}"/>
+    </exec>
+  </target>
+  
+  <!-- deploy to file system -->
+  <target name="deploy" depends="push" if="dirdeploy">
+    <echo message="${ant.project.name}: deploy"/>
+    <delete dir="${dirdeploy}/${zipfolder}"/>
+    <unzip dest="${dirdeploy}" src="${dirdist}/${distribution}" />
+  	<chmod dir="${dirdeploy}" perm="ugo+rx" includes="**/*.sh"/>
+  </target>
+  
+</project>

@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in French: Chapter Execution.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Exécution de SIARDGui</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body onload="adaptImages();">    
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sélection de la langue</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/execution.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a lang="fr" title="Français selectionné" aria-label="Français selectionné" class="active">FR</a></li>
+                <li><a href="../it/execution.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/execution.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite - Manuel</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Exécution de <em>SiardGui</em></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Exécution de <em>SiardGui</em></h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>L'application <em>SiardGui</em> intègre une interface graphique interactive (GUI - Graphical User Interface). 
+                  À l'aide de <em>SiardGui</em>, il est possible de:
+                  <ul>
+                    <li>télécharger une base de données et de l'enregistrer dans une archive SIARD,</li>
+                    <li>d'afficher les métadonnées dans une archive SIARD, de les rechercher, de les trier, de les compléter et de les modifier, tant que les données primaires demeurent inchangées,</li>
+                    <li>d'afficher, de rechercher et de trier les données primaires dans une archive SIARD,</li>
+                    <li>de charger une archive SIARD dans une instance de base de données en vue de recherches,</li>
+                    <li>de télécharger les métadonnées d'une base de données pour une archive SIARD (sans données primaires) pour obtenir un premier aperçu du processus d'archivage,</li>
+                    <li>d'importer un échantillon de métadonnées d'une archive SIARD à titre d'exemple avec des descriptions existantes.</li>
+                  </ul>
+                </p>
+                <p><em>SiardGui</em> est l'application centrale avec laquelle des données sont traitées en format SIARD. Les données primaires ne peuvent pas être modifiées. <em>SiardGui</em> n'est pas adapté pour des recherches complexes. Pour ces dernières, il est recommandé de charger l'archive SIARD dans une instance de base de données dans laquelle toutes les possibilités de requêtes SQL sont disponibles.</p>
+                <p>La conversion des champs de données de bases de données du type TIME ou TIMESTAMP dépend du fuseau horaire local. Si l'heure 15:30 est enregistrée dans une base de données à Zurich, elle sera alors enregistrée à l'heure UTC 14:30 (en hiver!) dans les métadonnées de l'archive SIARD. Si toutes les heures dans une base de données doivent être interprétées sans changement à l'heure UTC, <em>SiardGui</em> doit est lancé avec l'option <pre>-Duser.timezone=GMT</pre>.</p>
+                <p><em>SiardGui</em> peut être lancé avec le nom d'une archive SIARD comme unique argument qui sera alors immédiatement ouverte après le démarrage. Cela rend possible la configuration de <em>SiardGui</em> comme application standard pour l'ouverture de fichiers comportant l'extension <em>siard</em>.<p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2>Premier démarrage</h2>
+                <p><em>SIARD Suite</em> est livré dans un fichier ZIP et doit tout d'abord être décompressé. Le fichier <em>SiardGui.jar</em> se trouve dans le répertoire <em>lib</em> de la livraison. Si JAVA est correctement installé, le programme peut être lancé sous Windows avec un double-clic sur le fichier JAR. Comme alternative, les scripts indépendants d'une plateforme <em>siardgui.cmd</em> (Windows) ou <em>siardgui.sh</em> (LINUX) peuvent être exécutés.</p>
+                <p>Si cela ne fonctionne pas ou qu'un autre système d'exploitation est utilisé, <em>SiardGui</em> peut aussi être lancé depuis la ligne de commande <em>lib</em> de <em>SIARD Suite</em> de la manière suivante:
+                  <pre>javaw -jar SiardGui.jar (Windows)
+java -jar SiardGui.jar (tous les systèmes d'exploitation)</pre></p>
+                <p>Pour que cela fonctionne, le répertoire <em>bin</em> de JAVA Distribution doit avoir été inséré à la variable d'environnement PATH.
+                  Toutefois, ceci a normalement déjà été fait lors de l'installation de JAVA. Autrement, il faut indiquer le nom du chemin d'accès complet au programme JAVA: (par ex. <pre>"C:\Program Files\Java\jre1.8.0_144\bin\javaw.exe" -jar SiardGui.jar</pre> 
+                  y-compris les guillemets).</p>
+                <p>Lors du premier lancement de <em>SiardGui</em>, un message comme ci-dessous apparait:</p>
+                <p><img alt="Message Initial Installation" src="initialnew.png"/></p>
+                <p>Comme à cet instant, <em>SiardGui</em> ne connait pas la langue que l'utilisateur préfère, la langue du message affiché dépend de celle configurée dans le système d'exploitation et de celle qui a été sélectinnée lors de l'installation de JAVA.</p>
+                <p>Si ce message est quittancé avec <em>Oui</em>, on obtient la possibilité de choisir un nouveau répertoire vide, où une copie de la livraison SIARD doit être installée.
+                  Après l'installation réussie, <em>SiardGui</em> peut alors être lancé depuis le répertoire sélectionné ou avec un double-clic sur l'icone du bureau venant d'être installé.</p>
+                <p>Indifféremment au fait que <em>SiardGui</em> ait été lancé depuis un stick USB ou un CD-ROM ou qu'il soit installé sur le PC de l'utilisateur, la fenêtre principale ci-après est affichée.</p> 
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2>Fenêtre principale</h2>
+                <p>La fenêtre principale se compose d'un Menu (en haut), d'une arborescence de navigation (à gauche), du contenu (à droite) et d'une ligne d'état (en bas).</p>
+                <img class="screen" alt="Empty main window" src="mainempty.png"/>
+                <p>La séparation entre l'arborescence de navigation et le contenu peut être déplacée librement. La dimension de toute la fenêtre peut également être modifiée librement (toutefois pas plus petite que le minimum défini). Si un fichier SIARD est chargé dans <em>SiardGui</em>, la fenêtre principale apparait de la manière suivante:</p>
+                <img class="screen" alt="Main window with opened SIARD file" src="mainopened.png"/>
+                <p>L'arborescence de gauche sert à la navigation dans les métadonnées.
+                  Les métadonnées modifiables de l'objet de base de données sélectionné dans l'arborescence de navigation à gauche peuvent être saisies ou modifiées dans la partie supérieure droite du contenu.</p> 
+                <h3><em>Appliquer</em> et <em>Rejeter</em></h3>
+                <p>En activant le bouton <em>Appliquer</em>, les modifications dans les métadonnées de l'archive SIARD ouverte sont copiées. En cliquant sur <em>Rejeter</em>, toutes les modifications effectuées depuis le dernier <em>Appliquer</em> ne seront pas reprises.</p>  
+                <h3>Tableau des sous-objets</h3>
+                <p>Un tableau des sous-objets les plus importants est affiché dans le contenu sous les métadonnées modifiables. Si un titre de colonne est cliqué, le tableau est trié selon cette colonne. Comme les tableaux dans les schémas et les colonnes des tableaux ne possèdent pas d'ordre naturel dans les métadonnées, ils sont affichés dans <em>SiardGui</em> normalement en ordre alphabétique. 
+                  Cette possibilité de tri est utile lorsque l'on veut essayer de s'y retrouver dans de grands schémas de bases de données.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2>Tableau avec données primaires</h2>
+                <p>Sous <em>rows</em>, les données primaires de chaque tableau sont affichées.
+                  Comme les tableaux peuvent devenir très grands, il est impossible et aussi pas très utile de charger tous les enregistrements et de les afficher.
+                  À la place, si <em>rows</em> est sélectionné, un aperçu de 50 enregistrements au maximum répartis sur tout le tableau est affiché.
+                  On peut ensuite sélectionner quelle branche doit être affichée en détail, jusqu'à ce que le degré de détail est atteint, où chaque enregistrement devient visible.</p>
+                <p>Si un titre de colonne d'un affichage de données primaires est cliqué, tout le tableau est trié (dans un fichier XML temporaire qui sera effacé en quittant le programme). Le tri peut durer un certain temps. Il est toutefois très utile pour retrouver des enregistrements individuels au moyen d'une valeur de colonne.</p>
+                <p>La largeur de l'affichage des données primaires peut être modifiée en tirant la ligne de séparation entre les titres des colonnes.</p>
+                <p>L'affichage de la valeur d'une ligne dans le tableau est utile pour des valeurs courtes. C'est pourquoi on peut afficher une version plus détaillée de la valeur en effectuant un double-clic sur la ligne.</p>
+                <img class="screen" alt="Simple value display" src="valuesimple.png"/>
+                <p>Une simple valeur de donnée est ainsi affichée complètement et peut être copiée dans le presse-papier.</p>
+                <p>De longs textes (par ex. VARCHAR, CLOB ou valeurs XML) sont affichés dans une application texte externe qui peut être configurée dans le menu <em>Outils / Options</em>. Dans Windows, <em>Bloc-notes</em> est la préférence standard.</p>  
+                <img class="screen" alt="Long text display" src="valuexml.png"/>
+                <p>De longues valeurs binaires (par ex. VARBINARY ou valeurs BLOB) sont affichées dans l'éditeur binaire externe qui peut être configuré dans le menu <em>Outils / Options</em>. Dans Windows, le programme freeware <em>HxD</em> est configuré comme préférence et fait partie de la livraison SIARD.</p>
+                <img class="screen" alt="Long binary display" src="valuebinary.png"/>
+                <p>Si on sait qu'une colonne BLOB contient des valeurs d'un type spécial, comme des données PDF ou d'images, il est possible, à la place de l'affichage hexadecimal, de configurer un éditeur binaire qui affiche correctement ce type de données.</p>
+                <p>Les types de données définis par l'utilisateur (UDTs - user-defined data types) sont affichés hiérarchiquement avec les noms d'attributs en gris et les valeurs en blanc.</p>
+                <img class="screen" alt="Simple UDT value" src="valueudtsimple.png"/>
+                <p>Chacune de ces valeurs peut d'autre part être affichée en détail avec un double-clic.</p>
+                <img class="screen" alt="Complex UDT value with binary attribute" src="valueudtcomplex.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archives fédérales suisses</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licence</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

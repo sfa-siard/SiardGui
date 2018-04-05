@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- ===================================================================
+Manual of SIARD Suite in German: Chapter DBMS.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - DBMS</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachauswahl</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a lang="de" title="Deutsch ausgewählt" aria-label="Deutsch ausgewählt" class="active">DE</a></li>
+                <li><a href="../fr/dbms.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/dbms.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/dbms.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Handbuch</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Handbuch</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Datenbank Management Systeme</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Datenbank Management Systeme</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Die verschiedenen Datenbank Management Systeme (DBMS) werden 
+                  in <em>SIARD Suite</em> hauptsächlich in den folgenden Bereichen 
+                  unterschiedlich behandelt: 
+                  <ul>
+                    <li><a href="#jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a>,</li>
+                    <li><a href="#datatypes">Umgang mit proprietären Datentypen</a>,</li>
+                    <li><a href="#prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a>,</li>
+                    <li><a href="#prepupload">Vorbereiten einer Datenbank für das Hochladen</a>.</li>
+                    
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a name="jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a></h2>
+                <p><em>SIARD Suite</em> dokumentiert die Standard-JDBC-URL für die
+                  Verbindung zu einem unterstützten Datenbank Management System.
+                  Es gibt aber viele Variationen, wie DBMS Plattform- (z.B. Windows Login)
+                  oder Netzwerk- (z.B. Kerberos) Sicherheit in ihre Zugangskontrolle
+                  einbauen. An diesem Ort ist es unmöglich, jede Spezialität eines
+                  jeden DBMS einzeln zu dokumentieren. Solange eine für das DBMS 
+                  akzeptable JDBC URL benutzt wird, kann mit <em>SIARD Suite</em>
+                  eine Verbindung zu einer Datenbank hergestellt werden. Für ausführliche
+                  Angaben zu akzeptablen JDBC URLs ist jeweils die Dokumentation des
+                  DBMS zu konsultieren.</p>
+                <dl>
+                  <dt>MS Access</dt>
+                    <dd>Die JDBC-Implementation für MS Access unterstützt nur einen
+                      einzigen Typ von JDBC URL: jdbc:access:&lt;path to mdb/accdb&gt;</dd>
+                  <dt>DB/2</dt>
+                    <dd><a href="https://www.ibm.com/support/knowledgecenter/de/SSEPGG_9.7.0/com.ibm.db2.luw.apdv.java.doc/src/tpc/imjcc_r0052342.html">https://www.ibm.com/support/knowledgecenter/de/SSEPGG_9.7.0/com.ibm.db2.luw.apdv.java.doc/src/tpc/imjcc_r0052342.html</a></dd>
+                  <dt>H2 database</dt>
+                    <dd><a href="http://www.h2database.com/html/features.html#database_url">http://www.h2database.com/html/features.html#database_url</a></dd>
+                  <dt>MySQL</dt>
+                    <dd><a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html</a></dd>
+                  <dt>Oracle</dt>
+                    <dd><a href="http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm">http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm</a></dd>
+                  <dt>SQL Server</dt>
+                    <dd><a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url">https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url</a></dd>  
+                </dl>
+                <p>Wenn eine Verbindung zu einer Datenbank mittels <em>SIARD Suite</em> scheitert, kann
+                  als Erstes eine "native" Verbindung probiert werden, welche gänzlich ohne <em>SIARD Suite</em>
+                  aufgebaut wird. Wenn eine solche erfolgreich ist, mit der von
+                  den Verbindungsdaten abgeleiteten JDBC URL aber immer noch keine 
+                  Verbindung zustande kommt, kann dieselbe JDBC URL mit 
+                  <a href="http://squirrel-sql.sourceforge.net/" target="_blank">SQuirreL</a> ausprobiert werden.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a name="datatypes">Umgang mit proprietären Datentypen</a></h2>
+                <p>Die proprietären Datentypen werden in der jeweiligen JDBC-Hülle 
+                  auf SQL:2008 Datentypen abgebildet. Die Abbildung ist in den
+                  Tabellen <em>Jdbc&lt;DBMS&gt;-TypeInfo.ods</em> im LibreOffice Calc Format
+                  im Ordner <em>doc/datatypes</em> dokumentiert.</p> 
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a name="prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a></h2>
+                <p><em>SIARD Suite</em> lädt alle Daten herunter, die für den Datenbank-User
+                  sichtbar sind, welcher für die Verbindung benutzt wird. Die Wahl eines
+                  geeigneten Datenbank-User bestimmt deshalb den Umfang der archivierten
+                  Datenbank. Oft steht ein geeigneter "technischer Datenbank-User" einer
+                  Datenbank-Anwendung zur Verfügung, mit der die Datenbank bewirtschaftet wird.
+                  Dieser hat normalerweise genau die Zugriffsrechte, die für die Archivierung
+                  der Datenbank benötigt werden.</p>
+                <p>Wenn jedoch kein solcher Datenbank-User verfügbar ist, sollte <em>nicht</em>
+                  der Datenbank-Administrator (database administrator, DBA, dbo, root, SYSTEM, sa, ...)
+                  für das Herunterladen benutzt werden. Denn dieser lesend Zugriff
+                  auf viele Systemtabellen und Tabellen aus anderen Datenbanken, die
+                  nicht archivert werden sollen. Stattdessen wird empfohlen, einen
+                  Datenbank-User zum Zweck der Archivierung zu erzeugen. Diesem
+                  <em>Archvierungs-User</em> sind Leseprivilegien auf alle Schemas, 
+                  Tabellen, Views und Typen einzuräumen, die zur zu archivierenden
+                  Datenbank gehören. Die Dokumentation des DBMS gibt Auskunft, wie
+                  man einen User erzeugt und ih mit den notwendigen Privilegien ausstattet.</p>  
+                <p>Wenn ein geeigneter Archivierungs-User bestimmt oder erzeugt
+                  wurde, kann das Herunterladen der Datenbank mit dessen
+                  Anmeldeinformationen vorgenommen werden.</p> 
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a name="prepupload">Vorbereiten einer Datenbank für das Hochladen</a></h2>
+                <p>Für das Hochladen einer Datenbank in eine Instanz eines DBMS
+                  mit <em>SIARD Suite</em> müssen geeignete Datenbank-Schemas in
+                  der Zieldatenbank zur Verfügung stehen.
+                  Diese Schemas können dann in der Schema-Zuordnung im
+                  Dialog für das Hochladen (oder im Teil Schema-Zuordnung
+                  des Befehlszeile von <em>SiardToDb</em>) mit den Schemas im
+                  SIARD-Archiv assoziiert werden.</p>
+                <p>Idealerweise sind die Zielschemas leer. Es ist aber je nach
+                  Sicherheitsvorgaben beim DBMS nicht immer möglich, Schemas
+                  nach Belieben zu erzeugen oder auszuwählen. Wenn die Zielschemas
+                  nicht leer sind, werden die archivierten Daten nur hochgeladen,
+                  wenn entweder keine Namenskollisionen bei den Typen und Tabellen 
+                  vorkommen, oder aber explizit die Option <em>Überschreiben</em>
+                  gewählt wurde.</p>
+                <p>Der Datenbank-User, dessen Anmeldeinformationen für das Hochladen
+                  benutzt werden, muss das Privileg haben, in den Zielschemas
+                  Typen und Tabellen zu erzeugen und Daten in diese Tabellen einzufügen.
+                  Die DBMS-Dokumentation gibt Auskunft, wie man Schemas erzeugt
+                  und wie man dem Datenbank-User die nötigen Privilegien einräumt.
+                  Bequemerweise nutzt man die Anmeldeinformationen des 
+                  Datenbank-Administrators, sofern diese verfügbar sind.
+                  Denn dieser hat normalerweise alle notwendigen Privilegien.
+                  In diesem Fall sollte aber die Option <em>Überschreiben</em>
+                  nicht gewählt werden. Andernfalls ist das Risiko zu gross,
+                  dass wichtige Tabellen oder Typen im System überschrieben werden.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Zum Seitenanfang
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Schweizerisches Bundesarchiv</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Lizenz</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

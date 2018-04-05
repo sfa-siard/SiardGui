@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<!-- ===================================================================
+Manual of SIARD Suite in French: Chapter Menu.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Menus</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body onload="adaptImages();">
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sélection de la langue</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/menu.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a lang="fr" title="Français selectionné" aria-label="Français selectionné" class="active">FR</a></li>
+                <li><a href="../it/menu.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/menu.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite - Manuel</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Menus de <em>SiardGui</em></em></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Menus de <em>SiardGui</em></h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Les menus suivants sont disponibles dans <em>SiardGui</em>:
+                  <ul>
+                    <li><a href="#download"><em>Fichier / Télécharger ...</em></a></li>
+                    <li><a href="#downloadmru"><em>Fichier / Récemment téléchargés</em></a></li>
+                    <li><a href="#upload"><em>Fichier / Charger ...</em></a></li>
+                    <li><a href="#uploadmru"><em>Fichier / Récemment chargés</em></a></li>
+                    <li><a href="#open"><em>Fichier / Ouvrir ...</em></a></li>
+                    <li><a href="#openmru"><em>Fichier / Récemment ouverts</em></a></li>
+                    <li><a href="#save"><em>Fichier / Enregistrer</em></a></li>
+                    <li><a href="#close"><em>Fichier / Fermer</em></a></li>
+                    <li><a href="#displaymd"><em>Fichier / Afficher les métadonnées ...</em></a></li>
+                    <li><a href="#augmendmd"><em>Fichier / Enrichir les métadonnées ...</em></a></li>
+                    <li><a href="#exit"><em>Fichier / Quitter</em></a></li>
+                    <li><a href="#copyall"><em>Editer / Tout copier</em></a></li>
+                    <li><a href="#copy"><em>Editer / Copier</em></a></li>
+                    <li><a href="#export"><em>Editer / Exporter un tableau ...</em></a></li>
+                    <li><a href="#find"><em>Editer / Rechercher dans les métadonnées ...</em></a></li>
+                    <li><a href="#findnext"><em>Editer / Prochaine référence dans les métadonnées</em></a></li>
+                    <li><a href="#search"><em>Editer / Rechercher dans les données des tableaux ...</em></a></li>
+                    <li><a href="#searchnext"><em>Editer / Prochaine référence dans le tableau</em></a></li>
+                    <li><a href="#install"><em>Outils / Installer ...</em></a></li>
+                    <li><a href="#uninstall"><em>Outils / Désinstaller</em></a></li>
+                    <li><a href="#language"><em>Outils / Langue</em></a></li>
+                    <li><a href="#integrity"><em>Outils / Contrôler l'intégrité ...</em></a></li>
+                    <li><a href="#options"><em>Outils / Options ...</em></a></li>
+                    <li><a href="#help"><em>? / Aide</em></a></li>
+                    <li><a href="#info"><em>? / Info</em></a></li>
+                  </ul>
+                </p>
+                <p>Les menus sont désactivés s'ils ne peuvent pas être utilisés dans la situation actuelle. C'est pourquoi, au début, seuls <em>Télécharger</em> et <em>Ouvrir</em> sont disponibles.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="download"><em>Fichier / Télécharger ...</em></a></h2>
+                <p>En sélectionnant ce menu, un dialogue est affiché dans lequels les données de connexion pour la base de données peuvent être saisies.</p>
+                <img class="screen" alt="Download connection dialog" src="conndown.png"/>
+                <p>Le long champ de saisie texte au milieu doit être rempli avec un URL JDBC et l'utilisateur de l'archive ainsi que son mot de passe doivent être saisis. Si seules des métadonnées doivent être téléchargées (par ex. pour avoir une idée du volume de la base de données), la case "seulement métadonnées" doit être cochée. Si des vues doivent être téléchargées comme tableaux (par ex. parce que seules les vues, mais pas leurs tableaux de base sont visibles par l'utilisateur), la case "Archiver les vues comme tableaux" doit être cochée.</p>
+                <p>En haut, le nom du serveur, le répertoire de la base de données et le nom de la base de données ne servent qu'à créer l'URL correct pour le système de gestion de base de données (DBMS). Si ces données sont modifiées, les URL exemples affichés pour chaque DBMS supporté par SIARD sont modifiés. En activant le bouton <em>Copier l'URL</em> à côté d'un URL exemple, ce dernier est copié dans le champ de saisie pour l'URL JDBC.</p>
+                <img class="screen" alt="Download connection dialog" src="conndowndb.png"/>
+                <p>N'importe quelle chaine de caractères peut être saisie comme URL JDBC. Ainsi, des configurations de sécurité spécifiques peuvent être prises en compte, comme une annonce Windows ou Kerberos. Les définitions spécifiques des URL JDBC doivent être consultées dans la documentation du fournisseur du DBMS si les standards présentés ici sont insuffisants (voir <a href="dbms.html#jdbcurl" target="_blank">Database Management Systeme</a>).</p>
+                <p>C'est généralement une mauvaise idée d'utiliser l'administrateur de bases de données (DBA, root, dbo, SYSTEM, sa, dbadmin, ...) pour le téléchargement d'une archive SIARD. SIARD charge toutes les données en tant que base de données dans l'archive à laquelle l'utilisateur de la base de données peut accéder en lecture. L'administrateur de base de données global peut accéder en lecture sur toutes les bases de données du DBMS et à beaucoup de tableaux systèmes qui ne doivent pas être archivés. C'est pourquoi il est important de trouver ou de créer un utilisateur adéquat pour <a href="dbms.html#prepdownload" target="_blank">la préparation au téléchargement</a>.</p>
+                <p>Si la connexion à la base de données ne s'établit pas, le dialogue est affiché aussi longtemps, jusqu'à ce qu'un URL JDBC valable soit saisi ou que <em>Abandonner</em> soit choisi. Si <em>Seulement métadonnées</em> a été coché, une archive SIARD est créée. Elle est effacée en quittant le programme. (On peut toutefois éditer, afficher et exporter les métadonnées téléchargées avant de fermer l'archive.) Dans le cas contraire, il faut choisir ensuite le nom et le répertoire où l'archive SIARD doit être enregistrée.</p>
+                <img class="screen" alt="File selector for SIARD file as download target" src="downfile.png"/>
+                <p>Le téléchargement peut alors débuter.</p>
+                <img class="screen" alt="Download progress" src="downloading.png"/>
+                <p>Si le téléchargement a été effectué avec succès, le dialogue peut être fermé avec le bouton <em>OK</em>. Les données téléchargées apparaissent alors dans la fenêtre principale. A cet endroit, d'autres métadonnées devraient être saisies, au minimum un nom pour la base de données, le nom du propriétaire des données avant l'archivage et la période de création des données.</p>
+                <p>Si le téléchargement a été effectué avec succès, l'URL JDBC utilisé est repris dans la liste des données de connexion récemment utilisées qui peut être appelée par le prochain menu.</p>
+          
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+          
+                <h2><a name="downloadmru"><em>Fichier / Récemment téléchargés</em></a></h2>
+                <p>Les dernières données de connexion utilisées sont affichées au choix dans ce menu. Si une entrée est sélectionnée, le dialogue de connexion est affiché et contient déjà l'URL JDBC et l'utilisateur de la base de données. Seul le mot de passe doit encore être saisi.</p>
+
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+          
+                <h2><a name="upload"><em>Fichier / Charger ...</em></a></h2>
+                <p>En choisissant ce menu, le dialogue est affiché dans lequel les données de connexion à la base de données peuvent être saisies.</p> 
+                <img class="screen" alt="Upload connection dialog" src="connupdb.png"/>
+                <p>L'URL JDBC peut, de la même manière, être construit avec le serveur de la base de données, le nom de la base de données et le répertoire de la base de données et ensuite copié comme dans le dialogue de connexion pour le téléchargement. Comme le contenu des fichiers SIARD est indépendant du DBMS, les données peuvent être chargées dans une instance d'un autre DBMS.</p>
+                <p>Il est en outre possible de choisir si les types et les tableaux doivent être surinscrits avec le même nom. Ceci est dangereux si l'on se connecte avec l'administrateur de bases de données avec beaucoup de droits, toutefois utile si l'on veut charger plusieurs fois la même base de données.</p>  
+                <p>Si <em>Seulement schéma</em> est coché, seuls les schémas de la base de données (types et tableaux vides) seront créés, sans que les données primaires soient chargées.</p>
+                <p> Tout au bas du dialogue, une liste de tous les schémas pouvant apparaître dans le fichier SIARD est affichée. Pour le chargement, on peut décider ici dans quels schémas de l'instance de base de données les schémas du fichier SIARD doivent être chargés. Ces schémas doivent être créés <a href="dbms.html#prepupload" target="_blank">avant le chargement</a>.
+                  L'utilisateur de la base de données qui est indiqué dans ce dialogue doit détenir le privilège permettant de créer des types et des tableaux dans ces schémas. Le plus simple souvent, pour le chargement, c'est d'utiliser le compte d'un administrateur de bases de données qui détient tous les droits d'écriture.</p>
+                <p>Si le DBMS cible ne supporte pas d'UDTs ou ARRAYs, les données sont chargées de manière "aplatie". Cela signifie que chaque UDT ou ARRAY est chargé pendant qu'une colonne séparée est créée pour chaque composant.</p>
+                <img class="screen" alt="Upload progress" src="uploading.png"/>
+                <p>Si la création de types et de tableaux ainsi que le chargement des données primaires ont été effectués avec succès, le chargement est considéré comme réussi. Il est possible que quelques types et tableaux aient été renommés afin de satisfaire aux restrictions de longueurs pour les descriptifs du système cible. Dans ces cas, le suffixe supprimé d'un long descriptif est remplacé par un chiffre.</p>
+                <img class="screen" alt="Upload success dialog" src="uploaded.png"/>
+                <p>L'activation des restrictions (unicité, références) n'est tentée qu'à la fin du chargement. Il est possible que cela échoue, car différents DBMS suivent des règles plus sévères s'écartant du standard SQL:2008 que d'autres. Un tel échec est affiché dans l'onglet <em>Err</em> du dialogue de chargement.</p>
+                <img class="screen" alt="Upload constraint error" src="uploaderr.png"/>
+                <p>Si le chargement a été effectué avec succès, l'URL JDBC utilisé est repris dans la liste des données de connexion récemment utilisées qui peut être appelée par le prochain menu.</p>
+          
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="uploadmru"><em>Fichier / Récemment chargés</em></a></h2>
+                <p>Les connexions URLs JDBC récemment utilisées pour le chargement de bases de données sont à disposition dans ce menu. En en sélectionnant une, le dialogue de connexion est affiché avec l'URL JDBC correspondant et l'utilisateur de la base de données. Il faut encore saisir le mot de passe et l'affectation au schéma.</p>  
+          
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="open"><em>Fichier / Ouvrir ...</em></a></h2>
+                <p>En choisissant ce menu, un dialogue de sélection de fichiers est affiché pour lesquels un fichier SIARD existant peut être sélectionné. Ce dernier est ouvert dans la fenêtre principale. A cet endroit, les métadonnées peuvent être modifiées et complétées. Les données primaires peuvent être consultées.</p>
+                <p>Si un fichier SIARD a été ouvert ou téléchargé avec succès, son nom sera repris dans la liste des fichiers récemment utilisés qui peut être appelée dans le menu suivant.</p>
+          
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="openmru"><em>Fichier / Récemment ouverts</em></a></h2>
+                <p>En sélectionnant un fichier récemment ouvert, ce dernier est ouvert dans la fenêtre principale.</p>
+          
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="save"><em>Fichier / Enregistrer</em></a></h2>
+                <p>Si les métadonnées d'un fichier SIARD ont été modifiées, elles ne sont enregistrées sur le support de données seulement lorsqu'elles sont explicitement enregistrées.</p>
+                <p>Les fichiers temporaires SIARD créés au téléchargement avec l'option <em>Seulement métadonnées</em> ne peuvent pas être enregistrés. Leurs métadonnées peuvent toutefois être affichées, modifiées et exportées avant de fermer le fichier.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="close"><em>Fichier / Fermer</em></a></h2>
+                <p>Après la fermeture d'une archive SIARD, une autre peut être téléchargée ou ouverte.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="displaymd"><em>Fichier / Afficher les métadonnées ...</em></a></h2>
+                <p>En choisissant ce menu, les métadonnées d'une archive SIARD dans la fenêtre principale peuvent être affichées comme document HTML humainement lisible.</p>
+                <img class="screen" alt="Meta data summary" src="metadata.png"/>
+                <p>Une version HTML des métadonnées qui ont été créées avec le fichier XSL des métadonnées XML actuellement sélectionné  est affichée. La condition est d'utiliser une simple transformation <em>etc/metadata.xsl</em>. D'autres transformations XSL plus détaillées en fichiers HTML peuvent être sélectionnées dans <em>Outils / Options</em>.</p>
+                <p>L'XML des métadonnées originales peut être enregistré comme fichier externe avec le bouton <em>Enregistrer XML</em>. Si le bouton <em>Enregistrer HTML</em> est cliqué, le fichier HTML transformé, créé par la transformation XSL depuis les métadonnées XML d'origine, est enregistré à la place.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="augmendmd"><em>Fichier / Enrichir les métadonées ...</em></a></h2>
+                <p>Les métadonnées enregistrées en externe peuvent être très utiles si la "même" base de données doit être à nouveau archivée à une date ultérieure. Il est alors inutile de saisir à nouveau manuellement toutes les descriptions des tableaux et des colonnes. A la place, on peut enrichir l'archive SIARD, qui contient ces descriptions, avec des métadonnées enregistrées en externe.</p>
+                <p>Après la sélection d'un fichier avec des métadonnées XML pour enrichir l'archive SIARD affichée actuellement, toutes les descriptions auxquelles les noms des objets de la base de données (schéma, tableau, colonne, ...) correspondent, sont copiées. Si par conséquent la base de données actuelle diffère légèrement en terme de structure de la base de données documentée dans les métadonnées, la plupart des descriptions sont néanmoins reprises.</p>
+                   
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="exit"><em>Fichier / Quitter</em></a></h2>
+                <p>En sélectionnant ce menu, une archive éventuellement ouverte est fermée est le programme est quitté.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="copyall"><em>Editer / Tout copier</em></a></h2>
+                <p>Ce menu copie le tableau affiché à droite sous les métadonnées dans le presse-papier. Il peut s'agir d'une liste de sous-objets ou d'un extrait de données primaires.</p>
+                <img class="screen" alt="Copy all schemas in Calc" src="copyallmeta.png"/>
+                <p>Le contenu du presse-papier peut être inséré dans une autre application pouvant afficher du texte ou des données de tableaux. Les données de tableaux sont séparées par des tabulateurs. C'est pourquoi l'insertion dans MS Excel ou LibreOffice crée une bonne copie tabulaire.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="copy"><em>Editer / Copier</em></a></h2>
+                <p>Ce menu peut être sélectionné si une ligne du tableau est cliquée. Le cas échéant, la ligne particulière du tableau qui contient la cellule choisie est copiée dans le presse-papier.</p> 
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="export"><em>Editer / Exporter le tableau ...</em></a></h2>
+                <p>Quelquefois, il est souhaitable de traiter tout un tableau dans une autre application. Dans ce cas, le tableau entier peut être exporté dans un fichier HTML qui contient essentiellement seulement un tableau.</p>
+                <p>Le format HTML a été choisi comme format d'exportation, car on peut l'ouvrir comme un fichier CSV dans MS Excel ou LibreOffice. Par ailleurs, il évite certaines faiblesses du format CSV et rend possible des tableaux en tableaux pour des valeurs UDT et pour des liens à des fichiers externes pour des valeurs large objet (CLOB, BLOB, XML, ...).</p>  
+                <p>Si ce menu est sélectionné, le fichier HTML doit être spécifié à l'aide du dialogue de sélection de fichiers. Les valeurs large object sont enregistrées dans un répertoire LOB spécial qui peut être modifié dans <em>Outils / Options ...</em>.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="find"><em>Editer / Rechercher dans les métadonnées ...</em></a></h2>
+                <p>Si la base de données contient beaucoup de tableaux et de colonnes, il est souvent difficile de retrouver une valeur de métadonnée. A l'aide de la fonction <em>Rechercher dans les métadonnées ...</em>, toutes les métadonnées contenant une chaine de caractères peuvent être trouvées.</p>
+                <img class="screen" alt="Find dialog" src="find.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="findnext"><em>Editer / Prochaine référence dans les métadonnées</em></a></h2>
+                <p>Avec <em>Prochaine référence dans les métadonnées</em> ou 
+                  <em>Majuscule-F3</em>, toutes les références d'une chaine de caractères peuvent être recherchées.</p>
+                <img class="screen" alt="Find next result" src="findnext.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="search"><em>Editer / Rechercher dans les données des tableaux ...</em></a></h2>
+                <p>Par analogie, il est quelquefois souhaitable de rechercher les données primaires d'un tableau d'après une chaine de caractères.</p> 
+                <img class="screen" alt="Search dialog" src="search.png"/>
+                <p>Le dialogue de saisie d'une chaine de caractères est un peu plus complexe. La recherche est limitée à des colonnes simples. Une quantité partielle de ces colonnes simples peut être choisie. La recherche est une simple recherche de texte (les chiffres et les données affichés dans le tableau sont traités comme des textes). La recherche est effectuée séquentiellement dans tout le tableau et peut durer un certain temps pour de grands tableaux. Une recherche rapide ou une recherche dans de complexes ou grandes valeurs (CLOB, BLOB, XML, UDT, ARRAY, ...) est possible si l'on charge l'archive SIARD dans une instance DBMS et qu'on utilise SQL pour la recherche.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="searchnext"><em>Editer / Prochaine référence dans le tableau</em></a></h2>
+                <p>Avec <em>Prochaine référence dans le tableau</em> ou F3, la référence suivante de la chaine de caractères recherchée est affichée.</p>
+                <img class="screen" alt="Search next result" src="searchnext.png"/>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="install"><em>Outils / Installer ...</em></a></h2>
+                <p>Comme décrit dans le chapitre <a href="installation.html" target="_blank">Installation</a>, <em>SIARD Suite</em> peut à tout moment être installé si aucune version installée n'existe ou si la version installée porte un plus petit numéro de version que celle actuellement exécutée.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="uninstall"><em>Outils / Désinstaller</em></a></h2>
+                <p>Une installation de <em>SIARD Suite</em> peut être éliminée en sélectionnant ce menu. Avant la désinstallation, il est demandé à l'utilisateur si les paramètres personnels de <em>SIARD Suite</em> doivent aussi être éliminés ou conservés pour une installation future de <em>SIARD Suite</em>.</p>
+                   
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="language"><em>Outils / Langue</em></a></h2>
+                <p>On peut sélectionner ici une des langues supportées par l'interface utilisateur.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="integrity"><em>Outils / Contrôler l'intégrité</em></a></h2>
+                <p>Si l'archive SIARD contient un message digest relatif aux données primaires, il peut être recalculé à l'aide de ce menu et comparé avec la valeur enregistrée.</p>
+                <p><em>SIARD Suite</em> calcule le message digest immédiatement après le premier téléchargement et l'enregistre dans les métadonnées. Si l'archive SIARD a été décompressées et les données primaires ont été modifiées, le contrôle de l'intégrité échoue.</p> 
+                <p>Il est toutefois simplement possible pour d'autres programmes de modifier les données primaires et d'enregistrer le message digest correspondant dans les métadonnées. Dans ce cas, le contrôle d'intégrité prouve au plus qu'aucune donnée primaire n'a été <em>manuellement</em> modifiée.</p>
+                <p>Une meilleure garantie d'authenticité de l'archive consiste à enregistrer tous les messages digests générés lors du téléchargement dans une base de données séparée et strictement contrôlée. Ensuite, le message digest enregistré dans les métadonnées devrait être comparé avec celui de la base de données externe. Le contrôle d'intégrité disponible ici ne peut être considéré comme preuve que les données primaires n'ont plus été modifiées après le téléchargement, que si ce message digest n'a pas changé.</p>  
+                      
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="options"><em>Outils / Options ...</em></a></h2>
+                <p>Le dialogue Options permet de modifier plusieurs données personnelles de configuration. Si elles sont modifiées dans une instance de <em>SIARD Suite</em>, elles seront enregistrées dans les paramètres personnels en quittant le programme. Dans le cas contraire, elles ne sont valables que durant la session actuelle.</p>   
+                <img class="screen" alt="Options dialog" src="options.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="help"><em>? / Aide</em></a></h2>
+                <p>Ce menu permet de consulter le présent manuel.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+
+                <h2><a name="info"><em>? / Info</em></a></h2>
+                <p>Ce menu affiche l'impressum de <em>SIARD Suite</em>.</p>
+                <img class="screen" alt="Info dialog" src="info.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archives fédérales suisses</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licence</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

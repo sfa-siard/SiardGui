@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<!-- ===================================================================
+Manual of SIARD Suite in French: Chapter Concept.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Concept</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>    
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sélection de la langue</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/concept.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a lang="fr" title="Français selectionné" aria-label="Français selectionné" class="active">FR</a></li>
+                <li><a href="../it/concept.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/concept.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+        
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Manuel</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Concept</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Concept</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Les Archives fédérales suisses sont tenues d'archiver les documents de l'administration fédérale, <a href="https://www.admin.ch/opc/fr/classified-compilation/19994756/index.html" target="_blank">indépendamment du porteur d'information.</a>
+                  La problématique de l'archivage à long terme de bases de données relationnelles doit ainsi être résolu.</p>
+                <p>Depuis 2007, le <em>format SIARD Format</em> sert de format de normalisation aux Archives fédérales suisses - ainsi qu'à beaucoup d'autres archives dans le monde entier - pour la conservation à long terme de bases de données relationnelles.</p> 
+                <p>Afin d'en assurer la disponibilité à long terme, les bases de données sont conservées de manière conforme à <a href="https://www.iso.org/standard/38640.html" target="_blank">SQL:2008</a>. les contenus sont conservés dans une collection de fichiers SML. Etant donné que le format d'archivage pour bases de données se base sur ces deux standards ISO, on lui attribue une compréhension de plus longue durée.</p>
+                <p>Une exigence importante pour les données archivées en <em>format SIARD</em> est que le contenu de la base de données ait "caractère de documents". 
+                  Cela signifie que les contenus des tableaux archivés contiennent des données commerciales que la base de données exploite et qui sont compréhensibles, quelque soit l'application frontend. Avec <em>SIARD Suite</em>, aucun code de programme exécutable ni des objets ne sont archivés, mais uniquement des données commerciales dans les tableaux des bases de données.
+                  Cette approche est largement décrite par Hartwig Thomas dans le document 
+                  <a href="http://www.enterag.ch/hartwig/SIARD_Criterion.pdf" target="_blank">"Long-term Preservation 
+                  of Relational Databases, What needs to be preserved how?"</a>.</p>
+                <p>Dans le format SIARD, la définition du schéma d'une base de données archivée est enregistrée dans des fichiers XML conformes à SQL:2008 alors que que la documentation des tableaux et des champs ainsi que les données sont enregistrées dans des fichiers XML. Afin que ces derniers ne gonflent pas exagérément, les données BLOB et CLOB (Binar4y Large OBjects et Character Large OBjects) sont enregistrées dans des fichiers (binaires) séparés qui sont référencés dans les fichiers XML.</p>
+                <p>La structure des <em>formats SIARD</em> n'est pas expliquée plus en détail dans ce manuel car elle est décrite dans un autre document qui est livré avec <em>SIARD Suite</em>.
+                  En 2013, le <em>format SIARD</em> a été reconnu comme standard eCH.
+                  Depuis 2017, c'est la version 2.1 du <em>format SIARD</em> qui est disponible comme standard
+                  <a href="https://www.ech.ch/vechweb/page?p=categoryList&site=/documents/Alle/No" target="_blank">eCH-0165</a>.</p>
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archives fédérales suisses</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licence</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

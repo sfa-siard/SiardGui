@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- ===================================================================
+Manual of SIARD Suite in German: Chapter Introduction.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Einleitung</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachauswahl</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a lang="de" title="Deutsch ausgewählt" aria-label="Deutsch ausgewählt" class="active">DE</a></li>
+                <li><a href="../fr/intro.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/intro.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/intro.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Handbuch</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Handbuch</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Einleitung</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Einleitung</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <h2>Einleitung</h2>
+                <p>Das <a href="https://www.bar.admin.ch/" target="_blank">Schweizerische Bundesarchiv</a> 
+                  hat das <em>SIARD Format</em> und die Anwendung <em>SIARD Suite</em> entwickelt.
+                  <em>SIARD (Software-Independent Archival of Relational Databases)</em>
+                  dient dazu, Inhalte relationaler Datenbanken langfristig zu archivieren.</p>
+                <p>Im Auftrag des Bundesarchivs entwickelte die <a href="http://ww.enterag.ch/" target="_blank">Enter AG</a> 2007 
+                  das <em>SIARD Format</em> und die <em>SIARD Suite 1.0</em> und 2016-2018 die vorliegende 
+                  <em>SIARD Suite 2.1</em>.</p>
+                <p>In Zusammenarbeit mit dem EU-Projekt <a href="http://www.eark-project.com/" target="_blank">E-ARK</a> 
+                  und der <a href="https://kost-ceco.ch/" target="_blank">KOST</a> wurde 2015-2018 
+                  die Version 2.1 des SIARD Formats spezifiziert.
+                  Wie schon Version 1.0 wurde <em>SIARD Format 2.1</em> als Standard eCH-0165 vom 
+                  Verein <a href="https://www.ech.ch/" target="_blank">eCH E-Government Standards</a> homologiert.</p> 
+                <p><em>SIARD Suite 2.1</em> ist die Referenzimplementation für das 
+                  Archvieren relationaler Datenbanken im standardisierten <em>SIARD Format 2.1</em>.</p>
+                <p>Das vorliegende Dokument ist das Handbuch von <em>SIARD Suite 2.1</em>.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Neuerungen der Version 2.1</h3>
+                <p>Die wichtigsten Neuerungen des <em>SIARD Format 2.1</em> gegenüber
+                  Version 1.0 sind</p>
+                <ul>
+                  <li>Konformität zu SQL:2008, insbesondere Unterstützung neuer Datentypen
+                    (DISTINCT, UDT, ARRAY)</li>
+                  <li>Ermöglichung der Auslagerung von grossen Objekten in externe Dateien</li>
+                  <li>Unterstützung der reversiblen "deflate"-Kompression der SIARD Daten</li>
+                </ul>
+                <p>SIARD-Dateien, die konform zum Format 1.0 sind, können mit 
+                  den Programmen der <em>SIARD Suite 2.1</em> gelesen werden.
+                  Sobald man Änderungen vornimmt und diese abspeichert, werden
+                  sie ins Format 2.1 konvertiert.</p>
+                <p><em>SIARD Suite 2.1</em> ist die Referenzimplementation für das
+                  Archivieren von relationalen Datenbanken im standardisierten 
+                  SIARD Format 2.1.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+
+                <h3>Urheberrechte</h3>
+                <p><em>SIARD Suite</em> ist eine Entwicklung der Enter AG für das
+                  Schweizerische Bundesarchiv. Die Rechteinhaber veröffentlichen
+                  <em>SIARD Suite</em> als Open Source Software unter der 
+                  <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 Lizenz</a>
+                  (in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>).</p>
+                <p><em>SIARD Suite</em> stützt sich auf die folgenden Komponenten von Dritten:</p>
+                <dl>
+                  <dt>JAVA SE 1.7 oder höher</dt>
+                  <dd>von Oracle <a href="http://www.oracle.com/technetwork/java/javase/downloads/" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/</a><br/>
+                    Lizenz: <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html" target="_blank">Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX</a>
+                    in der SIARD-Distribution als <em>doc/licenses/java-license.txt</em>
+                  </dd>
+                  <dt>JavaFX 2.2 oder höher</dt>
+                  <dd>von Oracle <a href="http://www.oracle.com/technetwork/java/javafx2-archive-download-1939373.html" target="_blank">http://www.oracle.com/technetwork/java/javafx2-archive-download-1939373.html</a><br/>
+                    Lizenz: <a href="http://www.oracle.com/technetwork/java/javase/terms/license/index.html" target="_blank">Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX</a>
+                    in der SIARD-Distribution als <em>doc/licenses/java-license.txt</em>
+                  </dd>
+                  <dt>ini4j</dt>
+                  <dd>INI-File-Handler für Desktop Links unter LINUX von Apache <a href="http://ini4j.sourceforge.net/" target="_blank">http://ini4j.sourceforge.net/</a><br/>
+                    Lizenz: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License 2.0</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/Apache-license-2.0.txt</em>
+                  </dd>
+                  <dt>mslinks</dt>
+                  <dd>LNK-File-Handler für Desktop Links unter Windows von BlackOverlord666 <a href="https://github.com/BlackOverlord666/mslinks" target="_blank">https://github.com/BlackOverlord666/mslinks</a><br/> 
+                    Lizenz: <a href="http://www.wtfpl.net/" target="_blank">WTFPL License)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/WTFPL.txt</em>
+                  </dd>
+                  <dt>SiardApi</dt>
+                  <dd>from Swiss Federal Archives<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>
+                  <dt>Java Architecture for XML Binding (JAXB) (Version 2.2.12)</dt>
+                  <dd>von Oracle <a href="http://www.java2s.com/Code/Jar/j/Downloadjaxbapi22jar.htm" target="_blank">http://www.java2s.com/Code/Jar/j/Downloadjaxbapi22jar.htm</a><br/>
+                    Lizenz: <a href="https://glassfish.java.net/public/CDDL+GPL_1_1.html" target="_blank">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)Version 1.11 and the GNU General Public License (GPL) Version 2 (CDDL+GPL 1.1)</a>
+                    in der SIARD-Distribution as <em>doc/licenses/CDDL+GPL_1.1.txt</em>
+                  </dd>
+                  <dt>Woodstox XML processor</dt>
+                  <dd>Eine Implementation des Streaming API for XML (StAX2) für schnelles
+                    XML Streaming mit gleichzeitiger Validierung gegen ein XML Schema von 
+                    Codehaus <a href="https://mvnrepository.com/artifact/org.codehaus.woodstox/" target="_blank">https://mvnrepository.com/artifact/org.codehaus.woodstox/</a><br/>
+                    Lizenz: <a href="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html" target="_blank">GNU Lesser Public License 2.1 (LGPLv2.1)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/LGPL2.1.txt</em>
+                  </dd>
+                  <dt>Multi-Schema Validator (MSV)</dt>
+                  <dd>von SUN/Apache <a href="https://github.com/kohsuke/msv/" target="_blank">https://github.com/kohsuke/msv/</a><br/>
+                    Lizenz: <a href="https://directory.fsf.org/wiki?title=License:FreeBSD" target="_blank">BSD license (BSD-2)</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/BSD-2.txt</em>.
+                  </dd>
+                  <dt>Zip64File</dt>
+                  <dd>von Enter AG <a href="http://sourceforge.net/projects/zip64file/" target="_blank">http://sourceforge.net/projects/zip64file/</a><br/>
+                    Lizenz: als Teil von SIARD nutzbar unter der SIARD-Lizenz; 
+                    sonst: <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_blank">GNU Generial Public License, Version 2 (GPLv2.0)</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/GPL-2.0.txt</em>
+                  </dd>
+                  <dt>SqlParser</dt>
+                  <dd>von Enter AG<br/>
+                    Lizenz: als Teil von SIARD Suite frei nutzbar unter der SIARD-Lizenz; 
+                    sonst: <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License 3 (GPLv3)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/GPL-3.0.txt</em>
+                  </dd>
+                  <dt>ANTLR4 (Version 4.5.2)</dt>
+                  <dd>Parser Generator von Terence Parr <a href="http://www.antlr.org/download.html" target="_blank">http://www.antlr.org/download.html</a><br/> 
+                    Lizenz: <a href="http://www.antlr.org/license.html" target="_blank">BSD License (BSD-3))</a>
+                    in der SIARD-Distribution als <em>doc/licenses/BSD-3.txt</em>
+                  </dd>
+                  <dt>SiardCmd</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>
+                  <dt>JTS Topology Suite (Version 1.14 - von H2 und MySQL für die GEOMETRY Erweiterung benötigt)</dt>
+                  <dd>von Martin Davis <a href="http://tsusiatsoftware.net/" target="_blank">http://tsusiatsoftware.net/</a><br/>
+                    Lizenz: <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt" target="_blank">GNU Library General Public License (LGPLv2.0)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/LGPLv2.0.txt</em>.
+                  </dd>
+                  <dt>JdbcBase</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>JdbcOracle</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>JDBC Driver für Oracle (ojdbc6.jar (version 12.1.0.1.0), xdb6.jar, xmlparserv2.jar)</dt>
+                  <dd>von Oracle<br/>
+                    Lizenz: <a href="http://www.oracle.com/technetwork/licenses/distribution-license-152002.html" target="_blank">Oracle License</a>
+                    in der SIARD-Distribution als <em>doc/licenses/licenseOracle.txt</em>.
+                  </dd>
+                  <dt>JdbcMySql</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>JDBC Driver für MySQL (Version 5.1.40)</dt>
+                  <dd>von Oracle <a href="http://dev.mysql.com/doc/connector-j/5.1/en/" target="_blank">http://dev.mysql.com/doc/connector-j/5.1/en/</a><br/>
+                    Lizenz: <a href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_blank">GNU Generial Public License (GPLv2.0)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/GPLv2.0.txt</em>.
+                  </dd>
+                  <dt>JdbcMsSql</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>JDBC Driver für SQL Server (Version 4.1)</dt>
+                  <dd>von Microsoft <a href="https://msdn.microsoft.com/library/mt484311.aspx" target="_blank">https://msdn.microsoft.com/library/mt484311.aspx</a><br/> 
+                    Lizenz: <a href="https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774" target="_blank">Microsoft License</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/license41.txt</em>.
+                  </dd>
+                  <dt>JdbcH2</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>H2 database (Version 1.3.176)</dt>
+                  <dd>von Thomas Müller <a href="http://www.h2database.com/" target="_blank">http://www.h2database.com/</a><br/> 
+                    Lizenz: duale Lizenz <a href="https://opensource.org/licenses/eclipse-1.0.txt" target="_blank">Eclipse Public License v1.0 (EPL1.0)</a> und 
+                    <a href="https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt" target="_blank">Mozilla Public License 2.0 (MPL2.0)</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/EPL1.0.txt</em> und <em>doc/licenses/MPL2.0.txt</em>.
+                  </dd>
+                  <dt>JdbcDb2</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>JDBC Driver für DB/2 (Version 4.1)</dt>
+                  <dd>von IBM <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21363866" target="_blank">http://www-01.ibm.com/support/docview.wss?uid=swg21363866</a><br/>
+                   Lizenz: <a href="http://www14.software.ibm.com/cgi-bin/weblap/lap.pl?la_formnum=&li_formnum=L-LKSA-94UU9J&title=IBM+Data+Server+Driver+for+JDBC+and+SQLJ+(JCC+Driver)&l=en#LI" target="_blank">IBM license</a>
+                   in der SIARD-Distribution als <em>doc/licenses/IBM JDBC 4 License.txt</em> and <em>doc/licenses/IBM jdbc4_notices.txt</em>.<br/>
+                   Diese sehr lange Lizenz deklariert im Wesentlichen, dass IBM der Eigentümer der Urheberrecht ist und erlaubt, den Treiber
+                   frei zu nutzen, zu kopieren und weiterzuverbreiten.
+                   Die technischen "Lizenzen" begrenzen aber die Nutzung auf anderen Plattformen als Windows, UNIX und LINUX. 
+                   Wer <em>SIARD Suite</em> auf solchen Plattformen nutzen will,
+                   muss beim Verkäufer der DB/2 Datenbank-Instanz eine entsprechende
+                   technische Lizenz-Datei beantragen und sie zum Class Path hinzufügen.  
+                  </dd>
+                  <dt>JdbcAccess</dt>
+                  <dd>vom Schweizerischen Bundesarchiv<br/>
+                    Lizenz: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/CDDL-1.0.txt</em>
+                  </dd>                
+                  <dt>Jackcess (Version 2.1.6)</dt>
+                  <dd>von Health Market Science <a href="http://jackcess.sourceforge.net/" target="_blank">http://jackcess.sourceforge.net/</a><br/>
+                    Lizenz: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/Apache-license-2.0.txt</em>
+                  </dd>
+                  <dt>Zwei Komponenten (commons-lang-2.6 6 and commons-logging-1.1.3 7 ) von Apache Commons von Jackcess benötigt</dt>
+                   <dd>von Apache Commons <a href="http://commons.apache.org/" target="_blank">http://commons.apache.org/</a><br/>
+                    Lizenz: <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a> 
+                    in der SIARD-Distribution als <em>doc/licenses/Apache-license-2.0.txt</em>
+                  </dd>
+                  <dt>EnterUtilities</dt>
+                  <dd>von Enter AG<br/>
+                    Lizenz: als Teil von SIARD Suite frei nutzbar unter der SIARD-Lizenz; 
+                    sonst: <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank">GNU General Public License 3 (GPLv3)</a>
+                    in der SIARD-Distribution als <em>doc/licenses/GPL-3.0.txt</em>
+                  </dd>
+                </dl>
+                <p>Eine Kopie aller Lizenzen findet man im Ordner <em>doc/licenses</em> 
+                  der ZIP-Datei der SIARD-Distribution. Eine Kopie aller binären Komponenten
+                  von Dritten, die von <em>SIARD Suite</em> benötigt werden, findet man dort im Ordner <em>lib</em>.</p>
+
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a></small>
+                </p>
+                  
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Schweizerisches Bundesarchiv</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Lizenz</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

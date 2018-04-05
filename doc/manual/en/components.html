@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter Components.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Components</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/components.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/components.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/components.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Components</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Components</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>The <em>SIARD Suite</em> is made up of the following components:
+                  <ul>
+                    <li><a href="#siardgui">SiardGui</a></li>
+                    <li><a href="#siardfromdb">SiardFromDb</a></li>
+                    <li><a href="#siardtodb">SiardToDb</a></li>
+                    <li><a href="#siardapi">SiardApi</a></li>
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="siardgui">SiardGui</a></h2>
+                <p><em>SiardGui</em> implements an interactive graphical user interface
+                  facilitating processing of the data in a SIARD archive.
+                  Meta data can be edited, primary data cannot be changed.
+                  <em>SiardGui</em> is not suitable for complex research. For complex research, 
+                  it is recommended that the SIARD archive be loaded into a database 
+                  system and database techniques be used.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="siardfromdb">SiardFromDb</a></h2>
+                <p><em>SiardFromDb</em> is a command-line application for extracting 
+                  and storing a database in a SIARD file. This application's functionality 
+                  is identical to the download function available in <em>SiardGui</em>.
+                  The command-line version is especially more comfortable when downloading 
+                  large databases or downloading a number of databases in a batch.
+                  Further, long-lasting downloads can be better documented 
+                  using <em>stdout</em> and <em>stderr</em> redirection 
+                  (see <a href="https://technet.microsoft.com/en-us/library/bb490982.aspx" target="_blank">"Using command redirection operators"</a>).</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="siardtodb">SiardToDb</a></h2>
+                <p><em>SiardToDb</em> is a command-line application for uploading a 
+                  database from a SIARD file. This application's functionality is 
+                  identical with the function available in  <em>SiardGui</em>.
+                  Especially when uploading large databases, using the command-line 
+                  version is more comfortable. Further, long-lasting uploads can be better 
+                  documented using  <em>stdout</em> and <em>stderr</em> redirection 
+                  (see <a href="https://technet.microsoft.com/en-us/library/bb490982.aspx" target="_blank">"Using command redirection operators"</a>).</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="siardapi">SiardApi</a></h2>
+                <p><em>SiardApi</em> is a JAVA API for reading and writing SIARD
+                  archives. Its Javadoc documentation is available in the folder 
+                  <em>doc/siard-api</em> of the <em>SIARD Suite</em> distribution.</p>
+                <p>The <em>SiardApi</em> is implemented in the <em>siardapi.jar</em>
+                  in the <em>lib</em> folder of the <em>SIARD Suite</em> distribution.
+                  In addition, the following JAR files are required for its execution:
+                  <ul>
+                    <li>jaxb-api.jar</li>
+                    <li>jaxb-core.jar</li>
+                    <li>jaxb-impl.jar</li>
+                    <li>msv-core-2010.2.jar</li>
+                    <li>stax2-api-3.1.1.jar</li>
+                    <li>woodstox-core-lgpl-4.1.2.jar</li>
+                    <li>woodstox-msv-rng-datatype-20020414.jar</li>
+                    <li>xsdlib-2010.1.jar</li>
+                    <li>Zip64File.jar</li>
+                  </ul>
+                </p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter Prerequisites.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Prerequisites</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/prerequisites.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/prerequisites.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/prerequisites.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Prerequisites</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Prerequisites</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>A JAVA installation is a prerequisite for using <em>SIARD Suite</em>.
+                  A suitable database system infrastructure is a prerequisite for loading 
+                  or storing database content</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2>JAVA</h2>
+                <p>Users of the <em>SIARD Suite</em> must install JAVA in advance. The minimum 
+                  technical requirement is JRE 1.7.</p>
+                <p>JAVA is freely available from <a href="http://www.java.com/" target="_blank">http://www.java.com/</a> (JRE – JAVA Runtime Environment) 
+                  or <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 
+                  (JDK - JAVA Development Kit). <em>SIARD Suite</em> makes use of features
+                  of JavaFX, which are part of the JAVA SE distribution but not yet
+                  integrated in OpenJDK. Therefore one cannot use OpenJDK (http://openjdk.java.net/)
+                  instead.</p>
+                <p>To find out whether JAVA 1.7 or higher is available under Windows, 
+                  proceed as follows: in the Windows "Start" menu item, type the command "cmd"
+                  and enter "java -version" in the command window. Alternatively, type
+                  the command "regedit" in the "Start" menu item and search for
+                  the key <em>CurrentVersion</em> in <em>HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment</em>.
+                  If the registry item does not exist or <em>CurrentVersion</em> contains 
+                  a value lower than "1.7", a new version of JAVA must be installed.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h3>Architecture (32-bit/64-bit)</h3>
+                <p>In former versions of <em>SIARD Suite</em> a dependency on ODBC
+                  necessitated the use of 32-bit JAVA for accessing MS Access databases.
+                  <em>SIARD Suite 2.1</em> does not use ODBC for accessing MS Access databases anymore.
+                  Therefore those databases can be accessed on any platform (e.g. LINUX)
+                  and <em>SIARD Suite 2.1</em> is compatible with 32-bit JAVA as well as
+                  64-bit JAVA. It is recommended to choose the JAVA architecture
+                  according to the architecture of your operating system.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2>Databases</h2>
+                <p><em>SIARD Suite 2.1</em> currently supports the following
+                  database systems:
+                  <ul>
+                    <li>MS Access 2007 or higher</li>
+                    <li>DB/2 8 or higher</li>
+                    <li>H2 database 1.4 or higher</li>
+                    <li>MySQL (or MariaDB) 5.5 or higher</li>
+                    <li>Oracle 10 or higher</li>
+                    <li>SQL Server 2012 or higher</li>
+                  </ul>
+                </p>
+                <p>Further database systems may be integrated at a later date.
+                  The JDBC drivers of the database vendors usually do not conform
+                  to SQL:2008. Most of them even fail to conform to the JDBC 4 
+                  standard with respect to meta data or advanced
+                  data types. Therefore a JDBC wrapper needs to be developed for 
+                  each database system, which conforms to the standards at least to the 
+                  extent required by <em>SIARD Suite</em>.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

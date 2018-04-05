@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- ===================================================================
+Manual of SIARD Suite in German: Chapter Logging.
+Application: SIARD Suite 2.1
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Protokollierung</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachauswahl</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a lang="de" title="Deutsch ausgewählt" aria-label="Deutsch ausgewählt" class="active">DE</a></li>
+                <li><a href="../fr/logging.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/logging.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/logging.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.1 - Handbuch</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.1 - Handbuch</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Protokollierung</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.1 - Protokollierung</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Wenn Probleme bei der Benutzung der <em>SIARD Suite</em>
+                  auftauchen, ist es nützlich, ein Ausführungsprotokoll zu speichern. 
+                  Ein solches (oder - aus Sicherheitsgründen - eine Auszug daraus)
+                  sollte eine Fehlermeldung an die Wartung begleiten.</p>
+                <p>Um ein solches Protokoll aufzuzeichnen, geht man folgendermassen vor:</p>
+                <p>Im Verzeichnis <em>etc</em> der SIARD-Installation findet man 
+                  die Datei <em>logging.properties</em>. In dieser Datei wird die 
+                  Protokollierung mit Niveau WARNING auf die Konsole und alle
+                  Niveaus in die Logdatei <em>%t/siard2%u.log</em> umgeleitet. 
+                  Das %t steht hier für den temporären Ordner (Wert der Umgebungsvariablen
+                  TEMP oder TMP) und das %u für eine Laufnummer.
+                  Unter Windows ergibt das normalerweise 
+                  <em>C:\Users\&lt;user&gt;\AppData\Local\Temp\siard20.log</em>).</p>
+                <p>Das globale Logniveau steht anfänglich auf INFO. Ausführlicheres
+                  Logging kann eingestellt werden, indem man die Zeile<br/>
+                  <samp>.level=INFO</samp><br/>
+                  in<br/>
+                  <samp>.level=ALL</samp><br/>
+                  abändert. Derart ausführliches Logging verlangsamt die Ausführung.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Zum Seitenanfang
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Schweizerisches Bundesarchiv</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Lizenz</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

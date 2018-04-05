@@ -1,0 +1,47 @@
+Manifest-Version: 1.0
+Created-By: Hartwig Thomas, Enter AG, Rüti ZH, Switzerland
+Specification-Title: SIARD Suite
+Specification-Version: 2.1
+Specification-Vendor: Swiss Federal Archives, Berne, Switzerland
+Implementation-Title: SIARD Suite
+Implementation-Version: 2.1.58
+Implementation-Vendor: Swiss Federal Archives, Berne, Switzerland
+Built-By: Hartwig Thomas, Enter AG, Rüti ZH, Switzerland
+Built-Date: 29. Mar 2018
+Main-Class: ch.admin.bar.siard2.gui.SiardGui
+Class-Path: jfxrt.jar
+  mslinks.jar
+  ini4j-0.5.4.jar
+  siardcmd.jar
+  siardapi.jar
+  zip64.jar
+  xsdlib-2010.1.jar
+  woodstox-msv-rng-datatype-20020414.jar
+  woodstox-core-lgpl-4.1.2.jar
+  stax2-api-3.1.1.jar
+  msv-core-2010.2.jar
+  jaxb-impl.jar
+  jaxb-core.jar
+  jaxb-api.jar
+  jdbcoracle.jar
+  ojdbc6.jar
+  xdb6.jar
+  xmlparserv2.jar
+  jdbcmysql.jar
+  mysqljdbc5_1_40.jar
+  jdbcmssql.jar
+  sqljdbc41.jar
+  jdbch2.jar
+  h2-1.3.176.jar
+  jts-1.14.jar
+  jdbcdb2.jar
+  db2jcc4.jar
+  jdbcaccess.jar
+  jackcess-2.1.6a.jar
+  commons-lang-2.6.jar
+  commons-logging-1.1.3.jar
+  jdbcbase.jar
+  enterutils.jar
+  sqlparser.jar
+  antlr-runtime-4.5.2.jar
+  

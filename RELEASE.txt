@@ -1,0 +1,5 @@
+Release Notes for SiardGui 2.1
+==============================
+
+2.1.58
+First release of SiardGui on GitHub.
