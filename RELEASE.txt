@@ -8,3 +8,6 @@ First release of SiardGui on GitHub.
 .gitattributes added.
 In shell scripts CRLF changed to LF.
 _supports_arrays removed from jdbcdrivers.properties.
+
+2.1.64
+Forced Git to upload shell scripts without CRLF.
