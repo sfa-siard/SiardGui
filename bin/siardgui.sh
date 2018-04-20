@@ -18,7 +18,8 @@ reljar=lib/siardgui.jar
 rellogprop=etc/logging.properties
 
 #-----------------------------------------------------------------------
-# javackeck returns 1, if $java exists and has version $minjavaversion or higher
+# javackeck returns 1, if $java exists and has version $minjavaversion
+# or higher
 #-----------------------------------------------------------------------
 javacheck()
 {

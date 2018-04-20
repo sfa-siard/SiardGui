@@ -20,7 +20,8 @@ rellogprop=etc/logging.properties
 class=ch.admin.bar.siard2.cmd.SiardFromDb
 
 #-----------------------------------------------------------------------
-# javackeck returns 1, if $java exists and has version $minjavaversion or higher
+# javackeck returns 1, if $java exists and has version $minjavaversion
+# or higher
 #-----------------------------------------------------------------------
 javacheck()
 {
