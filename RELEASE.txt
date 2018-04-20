@@ -11,3 +11,8 @@ _supports_arrays removed from jdbcdrivers.properties.
 
 2.1.64
 Forced Git to upload shell scripts without CRLF.
+
+2.1.66
+Shell scripts confusing From and To corrected.
+Documentation of -x / -e switch corrected.
+Blocking of -x switch removed.

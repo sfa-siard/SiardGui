@@ -18,7 +18,7 @@ reljar=lib/siardcmd.jar
 # logging properties relative to script location
 rellogprop=etc/logging.properties
 # class with main() to be run
-class=ch.admin.bar.siard2.cmd.SiardFromDb
+class=ch.admin.bar.siard2.cmd.SiardToDb
 
 #-----------------------------------------------------------------------
 # javackeck returns 1, if $java exists and has version $minjavaversion

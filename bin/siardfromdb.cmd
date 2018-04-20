@@ -14,7 +14,7 @@ if "%~1"=="-h" goto help
 if "%~1"=="/h" goto help
 set jar=lib\siardcmd.jar
 set logprop=etc\logging.properties
-set class=ch.admin.bar.siard2.cmd.SiardToDb
+set class=ch.admin.bar.siard2.cmd.SiardFromDb
 goto start
 
 :regquery
