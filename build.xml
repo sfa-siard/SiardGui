@@ -431,7 +431,10 @@ Created    : 01.06.2017, Hartwig Thomas
       	<exclude name="${jarjunit4}"/>
       </zipfileset>
       <zipfileset dir="${dirbin}" prefix="${zipfolder}">
-        <include name="**/*.*"/>
+        <exclude name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+        <include name="**/*.sh"/>
       </zipfileset>
       <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
         <include name="**/*.*"/>

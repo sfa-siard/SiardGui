@@ -16,3 +16,9 @@ Forced Git to upload shell scripts without CRLF.
 Shell scripts confusing From and To corrected.
 Documentation of -x / -e switch corrected.
 Blocking of -x switch removed.
+
+2.1.68
+Shell scripts corrected: 
+* Missing /usr/bin/java handled correctly in javacheck
+* Backslash in SQL Server JDBC URL must now specified on bash command line in quotes with double backslash: -j="jdbc:sqlserver://vmw10.enterag.ch\\testdb:1433"
+* build.xml changed to make .sh scripts executable on deploy and on unzip.
