@@ -25,16 +25,19 @@ javacheck()
 {
   ok=0
   version=`$java -version 2>&1`
-  # must start with something like 'java version "1.7.0_23"'
-  start=`expr substr "$version" 1 12`
-  if [ "$start" = "java version" ];
+  if [ $? = 0 ]
   then
-    version=${version#*\"}
-    version=${version%%\"*}
-    if [ "$version" \> "$minjavaversion" ];
+    # must start with something like 'java version "1.7.0_23"'
+    start=`expr substr "$version" 1 12`
+    if [ "$start" = "java version" ];
     then
-      ok=1
-    fi  
+      version=${version#*\"}
+      version=${version%%\"*}
+      if [ "$version" \> "$minjavaversion" ];
+      then
+        ok=1
+      fi  
+    fi
   fi
   return "$ok"
 } # javacheck
@@ -90,7 +93,7 @@ execute()
   then
     "$java" $opts -jar "$execdir/$reljar"
   else
-    "$java" $opts -jar "$execdir/$reljar" "$args"
+    "$java" $opts -jar "$execdir/$reljar" $args
   fi
   return $?
 } # execute
