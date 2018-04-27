@@ -73,12 +73,11 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <div class="mod mod-text">
               <section class="clearfix">
                 <p>The download and upload functionality of <em>SIARD Suite</em>
-                  can be called from the command line:
-                  <ul>
-                    <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: download of a SIARD archive,</li>
-                    <li><a href="#siardtodb"><em>SiardToDb</em></a>: upload of a SIARD archive.</li>
-                  </ul>
-                </p>
+                  can be called from the command line:</p>
+                <ul>
+                  <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: download of a SIARD archive,</li>
+                  <li><a href="#siardtodb"><em>SiardToDb</em></a>: upload of a SIARD archive.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -86,15 +85,14 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="siardfromdb">SiardFromDb</a></h2>
+                <h2><a id="siardfromdb">SiardFromDb</a></h2>
                 <p><em>SiardFromDb</em> is a command-line program which extracts 
                   a database to a SIARD archive. One can use <em>SiardFromDb</em>
-                  to create
-                  <ul> 
-                    <li>a SIARD archive (meta data  and primary data) based on the database (option <em>-s</em>), and/or</li>
-                    <li>SIARD meta data XML, containing a definition of the database schema (option <em>-e</em>).</li>
-                  </ul>
-                </p>
+                  to create</p>
+                <ul> 
+                  <li>a SIARD archive (meta data  and primary data) based on the database (option <em>-s</em>), and/or</li>
+                  <li>SIARD meta data XML, containing a definition of the database schema (option <em>-e</em>).</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -131,12 +129,24 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>&lt;external LOB folder&gt;</td><td>folder for storing the data of the largest LOB column of database externally (contents will be deleted if they exist!)</td></tr>
                   <tr><td>&lt;mime type&gt;</td><td>MIME type of data in the largest LOB column of database (influences file extension of externally stored LOBs)</td></tr>
                   <tr><td valign="top">&lt;JDBC URL&gt;</td><td>JDBC URL of database to be downloaded<br/>
-                    e.g. for <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
-                    for <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
-                    for <em>H2 database</em>: jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb<br/>
-                    for <em>MySQL</em>: jdbc:mysql://dbserver.enterag.ch:3306/testdb<br/>
-                    for <em>Oracle</em>: jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl<br/>
-                    for <em>SQL Server</em>: jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</td></tr>
+                    e.g.
+                    <dl>
+                      <dt>for <em>MS Access</em></dt>
+                        <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>for <em>DB/2</em></dt>
+	                      <dd>jdbc:dbserver.enterag.ch:50000/testdb</dd>
+	                    <dt>for <em>H2 database</em></dt>
+	                      <dd><em>jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb</em></dd>
+	                    <dt>for <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>for <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>for SQL Server</dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em><br/>
+	                      (in bash shell the latter must be quoted with duplicated backslash:<br/>
+	                      <em>"jdbc:sqlserver://dbserver.enterag.ch\\testdb:1433"</em>)</dd>
+                    </dl> 
+                  </td></tr>
                   <tr><td>&lt;database user&gt;</td><td>database user</td></tr>
                   <tr><td>&lt;database password&gt;</td><td>database password</td></tr>
                   <tr><td>&lt;siard file&gt;</td><td>name of .siard file to be written</td></tr>
@@ -165,9 +175,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>The conversion of TIMEs and TIMESTAMPs in the database depends on the 
                   local time zone. If the time 15:30 is stored in Zurich, the UTC time 
                   value 14:30 will be stored in the SIARD file – in winter. To suppress 
-                  this conversion one must start <em>SiardFromDb</em> with the option
+                  this conversion one must start <em>SiardFromDb</em> with the option</p>
                   <pre>-Duser.timezone=GMT</pre>
-                  which tells SIARD to interpret all database times as UTC times.</p>
+                <p>which tells SIARD to interpret all database times as UTC times.</p>
                 
                 <p class="pull-right">
                   <small>
@@ -190,7 +200,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="siardtodb">SiardToDb</a></h2>
+                <h2><a id="siardtodb">SiardToDb</a></h2>
                 <p><em>SiardToDb</em> is a command-line program which loads a SIARD archive
                 into a database for research purposes.</p>
                 
@@ -226,12 +236,24 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>&lt;query timeout&gt;</td><td>timeout in seconds for query (0 for unlimited)</td></tr>
                   <tr><td>&lt;siard file&gt;</td><td>name of .siard file to be uploaded</td></tr>
                   <tr><td valign="top">&lt;JDBC URL&gt;</td><td>JDBC URL of the target database<br/>
-                    e.g. for <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
-                    for <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
-                    for <em>H2 database</em>: jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb<br/>
-                    for <em>MySQL</em>: jdbc:mysql://dbserver.enterag.ch:3306/testdb<br/>
-                    for <em>Oracle</em>: jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl<br/>
-                    for <em>SQL Server</em>: jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</td></tr>
+                    e.g.
+                    <dl>
+	                    <dt>for <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>for <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>for <em>H2 database</em></dt>
+	                      <dd><em>jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb</em></dd>
+	                    <dt>for <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>for <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>for <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em><br/>
+	                      (in bash shell the latter must be quoted with duplicated backslash:<br/>
+	                      <em>"jdbc:sqlserver://dbserver.enterag.ch\\testdb:1433"</em>)</dd>
+                    </dl> 
+                  </td></tr>
                   <tr><td>&lt;database user&gt;</td><td>database user</td></tr>
                   <tr><td>&lt;database password&gt;</td><td>database password</td></tr>
                   <tr><td>&lt;schema&gt;</td><td>schema name in SIARD file</td></tr>
@@ -273,9 +295,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>The conversion of TIMEs and TIMESTAMPs in the database depends 
                   on the local time zone. The UTC time 14:30 in the SIARD file 
                   is uploaded in Zurich as the local time 15:30 to the database – in winter. 
-                  To suppress this conversion one must start <em>SiardToDb</em> with the option
+                  To suppress this conversion one must start <em>SiardToDb</em> with the option</p>
                   <pre>-Duser.timezone=GMT</pre>
-                  which tells SIARD to interpret all database times as UTC times.</p>
+                <p>which tells SIARD to interpret all database times as UTC times.</p>
               </section>
             </div>
         
