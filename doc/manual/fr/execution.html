@@ -94,12 +94,13 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 
                 <h2>Premier démarrage</h2>
                 <p><em>SIARD Suite</em> est livré dans un fichier ZIP et doit tout d'abord être décompressé. Le fichier <em>SiardGui.jar</em> se trouve dans le répertoire <em>lib</em> de la livraison. Si JAVA est correctement installé, le programme peut être lancé sous Windows avec un double-clic sur le fichier JAR. Comme alternative, les scripts indépendants d'une plateforme <em>siardgui.cmd</em> (Windows) ou <em>siardgui.sh</em> (LINUX) peuvent être exécutés.</p>
-                <p>Si cela ne fonctionne pas ou qu'un autre système d'exploitation est utilisé, <em>SiardGui</em> peut aussi être lancé depuis la ligne de commande <em>lib</em> de <em>SIARD Suite</em> de la manière suivante:
-                  <pre>javaw -jar SiardGui.jar (Windows)
-java -jar SiardGui.jar (tous les systèmes d'exploitation)</pre></p>
+                <p>Si cela ne fonctionne pas ou qu'un autre système d'exploitation est utilisé, <em>SiardGui</em> peut aussi être lancé depuis la ligne de commande <em>lib</em> de <em>SIARD Suite</em> de la manière suivante:</p>
+                  <pre>javaw -jar lib/siardgui.jar (Windows)
+java -jar lib/siardgui.jar (tous les systèmes d'exploitation)</pre>
                 <p>Pour que cela fonctionne, le répertoire <em>bin</em> de JAVA Distribution doit avoir été inséré à la variable d'environnement PATH.
-                  Toutefois, ceci a normalement déjà été fait lors de l'installation de JAVA. Autrement, il faut indiquer le nom du chemin d'accès complet au programme JAVA: (par ex. <pre>"C:\Program Files\Java\jre1.8.0_144\bin\javaw.exe" -jar SiardGui.jar</pre> 
-                  y-compris les guillemets).</p>
+                  Toutefois, ceci a normalement déjà été fait lors de l'installation de JAVA. Autrement, il faut indiquer le nom du chemin d'accès complet au programme JAVA: (par ex.</p>
+                  <pre>"C:\Program Files\Java\jre1.8.0_144\bin\javaw.exe" -jar lib/siardgui.jar</pre> 
+                  <p>y-compris les guillemets).</p>
                 <p>Lors du premier lancement de <em>SiardGui</em>, un message comme ci-dessous apparait:</p>
                 <p><img alt="Message Initial Installation" src="initialnew.png"/></p>
                 <p>Comme à cet instant, <em>SiardGui</em> ne connait pas la langue que l'utilisateur préfère, la langue du message affiché dépend de celle configurée dans le système d'exploitation et de celle qui a été sélectinnée lors de l'installation de JAVA.</p>
