@@ -15,8 +15,8 @@ Created    : 01.06.2017, Hartwig Thomas
   -->
   <property file="build.properties"/>
   <property name="debuglevel" value="source,lines,vars"/>
-  <property name="target" value="1.7"/>
-  <property name="source" value="1.7"/>
+  <property name="target" value="1.8"/>
+  <property name="source" value="1.8"/>
   <!-- the main folders of the project -->
   <property name="dirsrc" value="src"/>
   <property name="dirtest" value="test/"/>

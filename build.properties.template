@@ -22,10 +22,10 @@ dirdeploy=/Users/Hartwig/test
 #dirdeploy=D:/Temp
 
 #-----------------------------------------------------------------------
-# The bootstrap class (run-time jar) for compiling code compatible with JSE 1.7.
-java7rtjar=/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre/lib/rt.jar
-#java7rtjar=C:/Program Files/Java/jdk1.7.0_79/jre/lib/rt.jar
-#java7rtjar=/usr/lib/jvm/java-7-openjdk-amd64/jre/lib/rt.jar
+# The bootstrap class (run-time jar) for compiling code compatible with JSE 1.8.
+#java8rtjar=C:/Program Files/Java/jdk1.8.0_144/jre/lib/rt.jar
+#java8rtjar=/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+java8rtjar=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home/jre/lib/rt.jar
 
 #-----------------------------------------------------------------------
 # The following property definition signals, that git can be 
