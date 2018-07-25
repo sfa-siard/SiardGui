@@ -468,6 +468,8 @@ public class SiardBundle extends FxBundle
   public String getOptionQueryTimeoutExplanation() { return getProperty("option.query.timeout.explanation"); }
   public String getOptionColumnWidthLabel() { return getProperty("option.column.width.label"); }
   public String getOptionColumnWidthExplanation() { return getProperty("option.column.width.explanation"); }
+  public String getOptionFileChooserNativeLabel() { return getProperty("option.file.chooser.native.label"); }
+  public String getOptionFileChooserNativeExplanation() { return getProperty("option.file.chooser.native.explanation"); }
   public String getOptionTextEditorLabel() { return getProperty("option.text.editor.label"); }
   public String getOptionTextEditorExplanation() { return getProperty("option.text.editor.explanation"); }
   public String getOptionBinaryEditorLabel() { return getProperty("option.binary.editor.label"); }

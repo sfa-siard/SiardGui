@@ -43,9 +43,11 @@ extends Application
       "Label", 200,String.class,"Initial Text");
     OptionVBox<File> ovb = new OptionVBox<File>("Long, long, long, long, long, long, long, long, long, long, long, long Explanation\nmultiline",
         "Label", 200,File.class,new File("testfiles"));
-    ***/
     OptionVBox<Integer> ovb = new OptionVBox<Integer>(stage,"Long, long, long, long, long, long, long, long, long, long, long, long Explanation\nmultiline",
-        "Label", 200,Integer.class,new Integer(5));
+        "Label", 200,Integer.class,Integer.valueOf(5));
+    ***/
+    OptionVBox<Boolean> ovb = new OptionVBox<Boolean>(stage,"Long, long, long, long, long, long, long, long, long, long, long, long Explanation\nmultiline",
+      "Label", 200,Boolean.class,Boolean.valueOf(false));
     VBox.setMargin(ovb, new Insets(0.0));
     vbox.getChildren().add(ovb);
     // System.out.println(FxSizes.getNodeWidth(vbox)+"x"+FxSizes.getNodeHeight(vbox));

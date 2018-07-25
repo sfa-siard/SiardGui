@@ -6,6 +6,7 @@
 	<classpathentry kind="lib" path="lib/mslinks.jar"/>
 	<classpathentry kind="lib" path="lib/activation-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.11.jar"/>
+	<classpathentry kind="lib" path="lib/jfxrt.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
@@ -32,7 +33,6 @@
 	<classpathentry kind="lib" path="lib/jdbcoracle.jar"/>
 	<classpathentry kind="lib" path="lib/jts-1.14.jar"/>
 	<classpathentry kind="lib" path="lib/msv-core-2010.2.jar"/>
-	<classpathentry kind="lib" path="lib/mysqljdbc5_1_40.jar"/>
 	<classpathentry kind="lib" path="lib/ojdbc6.jar"/>
 	<classpathentry kind="lib" path="lib/siardapi.jar" sourcepath="/SiardApi/src"/>
 	<classpathentry kind="lib" path="lib/siardcmd.jar" sourcepath="/SiardCmd/src"/>

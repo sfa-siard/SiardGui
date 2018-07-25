@@ -187,6 +187,9 @@ public class InstallUninstallHandler
       /* now select folder where SIARD Suite is to be installed. */
       try 
       {
+        /* do not use native directory chooser here */
+        boolean bNative = Boolean.valueOf(System.getProperty(FS.sUSE_NATIVE_PROPERTY));
+        System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(false));
         do
         {
           folderInstallation = FS.chooseNewFolder(stage, 
@@ -199,6 +202,7 @@ public class InstallUninstallHandler
             sb.getInstallationNotemptyTitle(),
             sb.getInstallationNotemptyMessage(), sb.getOk(), null) == 1)
           );
+        System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(bNative));
         /* install */
         _il.event("Selected installation folder: "+((folderInstallation == null)? "null" : folderInstallation.getAbsolutePath()));
         if (folderInstallation != null) // else DirectorySelector was cancelled

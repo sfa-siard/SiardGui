@@ -697,7 +697,7 @@ public class FC
     /* modality */
     initModality(Modality.APPLICATION_MODAL);
     /* display on top */
-    toFront();
+    setAlwaysOnTop(true);
   } /* constructor FS */
 
   /*------------------------------------------------------------------*/

@@ -12,7 +12,6 @@ public class FsTester
   /** return codes */
   private static final int iRETURN_OK = 0;
   private static final int iRETURN_ERROR = 8;
-  private static File _fileExisting = null;
   
   /**
    * @param args
@@ -22,8 +21,6 @@ public class FsTester
     int iReturn = iRETURN_ERROR;
     try
     {
-      if (args.length > 0)
-        _fileExisting = new File(args[0]); 
       // Problem: if there are two classes extending Application, we must load the ancillary one first
       try { Class.forName("ch.admin.bar.siard2.gui.SiardGui"); }
       catch(ClassNotFoundException cnfe) { System.err.println(EU.getExceptionMessage(cnfe)); }
@@ -37,11 +34,11 @@ public class FsTester
   @Override
   public void start(Stage stage) throws Exception
   {
-    /*
+    /***/
     try
     {
-      
-      File folderInitial = new File("C:\\Users\\Hartwig\\AppData\\Local\\siard_suite_2.0\\");
+      System.setProperty(FS.sUSE_NATIVE_PROPERTY, "true");
+      File folderInitial = new File("C:\\Users\\Hartwig\\AppData\\Local\\siard_suite_2.1\\");
       File folderChosen = FS.chooseExistingFolder(stage, 
           "Title", "Purpose of chosen folder", SiardBundle.getSiardBundle(),
           folderInitial);
@@ -51,9 +48,11 @@ public class FsTester
         System.out.println("Existing folder canceled");
     }
     catch(FileNotFoundException fnfe) { System.out.println(EU.getExceptionMessage(fnfe)); } 
-
+    /***/
+    /***
     try
     {
+      System.setProperty(FS.sUSE_NATIVE_PROPERTY, "true");
       File folderInitial = new File("D:\\Temp\\gaga\\");
       File folderChosen = FS.chooseNewFolder(stage, 
           "Title", "Purpose of chosen folder", SiardBundle.getSiardBundle(),
@@ -64,13 +63,12 @@ public class FsTester
         System.out.println("New folder canceled");
     }
     catch(IOException ie) { System.out.println(EU.getExceptionMessage(ie)); }
-    */
-
+    ***/
+    /***
     try
     {
-      File fileInitial = new File("C:\\Users\\Hartwig\\AppData\\Roaming\\SIARD Suite 2.0\\*.siard");
-      if (_fileExisting != null)
-        fileInitial = _fileExisting;
+      System.setProperty(FS.sUSE_NATIVE_PROPERTY, "true");
+      File fileInitial = new File("C:\\Users\\Hartwig\\AppData\\Roaming\\SIARD Suite 2.1\\*.siard");
       System.out.println("Initial file: "+fileInitial.getAbsolutePath());
       File fileChosen = FS.chooseExistingFile(stage, 
           "Title", "Purpose of chosen folder", SiardBundle.getSiardBundle(),
@@ -81,11 +79,13 @@ public class FsTester
         System.out.println("Existing file canceled");
     }
     catch(FileNotFoundException fnfe) { System.out.println(EU.getExceptionMessage(fnfe)); }
-
-    /*
+    ***/
+    /***
     try
     {
+      System.setProperty(FS.sUSE_NATIVE_PROPERTY, "true");
       File fileInitial = new File("D:\\Temp\\guguseli.html");
+      System.out.println("Initial file: "+fileInitial.getAbsolutePath());
       File fileChosen = FS.chooseNewFile(stage, 
           "Title", "Purpose of chosen folder", SiardBundle.getSiardBundle(),
           fileInitial,"html",false);
@@ -95,7 +95,8 @@ public class FsTester
         System.out.println("New file canceled");
     }
     catch(IOException ie) { System.out.println(EU.getExceptionMessage(ie)); }
-    */
+    ***/
+    
     stage.close();
   } /* start */
 

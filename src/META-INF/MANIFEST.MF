@@ -28,7 +28,7 @@ Class-Path: jfxrt.jar
   xdb6.jar
   xmlparserv2.jar
   jdbcmysql.jar
-  mysqljdbc5_1_40.jar
+  mysql-connector-java-8.0.11.jar
   jdbcmssql.jar
   sqljdbc41.jar
   jdbch2.jar

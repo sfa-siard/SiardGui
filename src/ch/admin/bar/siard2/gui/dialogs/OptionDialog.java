@@ -17,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.dialogs.FS;
 import ch.admin.bar.siard2.gui.*;
 
 /*====================================================================*/
@@ -44,6 +45,7 @@ public class OptionDialog
   private OptionVBox<Integer> _ovbLoginTimeout = null;
   private OptionVBox<Integer> _ovbQueryTimeout = null;
   private OptionVBox<Integer> _ovbColumnWidth = null;
+  private OptionVBox<Boolean> _ovbFileChooserNative = null;
   private OptionVBox<File> _ovbTextEditor = null;
   private OptionVBox<File> _ovbBinaryEditor = null;
   private OptionVBox<File> _ovbXslFile = null;
@@ -75,6 +77,9 @@ public class OptionDialog
       if (iColumnWidth > iMAX_COLUMN_WIDTH)
         iColumnWidth = iMAX_COLUMN_WIDTH;
       up.setColumnWidth(iColumnWidth);
+      boolean bFileChooserNative = _ovbFileChooserNative.getValue().booleanValue();
+      System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(bFileChooserNative));
+      up.setFileChooserNative(bFileChooserNative);
       File fileTextEditor = _ovbTextEditor.getValue();
       if ((fileTextEditor != null) && 
           fileTextEditor.exists() && 
@@ -161,6 +166,7 @@ public class OptionDialog
     String sLoginTimeoutLabel = sb.getOptionLoginTimeoutLabel(); 
     String sQueryTimeoutLabel = sb.getOptionQueryTimeoutLabel(); 
     String sColumnWidthLabel = sb.getOptionColumnWidthLabel(); 
+    String sFileChooserNativeLabel = sb.getOptionFileChooserNativeLabel(); 
     String sTextEditorLabel = sb.getOptionTextEditorLabel(); 
     String sBinaryEditorLabel = sb.getOptionBinaryEditorLabel(); 
     String sXslFileLabel = sb.getOptionXslFileLabel(); 
@@ -170,6 +176,7 @@ public class OptionDialog
           sLoginTimeoutLabel,
           sQueryTimeoutLabel,
           sColumnWidthLabel,
+          sFileChooserNativeLabel,
           sTextEditorLabel,
           sBinaryEditorLabel,
           sXslFileLabel,
@@ -184,6 +191,9 @@ public class OptionDialog
     _ovbColumnWidth = new OptionVBox<Integer>(this,sb.getOptionColumnWidthExplanation(),
       sColumnWidthLabel,dLabelWidth,Integer.class,Integer.valueOf(up.getColumnWidth()));
     vbox.getChildren().add(_ovbColumnWidth);
+    _ovbFileChooserNative = new OptionVBox<Boolean>(this,sb.getOptionFileChooserNativeExplanation(),
+      sFileChooserNativeLabel,dLabelWidth,Boolean.class,Boolean.valueOf(up.getFileChooserNative(false)));
+    vbox.getChildren().add(_ovbFileChooserNative);
     _ovbTextEditor = new OptionVBox<File>(this,sb.getOptionTextEditorExplanation(),
       sTextEditorLabel,dLabelWidth,File.class,up.getTextEditor());
     vbox.getChildren().add(_ovbTextEditor);

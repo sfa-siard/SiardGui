@@ -55,6 +55,8 @@ public class OptionVBox<T>
   private String _sOptionMessage = null;
   // text field
   private TextField _tf = null;
+  // check box
+  private CheckBox _cb = null;
   /*------------------------------------------------------------------*/
   /** return the current value of the text field.
    * @return edited value.
@@ -63,13 +65,18 @@ public class OptionVBox<T>
   public T getValue()
   {
     T oValue = null;
-    String sText = _tf.getText();
-    if (_cls == File.class)
-      oValue = (T)SpecialFolder.findInPath(sText);
-    else if (_cls == Integer.class)
-      oValue = (T)Integer.valueOf(Integer.parseInt(sText));
-    else
-      oValue = (T)sText;
+    if (_cls != Boolean.class)
+    {
+      String sText = _tf.getText();
+      if (_cls == File.class)
+        oValue = (T)SpecialFolder.findInPath(sText);
+      else if (_cls == Integer.class)
+        oValue = (T)Integer.valueOf(Integer.parseInt(sText));
+      else
+        oValue = (T)sText;
+    }
+    else if (_cls == Boolean.class)
+      oValue = (T)Boolean.valueOf(_cb.isSelected());
     return oValue;
   } /* getValue */
 
@@ -148,6 +155,19 @@ public class OptionVBox<T>
   } /* createTextField */
 
   /*------------------------------------------------------------------*/
+  /** create a check box
+   * @param bSelected initial selection of check box.
+   * @return check box.
+   */
+  private CheckBox createCheckBox(boolean bSelected)
+  {
+    _cb = new CheckBox();
+    _cb.setIndeterminate(false);
+    _cb.setSelected(bSelected);
+    return _cb;
+  } /* createCheckBox */
+
+  /*------------------------------------------------------------------*/
   /** create a HBox containing a label of the given width and a text input field.
    * @param sLabel label text.
    * @param dLabelWidth label width.
@@ -159,29 +179,42 @@ public class OptionVBox<T>
     HBox hbox = new HBox();
     hbox.setPadding(new Insets(dINNER_PADDING));
     hbox.setSpacing(dHSPACING);
-    String sText = null;
-    if (_cls == File.class)
-      sText = ((File)oValue).getPath();
-    else if (_cls == Integer.class)
-      sText = String.valueOf((Integer)oValue);
-    else
-      sText = (String)oValue;
-    TextField tf = createTextField(sText);
-    Label lbl = createLabel(sLabel, tf);
-    lbl.setMinWidth(dLabelWidth);
-    lbl.setMinHeight(FxSizes.getNodeHeight(_tf));
-    lbl.setAlignment(Pos.BASELINE_RIGHT);
-    hbox.getChildren().add(lbl);
-    hbox.getChildren().add(tf);
-    HBox.setHgrow(tf, Priority.ALWAYS);
-    if (_cls == File.class)
+    Label lbl = null;
+    if (_cls != Boolean.class)
     {
-      Button btnBrowse = new Button(SiardBundle.getSiardBundle().getOptionBrowse());
-      btnBrowse.setOnAction(this);
-      hbox.getChildren().add(btnBrowse);
+      String sText = null;
+      if (_cls == File.class)
+        sText = ((File)oValue).getPath();
+      else if (_cls == Integer.class)
+        sText = String.valueOf((Integer)oValue);
+      else
+        sText = (String)oValue;
+      TextField tf = createTextField(sText);
+      if (_cls == Integer.class)
+        tf.textProperty().addListener(this);
+      lbl = createLabel(sLabel, tf);
+      lbl.setMinHeight(FxSizes.getNodeHeight(tf));
+      hbox.getChildren().add(lbl);
+      hbox.getChildren().add(tf);
+      HBox.setHgrow(tf, Priority.ALWAYS);
+      if (_cls == File.class)
+      {
+        Button btnBrowse = new Button(SiardBundle.getSiardBundle().getOptionBrowse());
+        btnBrowse.setOnAction(this);
+        hbox.getChildren().add(btnBrowse);
+      }
     }
-    else if (_cls == Integer.class)
-      tf.textProperty().addListener(this);
+    else
+    {
+      boolean bSelected = ((Boolean)oValue).booleanValue();
+      CheckBox cb = createCheckBox(bSelected);
+      lbl = createLabel(sLabel, cb);
+      lbl.setMinHeight(FxSizes.getNodeHeight(cb));
+      hbox.getChildren().add(lbl);
+      hbox.getChildren().add(cb);
+    }
+    lbl.setMinWidth(dLabelWidth);
+    lbl.setAlignment(Pos.BASELINE_RIGHT);
     return hbox;
   } /* createHBoxLabeledText */
   

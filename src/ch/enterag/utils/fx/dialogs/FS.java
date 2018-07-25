@@ -12,16 +12,21 @@ package ch.enterag.utils.fx.dialogs;
 import java.io.*;
 import java.util.*;
 import javafx.stage.*;
+
 import ch.enterag.utils.fx.*;
 
 /*====================================================================*/
 /** FS implements convenience calls to the static methods in FC
   getting the relevant strings from an language-dependent FxBundle.
+  Use system property ch.enterag.utils.fx.dialogs.FS.useNative to
+  force usage of native dialogs.
  * @author Hartwig Thomas
  *
  */
 public abstract class FS
 {
+  public static final String sUSE_NATIVE_PROPERTY = "ch.enterag.utils.fx.dialogs.FS.useNative";
+  
   /*------------------------------------------------------------------*/
   /** convenience method with standard strings from bundle and no hidden files.
    * @param stageOwner owner stage or null.
@@ -37,9 +42,19 @@ public abstract class FS
       File fileInitialFolder)
     throws FileNotFoundException
   {
-    return FC.chooseExistingFolder(stageOwner,sTitle,sMessage,
-        fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFolderLabel(),
-        fileInitialFolder,false);
+    File fileFolder = null;
+    if (Boolean.valueOf(System.getProperty(sUSE_NATIVE_PROPERTY)))
+    {
+      DirectoryChooser dc = new DirectoryChooser();
+      dc.setTitle(sTitle);
+      dc.setInitialDirectory(fileInitialFolder);
+      fileFolder = dc.showDialog(stageOwner);
+    }
+    else
+      fileFolder = FC.chooseExistingFolder(stageOwner,sTitle,sMessage,
+          fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFolderLabel(),
+          fileInitialFolder,false);
+    return fileFolder;
   } /* chooseExistingFolder */
   
   /*------------------------------------------------------------------*/
@@ -57,9 +72,30 @@ public abstract class FS
       File fileInitialFolder)
     throws IOException
   {
-    return FC.chooseNewFolder(stageOwner,sTitle,sMessage,
+    File fileFolder = null;
+    if (Boolean.valueOf(System.getProperty(sUSE_NATIVE_PROPERTY)))
+    {
+      DirectoryChooser dc = new DirectoryChooser();
+      dc.setTitle(sTitle);
+      /* if the initial folder does not exist, create it */
+      int iCreated = 0;
+      for (File folder = fileInitialFolder; !folder.exists(); folder = folder.getParentFile())
+        iCreated++;
+      fileInitialFolder.mkdirs();
+      dc.setInitialDirectory(fileInitialFolder);
+      fileFolder = dc.showDialog(stageOwner);
+      /* remove the created folders again */
+      for (File folder = fileInitialFolder; iCreated > 0; folder = folder.getParentFile())
+      {
+        fileInitialFolder.delete();
+        iCreated--;
+      }
+    }
+    else
+      fileFolder = FC.chooseNewFolder(stageOwner,sTitle,sMessage,
         fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFolderLabel(),
         fileInitialFolder,false);
+    return fileFolder;
   } /* chooseNewFolder */
   
   /*------------------------------------------------------------------*/
@@ -81,16 +117,31 @@ public abstract class FS
       File fileInitialFile, String sExtension)
     throws FileNotFoundException
   {
-    List<FC.ExtensionFilter> listExtensions = null;
-    if (sExtension != null)
+    File file = null;
+    if (Boolean.valueOf(System.getProperty(sUSE_NATIVE_PROPERTY)))
     {
-      listExtensions = new ArrayList<FC.ExtensionFilter>();
-      listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getFiles(sExtension), sExtension));
-      listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getAllFiles(), null));
+      FileChooser fc = new FileChooser();
+      fc.setTitle(sTitle);
+      fc.setInitialDirectory(fileInitialFile.getParentFile());
+      fc.setInitialFileName(fileInitialFile.getName());
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(fb.getFiles(sExtension), "*."+sExtension));
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(fb.getAllFiles(), "*"));
+      file = fc.showOpenDialog(stageOwner);
     }
-    return FC.chooseExistingFile(stageOwner,sTitle,sMessage,
-        fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFileLabel(),
-        fileInitialFile,false,listExtensions);
+    else
+    {
+      List<FC.ExtensionFilter> listExtensions = null;
+      if (sExtension != null)
+      {
+        listExtensions = new ArrayList<FC.ExtensionFilter>();
+        listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getFiles(sExtension), sExtension));
+        listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getAllFiles(), null));
+      }
+      file = FC.chooseExistingFile(stageOwner,sTitle,sMessage,
+          fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFileLabel(),
+          fileInitialFile,false,listExtensions);
+    }
+    return file;
   } /* chooseExistingFile */
   
   /*------------------------------------------------------------------*/
@@ -113,26 +164,41 @@ public abstract class FS
       File fileInitialFile, String sExtension, boolean bOverwriteQuery)
     throws IOException
   {
-    List<FC.ExtensionFilter> listExtensions = null;
-    if (sExtension != null)
+    File file = null;
+    if (Boolean.valueOf(System.getProperty(sUSE_NATIVE_PROPERTY)))
     {
-      listExtensions = new ArrayList<FC.ExtensionFilter>();
-      listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getFiles(sExtension), sExtension));
-      listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getAllFiles(), null));
+      FileChooser fc = new FileChooser();
+      fc.setTitle(sTitle);
+      fc.setInitialDirectory(fileInitialFile.getParentFile());
+      fc.setInitialFileName(fileInitialFile.getName());
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(fb.getFiles(sExtension), sExtension));
+      fc.getExtensionFilters().add(new FileChooser.ExtensionFilter(fb.getAllFiles(), "*.*"));
+      file = fc.showSaveDialog(stageOwner);
     }
-    String sOverwriteQuery = null;
-    String sYes = null;
-    String sNo = null;
-    if (bOverwriteQuery)
+    else
     {
-      sOverwriteQuery = fb.getOverwriteQuery();
-      sYes = fb.getYes();
-      sNo = fb.getNo();
+      List<FC.ExtensionFilter> listExtensions = null;
+      if (sExtension != null)
+      {
+        listExtensions = new ArrayList<FC.ExtensionFilter>();
+        listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getFiles(sExtension), sExtension));
+        listExtensions.add(FC.ExtensionFilter.newExtensionFilter(fb.getAllFiles(), null));
+      }
+      String sOverwriteQuery = null;
+      String sYes = null;
+      String sNo = null;
+      if (bOverwriteQuery)
+      {
+        sOverwriteQuery = fb.getOverwriteQuery();
+        sYes = fb.getYes();
+        sNo = fb.getNo();
+      }
+      file = FC.chooseNewFile(stageOwner,sTitle,sMessage,
+          fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFileLabel(),
+          fileInitialFile,false,listExtensions, 
+          sOverwriteQuery, sYes, sNo);
     }
-    return FC.chooseNewFile(stageOwner,sTitle,sMessage,
-        fb.getOk(),fb.getCancel(),fb.getPathLabel(),fb.getFileLabel(),
-        fileInitialFile,false,listExtensions, 
-        sOverwriteQuery, sYes, sNo);
+    return file;
   } /* chooseNewFile */
   
 } /* class FS */

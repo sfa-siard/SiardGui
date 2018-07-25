@@ -425,6 +425,10 @@ public class UserProperties extends Properties
   public int getColumnWidth() { return getInt(sCOLUMN_WIDTH_KEY,iCOLUMN_WIDTH); }
   public void setColumnWidth(int iColumnWidth) { setInt(sCOLUMN_WIDTH_KEY,iColumnWidth); }
   
+  private static final String sFILE_CHOOSER_NATIVE = "file.chooser.native";
+  public boolean getFileChooserNative(boolean bDefault) { return getBoolean(sFILE_CHOOSER_NATIVE, bDefault); }
+  public void setFileChooserNative(boolean bFileChooserNative) { setBoolean(sFILE_CHOOSER_NATIVE, bFileChooserNative); }
+
   private static final String sCONFIG_FOLDER_KEY = "config.folder";
   private static final String sCONFIG_FOLDER = "etc";
   public File getConfigFolder()
