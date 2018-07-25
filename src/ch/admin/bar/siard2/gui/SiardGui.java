@@ -278,6 +278,7 @@ public class SiardGui extends Application
     up.setStageY(_stage.getY());
     up.setStageWidth(_stage.getWidth());
     up.setStageHeight(_stage.getHeight());
+    up.setFileChooserNative(Boolean.valueOf(System.getProperty(FS.sUSE_NATIVE_PROPERTY)));
     up.store();
     _il.exit();
   } /* storeProperties */

@@ -79,7 +79,6 @@ public class OptionDialog
       up.setColumnWidth(iColumnWidth);
       boolean bFileChooserNative = _ovbFileChooserNative.getValue().booleanValue();
       System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(bFileChooserNative));
-      up.setFileChooserNative(bFileChooserNative);
       File fileTextEditor = _ovbTextEditor.getValue();
       if ((fileTextEditor != null) && 
           fileTextEditor.exists() && 
@@ -192,7 +191,7 @@ public class OptionDialog
       sColumnWidthLabel,dLabelWidth,Integer.class,Integer.valueOf(up.getColumnWidth()));
     vbox.getChildren().add(_ovbColumnWidth);
     _ovbFileChooserNative = new OptionVBox<Boolean>(this,sb.getOptionFileChooserNativeExplanation(),
-      sFileChooserNativeLabel,dLabelWidth,Boolean.class,Boolean.valueOf(up.getFileChooserNative(false)));
+      sFileChooserNativeLabel,dLabelWidth,Boolean.class,Boolean.valueOf(Boolean.valueOf(System.getProperty(FS.sUSE_NATIVE_PROPERTY))));
     vbox.getChildren().add(_ovbFileChooserNative);
     _ovbTextEditor = new OptionVBox<File>(this,sb.getOptionTextEditorExplanation(),
       sTextEditorLabel,dLabelWidth,File.class,up.getTextEditor());

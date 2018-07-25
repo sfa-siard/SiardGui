@@ -178,10 +178,6 @@ public class ObjectListTableViewTester
     _vbox.getChildren().add(_oltv);
     // setting maxX, maxY would make fewer cells visible
     Scene scene = new Scene(_vbox);
-    // snapshot after inclusion in scene forces update of 
-    // (only visible!!!) cells and thus computation of table height
-    // (limited to max visible rows)
-    _vbox.snapshot(null, null);
     // limiting the max height now, introduces vertical scroll bar (same for width)
     _oltv.setMaxHeight(0.5*_oltv.getMinHeight());
     _oltv.setMinHeight(_oltv.getMaxHeight());
