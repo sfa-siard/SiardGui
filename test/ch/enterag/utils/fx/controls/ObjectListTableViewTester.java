@@ -178,8 +178,12 @@ public class ObjectListTableViewTester
     _vbox.getChildren().add(_oltv);
     // setting maxX, maxY would make fewer cells visible
     Scene scene = new Scene(_vbox);
+    // snapshot after inclusion in scene forces update of 
+    // (only visible!!!) cells and thus computation of table height
+    // (limited to max visible rows)
+    _vbox.snapshot(null, null);
     // limiting the max height now, introduces vertical scroll bar (same for width)
-    _oltv.setMaxHeight(0.5*_oltv.getMinHeight());
+    _oltv.setMaxHeight(0.75*_oltv.getMinHeight());
     _oltv.setMinHeight(_oltv.getMaxHeight());
     _vbox.setMinHeight(_oltv.getMinHeight()+20.0);
     System.out.println("VBox: "+_vbox.getMinWidth()+"/"+_vbox.getMinHeight());
@@ -200,7 +204,7 @@ public class ObjectListTableViewTester
       ObjectListTableView.ObjectTableCell otc = (ObjectListTableView.ObjectTableCell)ae.getTarget();
       System.out.println("show cell ("+String.valueOf(otc.getRow())+","+String.valueOf(otc.getColumn())+")");
       System.out.println(otc.getWidth()+"x"+otc.getHeight());
-      File fileTextEditor = new File("gedit");
+      File fileTextEditor = new File("Notepad");
       String[] asCommand = new String[] {fileTextEditor.getPath()};
       Execute ex = Execute.execute(asCommand);
       if (ex.getResult() != 0)

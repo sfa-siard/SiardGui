@@ -1,21 +1,13 @@
 Release Notes for SiardGui 2.1
 ==============================
 
-2.1.58
-First release of SiardGui on GitHub.
+2.1.71
+Release for JAVA 10.
+Shell scripts improved.
+Native file choosers supported.
 
-2.1.62
-.gitattributes added.
-In shell scripts CRLF changed to LF.
-_supports_arrays removed from jdbcdrivers.properties.
-
-2.1.64
-Forced Git to upload shell scripts without CRLF.
-
-2.1.66
-Shell scripts confusing From and To corrected.
-Documentation of -x / -e switch corrected.
-Blocking of -x switch removed.
+2.1.70
+MS Access parsing improved.
 
 2.1.68
 Shell scripts corrected: 
@@ -23,5 +15,18 @@ Shell scripts corrected:
 * Backslash in SQL Server JDBC URL must now specified on bash command line in quotes with double backslash: -j="jdbc:sqlserver://vmw10.enterag.ch\\testdb:1433"
 * build.xml changed to make .sh scripts executable on deploy and on unzip.
 
-2.1.70
-MS Access parsing improved.
+2.1.66
+Shell scripts confusing From and To corrected.
+Documentation of -x / -e switch corrected.
+Blocking of -x switch removed.
+
+2.1.64
+Forced Git to upload shell scripts without CRLF.
+
+2.1.62
+.gitattributes added.
+In shell scripts CRLF changed to LF.
+_supports_arrays removed from jdbcdrivers.properties.
+
+2.1.58
+First release of SiardGui on GitHub.
