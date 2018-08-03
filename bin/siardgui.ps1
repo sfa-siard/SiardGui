@@ -161,12 +161,12 @@ else
     #Write-Host 'execDir: '+$execDir
     $logProp = (Join-Path $execDir $REL_LOGGING_PROPERTIES)
     #Write-Host 'logProp: '+$logProp
-    $opts = '-Xmx1024m -Dsun.awt.disablegrab=true '+$('-Djava.util.logging.config.file=' + $logProp)
+    $opts =  '-Xmx1024m','-Dsun.awt.disablegrab=true',$('-Djava.util.logging.config.file=' + $logProp),$env:JAVA_OPTS
     #Write-Host 'opts: '+$opts
     $jarFile = (Join-Path $execDir $REL_JAR_FILE)
     #Write-Host 'jarFile: '+$jarFile
-    #Write-Host "running: $javaExe $opts $env:JAVA_OPTS -jar $jarFile $args"
-    & $javaExe $opts $env:JAVA_OPTS -jar $jarFile $args
+    #Write-Host "running: $javaExe $opts -jar $jarFile $args"
+    & $javaExe $opts -jar $jarFile $args
   }
   else
   {
