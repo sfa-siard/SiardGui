@@ -23,7 +23,7 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.control.skin.*;
+import com.sun.javafx.scene.control.skin.*;
 import javafx.scene.input.*;
 import javafx.scene.text.*;
 import javafx.util.*;
