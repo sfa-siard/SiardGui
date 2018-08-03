@@ -5,6 +5,7 @@ Release Notes for SiardGui 2.1
 Release for JAVA 10.
 Shell scripts improved.
 Native file choosers supported.
+New Connection choosers implemented.
 
 2.1.70
 MS Access parsing improved.

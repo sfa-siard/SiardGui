@@ -62,9 +62,6 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="jarjdbcbasetest" value="jdbcbase-test.jar"/>
   <property name="cpjdbcbase" value="${dirlib}/${jarjdbcbase}"/> 
   <property name="cpjdbcbase-test" value="${dirlib}/${jarjdbcbasetest}"/>
-  <!-- sunjdbc -->
-  <property name="jarsunjdbc" value="sunjdbc.jar"/>
-  <property name="cpsunjdbc" value="${dirlib}/${jarsunjdbc}"/>
   <!-- JTS -->
   <property name="jarjts" value="jts-1.14.jar"/>
   <property name="cpjts" value="${dirlib}/${jarjts}"/>
@@ -103,7 +100,7 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="cpjdbcoracle" value="${dirlib}/${jarjdbcoracle};${dirlib}/${jarojdbc};${dirlib}/${jarxdb};${dirlib}/${jarxmlparser}"/> 
   <property name="cpjdbcoracle-test" value="${dirlib}/${jarjdbcoracletest}"/>
   <!-- jdbcmysql jars -->
-  <property name="jarmysqljdbc" value="mysqljdbc5_1_40.jar"/>
+  <property name="jarmysqljdbc" value="mysql-connector-java-8.0.11.jar"/>
   <property name="jarjdbcmysql" value="jdbcmysql.jar"/>
   <property name="jarjdbcmysqltest" value="jdbcmysql-test.jar"/>
   <property name="cpjdbcmysql" value="${dirlib}/${jarjdbcmysql};${dirlib}/${jarmysqljdbc}"/>
@@ -181,7 +178,7 @@ Created    : 01.06.2017, Hartwig Thomas
           <and>
             <isset property="version"/>
             <isset property="revold"/>
-            <isset property="java7rtjar"/>
+            <isset property="java8rtjar"/>
           </and>
         </not>
       </condition>
@@ -318,7 +315,7 @@ Created    : 01.06.2017, Hartwig Thomas
     </touch>
     <javac debug="true" debuglevel="${debuglevel}"
       includeantruntime="false"
-      bootclasspath="${java7rtjar}"
+      bootclasspath="${java8rtjar}"
       source="${source}" 
       target="${target}"
       encoding="UTF-8"
@@ -367,7 +364,7 @@ Created    : 01.06.2017, Hartwig Thomas
     <!-- build the tests -->
     <javac debug="true" debuglevel="${debuglevel}"
       includeantruntime="false"
-      bootclasspath="${java7rtjar}"
+      bootclasspath="${java8rtjar}"
       source="${source}" 
       target="${target}"
       encoding="UTF-8"

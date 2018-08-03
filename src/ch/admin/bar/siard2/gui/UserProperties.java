@@ -340,6 +340,12 @@ public class UserProperties extends Properties
   public boolean getSearchMatchCase() { return getBoolean(sSEARCH_MATCH_CASE_KEY, false); }
   public void setSearchMatchCase(boolean bMatchCase) { setBoolean(sSEARCH_MATCH_CASE_KEY, bMatchCase); }
   
+  private static final String sDATABASE_SCHEME_KEY = "database.scheme";
+  private static final String sDATABASE_SCHEME = "sqlserver";
+  public static final String sORACLE_DATABASE_SCHEME = "oracle";
+  public String getDatabaseScheme() { return getString(sDATABASE_SCHEME_KEY,sDATABASE_SCHEME); }
+  public void setDatabaseScheme(String sDatabaseScheme) { setString(sDATABASE_SCHEME_KEY, sDatabaseScheme); }
+
   private static final String sDATABASE_HOST_KEY = "database.host";
   private static final String sDATABASE_HOST = "dbserver.enterag.ch";
   public String getDatabaseHost() { return getString(sDATABASE_HOST_KEY,sDATABASE_HOST); }
@@ -347,7 +353,8 @@ public class UserProperties extends Properties
 
   private static final String sDATABASE_NAME_KEY = "database.name";
   private static final String sDATABASE_NAME = "testdb";
-  public String getDatabaseName() { return getString(sDATABASE_NAME_KEY,sDATABASE_NAME); }
+  public static final String sORACLE_DATABASE_NAME = "orcl";
+  public String getDatabaseName() { return getString(sDATABASE_NAME_KEY,getDatabaseScheme().equals(sORACLE_DATABASE_SCHEME)?sORACLE_DATABASE_NAME:sDATABASE_NAME); }
   public void setDatabaseName(String sDatabaseName) { setString(sDATABASE_NAME_KEY, sDatabaseName); }
   
   private static final String sDATABASE_FOLDER_KEY = "database.folder";

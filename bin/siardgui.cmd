@@ -33,19 +33,50 @@ for /f "skip=2 tokens=1,2,*" %%f in ('%reg% query "%key%" /v %value%') do set re
 rem @echo -regquery: %result%
 goto exit
 
+:getmajor
+rem --------------------------------------------------------------------
+rem extract the major version from version string %1
+rem output: %major%
+rem see https://ss64.com/nt/syntax-replace.html
+rem --------------------------------------------------------------------
+rem @echo +getmajor(%1)
+set major=%1
+rem drop leading "1." from %major%
+if not "%major:~0,2%"=="1." goto maj
+set major=%major:~2%
+:maj
+set tail=%major:*.=%
+call set major=%%major:.%tail%=%%
+rem @echo -getmajor: '%major%'
+goto exit
+
 :regjava
 rem --------------------------------------------------------------------
 rem check registry HKLM\SOFTWARE\JavaSoft\Java Runtime Environment\xxx
 rem for JavaHome\bin\%executable%
-rem input: %reg%, %softkey% and %executable%
+rem input: %reg%, %softkey%, %minversion% and %executable%
 rem output: %jh%
 rem --------------------------------------------------------------------
-rem @echo +regjava(reg: %reg%, softkey: %softkey%, executable: %executable%)
+rem @echo +regjava(reg: %reg%, softkey: %softkey%, executable: %executable%, minversion: %minversion%)
 set jh=
+rem for JAVA 9 they changed the registry location from "Java Runtime Environment" to "JDK" or "JRE"!
+set key=%softkey%\JavaSoft\JDK
+set value=CurrentVersion
+call :regquery
+if not "%result%"=="" goto current
+set key=%softkey%\JavaSoft\JRE
+set value=CurrentVersion
+call :regquery
+if not "%result%"=="" goto current
 set key=%softkey%\JavaSoft\Java Runtime Environment
 set value=CurrentVersion
 call :regquery
+:current
 rem @echo current version: %result%
+call :getmajor %result%
+set version=%major%
+rem @echo comparing %version% and %minversion%
+if %version% LSS %minversion% goto error
 if "%result%"=="" goto jh
 set cv=%result%
 if "%cv%"=="" goto jh
@@ -81,6 +112,9 @@ set executable=javaw.exe
 set java=
 set args=%*
 set softkey=HKLM\Software
+set minversion=1.8
+call :getmajor %minversion%
+set minversion=%major%
 
 :regcheck
 rem @echo check registry for JAVA_HOME
@@ -100,6 +134,10 @@ rem check environment variable JAVA_HOME for %executable%
 rem --------------------------------------------------------------------
 rem @echo checking JAVA_HOME
 if "%JAVA_HOME%"=="" goto error
+call :getmajor %JAVA_HOME:*jdk=%
+set version=%major%
+rem @echo comparing %version% and %minversion%
+if %version% LSS %minversion% goto error
 set java=%JAVA_HOME%\bin\%executable%
 if exist "%java%" goto execute
 rem @echo File "%java%" could not be found!
@@ -109,7 +147,7 @@ goto error
 rem --------------------------------------------------------------------
 rem execute %class% in %jar%
 rem --------------------------------------------------------------------
-set opts="-Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
+set opts="-Xmx1024m -Dsun.awt.disablegrab=true -Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
 "%java%" %opts% -jar "%execdir%\%jar%" %args%
 goto exit
 
@@ -117,8 +155,8 @@ goto exit
 rem --------------------------------------------------------------------
 rem error message for missing %executable%
 rem --------------------------------------------------------------------
-@echo "No valid javaw.exe could be found.                                  "
-@echo "Install the JAVA JRE or set environment variable JAVA_HOME.         "
+@echo No valid %executable% with version greater or equal %minversion% could be found.
+@echo "Install the JAVA JRE or indicate correct path on the command line.  "
 
 :help
 rem --------------------------------------------------------------------

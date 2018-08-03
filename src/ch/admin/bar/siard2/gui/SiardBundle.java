@@ -189,6 +189,8 @@ public class SiardBundle extends FxBundle
 
   public String getConnectionDownloadTitle() { return getProperty("connection.download.title"); }
   public String getConnectionUploadTitle() { return getProperty("connection.upload.title"); }
+  public String getConnectionDbSchemeLabel() { return getProperty("connection.dbscheme.label"); }
+  public String getConnectionDbSchemeTooltip() { return getProperty("connection.dbscheme.tooltip"); }
   public String getConnectionDbHostLabel() { return getProperty("connection.dbhost.label"); }
   public String getConnectionDbNameLabel() { return getProperty("connection.dbname.label"); }
   public String getConnectionDbFolderLabel() { return getProperty("connection.dbfolder.label"); }

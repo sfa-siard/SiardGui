@@ -3,7 +3,7 @@ ConnectionDialog for entering data to connect to a database.
 Application : Siard2
 Description : ConnectionDialog for entering data to connect to a 
               database. 
-Platform    : Java 7, JavaFX 2.2   
+Platform    : Java 8, JavaFX 8   
 ------------------------------------------------------------------------
 Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
 Created    : 27.06.2017, Hartwig Thomas, Enter AG, Rüti ZH
@@ -12,8 +12,10 @@ package ch.admin.bar.siard2.gui.dialogs;
 
 import java.io.*;
 import java.util.*;
+
 import javafx.beans.value.*;
 import javafx.event.*;
+import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -62,14 +64,23 @@ public abstract class ConnectionDialog
   protected Button _btnDefault = null;
   /** cancel button (= Escape) */
   protected Button _btnCancel = null;
+  /** VBox for parameters */
+  protected VBox _vboxParameters = null;
+  protected ComboBox<String> _cbDbScheme = null;
+  /** hbox for database host */
+  protected HBox _hboxDbHost = null;
   /** text field for database host */
   protected TextField _tfDbHost = null;
   /** text field for database name */
   protected TextField _tfDbName = null;
+  /** hbox for database folder */
+  protected HBox _hboxDbFolder = null;
   /** text field for folder name */
   protected Label _lblDbFolder = null;
   /** button for triggering folder selection */
   protected Button _btnDbFolder = null;
+  /** map from scheme title to scheme */
+  protected Map<String,String> _mapSchemes = new HashMap<String,String>();
   /** list of sample URL labels */
   protected Map<String,Label> _mapSampleUrls = new HashMap<String,Label>();
   /** text field for connection URL */
@@ -92,7 +103,7 @@ public abstract class ConnectionDialog
   public boolean isViewsAsTables() { return (_iResult == 1) && (_cbViewsAsTables != null)? _cbViewsAsTables.isSelected(): false; }
 
   /*------------------------------------------------------------------*/
-  /** if either the dbhost or the dbname changed, recompute the samle URLs.
+  /** if the scheme choice changed, redisplay Host/Folder and JDBC URL.
    * @param ovs observable value.
    * @param sOld old string.
    * @param sNew new string.
@@ -101,28 +112,29 @@ public abstract class ConnectionDialog
   public void changed(ObservableValue<? extends String> ovs,
       String sOld, String sNew)
   {
-    String sDbHost = _tfDbHost.getText();
-    String sDbName = _tfDbName.getText();
-    String sDbFolder = _lblDbFolder.getText();
-    if ((sDbHost != null) && (sDbHost.length() > 0) &&
-        (sDbFolder != null) && (sDbFolder.length() > 0) &&
-        (sDbName != null) && (sDbName.length() > 0))
+    SiardConnection sc = SiardConnection.getSiardConnection();
+    String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
+    if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
     {
-      SiardConnection sc = SiardConnection.getSiardConnection();
-      for (Iterator<String> iterScheme = _mapSampleUrls.keySet().iterator(); iterScheme.hasNext(); )
+      if (sc.isLocal(sScheme))
       {
-        String sScheme = iterScheme.next();
-        Label lblSampleUrl = _mapSampleUrls.get(sScheme);
-        double dMaxWidth = lblSampleUrl.getMaxWidth();
-        String sText = sc.getSampleUrl(sScheme, sDbHost, sDbFolder, sDbName);
-        lblSampleUrl.setText(sText);
-        double dWidth = FxSizes.getTextWidth(sText);
-        if (dWidth > dMaxWidth)
-          dWidth = dMaxWidth;
-        lblSampleUrl.setMinWidth(dWidth);
-        lblSampleUrl.setPrefWidth(dWidth);
+        if (_vboxParameters.getChildren().contains(_hboxDbHost))
+          _vboxParameters.getChildren().remove(_hboxDbHost);
+        if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
+          _vboxParameters.getChildren().add(1, _hboxDbFolder);
       }
+      else
+      {
+        if (!_vboxParameters.getChildren().contains(_hboxDbHost))
+          _vboxParameters.getChildren().add(1,_hboxDbHost);
+        if (_vboxParameters.getChildren().contains(_hboxDbFolder))
+          _vboxParameters.getChildren().remove(_hboxDbFolder);
+      }
+      if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
+        _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
     }
+    String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _lblDbFolder.getText(), _tfDbName.getText());
+    _tfConnectionUrl.setText(sSampleUrl);
   } /* changed */
   
   /*------------------------------------------------------------------*/
@@ -136,6 +148,8 @@ public abstract class ConnectionDialog
       if (ae.getSource() == _btnDefault)
       {
         UserProperties up = UserProperties.getUserProperties();
+        String sDbScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
+        up.setDatabaseScheme(sDbScheme);
         String sDbHost = _tfDbHost.getText();
         if ((sDbHost != null) && (sDbHost.length() == 0))
           sDbHost = null; // results in default name next time
@@ -167,20 +181,59 @@ public abstract class ConnectionDialog
       }
       catch(FileNotFoundException fnfe) { _il.exception(fnfe); }
     }
-    else // one of the copy buttons
-    {
-      String sSampleUrl = null;
-      /* last label contains sample URL */
-      HBox hbox = (HBox)((Node)ae.getSource()).getParent();
-      for (Iterator<Node> iterChild = hbox.getChildren().iterator(); iterChild.hasNext(); )
-      {
-        Node node = iterChild.next();
-        if (node instanceof Label)
-          sSampleUrl = ((Label)node).getText();
-      }
-      _tfConnectionUrl.setText(sSampleUrl);
-    }
   } /* handle */
+  
+  /*------------------------------------------------------------------*/
+  /** compute the maximum pref width of the given labels and set their
+   * min and pref widths to that value.
+   * @param aLabels labels.
+   * @return maximum pref width.
+   */
+  protected double getMaxLabelPrefWidth(Label... aLabel)
+  {
+    double dMaxPrefWidth = 0.0;
+    for (int iLabel = 0; iLabel < aLabel.length; iLabel++)
+    {
+      Label lbl = aLabel[iLabel];
+      if (lbl != null)
+      {
+        double dPrefWidth = lbl.getPrefWidth();
+        if (dMaxPrefWidth < dPrefWidth)
+          dMaxPrefWidth = dPrefWidth;
+      }
+    }   
+    for (int iLabel = 0; iLabel < aLabel.length; iLabel++)
+    {
+      Label lbl = aLabel[iLabel];
+      if (lbl != null)
+      {
+        lbl.setMinWidth(dMaxPrefWidth);
+        lbl.setPrefWidth(dMaxPrefWidth);
+      }
+    }   
+    return dMaxPrefWidth;
+  } /* getMaxLabelPrefWidth */
+
+  /*------------------------------------------------------------------*/
+  /** compute the maximum min width of the given Panes.
+   * @param apane Panes.
+   * @return maximum min width.
+   */
+  protected double getMaxPaneMinWidth(Pane... apane)
+  {
+    double dMaxMinWidth = 0.0;
+    for (int iPane = 0; iPane < apane.length; iPane++)
+    {
+      Pane pane = apane[iPane];
+      if (pane != null)
+      {
+        double dMinWidth = pane.getMinWidth();
+        if (dMaxMinWidth < dMinWidth)
+          dMaxMinWidth = dMinWidth;
+      }
+    }
+    return dMaxMinWidth;
+  } /* getMaxPaneMinWidth */
   
   /*------------------------------------------------------------------*/
   /** create a label for the given node.
@@ -257,19 +310,29 @@ public abstract class ConnectionDialog
     vbox.setPadding(new Insets(dINNER_PADDING));
     vbox.setSpacing(dVSPACING);
     vbox.setAlignment(Pos.TOP_LEFT);
-    double dLabelWidth = 0.0;
+    
+    ObservableList<String> olScheme = FXCollections.observableArrayList();
+    SiardConnection sc = SiardConnection.getSiardConnection();
+    String[] asScheme = sc.getSchemes();
+    for (int iScheme = 0; iScheme < asScheme.length; iScheme++)
+    {
+      String sScheme = asScheme[iScheme];
+      String sTitle = sc.getTitle(sScheme);
+      olScheme.add(sTitle);
+      _mapSchemes.put(sTitle, sScheme);
+    }
+
+    _cbDbScheme = new ComboBox<String>(olScheme);
+    _cbDbScheme.setTooltip(new Tooltip(sb.getConnectionDbSchemeTooltip()));
+    _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(this);
+    HBox.setHgrow(_cbDbScheme, Priority.ALWAYS);
+    Label lblDbSchemeLabel = createLabel(sb.getConnectionDbSchemeLabel(),_cbDbScheme);
+    
     _tfDbHost = new TextField(up.getDatabaseHost());
     _tfDbHost.textProperty().addListener(this);
     HBox.setHgrow(_tfDbHost, Priority.ALWAYS);
     Label lblDbHostLabel = createLabel(sb.getConnectionDbHostLabel(),_tfDbHost);
-    if (dLabelWidth < lblDbHostLabel.getPrefWidth())
-      dLabelWidth = lblDbHostLabel.getPrefWidth();
-    _tfDbName = new TextField(up.getDatabaseName());
-    _tfDbName.textProperty().addListener(this);
-    HBox.setHgrow(_tfDbName, Priority.ALWAYS);
-    Label lblDbNameLabel = createLabel(sb.getConnectionDbNameLabel(),_tfDbName);
-    if (dLabelWidth < lblDbNameLabel.getPrefWidth())
-      dLabelWidth = lblDbNameLabel.getPrefWidth();
+    
     _lblDbFolder = new Label(up.getDatabaseFolder().getAbsolutePath());
     _lblDbFolder.setStyle(FxStyles.sSTYLE_BACKGROUND_WHITE);
     _lblDbFolder.setAlignment(Pos.BASELINE_LEFT);
@@ -283,28 +346,24 @@ public abstract class ConnectionDialog
     _btnDbFolder.setAlignment(Pos.BASELINE_RIGHT);
     _btnDbFolder.setMinWidth(FxSizes.getNodeWidth(_btnDbFolder));
     Label lblDbFolderLabel = createLabel(sb.getConnectionDbFolderLabel(),_lblDbFolder);
-    if (dLabelWidth < lblDbFolderLabel.getPrefWidth())
-      dLabelWidth = lblDbFolderLabel.getPrefWidth();
+
+    _tfDbName = new TextField(up.getDatabaseName());
+    _tfDbName.textProperty().addListener(this);
+    HBox.setHgrow(_tfDbName, Priority.ALWAYS);
+    Label lblDbNameLabel = createLabel(sb.getConnectionDbNameLabel(),_tfDbName);
     
-    lblDbHostLabel.setMinWidth(dLabelWidth);
-    lblDbHostLabel.setPrefWidth(dLabelWidth);
-    lblDbNameLabel.setMinWidth(dLabelWidth);
-    lblDbNameLabel.setPrefWidth(dLabelWidth);
-    lblDbFolderLabel.setMinWidth(dLabelWidth);
-    lblDbFolderLabel.setPrefWidth(dLabelWidth);
-    double dMinWidth = 0.0;
-    HBox hboxDbHost = createHBox(lblDbHostLabel, _tfDbHost);
-    vbox.getChildren().add(hboxDbHost);
-    if (dMinWidth < hboxDbHost.getMinWidth())
-      dMinWidth = hboxDbHost.getMinWidth();
+    getMaxLabelPrefWidth(lblDbSchemeLabel,lblDbHostLabel,lblDbNameLabel,lblDbFolderLabel);
+    
+    HBox hboxDbScheme = createHBox(lblDbSchemeLabel, _cbDbScheme);
+    vbox.getChildren().add(hboxDbScheme);
+    _hboxDbHost = createHBox(lblDbHostLabel, _tfDbHost);
+    vbox.getChildren().add(_hboxDbHost);
+    _hboxDbFolder = createHBox(lblDbFolderLabel, _lblDbFolder, _btnDbFolder);
+    vbox.getChildren().add(_hboxDbFolder);
     HBox hboxDbName = createHBox(lblDbNameLabel, _tfDbName);
     vbox.getChildren().add(hboxDbName);
-    if (dMinWidth < hboxDbName.getMinWidth())
-      dMinWidth = hboxDbName.getMinWidth();
-    HBox hboxDbFolder = createHBox(lblDbFolderLabel, _lblDbFolder, _btnDbFolder);
-    vbox.getChildren().add(hboxDbFolder);
-    if (dMinWidth < hboxDbFolder.getMinWidth())
-      dMinWidth = hboxDbFolder.getMinWidth();
+    
+    double dMinWidth = getMaxPaneMinWidth(hboxDbScheme,_hboxDbHost,_hboxDbFolder,hboxDbName);
     vbox.setMinWidth(dMinWidth);
     return vbox;
   } /* createVBoxParameters */
@@ -353,62 +412,6 @@ public abstract class ConnectionDialog
   } /* createHBoxButton */
 
   /*------------------------------------------------------------------*/
-  /** create the HBox for the scheme's title, sample URL and copy button.
-   * @param sScheme JDBC URL sub scheme.
-   * @param dTitleWidth largest title width.
-   * @return HBox for the scheme's title, sample URL and copy button.
-   */
-  private HBox createHBoxScheme(String sScheme, double dTitleWidth)
-  {
-    HBox hbox = new HBox();
-    hbox.setPadding(new Insets(dINNER_PADDING));
-    hbox.setSpacing(dHSPACING);
-    hbox.setAlignment(Pos.BASELINE_LEFT);
-    SiardConnection sc = SiardConnection.getSiardConnection();
-    SiardBundle sb = SiardBundle.getSiardBundle();
-    UserProperties up = UserProperties.getUserProperties();
-    double dMinWidth = 2*dINNER_PADDING;
-    String sTitle = sc.getTitle(sScheme)+":";
-    Label lblTitle = new Label(sTitle);
-    lblTitle.setTooltip(new Tooltip(sb.getConnectionSchemeTitleTooltip()));
-    Region rgIndent = new Region();
-    rgIndent.setMinWidth(dHSPACING);
-    dMinWidth += dHSPACING;
-    hbox.getChildren().add(rgIndent);
-    lblTitle.setMinWidth(dTitleWidth);
-    lblTitle.setPrefWidth(dTitleWidth);
-    lblTitle.setAlignment(Pos.BASELINE_RIGHT);
-    hbox.getChildren().add(lblTitle);
-    dMinWidth = dMinWidth + dHSPACING + lblTitle.getPrefWidth();
-    String sSampleUrl = sc.getSampleUrl(sScheme,up.getDatabaseHost(),up.getDatabaseFolder().getAbsolutePath(),up.getDatabaseName());
-    Label lblSampleUrl = new Label(sSampleUrl);
-    lblSampleUrl.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
-    lblSampleUrl.setTooltip(new Tooltip(sb.getConnectionSchemeSampleUrlTooltip(sc.getTitle(sScheme))));
-    lblSampleUrl.setPrefWidth(FxSizes.getTextWidth(sSampleUrl));
-    hbox.getChildren().add(lblSampleUrl);
-    dMinWidth = dMinWidth + dHSPACING /* +lblSampleUrl.getPrefWidth() */;
-    _mapSampleUrls.put(sScheme,lblSampleUrl);
-    Region rgGrow = new Region();
-    HBox.setHgrow(rgGrow, Priority.ALWAYS);
-    hbox.getChildren().add(rgGrow);
-    dMinWidth = dMinWidth + dHSPACING;
-    Button btnScheme = new Button(sb.getConnectionSchemeCopy());
-    btnScheme.setMinWidth(FxSizes.getNodeWidth(btnScheme));
-    btnScheme.setTooltip(new Tooltip(sb.getConnectionSchemeCopyTooltip(sc.getSampleUrl(sScheme,"dbserver.enterag.ch","D:\\dbfolder","testdb"))));
-    btnScheme.setOnAction(this);
-    dMinWidth = dMinWidth + dHSPACING + FxSizes.getNodeWidth(btnScheme);
-    hbox.getChildren().add(btnScheme);
-    double dSampleUrlWidth = dMinWidth; 
-    if (dMinWidth < dWIDTH_URL)
-      dMinWidth = dWIDTH_URL;
-    dSampleUrlWidth = dMinWidth - dSampleUrlWidth;
-    lblSampleUrl.setMaxWidth(dSampleUrlWidth);
-    hbox.setMinWidth(dMinWidth);
-    hbox.setMaxWidth(dMinWidth);
-    return hbox;
-  } /* createHBoxScheme */
-  
-  /*------------------------------------------------------------------*/
   /** create the VBox for the connection URL.
    * @return VBox with connection URL.
    */
@@ -428,49 +431,11 @@ public abstract class ConnectionDialog
     if (dMinWidth < lblConnectionUrl.getPrefWidth())
       dMinWidth = lblConnectionUrl.getPrefWidth();
     vbox.getChildren().add(lblConnectionUrl);
-    SiardConnection sc = SiardConnection.getSiardConnection();
-    String[] asSchemes = sc.getSchemes();
-    double dTitleWidth = 0.0;
-    for (int i = 0; i < asSchemes.length;i++)
-    {
-      double d = FxSizes.getTextWidth(sc.getTitle(asSchemes[i])+":")+2.0;
-      if (dTitleWidth < d)
-        dTitleWidth = d;
-    }
-    for (int i = 0; i < asSchemes.length; i++)
-    {
-      HBox hboxScheme = createHBoxScheme(asSchemes[i],dTitleWidth);
-      if (dMinWidth < hboxScheme.getMinWidth())
-        dMinWidth = hboxScheme.getMinWidth();
-      vbox.getChildren().add(hboxScheme);
-    }
     vbox.getChildren().add(_tfConnectionUrl);
     vbox.setMinWidth(dMinWidth);
     return vbox;
   } /* createVBoxConnectionUrl */
 
-  /*------------------------------------------------------------------*/
-  /** set the minimum width to the maximum preferred width of the given 
-   * labels.
-   * @param albl labels.
-   * @return maximum preferred width.
-   */
-  private double setMaxLabelWidth(Label[] albl)
-  {
-    double dLabelWidth = 0.0;
-    for (int i = 0; i < albl.length; i++)
-    {
-      if ((albl[i] != null) && (dLabelWidth < albl[i].getPrefWidth()))
-        dLabelWidth = albl[i].getPrefWidth();
-    }
-    for (int i = 0; i < albl.length; i++)
-    {
-      if (albl[i] != null)
-        albl[i].setMinWidth(dLabelWidth);
-    }
-    return dLabelWidth;
-  } /* setMaxLabelWidth */
-  
   /*------------------------------------------------------------------*/
   /** create the VBox with the connection parameters.
    * @param sLoadMetaDataOnlyLabel label for meta data only check box.
@@ -516,7 +481,7 @@ public abstract class ConnectionDialog
       lblViewsAsTables  = createLabel(sLoadViewsAsTablesLabel+":",_cbViewsAsTables);
     }
 
-    double dLabelWidth = setMaxLabelWidth(new Label[] {lblDbUser,lblDbPassword,lblMetaDataOnly,lblOverwrite,lblViewsAsTables});
+    double dLabelWidth = this.getMaxLabelPrefWidth(lblDbUser,lblDbPassword,lblMetaDataOnly,lblOverwrite,lblViewsAsTables);
 
     double dTextWidth = dWIDTH_URL - dLabelWidth - dHSPACING;
     _tfDbUser.setPrefWidth(dTextWidth);
@@ -526,38 +491,30 @@ public abstract class ConnectionDialog
     vbox.setPadding(new Insets(dINNER_PADDING));
     vbox.setSpacing(dVSPACING);
     vbox.setAlignment(Pos.TOP_LEFT);
-    double dMinWidth = 0;
     
     HBox hboxDbUser = createHBox(lblDbUser,_tfDbUser);
-    if (dMinWidth < hboxDbUser.getMinWidth())
-      dMinWidth = hboxDbUser.getMinWidth();
     vbox.getChildren().add(hboxDbUser);
     
     HBox hboxDbPassword = createHBox(lblDbPassword,_pfDbPassword);
-    if (dMinWidth < hboxDbPassword.getMinWidth())
-      dMinWidth = hboxDbPassword.getMinWidth();
     vbox.getChildren().add(hboxDbPassword);
     
     HBox hboxMetaDataOnly = createHBox(lblMetaDataOnly,_cbMetaDataOnly);
-    if (dMinWidth < hboxMetaDataOnly.getMinWidth())
-      dMinWidth = hboxMetaDataOnly.getMinWidth();
     vbox.getChildren().add(hboxMetaDataOnly);
 
+    HBox hboxOverwrite = null;
     if (sLoadOverwriteLabel != null)
     {
-      HBox hboxOverwrite = createHBox(lblOverwrite,_cbOverwrite);
-      if (dMinWidth < hboxOverwrite.getMinWidth())
-        dMinWidth = hboxOverwrite.getMinWidth();
+      hboxOverwrite = createHBox(lblOverwrite,_cbOverwrite);
       vbox.getChildren().add(hboxOverwrite);
     }
     
+    HBox hboxViewsAsTables = null;
     if (sLoadViewsAsTablesLabel != null)
     {
-      HBox hboxViewsAsTables = createHBox(lblViewsAsTables,_cbViewsAsTables);
-      if (dMinWidth < hboxViewsAsTables.getMinWidth())
-        dMinWidth = hboxViewsAsTables.getMinWidth();
+      hboxViewsAsTables = createHBox(lblViewsAsTables,_cbViewsAsTables);
       vbox.getChildren().add(hboxViewsAsTables);
     }
+    double dMinWidth = getMaxPaneMinWidth(hboxDbUser,hboxDbPassword,hboxMetaDataOnly,hboxOverwrite,hboxViewsAsTables);
     vbox.setMinWidth(dMinWidth);
     return vbox;
   } /* createVBoxConnectionParameters */
@@ -581,35 +538,27 @@ public abstract class ConnectionDialog
     vbox.setPadding(new Insets(dOUTER_PADDING));
     vbox.setSpacing(dVSPACING);
     vbox.setStyle(FxStyles.sSTYLE_BACKGROUND_LIGHTGREY);
-    double dMinWidth = 0;
     
-    VBox vboxParameters = createVBoxParameters();
-    if (dMinWidth < vboxParameters.getMinWidth())
-      dMinWidth = vboxParameters.getMinWidth();
-    vbox.getChildren().add(vboxParameters);
+    _vboxParameters = createVBoxParameters();
+    vbox.getChildren().add(_vboxParameters);
     
     vbox.getChildren().add(new Separator());
 
     VBox vboxConnectionUrl = createVBoxConnectionUrl();
-    if (dMinWidth < vboxConnectionUrl.getMinWidth())
-      dMinWidth = vboxConnectionUrl.getMinWidth();
     vbox.getChildren().add(vboxConnectionUrl);
     
     VBox vboxConnectionParameters = createVBoxConnectionParameters(
         sLoadMetaDataOnlyLabel, sLoadMetaDataOnlyTooltip, 
         sLoadOverwriteLabel, sLoadOverwriteTooltip,
         sLoadViewsAsTablesLabel, sLoadViewsAsTablesTooltip);
-    if (dMinWidth < vboxConnectionParameters.getMinWidth())
-      dMinWidth = vboxConnectionParameters.getMinWidth();
     vbox.getChildren().add(vboxConnectionParameters);
     
     vbox.getChildren().add(new Separator());
     
     HBox hboxButton = createHBoxButtons();
-    if (dMinWidth < hboxButton.getMinWidth())
-      dMinWidth = hboxButton.getMinWidth();
     vbox.getChildren().add(hboxButton);
     
+    double dMinWidth = getMaxPaneMinWidth(_vboxParameters,vboxConnectionUrl,vboxConnectionParameters,hboxButton);
     vbox.setMinWidth(dMinWidth);
     return vbox;
   } /* createVBoxDialog */
@@ -657,6 +606,15 @@ public abstract class ConnectionDialog
     initOwner(stageOwner);
     /* modality */
     initModality(Modality.APPLICATION_MODAL);
+    /* select the element for the connection URL in combo box */
+    String sScheme = UserProperties.getUserProperties().getDatabaseScheme();
+    if (sScheme != null)
+    {
+      SiardConnection sc = SiardConnection.getSiardConnection();
+      _cbDbScheme.getSelectionModel().select(sc.getTitle(sScheme));
+    }
+    else
+      _cbDbScheme.getSelectionModel().select(0);
   } /* constructor DownloadConnectionDialog */
   
-} /* class DownloadConnectionDialog */
+} /* class ConnectionDialog */
