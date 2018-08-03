@@ -147,7 +147,7 @@ goto error
 rem --------------------------------------------------------------------
 rem execute %class% in %jar%
 rem --------------------------------------------------------------------
-set opts="-Xmx1024m -Dsun.awt.disablegrab=true -Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
+set opts=-Xmx1024m -Dsun.awt.disablegrab=true "-Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
 "%java%" %opts% -jar "%execdir%\%jar%" %args%
 goto exit
 
