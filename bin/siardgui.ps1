@@ -153,9 +153,9 @@ else
   {
     # logging properties and jar
     # are relative to script location (not to working directory!)
-    $scriptName = $MyInvocation.InvocationName
+    $scriptName = $MyInvocation.MyCommand.Definition
     #Write-Host 'scriptName: '+$scriptName
-    $scriptName = (Resolve-Path -Path $scriptName)
+    #$scriptName = (Resolve-Path -Path $scriptName)
     #Write-Host 'scriptName: '+$scriptName
     $execDir = (Split-Path -Path $scriptName)
     #Write-Host 'execDir: '+$execDir
