@@ -11,12 +11,14 @@ Created    : 29.06.2017, Hartwig Thomas, Enter AG, Rüti ZH
 package ch.admin.bar.siard2.gui.dialogs;
 
 import java.util.*;
+
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.admin.bar.siard2.api.*;
 import ch.admin.bar.siard2.gui.*;
+import ch.enterag.utils.fx.dialogs.*;
 
 /*====================================================================*/
 /** UploadConnectionDialog for entering data to connect to a database
@@ -24,7 +26,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class UploadConnectionDialog
-  extends ConnectionDialog 
+  extends ConnectionDialog
 {
   private static SiardBundle _sb = SiardBundle.getSiardBundle();
   private Archive _archive = null;
@@ -44,6 +46,38 @@ public class UploadConnectionDialog
     return mapSchemas;
   } /* getSchemasMap */
   
+  /*------------------------------------------------------------------*/
+  /** prevent closing if a schema is empty.
+   * @param event close event,
+   */
+  @Override
+  public void close()
+  {
+    boolean bClose = true;
+    if (_iResult == ConnectionDialog.iRESULT_SUCCESS)
+    {
+      for (Iterator<Label> iterSchema = _mapSchemas.keySet().iterator(); iterSchema.hasNext(); )
+      {
+        Label lbl = iterSchema.next();
+        TextField tf = _mapSchemas.get(lbl);
+        String sMapped = tf.getText();
+        if (sMapped.length() == 0)
+          _iResult = ConnectionDialog.iRESULT_CANCELED;
+      }
+      if (_iResult != ConnectionDialog.iRESULT_SUCCESS)
+      {
+        SiardBundle sb = SiardBundle.getSiardBundle();
+        MB.show(this,
+          sb.getUploadConnectionErrorTitle(), 
+          sb.getUploadConnectionErrorSchemaMessage(), 
+          sb.getOk(), null);
+        bClose = false;
+      }
+    }
+    if (bClose)
+      super.close();
+  } /* close */
+
   /*------------------------------------------------------------------*/
   /** create a VBox for the schema mapping.
    * @return VBox for the schema mapping. 

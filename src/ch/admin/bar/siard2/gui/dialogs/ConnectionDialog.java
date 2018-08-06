@@ -19,6 +19,7 @@ import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
@@ -34,7 +35,6 @@ import ch.admin.bar.siard2.gui.*;
  */
 public abstract class ConnectionDialog
   extends Stage 
-  implements EventHandler<ActionEvent>, ChangeListener<String>
 {
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(ConnectionDialog.class.getName());
@@ -76,7 +76,8 @@ public abstract class ConnectionDialog
   /** hbox for database folder */
   protected HBox _hboxDbFolder = null;
   /** text field for folder name */
-  protected Label _lblDbFolder = null;
+  protected PastingTextField _tfDbFolder = null;
+  // protected Label _lblDbFolder = null;
   /** button for triggering folder selection */
   protected Button _btnDbFolder = null;
   /** map from scheme title to scheme */
@@ -102,50 +103,57 @@ public abstract class ConnectionDialog
   private CheckBox _cbViewsAsTables = null;
   public boolean isViewsAsTables() { return (_iResult == 1) && (_cbViewsAsTables != null)? _cbViewsAsTables.isSelected(): false; }
 
-  /*------------------------------------------------------------------*/
-  /** if the scheme choice changed, redisplay Host/Folder and JDBC URL.
-   * @param ovs observable value.
-   * @param sOld old string.
-   * @param sNew new string.
+  /*====================================================================*/
+  /** DragEventHandler handles dropping folders on DbFolder field.
    */
-  @Override
-  public void changed(ObservableValue<? extends String> ovs,
-      String sOld, String sNew)
+  private class DragEventHandler
+    implements EventHandler<DragEvent>
   {
-    SiardConnection sc = SiardConnection.getSiardConnection();
-    String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
-    if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
+    @Override
+    public void handle(DragEvent event)
     {
-      if (sc.isLocal(sScheme))
+      boolean bDropCompleted = false;
+      Dragboard db = event.getDragboard();
+      if (db.hasFiles())
       {
-        if (_vboxParameters.getChildren().contains(_hboxDbHost))
-          _vboxParameters.getChildren().remove(_hboxDbHost);
-        if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
-          _vboxParameters.getChildren().add(1, _hboxDbFolder);
+        List<File> listFiles = db.getFiles();
+        if (listFiles.size() == 1)
+        {
+          File file = db.getFiles().get(0);
+          if (file.isDirectory())
+          {
+            if (event.getEventType() == DragEvent.DRAG_OVER)
+              event.acceptTransferModes(TransferMode.COPY);
+            else if (event.getEventType() == DragEvent.DRAG_DROPPED)
+            {
+              PastingTextField ptf = (PastingTextField)event.getSource();
+              ptf.changeText(file.getAbsolutePath());
+              bDropCompleted = true;
+            }
+          }
+        }
       }
-      else
-      {
-        if (!_vboxParameters.getChildren().contains(_hboxDbHost))
-          _vboxParameters.getChildren().add(1,_hboxDbHost);
-        if (_vboxParameters.getChildren().contains(_hboxDbFolder))
-          _vboxParameters.getChildren().remove(_hboxDbFolder);
-      }
-      if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
-        _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
-    }
-    String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _lblDbFolder.getText(), _tfDbName.getText());
-    _tfConnectionUrl.setText(sSampleUrl);
-  } /* changed */
+      if (event.getEventType() == DragEvent.DRAG_DROPPED)
+        event.setDropCompleted(bDropCompleted);
+    } // handle
+  } // class
+  private DragEventHandler _deh = new DragEventHandler();
   
-  /*------------------------------------------------------------------*/
-  /** handle the clicking of the default or cancel button.
+  /*====================================================================*/
+  /** ActionEventHandler handles all action events.
    */
-  @Override
-  public void handle(ActionEvent ae)
+  private class ActionEventHandler
+    implements EventHandler<ActionEvent>
   {
-    if ((ae.getSource() == _btnDefault) || (ae.getSource() == _btnCancel))
+    /*------------------------------------------------------------------*/
+    /** handle the clicking of the default or cancel button.
+     */
+    @Override
+    public void handle(ActionEvent ae)
     {
-      if (ae.getSource() == _btnDefault)
+      if (ae.getSource() == _btnCancel)
+        close();
+      else if (ae.getSource() == _btnDefault)
       {
         UserProperties up = UserProperties.getUserProperties();
         String sDbScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
@@ -159,29 +167,110 @@ public abstract class ConnectionDialog
           sDbName = null; // results in default name next time
         up.setDatabaseName(sDbName);
         _iResult = iRESULT_SUCCESS;
+        close();
       }
-      close();
-    }
-    else if (ae.getSource() == _btnDbFolder)
-    {
-      UserProperties up = UserProperties.getUserProperties();
-      SiardBundle sb = SiardBundle.getSiardBundle();
-      String sDbFolder = _lblDbFolder.getText();
-      File fileDbFolder = new File(sDbFolder);
-      try
+      else if (ae.getSource() == _btnDbFolder)
       {
-        fileDbFolder = FS.chooseExistingFolder(this, 
-          sb.getConnectionDbFolderTitle(), sb.getConnectionDbFolderMessage(), sb, 
-          fileDbFolder);
-        if (fileDbFolder != null)
+        UserProperties up = UserProperties.getUserProperties();
+        SiardBundle sb = SiardBundle.getSiardBundle();
+        String sDbFolder = _tfDbFolder.getText();
+        File fileDbFolder = new File(sDbFolder);
+        try
         {
-          up.setDatabaseFolder(fileDbFolder);
-          _lblDbFolder.setText(fileDbFolder.getAbsolutePath());
+          fileDbFolder = FS.chooseExistingFolder(ConnectionDialog.this, 
+            sb.getConnectionDbFolderTitle(), sb.getConnectionDbFolderMessage(), sb, 
+            fileDbFolder);
+          if (fileDbFolder != null)
+          {
+            up.setDatabaseFolder(fileDbFolder);
+            _tfDbFolder.setText(fileDbFolder.getAbsolutePath());
+          }
         }
+        catch(FileNotFoundException fnfe) { _il.exception(fnfe); }
       }
-      catch(FileNotFoundException fnfe) { _il.exception(fnfe); }
+    } /* handle */
+  }
+  private ActionEventHandler _aeh = new ActionEventHandler();
+  
+  /*====================================================================*/
+  /** StringChangeListener handles all change events.
+   */
+  private class StringChangeListener
+    implements ChangeListener<String>
+  {
+    /*------------------------------------------------------------------*/
+    /** if the scheme choice changed, redisplay Host/Folder and JDBC URL.
+     * @param ovs observable value.
+     * @param sOld old string.
+     * @param sNew new string.
+     */
+    @Override
+    public void changed(ObservableValue<? extends String> ovs,
+        String sOld, String sNew)
+    {
+      SiardConnection sc = SiardConnection.getSiardConnection();
+      String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
+      if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
+      {
+        if (sc.isLocal(sScheme))
+        {
+          if (_vboxParameters.getChildren().contains(_hboxDbHost))
+            _vboxParameters.getChildren().remove(_hboxDbHost);
+          if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
+            _vboxParameters.getChildren().add(1, _hboxDbFolder);
+        }
+        else
+        {
+          if (!_vboxParameters.getChildren().contains(_hboxDbHost))
+            _vboxParameters.getChildren().add(1,_hboxDbHost);
+          if (_vboxParameters.getChildren().contains(_hboxDbFolder))
+            _vboxParameters.getChildren().remove(_hboxDbFolder);
+        }
+        if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
+          _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
+      }
+      String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
+      _tfConnectionUrl.setText(sSampleUrl);
+    } /* changed */
+  } /* class */
+  private StringChangeListener _scl = new StringChangeListener();
+  
+  /*====================================================================*/
+  /** PastingTextField implements non-editable field which can receive
+   * paste events and serve as a drop target.
+   */
+  private class PastingTextField
+    extends TextField
+  {
+    private boolean bChangeable = false;
+    PastingTextField(String s)
+    {
+      super(s);
     }
-  } /* handle */
+    @Override
+    public void replaceText(int start, int end, String text) 
+    {
+      if (bChangeable)
+        super.replaceText(start, end, text);
+    }
+    public void changeText(String s)
+    {
+      bChangeable = true;
+      setText(s);
+      bChangeable = false;
+    }
+    @Override
+    public void paste()
+    {
+      Clipboard cb = Clipboard.getSystemClipboard();
+      String sPasted = cb.getString();
+      System.out.println("pasted: "+sPasted);
+      File file = new File(sPasted);
+      if (file.isDirectory())
+        changeText(file.getAbsolutePath());
+    }
+  } /* class */ 
+  /*====================================================================*/
   
   /*------------------------------------------------------------------*/
   /** compute the maximum pref width of the given labels and set their
@@ -252,11 +341,11 @@ public abstract class ConnectionDialog
   /*------------------------------------------------------------------*/
   /** create a horizontal box with label and text
    * @param lbl Label.
-   * @param lblText label for text
+   * @param ptfText field for text
    * @param btn button for selector
    * @return horizontal box.
    */
-  protected HBox createHBox(Label lbl, Label lblText, Button btn)
+  protected HBox createHBox(Label lbl, PastingTextField ptfText, Button btn)
   {
     HBox hbox = new HBox();
     lbl.setAlignment(Pos.BASELINE_RIGHT);
@@ -264,11 +353,11 @@ public abstract class ConnectionDialog
     hbox.setSpacing(dHSPACING);
     hbox.setAlignment(Pos.TOP_LEFT);
     hbox.getChildren().add(lbl);
-    hbox.getChildren().add(lblText);
-    HBox.getHgrow(lblText);
+    hbox.getChildren().add(ptfText);
+    HBox.getHgrow(ptfText);
     hbox.getChildren().add(btn);
     hbox.setMinWidth(lbl.getPrefWidth() + dHSPACING + 
-        lblText.getPrefWidth() + dHSPACING +
+        ptfText.getPrefWidth() + dHSPACING +
         btn.getPrefWidth());
     return hbox;
   } /* createHBox */
@@ -324,31 +413,36 @@ public abstract class ConnectionDialog
 
     _cbDbScheme = new ComboBox<String>(olScheme);
     _cbDbScheme.setTooltip(new Tooltip(sb.getConnectionDbSchemeTooltip()));
-    _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(this);
+    _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(_scl);
     HBox.setHgrow(_cbDbScheme, Priority.ALWAYS);
     Label lblDbSchemeLabel = createLabel(sb.getConnectionDbSchemeLabel(),_cbDbScheme);
     
     _tfDbHost = new TextField(up.getDatabaseHost());
-    _tfDbHost.textProperty().addListener(this);
+    _tfDbHost.textProperty().addListener(_scl);
     HBox.setHgrow(_tfDbHost, Priority.ALWAYS);
     Label lblDbHostLabel = createLabel(sb.getConnectionDbHostLabel(),_tfDbHost);
     
-    _lblDbFolder = new Label(up.getDatabaseFolder().getAbsolutePath());
+    _tfDbFolder = new PastingTextField(up.getDatabaseFolder().getAbsolutePath());
+    _tfDbFolder.setPrefHeight(FxSizes.getNodeHeight(_tfDbHost));
+    _tfDbFolder.prefWidthProperty().bind(_tfDbHost.widthProperty());
+    _tfDbFolder.setPadding(_tfDbHost.getPadding()); // has been set by getNodeHeight
+    _tfDbFolder.setOnDragOver(_deh);
+    _tfDbFolder.setOnDragDropped(_deh);
+    
+/*    _lblDbFolder = new Label(up.getDatabaseFolder().getAbsolutePath());
     _lblDbFolder.setStyle(FxStyles.sSTYLE_BACKGROUND_WHITE);
     _lblDbFolder.setAlignment(Pos.BASELINE_LEFT);
-    _lblDbFolder.textProperty().addListener(this);
+    _lblDbFolder.textProperty().addListener(_scl);
     _lblDbFolder.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
-    _lblDbFolder.setPrefHeight(FxSizes.getNodeHeight(_tfDbHost));
-    _lblDbFolder.prefWidthProperty().bind(_tfDbHost.widthProperty());
-    _lblDbFolder.setPadding(_tfDbHost.getPadding()); // has been set by getNodeHeight
+*/
     _btnDbFolder = new Button(sb.getConnectionDbFolderButton());
-    _btnDbFolder.setOnAction(this);
+    _btnDbFolder.setOnAction(_aeh);
     _btnDbFolder.setAlignment(Pos.BASELINE_RIGHT);
     _btnDbFolder.setMinWidth(FxSizes.getNodeWidth(_btnDbFolder));
-    Label lblDbFolderLabel = createLabel(sb.getConnectionDbFolderLabel(),_lblDbFolder);
+    Label lblDbFolderLabel = createLabel(sb.getConnectionDbFolderLabel(),_tfDbFolder);
 
     _tfDbName = new TextField(up.getDatabaseName());
-    _tfDbName.textProperty().addListener(this);
+    _tfDbName.textProperty().addListener(_scl);
     HBox.setHgrow(_tfDbName, Priority.ALWAYS);
     Label lblDbNameLabel = createLabel(sb.getConnectionDbNameLabel(),_tfDbName);
     
@@ -358,7 +452,7 @@ public abstract class ConnectionDialog
     vbox.getChildren().add(hboxDbScheme);
     _hboxDbHost = createHBox(lblDbHostLabel, _tfDbHost);
     vbox.getChildren().add(_hboxDbHost);
-    _hboxDbFolder = createHBox(lblDbFolderLabel, _lblDbFolder, _btnDbFolder);
+    _hboxDbFolder = createHBox(lblDbFolderLabel, _tfDbFolder, _btnDbFolder);
     vbox.getChildren().add(_hboxDbFolder);
     HBox hboxDbName = createHBox(lblDbNameLabel, _tfDbName);
     vbox.getChildren().add(hboxDbName);
@@ -391,12 +485,12 @@ public abstract class ConnectionDialog
     /* ok button */
     _btnDefault = new Button(sb.getOk());
     _btnDefault.setDefaultButton(true);
-    _btnDefault.setOnAction(this);
+    _btnDefault.setOnAction(_aeh);
     double dMinWidth = _btnDefault.getLayoutBounds().getWidth();
     /* cancel button */
     _btnCancel = new Button(sb.getCancel());
     _btnCancel.setCancelButton(true);
-    _btnCancel.setOnAction(this);
+    _btnCancel.setOnAction(_aeh);
     dMinWidth += dHSPACING + _btnCancel.getLayoutBounds().getWidth();
     /* HBox for buttons */
     HBox hboxButton = new HBox();

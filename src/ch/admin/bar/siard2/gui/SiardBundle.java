@@ -235,6 +235,9 @@ public class SiardBundle extends FxBundle
       sUrl, EU.getExceptionMessage(e)); 
   }
 
+  public String getUploadConnectionErrorTitle() { return getProperty("upload.connection.error.title"); }
+  public String getUploadConnectionErrorSchemaMessage() { return getProperty("upload.connection.error.schema.message"); }
+  
   public String getArchiveFileTitle() { return getProperty("archive.file.title"); }
   public String getArchiveFileMessage() { return getProperty("archive.file.message"); }
   public String getDownloadingStatus(String sUrl, File fileArchive)
