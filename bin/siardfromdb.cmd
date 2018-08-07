@@ -148,7 +148,7 @@ goto error
 rem --------------------------------------------------------------------
 rem execute bin/SiardFromDb
 rem --------------------------------------------------------------------
-set opts="-Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
+set opts="-Xmx1024m" "-Djava.util.logging.config.file=%execdir%\%logprop%" %JAVA_OPTS%
 "%java%" %opts% -cp "%execdir%\%jar%" %class% %args%
 goto exit
 

@@ -74,6 +74,7 @@ Function NormalizeJavaVersion([Version] $version)
 Function FindJava()
 {
   #Write-Host '>> FindJava'
+  $binJavaExe = Join-Path 'bin' $EXECUTABLE
   try
   {
     $MIN_JAVA_VERSION = NormalizeJavaVersion $MIN_JAVA_VERSION
@@ -109,7 +110,11 @@ Function FindJava()
       #Write-Host 'javaHome: '+$javaHome
       if ($javaHome)
       {
-        $tryJavaExe = [io.path]::combine($javaHome,'bin',$EXECUTABLE)
+        $tryJavaExe = Join-Path $javaHome $binJavaExe
+        if (Test-Path $tryJavaExe)
+        {
+          $javaExe = $tryJavaExe
+        }
       }
     }
     else
@@ -121,17 +126,13 @@ Function FindJava()
   {
     #Write-Host 'HKLM:\Software\JavaSoft not found!'
   }
-  if ($tryJavaExe -and (Test-Path $tryJavaExe))
-  {
-    $javaExe = $tryJavaExe
-  }
-  else
+  if (-not $javaExe)
   {
     #Write-Host 'check JAVA_HOME'
     $javaHome = $env:JAVA_HOME
     if ($javaHome)
     {
-      $tryJavaExe = [io.path]::combine($javaHome,'bin',$EXECUTABLE)
+      $tryJavaExe = Join-Path $javaHome $binJavaExe
       if (Test-Path $tryJavaExe)
       {
         $javaExe = $tryJavaExe
@@ -162,12 +163,12 @@ else
     #Write-Host 'execDir: '+$execDir
     $logProp = (Join-Path $execDir $REL_LOGGING_PROPERTIES)
     #Write-Host 'logProp: '+$logProp
-    $opts = $('-Djava.util.logging.config.file=' + $logProp)
+    $opts = '-Xmx1024m',$('-Djava.util.logging.config.file=' + $logProp),$env:JAVA_OPTS
     #Write-Host 'opts: '+$opts
     $jarFile = (Join-Path $execDir $REL_JAR_FILE)
     #Write-Host 'jarFile: '+$jarFile
     #Write-Host "running: $javaExe $opts $env:JAVA_OPTS -cp $jarFile $CLASS $args"
-    & $javaExe $opts $env:JAVA_OPTS -cp $jarFile $CLASS $args
+    & $javaExe $opts -cp $jarFile $CLASS $args
   }
   else
   {

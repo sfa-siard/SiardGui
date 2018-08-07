@@ -41,10 +41,11 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="jarsqlparser" value="sqlparser.jar"/>
   <property name="cpsqlparser" value="${dirlib}/${jarsqlparser}"/> 
   <!-- JAXB jars -->
+  <property name="jaractivation" value="activation-1.1.1.jar"/>
   <property name="jarjaxbapi" value="jaxb-api.jar"/>
   <property name="jarjaxbcore" value="jaxb-core.jar"/>
   <property name="jarjaxbimpl" value="jaxb-impl.jar"/>
-  <property name="cpjaxb" value="${dirlib}/${jarjaxbapi};${dirlib}/${jarjaxbcore};${dirlib}/${jarjaxbimpl}"/> 
+  <property name="cpjaxb" value="${dirlib}/${jaractivation};${dirlib}/${jarjaxbapi};${dirlib}/${jarjaxbcore};${dirlib}/${jarjaxbimpl}"/> 
   <!-- zip64 jar -->
   <property name="jarzip64" value="zip64.jar"/>
   <property name="cpzip64" value="${dirlib}/${jarzip64}"/> 
