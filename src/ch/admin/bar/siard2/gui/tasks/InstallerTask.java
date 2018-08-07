@@ -111,6 +111,7 @@ public class InstallerTask
       File fileExecutable = new File(sJavaHome + File.separator + "bin"+File.separator+sJavaExecutable);
       String sAppFolder = _folderInstallation.getAbsolutePath();
       List<String> listArguments = new ArrayList<String>(Arrays.asList(new String[] {
+          "-Xmx1024m",
           "-Dsun.awt.disablegrab=true",
           "-Djava.util.logging.config.file="+sAppFolder+File.separator+"etc"+File.separator+"logging.properties",
           "-jar",
