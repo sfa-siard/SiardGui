@@ -23,8 +23,8 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import com.sun.javafx.scene.control.skin.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.util.*;
 import javafx.util.Pair;
@@ -678,18 +678,21 @@ public class ObjectListTableView
   } /* setMaxRows */
 
   /*------------------------------------------------------------------*/
-  /** get the virtual flow from the skin 
+  /** get the virtual flow from the skin
+   * N.B.: Java 9/10 makes it virtually impossible to use an external
+   * JAVA 1.8 implementation of JavaFX! com.sun.javafx.scene.control.skin
+   * and javafx.scene.control.skin clash!! 
    * @param tvs table view skin.
    * @return virtual flow instance.
    */
-  private VirtualFlow<?> getVirtualFlow(TableViewSkin<?> tvs)
+  private /* VirtualFlow<?> */ Region getVirtualFlow(/*TableViewSkin<?>*/ SkinBase<?> tvs)
   {
-    VirtualFlow<?> flow = null;
+    /* VirtualFlow<?> */ Region flow = null;
     for (int iSkinChild = 0; iSkinChild < tvs.getChildren().size(); iSkinChild++)
     {
       Object oChild = tvs.getChildren().get(iSkinChild);
-      if (oChild instanceof VirtualFlow<?>)
-        flow = (VirtualFlow<?>)oChild;
+      if (oChild instanceof Region /* VirtualFlow<?> */)
+        flow = (/* VirtualFlow<?> */ Region) oChild;
     }
     return flow;
   } /* getVirtualFlow */
@@ -700,7 +703,7 @@ public class ObjectListTableView
    * @param orientation orientation.
    * @return scroll bar or null, if it does not exist.
    */
-  private ScrollBar getScrollBar(VirtualFlow<?> flow, Orientation orientation)
+  private ScrollBar getScrollBar(/* VirtualFlow<?> */ Region flow, Orientation orientation)
   {
     ScrollBar sb = null;
     for (int iFlowChild = 0; iFlowChild < flow.getChildrenUnmodifiable().size(); iFlowChild++)
@@ -724,7 +727,8 @@ public class ObjectListTableView
    */
   private double getScrollBarBreadth(ScrollBar sb)
   {
-    ScrollBarSkin sbs = (ScrollBarSkin)sb.getSkin();
+    @SuppressWarnings("unchecked")
+    /* ScrollBarSkin */ SkinBase<ScrollBar> sbs = (/* ScrollBarSkin */SkinBase<ScrollBar>)sb.getSkin();
     Double d = (Double)Glue.invokePrivate(sbs, "getBreadth", new Class<?>[] {}, new Object[] {});
     return d.doubleValue();
   } /* getScrollBarBreadth */
@@ -745,7 +749,7 @@ public class ObjectListTableView
   /** this is only called, if skins for table view and all rows exist.
    * @param tvs table view skin (not null!)
    */
-  private void setTableHeight(TableViewSkin<?> tvs)
+  private void setTableHeight(/* TableViewSkin<?> */SkinBase<?> tvs)
   {
     /* number of rows to display */
     int iRows = getItems().size();
@@ -754,7 +758,7 @@ public class ObjectListTableView
     
     /* header */
     double dTableHeight = getInsets().getTop()+getInsets().getBottom();
-    TableHeaderRow thr = (TableHeaderRow)lookup("TableHeaderRow");
+    /* TableHeaderRow */ StackPane thr = (/*TableHeaderRow*/StackPane)lookup("TableHeaderRow");
     _dHeaderHeight = thr.getInsets().getTop() + thr.getInsets().getBottom() +
         thr.getLayoutBounds().getHeight();
     dTableHeight += _dHeaderHeight;
@@ -763,7 +767,7 @@ public class ObjectListTableView
     dTableHeight += dRowsHeight;
     _dRowHeight = dRowsHeight/iRows;
     /* flow */
-    VirtualFlow<?> flow = getVirtualFlow(tvs);
+    /* VirtualFlow<?> */Region flow = getVirtualFlow(tvs);
     /* horizontal scroll bar */
     double dScrollBarHeight = 0.0;
     ScrollBar sb = getScrollBar(flow,Orientation.HORIZONTAL);
@@ -794,7 +798,7 @@ public class ObjectListTableView
         (getItems().size() == _llTableCells.size()) &&
         (getColumns().size() == _llTableCells.get(getItems().size()-1).size()))
     {
-      TableViewSkin<?> tvs = (TableViewSkin<?>)getSkin();
+      /* TableViewSkin<?> */SkinBase<?> tvs = (/*TableViewSkin<?>*/SkinBase<?>)getSkin();
       if ((tvs != null) && (_llTableCells.size() == getItems().size()))
         setTableHeight(tvs);
       else
@@ -805,7 +809,7 @@ public class ObjectListTableView
           public void changed(ObservableValue<? extends Skin<?>> ovs,
               Skin<?> skinOld, Skin<?> skinNew)
           {
-            TableViewSkin<?> tvs = (TableViewSkin<?>)skinNew;
+            /* TableViewSkin<?>*/SkinBase<?> tvs = (/*TableViewSkin<?>*/SkinBase<?>)skinNew;
             if ((tvs != null) && (_llTableCells.size() == ObjectListTableView.this.getItems().size()))
             {
               setTableHeight(tvs);
