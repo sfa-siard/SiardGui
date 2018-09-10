@@ -4,10 +4,10 @@ Specification-Title: SIARD Suite
 Specification-Version: 2.1
 Specification-Vendor: Swiss Federal Archives, Berne, Switzerland
 Implementation-Title: SIARD Suite
-Implementation-Version: 2.1.85
+Implementation-Version: 2.1.86
 Implementation-Vendor: Swiss Federal Archives, Berne, Switzerland
 Built-By: Hartwig Thomas, Enter AG, Rüti ZH, Switzerland
-Built-Date: 08. Aug 2018
+Built-Date: 10. Sep 2018
 Main-Class: ch.admin.bar.siard2.gui.SiardGui
 Class-Path: jfxrt.jar
   mslinks.jar
