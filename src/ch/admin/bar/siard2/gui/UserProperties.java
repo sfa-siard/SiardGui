@@ -468,6 +468,40 @@ public class UserProperties extends Properties
     setFile(sLOBS_FOLDER_KEY, fileLobsFolder);
   } /* setLobsFolder */
   
+  private static final String sMETADATA_FOLDER = "md";
+  private static final String sMETADATA_IMPORT_KEY = "metadata.import";
+  public File getImportMetadataFolder()
+  {
+    _il.enter();
+    File fileImportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+        File.separator+sMETADATA_FOLDER);
+    fileImportMetadataFolder = getFile(sMETADATA_IMPORT_KEY, fileImportMetadataFolder);
+    fileImportMetadataFolder.getParentFile().mkdirs();
+    _il.exit(fileImportMetadataFolder);
+    return fileImportMetadataFolder;
+  } /* getImportMetadataFolder */
+  public void setImportMetadataFolder(File fileImportMetadataFolder)
+  {
+    setFile(sMETADATA_IMPORT_KEY, fileImportMetadataFolder);
+  } /* setImportMetadataFolder */    
+  
+  private static final String sMETADATA_EXPORT_KEY = "metadata.export";
+  public File getExportMetadataFolder()
+  {
+    _il.enter();
+    File fileExportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+        File.separator+sMETADATA_FOLDER);
+    fileExportMetadataFolder = getFile(sMETADATA_EXPORT_KEY, fileExportMetadataFolder);
+    fileExportMetadataFolder.getParentFile().mkdirs();
+    _il.exit(fileExportMetadataFolder);
+    return fileExportMetadataFolder;
+  } /* getExportMetadataFolder */
+  public void setExportMetadataFolder(File fileExportMetadataFolder)
+  {
+    setFile(sMETADATA_IMPORT_KEY, fileExportMetadataFolder);
+  } /* setExportMetadataFolder */    
+  
+  
   private static final String sXSL_FILE_KEY = "xsl.file";
   private static final String sXSL_FILE = "metadata.xsl";
   public File getXslFile()

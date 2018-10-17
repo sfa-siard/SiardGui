@@ -134,6 +134,16 @@ public class UploadDownloadAction
         {
           Archive archive = ArchiveImpl.newInstance();
           archive.create(fileArchive);
+          /* if there is a meta data only archive, use its meta data as a template */
+          if (SiardGui.getSiardGui().getArchive() != null)
+          {
+            PipedOutputStream pout = new PipedOutputStream();
+            PipedInputStream pin = new PipedInputStream(pout);
+            SiardGui.getSiardGui().getArchive().exportMetaData(pout);
+            archive.importMetaDataTemplate(pin);
+            pin.close();
+            pout.close();
+          }
           /* show download dialog */
           DownloadDialog dd = DownloadDialog.showDownloadDialog(
             stage,conn,archive,dcd.isMetaDataOnly(),dcd.isViewsAsTables());

@@ -14,6 +14,7 @@ import javafx.stage.*;
 import ch.enterag.utils.logging.*;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.admin.bar.siard2.api.*;
+import ch.admin.bar.siard2.api.primary.ArchiveImpl;
 import ch.admin.bar.siard2.gui.*;
 import ch.admin.bar.siard2.gui.dialogs.*;
 
@@ -86,7 +87,16 @@ public class MetaDataAction
       try
       {
         FileInputStream fis = new FileInputStream(fileMetaData);
-        SiardGui.getSiardGui().getArchive().importMetaDataTemplate(fis);
+        Archive archive = SiardGui.getSiardGui().getArchive();
+        if (archive == null)
+        {
+          archive = ArchiveImpl.newInstance();
+          File fileArchive = File.createTempFile("mdo",".siard");
+          fileArchive.delete();
+          archive.create(fileArchive);
+          SiardGui.getSiardGui().setArchive(archive);
+        }
+        archive.importMetaDataTemplate(fis);
         fis.close();
       }
       catch(IOException ie)

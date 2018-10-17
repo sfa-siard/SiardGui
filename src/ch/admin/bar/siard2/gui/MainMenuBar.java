@@ -35,7 +35,7 @@ public class MainMenuBar
   private Menu _menuOpenMru = null;
   private MenuItem _miSave = null;
   private MenuItem _miDisplayMetaData = null;
-  private MenuItem _miAugmentMetaData = null;
+  private MenuItem _miAugmentMetaData = null; // import meta data
   private MenuItem _miUpload = null;
   private Menu _menuUploadMru= null;
   private MenuItem _miClose = null;
@@ -143,14 +143,19 @@ public class MainMenuBar
    */
   public void restrict()
   {
+    boolean bAvailable = false;
     boolean bChanged = false;
     boolean bValid = false;
     Archive archive = SiardGui.getSiardGui().getArchive();
     MainPane mp = MainPane.getMainPane();
-    if ((archive != null) && ((!archive.isMetaDataUnchanged()) || mp.isChanged()))
-      bChanged = true;
-    if ((archive != null) && archive.isValid())
-      bValid = true;
+    if (archive != null)
+    {
+      bAvailable = true;
+      if (archive.isValid())
+        bValid = true;
+      if ((!archive.isMetaDataUnchanged()) || mp.isChanged())
+        bChanged = true;
+    }
     _miDownload.setDisable(bChanged);
     boolean bDisableMruDownloads = bChanged || 
       (MruConnection.getMruConnection(true).getMruConnections() == 0);
@@ -159,27 +164,28 @@ public class MainMenuBar
     boolean bDisableMruUploads = (archive == null) || 
       (MruConnection.getMruConnection(false).getMruConnections() == 0);
     _menuUploadMru.setDisable(bDisableMruUploads);
-    _miOpen.setDisable(bChanged);
+    _miOpen.setDisable(bChanged);  
     boolean bDisableMruFiles = bChanged ||
       (MruFile.getMruFile().getMruFiles() == 0);
     _menuOpenMru.setDisable(bDisableMruFiles);
-    _miSave.setDisable((archive == null) || (!bChanged) || (!bValid));
-    _miDisplayMetaData.setDisable(archive == null);
-    _miAugmentMetaData.setDisable(archive == null);
-    _miClose.setDisable(archive == null);
+    _miSave.setDisable((!bAvailable) || (!bChanged) || (!bValid));
+    _miDisplayMetaData.setDisable(!bAvailable);
+    System.out.println("disp disabled: "+String.valueOf(_miDisplayMetaData.isDisable()));
+    _miAugmentMetaData.setDisable(false);
+    _miClose.setDisable(!bAvailable);
     Table table = mp.getSelectedTable();
     _miCopyAll.setDisable(mp.getDisplayedTableView() == null);
     _miCopyRow.setDisable(mp.getSelectedTableRow() < 0);
     _miExportTable.setDisable(table == null);
-    _miFind.setDisable(archive == null);
-    _miFindNext.setDisable((archive == null) || (!archive.getMetaData().canFindNext()));
+    _miFind.setDisable(!bAvailable);
+    _miFindNext.setDisable((!bAvailable) || (!archive.getMetaData().canFindNext()));
     _miSearch.setDisable(table == null);
     _miSearchNext.setDisable((table == null) || (!table.canFindNext()));
     // for install/uninstall we need to look at locations and versions
     String sInstalledVersion = UserProperties.getUserProperties().getInstalledVersion(null);
     _miInstall.setDisable(SiardGui.compareVersion(sInstalledVersion) <= 0);
     _miUninstall.setDisable(sInstalledVersion == null);
-    _miIntegrity.setDisable((archive == null) || (archive.getMetaData().getMessageDigest().size() == 0));
+    _miIntegrity.setDisable((!bAvailable) || (archive.getMetaData().getMessageDigest().size() == 0));
     _miOptions.setDisable(false);
     _miHelp.setDisable(false);
     _miInfo.setDisable(false);
@@ -317,6 +323,7 @@ public class MainMenuBar
     _menuFile.getItems().add(new SeparatorMenuItem());
     
     _miDisplayMetaData = new MenuItem();
+    _miDisplayMetaData.setDisable(false);
     _miDisplayMetaData.setOnAction(this);
     _menuFile.getItems().add(_miDisplayMetaData);
     

@@ -399,6 +399,7 @@ public class SiardGui extends Application
     MetaDataAction.newMetaDataAction().augmentMetaData();
     setTitle();
     MainMenuBar.getMainMenuBar().restrict();
+    MainPane.getMainPane().setArchive();
   } /* augmentMetaData */
   
   /*------------------------------------------------------------------*/
