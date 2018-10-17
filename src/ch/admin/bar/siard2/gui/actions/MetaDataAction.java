@@ -72,8 +72,10 @@ public class MetaDataAction
   {
     _il.enter();
     SiardBundle sb = SiardBundle.getSiardBundle();
+    UserProperties up = UserProperties.getUserProperties();
     Stage stage = SiardGui.getSiardGui().getStage();
-    File fileMetaData = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+    
+    File fileMetaData = new File(up.getImportMetadataFolder().getAbsolutePath() + 
       File.separator+"*."+sXML_EXTENSION);
     try
     {
@@ -98,6 +100,7 @@ public class MetaDataAction
         }
         archive.importMetaDataTemplate(fis);
         fis.close();
+        up.setImportMetadataFolder(fileMetaData.getParentFile());
       }
       catch(IOException ie)
       {
@@ -125,13 +128,9 @@ public class MetaDataAction
     _il.enter();
     SiardBundle sb = SiardBundle.getSiardBundle();
     Stage stage = SiardGui.getSiardGui().getStage();
-    String sFileMetaData = archive.getFile().getAbsolutePath();
-    // replace the SIARD extension by the given extension
-    int iSep = sFileMetaData.lastIndexOf(File.separator);
-    int iExt = sFileMetaData.lastIndexOf(".");
-    if (iExt > iSep)
-      sFileMetaData = sFileMetaData.substring(0,iExt);
-    File fileMetaData = new File(sFileMetaData+"."+sExtension);
+    UserProperties up = UserProperties.getUserProperties();
+    File fileMetaData = new File(up.getExportMetadataFolder().getAbsolutePath() + 
+      File.separator+"*."+sExtension);
     try
     {
       fileMetaData = FS.chooseNewFile(stage, 
@@ -146,6 +145,7 @@ public class MetaDataAction
         FileWriter fw = new FileWriter(fileMetaData);
         fw.write(sMetaData);
         fw.close();
+        up.setExportMetadataFolder(fileMetaData.getParentFile());
       }
       catch(IOException ie)
       {

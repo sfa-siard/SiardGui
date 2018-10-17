@@ -37,6 +37,9 @@ public abstract class FxStyles
   /** opacity for disabled elements */
   public static final String sSTYLE_DISABLED_OPACITY = "-fx-opacity: 0.8;";
   
+  /** opacity for enabled elements */
+  public static final String sSTYLE_ENABLED_OPACITY = "-fx-opacity: 1.0;";
+  
   /** solid border style */
   public static final String sSTYLE_SOLID_BORDER = "-fx-border-style: solid; -fx-border-width: 1px; -fx-border-color: black;";
 

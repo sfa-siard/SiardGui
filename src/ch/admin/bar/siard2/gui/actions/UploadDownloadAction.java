@@ -137,12 +137,12 @@ public class UploadDownloadAction
           /* if there is a meta data only archive, use its meta data as a template */
           if (SiardGui.getSiardGui().getArchive() != null)
           {
-            PipedOutputStream pout = new PipedOutputStream();
-            PipedInputStream pin = new PipedInputStream(pout);
-            SiardGui.getSiardGui().getArchive().exportMetaData(pout);
-            archive.importMetaDataTemplate(pin);
-            pin.close();
-            pout.close();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            SiardGui.getSiardGui().getArchive().exportMetaData(baos);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            baos.close();
+            archive.importMetaDataTemplate(bais);
+            bais.close();
           }
           /* show download dialog */
           DownloadDialog dd = DownloadDialog.showDownloadDialog(

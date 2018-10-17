@@ -9,10 +9,12 @@ Created    : 10.05.2017, Hartwig Thomas, Enter AG, Rüti ZH
 ======================================================================*/
 package ch.admin.bar.siard2.gui;
 
+import javafx.beans.property.*;
 import javafx.beans.value.*;
 import javafx.event.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
+import ch.enterag.utils.fx.*;
 import ch.admin.bar.siard2.api.*;
 
 /*====================================================================*/
@@ -23,7 +25,7 @@ import ch.admin.bar.siard2.api.*;
  */
 public class MainMenuBar 
   extends MenuBar 
-  implements EventHandler<ActionEvent>, ChangeListener<Toggle>
+  implements EventHandler<ActionEvent>
 {
   /** singleton */
   private static MainMenuBar _mmb = null;
@@ -58,21 +60,50 @@ public class MainMenuBar
   private MenuItem _miHelp = null;
   private MenuItem _miInfo = null;
 
-  /*------------------------------------------------------------------*/
-  /** {@link javafx.beans.value.ChangeListener<Toggle>#changed changed}
-   * handles toggling of language radio menu items */
-  @Override
-  public void changed(ObservableValue<? extends Toggle> ovValue,
-    Toggle tOld, Toggle tNew)
+  /*==================================================================*/
+  private class ToggleChangeListener
+    implements ChangeListener<Toggle>
   {
-    if (tNew != null)
+    /*------------------------------------------------------------------*/
+    /** {@link javafx.beans.value.ChangeListener<Toggle>#changed changed}
+     * handles toggling of language radio menu items */
+    @Override
+    public void changed(ObservableValue<? extends Toggle> ovValue,
+      Toggle tOld, Toggle tNew)
     {
-      RadioMenuItem rmiLanguage = (RadioMenuItem)tNew;
-      String sLanguage = (String)rmiLanguage.getUserData();
-      SiardGui.getSiardGui().setLanguage(sLanguage);
-    }
-  } /* changed */
+      if (tNew != null)
+      {
+        RadioMenuItem rmiLanguage = (RadioMenuItem)tNew;
+        String sLanguage = (String)rmiLanguage.getUserData();
+        SiardGui.getSiardGui().setLanguage(sLanguage);
+      }
+    } /* changed */
+  }
+  private ToggleChangeListener _tcl = new ToggleChangeListener();
 
+  /*==================================================================*/
+  /** this class fixes a bug in the disable display ...
+   */
+  private class DisableChangeListener
+    implements ChangeListener<Boolean>
+  {
+    /*------------------------------------------------------------------*/
+    /** {@link javafx.beans.value.ChangeListener<Boolean>#changed changed}
+     * handles change of disable state */
+    @Override
+    public void changed(ObservableValue<? extends Boolean> ovValue,
+      Boolean bOld, Boolean bNew)
+    {
+      BooleanProperty bp = (BooleanProperty)ovValue;
+      MenuItem mi = (MenuItem)bp.getBean();
+      if (bNew.booleanValue())
+        mi.setStyle(FxStyles.sSTYLE_DISABLED_OPACITY);
+      else
+        mi.setStyle(FxStyles.sSTYLE_ENABLED_OPACITY);
+    } /* changed */
+  }
+  private DisableChangeListener _dcl = new DisableChangeListener(); 
+  
   /*------------------------------------------------------------------*/
   /** {@link javafx.event.EventHandler<ActionEvent>#handle handle}
    * handles selection of menu items */
@@ -160,8 +191,8 @@ public class MainMenuBar
     boolean bDisableMruDownloads = bChanged || 
       (MruConnection.getMruConnection(true).getMruConnections() == 0);
     _menuDownloadMru.setDisable(bDisableMruDownloads);
-    _miUpload.setDisable(archive == null);
-    boolean bDisableMruUploads = (archive == null) || 
+    _miUpload.setDisable((!bAvailable) || (!bValid));
+    boolean bDisableMruUploads = ((!bAvailable) || (!bValid)) || 
       (MruConnection.getMruConnection(false).getMruConnections() == 0);
     _menuUploadMru.setDisable(bDisableMruUploads);
     _miOpen.setDisable(bChanged);  
@@ -170,7 +201,6 @@ public class MainMenuBar
     _menuOpenMru.setDisable(bDisableMruFiles);
     _miSave.setDisable((!bAvailable) || (!bChanged) || (!bValid));
     _miDisplayMetaData.setDisable(!bAvailable);
-    System.out.println("disp disabled: "+String.valueOf(_miDisplayMetaData.isDisable()));
     _miAugmentMetaData.setDisable(false);
     _miClose.setDisable(!bAvailable);
     Table table = mp.getSelectedTable();
@@ -276,6 +306,14 @@ public class MainMenuBar
     }
   } /* setFileMru */
   
+  private MenuItem createMenuItem()
+  {
+    MenuItem mi = new MenuItem();
+    mi.disableProperty().addListener(_dcl);
+    mi.setOnAction(this);
+    return mi;
+  } /* createMenuItem */
+  
   /*------------------------------------------------------------------*/
   /** constructor
    */
@@ -284,16 +322,14 @@ public class MainMenuBar
     super();
     _menuFile = new Menu();
     
-    _miDownload = new MenuItem();
-    _miDownload.setOnAction(this);
+    _miDownload = createMenuItem();
     _menuFile.getItems().add(_miDownload);
     
     _menuDownloadMru = new Menu();
     setConnectionMru(true);
     _menuFile.getItems().add(_menuDownloadMru);
     
-    _miUpload = new MenuItem();
-    _miUpload.setOnAction(this);
+    _miUpload = createMenuItem();
     _menuFile.getItems().add(_miUpload);
     
     _menuUploadMru = new Menu();
@@ -302,39 +338,32 @@ public class MainMenuBar
     
     _menuFile.getItems().add(new SeparatorMenuItem());
     
-    _miOpen = new MenuItem();
-    _miOpen.setOnAction(this);
+    _miOpen = createMenuItem();
     _menuFile.getItems().add(_miOpen);
     
     _menuOpenMru = new Menu();
     setFileMru();
     _menuFile.getItems().add(_menuOpenMru);
     
-    _miSave = new MenuItem();
-    _miSave.setOnAction(this);
+    _miSave = createMenuItem();
     /* Ctrl-S for save */
     _miSave.setAccelerator(new KeyCodeCombination(KeyCode.S,KeyCombination.CONTROL_DOWN));    
     _menuFile.getItems().add(_miSave);
 
-    _miClose = new MenuItem();
-    _miClose.setOnAction(this);
+    _miClose = createMenuItem();
     _menuFile.getItems().add(_miClose);
 
     _menuFile.getItems().add(new SeparatorMenuItem());
     
-    _miDisplayMetaData = new MenuItem();
-    _miDisplayMetaData.setDisable(false);
-    _miDisplayMetaData.setOnAction(this);
+    _miDisplayMetaData = createMenuItem();
     _menuFile.getItems().add(_miDisplayMetaData);
     
-    _miAugmentMetaData = new MenuItem();
-    _miAugmentMetaData.setOnAction(this);
+    _miAugmentMetaData = createMenuItem();
     _menuFile.getItems().add(_miAugmentMetaData);
     
     _menuFile.getItems().add(new SeparatorMenuItem());
     
-    _miExit = new MenuItem();
-    _miExit.setOnAction(this);
+    _miExit = createMenuItem();
     /* Ctrl-X for exit */
     _miExit.setAccelerator(new KeyCodeCombination(KeyCode.X,KeyCombination.CONTROL_DOWN));
     _menuFile.getItems().add(_miExit);
@@ -343,44 +372,37 @@ public class MainMenuBar
     
     _menuEdit = new Menu();
     
-    _miCopyAll = new MenuItem();
-    _miCopyAll.setOnAction(this);
+    _miCopyAll = createMenuItem();
     /* Ctrl-C for copy all */
     _miCopyAll.setAccelerator(new KeyCodeCombination(KeyCode.C,KeyCombination.CONTROL_DOWN));
     _menuEdit.getItems().add(_miCopyAll);
     
-    _miCopyRow = new MenuItem();
-    _miCopyRow.setOnAction(this);
+    _miCopyRow = createMenuItem();
     /* Shift-Ctrl-C for copy row */
     _miCopyRow.setAccelerator(new KeyCodeCombination(KeyCode.C,KeyCombination.CONTROL_DOWN,KeyCombination.SHIFT_DOWN));
     _menuEdit.getItems().add(_miCopyRow);
     
-    _miExportTable = new MenuItem();
-    _miExportTable.setOnAction(this);
+    _miExportTable = createMenuItem();
     _menuEdit.getItems().add(_miExportTable);
     
     _menuEdit.getItems().add(new SeparatorMenuItem());
     
-    _miFind = new MenuItem();
-    _miFind.setOnAction(this);
+    _miFind = createMenuItem();
     /* Shift-Ctrl-F for find */
     _miFind.setAccelerator(new KeyCodeCombination(KeyCode.F3,KeyCombination.CONTROL_DOWN,KeyCombination.SHIFT_DOWN));
     _menuEdit.getItems().add(_miFind);
     
-    _miFindNext = new MenuItem();
-    _miFindNext.setOnAction(this);
+    _miFindNext = createMenuItem();
     /* Shift-F3 for find next */
     _miFindNext.setAccelerator(new KeyCodeCombination(KeyCode.F3,KeyCombination.SHIFT_DOWN));
     _menuEdit.getItems().add(_miFindNext);
     
-    _miSearch = new MenuItem();
-    _miSearch.setOnAction(this);
+    _miSearch = createMenuItem();
     /* Ctrl-F for search */
     _miSearch.setAccelerator(new KeyCodeCombination(KeyCode.F,KeyCombination.CONTROL_DOWN));
     _menuEdit.getItems().add(_miSearch);
     
-    _miSearchNext = new MenuItem();
-    _miSearchNext.setOnAction(this);
+    _miSearchNext = createMenuItem();
     /* F3 for search next */ 
     _miSearchNext.setAccelerator(new KeyCodeCombination(KeyCode.F3));
     _menuEdit.getItems().add(_miSearchNext);
@@ -389,12 +411,10 @@ public class MainMenuBar
     
     _menuTools = new Menu();
     
-    _miInstall = new MenuItem();
-    _miInstall.setOnAction(this);
+    _miInstall = createMenuItem();
     _menuTools.getItems().add(_miInstall);
 
-    _miUninstall = new MenuItem();
-    _miUninstall.setOnAction(this);
+    _miUninstall = createMenuItem();
     _menuTools.getItems().add(_miUninstall);
 
     _menuTools.getItems().add(new SeparatorMenuItem());
@@ -415,31 +435,27 @@ public class MainMenuBar
       rmiLanguage.setSelected(bSelected);
       _menuLanguage.getItems().add(rmiLanguage);
     }
-    tgLanguage.selectedToggleProperty().addListener(this);
+    tgLanguage.selectedToggleProperty().addListener(_tcl);
     _menuTools.getItems().add(_menuLanguage);
     
     _menuTools.getItems().add(new SeparatorMenuItem());
     
-    _miIntegrity = new MenuItem();
-    _miIntegrity.setOnAction(this);
+    _miIntegrity = createMenuItem();
     _menuTools.getItems().add(_miIntegrity);
 
-    _miOptions = new MenuItem();
-    _miOptions.setOnAction(this);
+    _miOptions = createMenuItem();
     _menuTools.getItems().add(_miOptions);
 
     getMenus().add(_menuTools);
     
     _menuHelp = new Menu();
 
-    _miHelp = new MenuItem();
-    _miHelp.setOnAction(this);
+    _miHelp = createMenuItem();
     _menuHelp.getItems().add(_miHelp);
     
     _menuHelp.getItems().add(new SeparatorMenuItem());
     
-    _miInfo = new MenuItem();
-    _miInfo.setOnAction(this);
+    _miInfo = createMenuItem();
     _menuHelp.getItems().add(_miInfo);
     
     getMenus().add(_menuHelp);

@@ -338,6 +338,7 @@ public class MetaDataEditor
     _bEditable = false;
     if (_oMetaData instanceof MetaData)
     {
+      MetaData md = (MetaData)_oMetaData;
       displayProperty(MetaData.class,"Version",false,false,false);
       displayProperty(MetaData.class,"DbName",true,false,true);
       displayProperty(MetaData.class,"Description",true,true,false);
@@ -345,7 +346,10 @@ public class MetaDataEditor
       displayProperty(MetaData.class,"ArchiverContact",true,true,false);
       displayProperty(MetaData.class,"DataOwner",true,false,true);
       displayProperty(MetaData.class,"DataOriginTimespan",true,false,true);
-      displayProperty(MetaData.class,"LobFolder",false,false,false);
+      boolean bEditable = false;
+      if (!md.getArchive().isValid())
+        bEditable = true;
+      displayProperty(MetaData.class,"LobFolder",bEditable,false,false);
       displayProperty(MetaData.class,"ProducerApplication",false,false,false);
       displayProperty(MetaData.class,"ArchivalDate",false,false,false);
       displayProperty(MetaData.class,"ClientMachine",false,false,false);
@@ -428,9 +432,13 @@ public class MetaDataEditor
     }
     else if (_oMetaData instanceof MetaColumn)
     {
+      MetaColumn mc = (MetaColumn)_oMetaData;
       displayProperty(MetaColumn.class,"Name",false,false,false);
       displayProperty(MetaColumn.class,"Position",false,false,false);
-      displayProperty(MetaColumn.class,"LobFolder",false,false,false);
+      boolean bEditable = false;
+      if (!mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid())
+        bEditable = true;
+      displayProperty(MetaColumn.class,"LobFolder",bEditable,false,false);
       displayProperty(MetaColumn.class,"MimeType",false,false,false);
       displayProperty(MetaColumn.class,"Type",false,false,false);
       displayProperty(MetaColumn.class,"TypeSchema",false,false,false);
@@ -474,9 +482,13 @@ public class MetaDataEditor
     }
     else if (_oMetaData instanceof MetaField)
     {
+      MetaField mf = (MetaField)_oMetaData;
       displayProperty(MetaField.class,"Name",false,false,false);
       displayProperty(MetaField.class,"Position",false,false,false);
-      displayProperty(MetaField.class,"LobFolder",false,false,false);
+      boolean bEditable = false;
+      if (!mf.getAncestorMetaColumn().getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid())
+        bEditable = true;
+      displayProperty(MetaField.class,"LobFolder",bEditable,false,false);
       displayProperty(MetaField.class,"MimeType",false,false,false);
       displayProperty(MetaField.class,"Type",false,false,false);
       displayProperty(MetaField.class,"TypeSchema",false,false,false);
