@@ -29,7 +29,7 @@
 	<classpathentry kind="lib" path="lib/jdbcdb2.jar"/>
 	<classpathentry kind="lib" path="lib/jdbch2.jar"/>
 	<classpathentry kind="lib" path="lib/jdbcmssql.jar"/>
-	<classpathentry kind="lib" path="lib/jdbcmysql.jar"/>
+	<classpathentry kind="lib" path="lib/jdbcmysql.jar" sourcepath="/JdbcMySql/src"/>
 	<classpathentry kind="lib" path="lib/jdbcoracle.jar"/>
 	<classpathentry kind="lib" path="lib/jts-1.14.jar"/>
 	<classpathentry kind="lib" path="lib/msv-core-2010.2.jar"/>
