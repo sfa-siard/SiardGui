@@ -88,18 +88,13 @@ public class MetaDataAction
     {
       try
       {
-        FileInputStream fis = new FileInputStream(fileMetaData);
         Archive archive = SiardGui.getSiardGui().getArchive();
         if (archive == null)
-        {
           archive = ArchiveImpl.newInstance();
-          File fileArchive = File.createTempFile("mdo",".siard");
-          fileArchive.delete();
-          archive.create(fileArchive);
-          SiardGui.getSiardGui().setArchive(archive);
-        }
+        FileInputStream fis = new FileInputStream(fileMetaData);
         archive.importMetaDataTemplate(fis);
         fis.close();
+        SiardGui.getSiardGui().setArchive(archive);
         up.setImportMetadataFolder(fileMetaData.getParentFile());
       }
       catch(IOException ie)

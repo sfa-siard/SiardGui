@@ -12,6 +12,7 @@ package ch.admin.bar.siard2.gui.details;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
+import java.sql.Types;
 import java.util.*;
 
 import javafx.beans.value.*;
@@ -109,8 +110,20 @@ public class MetaDataEditor
     String sMethodName = "set"+sProperty;
     try
     {
-      Method methodSet = _oMetaData.getClass().getDeclaredMethod(sMethodName, String.class);
-      methodSet.invoke(_oMetaData, sValue);
+      Method methodSet = null;
+      if (!sProperty.equals("LobFolder"))
+      {
+        methodSet = _oMetaData.getClass().getDeclaredMethod(sMethodName, String.class);
+        methodSet.invoke(_oMetaData, sValue);
+      }
+      else 
+      {
+        URI uriValue = null;
+        if (sValue != null)
+          uriValue = URI.create(sValue);
+        methodSet = _oMetaData.getClass().getDeclaredMethod(sMethodName, URI.class);
+        methodSet.invoke(_oMetaData, uriValue);
+      }
     }
     catch(IllegalAccessException iae) { _il.exception(iae); }
     catch (InvocationTargetException ite) {_il.exception(ite); }
@@ -436,10 +449,26 @@ public class MetaDataEditor
       displayProperty(MetaColumn.class,"Name",false,false,false);
       displayProperty(MetaColumn.class,"Position",false,false,false);
       boolean bEditable = false;
-      if (!mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid())
-        bEditable = true;
+      try
+      {
+        int iPreType = mc.getPreType();
+        if ((!mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid()) &&
+            ((iPreType == Types.BINARY) ||
+             (iPreType == Types.VARBINARY) ||
+             (iPreType == Types.BLOB) ||
+             (iPreType == Types.CHAR) ||
+             (iPreType == Types.VARCHAR) ||
+             (iPreType == Types.CLOB) ||
+             (iPreType == Types.NCHAR) ||
+             (iPreType == Types.NVARCHAR) ||
+             (iPreType == Types.NCLOB) ||
+             (iPreType == Types.SQLXML)
+            ));
+          bEditable = true;
+      }
+      catch(IOException ie) {}
       displayProperty(MetaColumn.class,"LobFolder",bEditable,false,false);
-      displayProperty(MetaColumn.class,"MimeType",false,false,false);
+      displayProperty(MetaColumn.class,"MimeType",bEditable,false,false);
       displayProperty(MetaColumn.class,"Type",false,false,false);
       displayProperty(MetaColumn.class,"TypeSchema",false,false,false);
       displayProperty(MetaColumn.class,"TypeName",false,false,false);
@@ -486,10 +515,26 @@ public class MetaDataEditor
       displayProperty(MetaField.class,"Name",false,false,false);
       displayProperty(MetaField.class,"Position",false,false,false);
       boolean bEditable = false;
-      if (!mf.getAncestorMetaColumn().getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid())
-        bEditable = true;
+      try
+      {
+        int iPreType = mf.getPreType();
+        if ((!mf.getAncestorMetaColumn().getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid()) &&
+            ((iPreType == Types.BINARY) ||
+             (iPreType == Types.VARBINARY) ||
+             (iPreType == Types.BLOB) ||
+             (iPreType == Types.CHAR) ||
+             (iPreType == Types.VARCHAR) ||
+             (iPreType == Types.CLOB) ||
+             (iPreType == Types.NCHAR) ||
+             (iPreType == Types.NVARCHAR) ||
+             (iPreType == Types.NCLOB) ||
+             (iPreType == Types.SQLXML)
+            ));
+          bEditable = true;
+      }
+      catch(IOException ie) {}
       displayProperty(MetaField.class,"LobFolder",bEditable,false,false);
-      displayProperty(MetaField.class,"MimeType",false,false,false);
+      displayProperty(MetaField.class,"MimeType",bEditable,false,false);
       displayProperty(MetaField.class,"Type",false,false,false);
       displayProperty(MetaField.class,"TypeSchema",false,false,false);
       displayProperty(MetaField.class,"TypeName",false,false,false);

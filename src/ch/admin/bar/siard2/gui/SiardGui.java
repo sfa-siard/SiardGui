@@ -387,6 +387,8 @@ public class SiardGui extends Application
     // force apply/reset on unsaved changes to meta data
     MainPane.getMainPane().refreshLanguage();
     MetaDataAction.newMetaDataAction().displayMetaData();
+    setTitle();
+    MainMenuBar.getMainMenuBar().restrict();
   } /* displayMetaData */
 
   /*------------------------------------------------------------------*/
@@ -425,7 +427,9 @@ public class SiardGui extends Application
       }
       else
       {
-        int iResult = MB.show(getStage(), sb.getCloseTitle(),
+        if (!_archive.isMetaDataUnchanged())
+        {
+          int iResult = MB.show(getStage(), sb.getCloseTitle(),
             sb.getCloseExportMetaDataQuestion(),
             sb.getYes(), sb.getNo());
           if (iResult == MB.iRESULT_SUCCESS)
@@ -436,6 +440,7 @@ public class SiardGui extends Application
             String sMetaDataXml = new String(baos.toByteArray());
             MetaDataAction.newMetaDataAction().saveMetaDataXml(getStage(), _archive, sMetaDataXml);
           }
+        }
       }
       _archive.close();
     }

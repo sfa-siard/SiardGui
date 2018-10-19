@@ -187,16 +187,16 @@ public class MainMenuBar
       if ((!archive.isMetaDataUnchanged()) || mp.isChanged())
         bChanged = true;
     }
-    _miDownload.setDisable(bChanged);
-    boolean bDisableMruDownloads = bChanged || 
+    _miDownload.setDisable(bChanged && bValid);
+    boolean bDisableMruDownloads = _miDownload.isDisable() || 
       (MruConnection.getMruConnection(true).getMruConnections() == 0);
     _menuDownloadMru.setDisable(bDisableMruDownloads);
     _miUpload.setDisable((!bAvailable) || (!bValid));
     boolean bDisableMruUploads = ((!bAvailable) || (!bValid)) || 
       (MruConnection.getMruConnection(false).getMruConnections() == 0);
     _menuUploadMru.setDisable(bDisableMruUploads);
-    _miOpen.setDisable(bChanged);  
-    boolean bDisableMruFiles = bChanged ||
+    _miOpen.setDisable(bAvailable && bChanged);  
+    boolean bDisableMruFiles = _miOpen.isDisable() ||
       (MruFile.getMruFile().getMruFiles() == 0);
     _menuOpenMru.setDisable(bDisableMruFiles);
     _miSave.setDisable((!bAvailable) || (!bChanged) || (!bValid));
