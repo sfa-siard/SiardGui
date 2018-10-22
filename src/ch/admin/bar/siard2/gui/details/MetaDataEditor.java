@@ -451,9 +451,12 @@ public class MetaDataEditor
       boolean bEditable = false;
       try
       {
-        int iPreType = mc.getPreType();
-        if ((!mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid()) &&
-            ((iPreType == Types.BINARY) ||
+        boolean bInvalid = !mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid();
+        if (bInvalid)
+        {
+          int iPreType = mc.getPreType();
+          boolean bLob = 
+             (iPreType == Types.BINARY) ||
              (iPreType == Types.VARBINARY) ||
              (iPreType == Types.BLOB) ||
              (iPreType == Types.CHAR) ||
@@ -462,9 +465,10 @@ public class MetaDataEditor
              (iPreType == Types.NCHAR) ||
              (iPreType == Types.NVARCHAR) ||
              (iPreType == Types.NCLOB) ||
-             (iPreType == Types.SQLXML)
-            ));
-          bEditable = true;
+             (iPreType == Types.SQLXML);
+          if (bLob)
+            bEditable = true;
+        }
       }
       catch(IOException ie) {}
       displayProperty(MetaColumn.class,"LobFolder",bEditable,false,false);
@@ -517,9 +521,12 @@ public class MetaDataEditor
       boolean bEditable = false;
       try
       {
-        int iPreType = mf.getPreType();
-        if ((!mf.getAncestorMetaColumn().getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid()) &&
-            ((iPreType == Types.BINARY) ||
+        boolean bInvalid = !mf.getAncestorMetaColumn().getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid();
+        if (bInvalid)
+        {
+          int iPreType = mf.getPreType();
+          boolean bLob = 
+             (iPreType == Types.BINARY) ||
              (iPreType == Types.VARBINARY) ||
              (iPreType == Types.BLOB) ||
              (iPreType == Types.CHAR) ||
@@ -528,9 +535,10 @@ public class MetaDataEditor
              (iPreType == Types.NCHAR) ||
              (iPreType == Types.NVARCHAR) ||
              (iPreType == Types.NCLOB) ||
-             (iPreType == Types.SQLXML)
-            ));
-          bEditable = true;
+             (iPreType == Types.SQLXML);
+          if (bLob)
+            bEditable = true;
+        }
       }
       catch(IOException ie) {}
       displayProperty(MetaField.class,"LobFolder",bEditable,false,false);
