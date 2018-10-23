@@ -343,6 +343,8 @@ public class UserProperties extends Properties
   private static final String sDATABASE_SCHEME_KEY = "database.scheme";
   private static final String sDATABASE_SCHEME = "sqlserver";
   public static final String sORACLE_DATABASE_SCHEME = "oracle";
+  public static final String sACCESS_DATABASE_SCHEME = "access";
+  public static final String sACCESS_DATABASE_USER = "Admin";
   public String getDatabaseScheme() { return getString(sDATABASE_SCHEME_KEY,sDATABASE_SCHEME); }
   public void setDatabaseScheme(String sDatabaseScheme) { setString(sDATABASE_SCHEME_KEY, sDatabaseScheme); }
 

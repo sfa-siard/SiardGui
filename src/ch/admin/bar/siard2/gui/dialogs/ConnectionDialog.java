@@ -247,6 +247,8 @@ public abstract class ConnectionDialog
         }
         if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
           _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
+        if (sScheme.equals(UserProperties.sACCESS_DATABASE_SCHEME))
+          _tfDbUser.setText(UserProperties.sACCESS_DATABASE_USER);
       }
       if ((ovs == _tfDbHost.textProperty()) ||
           (ovs == _tfDbFolder.textProperty()) ||
