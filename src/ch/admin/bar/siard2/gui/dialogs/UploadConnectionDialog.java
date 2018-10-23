@@ -18,7 +18,6 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.admin.bar.siard2.api.*;
 import ch.admin.bar.siard2.gui.*;
-import ch.enterag.utils.fx.dialogs.*;
 
 /*====================================================================*/
 /** UploadConnectionDialog for entering data to connect to a database
@@ -46,38 +45,23 @@ public class UploadConnectionDialog
     return mapSchemas;
   } /* getSchemasMap */
   
-  /*------------------------------------------------------------------*/
-  /** prevent closing if a schema is empty.
-   * @param event close event,
-   */
   @Override
-  public void close()
+  protected String validate()
   {
-    boolean bClose = true;
-    if (_iResult == ConnectionDialog.iRESULT_SUCCESS)
+    String sError = super.validate();
+    for (Iterator<Label> iterSchema = _mapSchemas.keySet().iterator(); (sError == null) && iterSchema.hasNext(); )
     {
-      for (Iterator<Label> iterSchema = _mapSchemas.keySet().iterator(); iterSchema.hasNext(); )
+      Label lbl = iterSchema.next();
+      TextField tf = _mapSchemas.get(lbl);
+      String sMapped = tf.getText();
+      if (sMapped.length() == 0)
       {
-        Label lbl = iterSchema.next();
-        TextField tf = _mapSchemas.get(lbl);
-        String sMapped = tf.getText();
-        if (sMapped.length() == 0)
-          _iResult = ConnectionDialog.iRESULT_CANCELED;
-      }
-      if (_iResult != ConnectionDialog.iRESULT_SUCCESS)
-      {
-        SiardBundle sb = SiardBundle.getSiardBundle();
-        MB.show(this,
-          sb.getUploadConnectionErrorTitle(), 
-          sb.getUploadConnectionErrorSchemaMessage(), 
-          sb.getOk(), null);
-        bClose = false;
+        sError = SiardBundle.getSiardBundle().getUploadConnectionErrorSchema();
+        tf.requestFocus();
       }
     }
-    if (bClose)
-      super.close();
-  } /* close */
-
+    return sError;
+  }
   /*------------------------------------------------------------------*/
   /** create a VBox for the schema mapping.
    * @return VBox for the schema mapping. 
@@ -101,6 +85,7 @@ public class UploadConnectionDialog
     {
       String sSchema = md.getMetaSchema(iSchema).getName();
       TextField tfSchema = new TextField(sSchema);
+      tfSchema.textProperty().addListener(_scl);
       Label lblSchema = createLabel(sSchema,tfSchema);
       if (dLabelWidth < lblSchema.getPrefWidth())
         dLabelWidth = lblSchema.getPrefWidth();

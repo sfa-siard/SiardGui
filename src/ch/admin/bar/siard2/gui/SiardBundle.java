@@ -235,8 +235,7 @@ public class SiardBundle extends FxBundle
       sUrl, EU.getExceptionMessage(e)); 
   }
 
-  public String getUploadConnectionErrorTitle() { return getProperty("upload.connection.error.title"); }
-  public String getUploadConnectionErrorSchemaMessage() { return getProperty("upload.connection.error.schema.message"); }
+  public String getUploadConnectionErrorSchema() { return getProperty("upload.connection.error.schema"); }
   
   public String getArchiveFileTitle() { return getProperty("archive.file.title"); }
   public String getArchiveFileMessage() { return getProperty("archive.file.message"); }
@@ -305,6 +304,8 @@ public class SiardBundle extends FxBundle
   public String getUploadExtentLabel() { return getProperty("upload.extent.label"); }
   public String getUploadExtentMetaDataOnly() { return getProperty("upload.extent.metadataonly"); }
   public String getUploadExtentFullDatabase() { return getProperty("upload.extent.fulldatabase"); }
+  
+  public String getConnectionErrorUser() { return getProperty("connection.error.user"); }
   
   public String getOpeningStatus(File fileArchive)
   {
