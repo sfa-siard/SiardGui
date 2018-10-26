@@ -67,7 +67,7 @@ public class DownloadTask
     UserProperties up = UserProperties.getUserProperties();
     MetaDataFromDb mdfd = MetaDataFromDb.newInstance(_conn.getMetaData(), _archive.getMetaData());
     mdfd.setQueryTimeout(up.getQueryTimeoutSeconds());
-    mdfd.download(_bViewsAsTables, this);
+    mdfd.download(_bViewsAsTables, false, this);
     if (!_bMetaDataOnly)
     {
       updateProgress(0,100);
