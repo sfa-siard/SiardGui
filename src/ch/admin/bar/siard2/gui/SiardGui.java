@@ -169,7 +169,7 @@ public class SiardGui extends Application
    *   0 for running version equals given version,
    *   -1 for running version is less than given version (not null).
    */
-  static int compareVersion(String sVersion)
+  public static int compareVersion(String sVersion)
   {
     int iCompare = 1;
     if (sVersion != null)
@@ -209,7 +209,7 @@ public class SiardGui extends Application
     boolean bRunningFromFolder = false;
     if (fileInstalled != null)
     {
-      bRunningFromFolder = true;
+      bRunningFromFolder = false;
       File fileJar = SpecialFolder.getJarFromClass(SiardGui.class, false);
       if (fileJar.isFile()) // running from a JAR file
       {
@@ -220,6 +220,18 @@ public class SiardGui extends Application
     }
     return bRunningFromFolder;
   } /* isRunningFrom */
+  
+  /*------------------------------------------------------------------*/
+  /** check if running instance is installed instance.
+   * N.B.: Otherwise UserProperties are not stored.
+   * @return true, if running instance is installed instance.
+   */
+  public static boolean isRunningInstalled()
+  {
+    UserProperties up = UserProperties.getUserProperties();
+    return ((compareVersion(up.getInstalledVersion(null)) == 0) && 
+      isRunningFrom(up.getInstalledPath(null)));
+  } /* is RunningInstalled */
   
   /*------------------------------------------------------------------*/
   /** initialize language, size and state of stage from user data.
@@ -251,7 +263,7 @@ public class SiardGui extends Application
       _stage.setWidth(up.getStageWidth(0.7*rectScreen.getWidth()));
       _stage.setHeight(up.getStageHeight(0.7*rectScreen.getHeight()));
     }
-    System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(up.getFileChooserNative(false)));
+    System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(up.getFileChooserNative(true)));
     _il.exit(up);
     return up;
   } /* loadProperties */

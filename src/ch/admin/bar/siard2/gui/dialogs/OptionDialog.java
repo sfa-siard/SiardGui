@@ -126,9 +126,12 @@ public class OptionDialog
   {
     SiardBundle sb = SiardBundle.getSiardBundle();
     /* ok button */
+    // label is needed for tooltip on disabled button
     _btnDefault = new Button(sb.getOk());
     _btnDefault.setDefaultButton(true);
     _btnDefault.setOnAction(this);
+    if (!SiardGui.isRunningInstalled())
+      _btnDefault.setTooltip(new Tooltip(sb.getOptionNotstoredTooltip()));
     // double dMinWidth = _btnDefault.getLayoutBounds().getWidth();
     /* cancel button */
     _btnCancel = new Button(sb.getCancel());

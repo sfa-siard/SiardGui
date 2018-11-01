@@ -295,8 +295,11 @@ public abstract class ConnectionDialog
     {
       Clipboard cb = Clipboard.getSystemClipboard();
       String sPasted = cb.getString();
-      System.out.println("pasted: "+sPasted);
       File file = new File(sPasted);
+      // if we have a file, it gets priority over the string
+      List<File> listFiles = cb.getFiles();
+      if (listFiles.size() == 1)
+        file = listFiles.get(0);
       if (file.isDirectory())
         changeText(file.getAbsolutePath());
     }

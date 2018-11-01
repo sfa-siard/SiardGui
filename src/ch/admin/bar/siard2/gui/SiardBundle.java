@@ -484,6 +484,7 @@ public class SiardBundle extends FxBundle
   public String getOptionXslFileExplanation() { return getProperty("option.xsl.file.explanation"); }
   public String getOptionLobsFolderLabel() { return getProperty("option.lobs.folder.label"); }
   public String getOptionLobsFolderExplanation() { return getProperty("option.lobs.folder.explanation"); }
+  public String getOptionNotstoredTooltip() { return getProperty("option.notstored.tooltip"); }
 
   public String getValueDisplayErrorTitle() { return getProperty("value.display.error.title"); }
   public String getValueDisplayErrorSystem() { return getProperty("value.display.error.system"); }
