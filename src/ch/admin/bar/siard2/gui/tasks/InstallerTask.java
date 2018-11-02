@@ -132,9 +132,9 @@ public class InstallerTask
         dt.createLink(InstallUninstallHandler.sDESKTOP_NAME, 
           fileExecutable, listArguments, _folderInstallation, fileIcon, sDescription);
         // write a link to the installation folder too ...
+        dt.setFolder(_folderInstallation);
         dt.createLink(InstallUninstallHandler.sDESKTOP_NAME, 
           fileExecutable, listArguments, _folderInstallation, fileIcon, sDescription);
-        dt.setFolder(_folderInstallation);
         _il.event("Link created");
       }
       catch(IOException ie) 
