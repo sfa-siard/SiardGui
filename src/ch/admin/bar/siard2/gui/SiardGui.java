@@ -169,7 +169,7 @@ public class SiardGui extends Application
    *   0 for running version equals given version,
    *   -1 for running version is less than given version (not null).
    */
-  static int compareVersion(String sVersion)
+  public static int compareVersion(String sVersion)
   {
     int iCompare = 1;
     if (sVersion != null)
@@ -209,7 +209,7 @@ public class SiardGui extends Application
     boolean bRunningFromFolder = false;
     if (fileInstalled != null)
     {
-      bRunningFromFolder = true;
+      bRunningFromFolder = false;
       File fileJar = SpecialFolder.getJarFromClass(SiardGui.class, false);
       if (fileJar.isFile()) // running from a JAR file
       {
@@ -217,9 +217,23 @@ public class SiardGui extends Application
         if (!fileJar.getAbsolutePath().equals(fileInstalled.getAbsolutePath()))
           bRunningFromFolder = false;
       }
+      else
+        bRunningFromFolder = true; // store properties when debugging
     }
     return bRunningFromFolder;
   } /* isRunningFrom */
+  
+  /*------------------------------------------------------------------*/
+  /** check if running instance is installed instance.
+   * N.B.: Otherwise UserProperties are not stored.
+   * @return true, if running instance is installed instance.
+   */
+  public static boolean isRunningInstalled()
+  {
+    UserProperties up = UserProperties.getUserProperties();
+    return ((compareVersion(up.getInstalledVersion(null)) == 0) && 
+      isRunningFrom(up.getInstalledPath(null)));
+  } /* is RunningInstalled */
   
   /*------------------------------------------------------------------*/
   /** initialize language, size and state of stage from user data.
@@ -251,7 +265,7 @@ public class SiardGui extends Application
       _stage.setWidth(up.getStageWidth(0.7*rectScreen.getWidth()));
       _stage.setHeight(up.getStageHeight(0.7*rectScreen.getHeight()));
     }
-    System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(up.getFileChooserNative(false)));
+    System.setProperty(FS.sUSE_NATIVE_PROPERTY, String.valueOf(up.getFileChooserNative(true)));
     _il.exit(up);
     return up;
   } /* loadProperties */
@@ -262,6 +276,8 @@ public class SiardGui extends Application
   private void storeProperties()
   {
     _il.enter();
+    /* store schema mappings in user properties */
+    SchemaMapping.getInstance().store();
     /* store MRU connections in user properties */
     MruConnection.getMruConnection(true).store();
     MruConnection.getMruConnection(false).store();
@@ -387,6 +403,8 @@ public class SiardGui extends Application
     // force apply/reset on unsaved changes to meta data
     MainPane.getMainPane().refreshLanguage();
     MetaDataAction.newMetaDataAction().displayMetaData();
+    setTitle();
+    MainMenuBar.getMainMenuBar().restrict();
   } /* displayMetaData */
 
   /*------------------------------------------------------------------*/
@@ -399,6 +417,7 @@ public class SiardGui extends Application
     MetaDataAction.newMetaDataAction().augmentMetaData();
     setTitle();
     MainMenuBar.getMainMenuBar().restrict();
+    MainPane.getMainPane().setArchive();
   } /* augmentMetaData */
   
   /*------------------------------------------------------------------*/
@@ -424,7 +443,9 @@ public class SiardGui extends Application
       }
       else
       {
-        int iResult = MB.show(getStage(), sb.getCloseTitle(),
+        if (!_archive.isMetaDataUnchanged())
+        {
+          int iResult = MB.show(getStage(), sb.getCloseTitle(),
             sb.getCloseExportMetaDataQuestion(),
             sb.getYes(), sb.getNo());
           if (iResult == MB.iRESULT_SUCCESS)
@@ -435,6 +456,7 @@ public class SiardGui extends Application
             String sMetaDataXml = new String(baos.toByteArray());
             MetaDataAction.newMetaDataAction().saveMetaDataXml(getStage(), _archive, sMetaDataXml);
           }
+        }
       }
       _archive.close();
     }

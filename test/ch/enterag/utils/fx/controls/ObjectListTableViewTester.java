@@ -183,8 +183,8 @@ public class ObjectListTableViewTester
     // (limited to max visible rows)
     _vbox.snapshot(null, null);
     // limiting the max height now, introduces vertical scroll bar (same for width)
-    _oltv.setMaxHeight(0.75*_oltv.getMinHeight());
-    _oltv.setMinHeight(_oltv.getMaxHeight());
+    //_oltv.setMaxHeight(1.00*_oltv.getMinHeight());
+    //_oltv.setMinHeight(_oltv.getMaxHeight());
     _vbox.setMinHeight(_oltv.getMinHeight()+20.0);
     System.out.println("VBox: "+_vbox.getMinWidth()+"/"+_vbox.getMinHeight());
     stage.setScene(scene);
@@ -192,7 +192,7 @@ public class ObjectListTableViewTester
     stage.show();
     System.out.println("Stage displayed");
   } /* start */
-
+  
   /*------------------------------------------------------------------*/
   /** handle show cell event.
    */

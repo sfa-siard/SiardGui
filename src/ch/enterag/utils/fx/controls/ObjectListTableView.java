@@ -31,7 +31,6 @@ import javafx.util.Pair;
 
 import ch.enterag.utils.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.reflect.Glue;
 import ch.enterag.sqlparser.*;
 
 /*====================================================================*/
@@ -677,73 +676,77 @@ public class ObjectListTableView
     setTableHeight();
   } /* setMaxRows */
 
-  /*------------------------------------------------------------------*/
-  /** get the virtual flow from the skin
-   * N.B.: Java 9/10 makes it virtually impossible to use an external
-   * JAVA 1.8 implementation of JavaFX! com.sun.javafx.scene.control.skin
-   * and javafx.scene.control.skin clash!! 
-   * @param tvs table view skin.
-   * @return virtual flow instance.
-   */
-  private /* VirtualFlow<?> */ Region getVirtualFlow(/*TableViewSkin<?>*/ SkinBase<?> tvs)
+  /*==================================================================*/
+  /** breadth listener: recompute table height, when scrollbar height/width changes. */
+  ChangeListener<Number> _sbbl = new ChangeListener<Number>()
   {
-    /* VirtualFlow<?> */ Region flow = null;
-    for (int iSkinChild = 0; iSkinChild < tvs.getChildren().size(); iSkinChild++)
+    @Override
+    public void changed(ObservableValue<? extends Number> observable,
+      Number oldValue, Number newValue)
     {
-      Object oChild = tvs.getChildren().get(iSkinChild);
-      if (oChild instanceof Region /* VirtualFlow<?> */)
-        flow = (/* VirtualFlow<?> */ Region) oChild;
+      setTableHeight();
     }
-    return flow;
-  } /* getVirtualFlow */
+  };
   
-  /*------------------------------------------------------------------*/
-  /** get scroll bar of the given orientation from the flow.
-   * @param flow instance.
-   * @param orientation orientation.
-   * @return scroll bar or null, if it does not exist.
-   */
-  private ScrollBar getScrollBar(/* VirtualFlow<?> */ Region flow, Orientation orientation)
-  {
-    ScrollBar sb = null;
-    for (int iFlowChild = 0; iFlowChild < flow.getChildrenUnmodifiable().size(); iFlowChild++)
-    {
-      Node nodeChild = flow.getChildrenUnmodifiable().get(iFlowChild);
-      if (nodeChild instanceof ScrollBar)
-      {
-        sb = (ScrollBar)nodeChild;
-        if (sb.getOrientation() != orientation)
-         sb = null;
-      }
-    }
-    return sb;
-  } /* getScrollBar */
-
-  /*------------------------------------------------------------------*/
-  /** compute breadth of scroll bar by calling a private method on
-   * its skin.
-   * @param sb scroll bar.
-   * @return breadth of scroll bar.
-   */
-  private double getScrollBarBreadth(ScrollBar sb)
-  {
-    @SuppressWarnings("unchecked")
-    /* ScrollBarSkin */ SkinBase<ScrollBar> sbs = (/* ScrollBarSkin */SkinBase<ScrollBar>)sb.getSkin();
-    Double d = (Double)Glue.invokePrivate(sbs, "getBreadth", new Class<?>[] {}, new Object[] {});
-    return d.doubleValue();
-  } /* getScrollBarBreadth */
-  
-  /* listener for visibility of horizontal scroll bar */
+  /*==================================================================*/
+  /** visibility listener: recompute table height, when scrollbar visibility changes */
   ChangeListener<Boolean> _sbvl = new ChangeListener<Boolean>() 
   {
     @Override
     public void changed(ObservableValue<? extends Boolean> ovb,
         Boolean bOldVisible, Boolean bNewVisible)
     {
-      // System.out.println("Visibility of scrollbar changed to "+bNewVisible+"!");
       setTableHeight();
     }
   };
+
+  /*------------------------------------------------------------------*/
+  /** get scroll bar of the given orientation from the skin.
+   * N.B.: Java 9/10 makes it virtually impossible to use an external
+   * JAVA 1.8 implementation of JavaFX! com.sun.javafx.scene.control.skin
+   * and javafx.scene.control.skin clash!! 
+   * @param tvs table view skin.
+   * @param orientation orientation.
+   * @return scroll bar or null, if it does not exist.
+   */
+  private ScrollBar getScrollBar(/*TableViewSkin<?>*/ SkinBase<?> tvs, Orientation orientation)
+  {
+    ScrollBar sb = null;
+    for (int iSkinChild = 0; iSkinChild < tvs.getChildren().size(); iSkinChild++)
+    {
+      Node nodeSkinChild = tvs.getChildren().get(iSkinChild);
+      if (nodeSkinChild instanceof Region /* VirtualFlow<?> */)
+      {
+        Region regionSkinChild = (Region)nodeSkinChild;
+        for (int iRegionChild = 0; iRegionChild < regionSkinChild.getChildrenUnmodifiable().size(); iRegionChild++)
+        {
+          Node nodeRegionChild = regionSkinChild.getChildrenUnmodifiable().get(iRegionChild);
+          if (nodeRegionChild instanceof ScrollBar)
+          {
+            sb = (ScrollBar)nodeRegionChild;
+            if (sb.getOrientation() == orientation)
+            {
+              sb.visibleProperty().removeListener(_sbvl);
+              sb.visibleProperty().addListener(_sbvl);
+              if (orientation == Orientation.HORIZONTAL)
+              {
+                sb.heightProperty().removeListener(_sbbl);
+                sb.heightProperty().addListener(_sbbl);
+              }
+              else
+              {
+                sb.widthProperty().removeListener(_sbbl);
+                sb.widthProperty().addListener(_sbbl);
+              }
+            }
+            else
+              sb = null;
+          }
+        }
+      }
+    }
+    return sb;
+  } /* getScrollBar */
 
   /*------------------------------------------------------------------*/
   /** this is only called, if skins for table view and all rows exist.
@@ -763,20 +766,16 @@ public class ObjectListTableView
         thr.getLayoutBounds().getHeight();
     dTableHeight += _dHeaderHeight;
     /* rows */
-    double dRowsHeight = iRows*this.getFixedCellSize();
+    double dRowsHeight = iRows*getFixedCellSize();
     dTableHeight += dRowsHeight;
     _dRowHeight = dRowsHeight/iRows;
-    /* flow */
-    /* VirtualFlow<?> */Region flow = getVirtualFlow(tvs);
     /* horizontal scroll bar */
     double dScrollBarHeight = 0.0;
-    ScrollBar sb = getScrollBar(flow,Orientation.HORIZONTAL);
+    ScrollBar sb = getScrollBar(tvs,Orientation.HORIZONTAL);
     if (sb != null)
     {
-      sb.visibleProperty().removeListener(_sbvl);
-      sb.visibleProperty().addListener(_sbvl);
       if (sb.isVisible())
-        dScrollBarHeight = getScrollBarBreadth(sb);
+        dScrollBarHeight = sb.heightProperty().getValue();
     }
     // System.out.println("ScrollBar has height: "+dScrollBarHeight);
     dTableHeight += dScrollBarHeight;

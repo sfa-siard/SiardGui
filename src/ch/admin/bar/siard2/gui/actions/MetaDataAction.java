@@ -14,6 +14,7 @@ import javafx.stage.*;
 import ch.enterag.utils.logging.*;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.admin.bar.siard2.api.*;
+import ch.admin.bar.siard2.api.primary.ArchiveImpl;
 import ch.admin.bar.siard2.gui.*;
 import ch.admin.bar.siard2.gui.dialogs.*;
 
@@ -71,8 +72,10 @@ public class MetaDataAction
   {
     _il.enter();
     SiardBundle sb = SiardBundle.getSiardBundle();
+    UserProperties up = UserProperties.getUserProperties();
     Stage stage = SiardGui.getSiardGui().getStage();
-    File fileMetaData = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+    
+    File fileMetaData = new File(up.getImportMetadataFolder().getAbsolutePath() + 
       File.separator+"*."+sXML_EXTENSION);
     try
     {
@@ -85,9 +88,14 @@ public class MetaDataAction
     {
       try
       {
+        Archive archive = SiardGui.getSiardGui().getArchive();
+        if (archive == null)
+          archive = ArchiveImpl.newInstance();
         FileInputStream fis = new FileInputStream(fileMetaData);
-        SiardGui.getSiardGui().getArchive().importMetaDataTemplate(fis);
+        archive.importMetaDataTemplate(fis);
         fis.close();
+        SiardGui.getSiardGui().setArchive(archive);
+        up.setImportMetadataFolder(fileMetaData.getParentFile());
       }
       catch(IOException ie)
       {
@@ -115,13 +123,9 @@ public class MetaDataAction
     _il.enter();
     SiardBundle sb = SiardBundle.getSiardBundle();
     Stage stage = SiardGui.getSiardGui().getStage();
-    String sFileMetaData = archive.getFile().getAbsolutePath();
-    // replace the SIARD extension by the given extension
-    int iSep = sFileMetaData.lastIndexOf(File.separator);
-    int iExt = sFileMetaData.lastIndexOf(".");
-    if (iExt > iSep)
-      sFileMetaData = sFileMetaData.substring(0,iExt);
-    File fileMetaData = new File(sFileMetaData+"."+sExtension);
+    UserProperties up = UserProperties.getUserProperties();
+    File fileMetaData = new File(up.getExportMetadataFolder().getAbsolutePath() + 
+      File.separator+"*."+sExtension);
     try
     {
       fileMetaData = FS.chooseNewFile(stage, 
@@ -136,6 +140,7 @@ public class MetaDataAction
         FileWriter fw = new FileWriter(fileMetaData);
         fw.write(sMetaData);
         fw.close();
+        up.setExportMetadataFolder(fileMetaData.getParentFile());
       }
       catch(IOException ie)
       {

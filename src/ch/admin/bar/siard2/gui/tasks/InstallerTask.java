@@ -131,6 +131,10 @@ public class InstallerTask
         _il.event(" Desktop Instance: "+String.valueOf(dt));
         dt.createLink(InstallUninstallHandler.sDESKTOP_NAME, 
           fileExecutable, listArguments, _folderInstallation, fileIcon, sDescription);
+        // write a link to the installation folder too ...
+        dt.setFolder(_folderInstallation);
+        dt.createLink(InstallUninstallHandler.sDESKTOP_NAME, 
+          fileExecutable, listArguments, _folderInstallation, fileIcon, sDescription);
         _il.event("Link created");
       }
       catch(IOException ie) 

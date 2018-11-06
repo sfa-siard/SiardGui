@@ -17,7 +17,7 @@
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/db2jcc4.jar"/>
-	<classpathentry kind="lib" path="lib/enterutils.jar"/>
+	<classpathentry kind="lib" path="lib/enterutils.jar" sourcepath="/EnterUtilities/src"/>
 	<classpathentry kind="lib" path="lib/sqlparser.jar"/>
 	<classpathentry kind="lib" path="lib/h2-1.3.176.jar"/>
 	<classpathentry kind="lib" path="lib/jackcess-2.1.6a.jar"/>
@@ -29,7 +29,7 @@
 	<classpathentry kind="lib" path="lib/jdbcdb2.jar"/>
 	<classpathentry kind="lib" path="lib/jdbch2.jar"/>
 	<classpathentry kind="lib" path="lib/jdbcmssql.jar"/>
-	<classpathentry kind="lib" path="lib/jdbcmysql.jar"/>
+	<classpathentry kind="lib" path="lib/jdbcmysql.jar" sourcepath="/JdbcMySql/src"/>
 	<classpathentry kind="lib" path="lib/jdbcoracle.jar"/>
 	<classpathentry kind="lib" path="lib/jts-1.14.jar"/>
 	<classpathentry kind="lib" path="lib/msv-core-2010.2.jar"/>

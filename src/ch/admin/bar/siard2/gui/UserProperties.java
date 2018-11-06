@@ -343,6 +343,8 @@ public class UserProperties extends Properties
   private static final String sDATABASE_SCHEME_KEY = "database.scheme";
   private static final String sDATABASE_SCHEME = "sqlserver";
   public static final String sORACLE_DATABASE_SCHEME = "oracle";
+  public static final String sACCESS_DATABASE_SCHEME = "access";
+  public static final String sACCESS_DATABASE_USER = "Admin";
   public String getDatabaseScheme() { return getString(sDATABASE_SCHEME_KEY,sDATABASE_SCHEME); }
   public void setDatabaseScheme(String sDatabaseScheme) { setString(sDATABASE_SCHEME_KEY, sDatabaseScheme); }
 
@@ -373,6 +375,11 @@ public class UserProperties extends Properties
   {
     setFile(sDATABASE_FOLDER_KEY, fileDbFolder);
   } /* setDatabaseFolder */
+
+  private static final String sDATABASE_USER_KEY = "database.user";
+  private static final String sDATABASE_USER = "dbuser";
+  public String getDatabaseUser() { return getString(sDATABASE_USER_KEY,sDATABASE_USER); }
+  public void setDatabaseUser(String sDatabaseUser) { setString(sDATABASE_USER_KEY, sDatabaseUser); }
 
   private static final String sTEXT_EDITOR_KEY = "installed.texteditor";
   private static final File fileWINDOWS_EDITOR = new File("notepad.exe");
@@ -468,6 +475,40 @@ public class UserProperties extends Properties
     setFile(sLOBS_FOLDER_KEY, fileLobsFolder);
   } /* setLobsFolder */
   
+  private static final String sMETADATA_FOLDER = "md";
+  private static final String sMETADATA_IMPORT_KEY = "metadata.import";
+  public File getImportMetadataFolder()
+  {
+    _il.enter();
+    File fileImportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+        File.separator+sMETADATA_FOLDER);
+    fileImportMetadataFolder = getFile(sMETADATA_IMPORT_KEY, fileImportMetadataFolder);
+    fileImportMetadataFolder.getParentFile().mkdirs();
+    _il.exit(fileImportMetadataFolder);
+    return fileImportMetadataFolder;
+  } /* getImportMetadataFolder */
+  public void setImportMetadataFolder(File fileImportMetadataFolder)
+  {
+    setFile(sMETADATA_IMPORT_KEY, fileImportMetadataFolder);
+  } /* setImportMetadataFolder */    
+  
+  private static final String sMETADATA_EXPORT_KEY = "metadata.export";
+  public File getExportMetadataFolder()
+  {
+    _il.enter();
+    File fileExportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
+        File.separator+sMETADATA_FOLDER);
+    fileExportMetadataFolder = getFile(sMETADATA_EXPORT_KEY, fileExportMetadataFolder);
+    fileExportMetadataFolder.getParentFile().mkdirs();
+    _il.exit(fileExportMetadataFolder);
+    return fileExportMetadataFolder;
+  } /* getExportMetadataFolder */
+  public void setExportMetadataFolder(File fileExportMetadataFolder)
+  {
+    setFile(sMETADATA_IMPORT_KEY, fileExportMetadataFolder);
+  } /* setExportMetadataFolder */    
+  
+  
   private static final String sXSL_FILE_KEY = "xsl.file";
   private static final String sXSL_FILE = "metadata.xsl";
   public File getXslFile()
@@ -480,7 +521,36 @@ public class UserProperties extends Properties
   {
     setFile(sXSL_FILE_KEY,fileXsl);
   } /* setXslFile */
+
+  private static String sSCHEMA_MAPPING_KEY = "schema.mapping";
+  /*------------------------------------------------------------------*/
+  /** get a schema mapping (schema \t mapped schema)
+   * @param iIndex index of the schema mapping.
+   * @return schema mapping (schema \t mapped schema) or null.
+   */
+  public String getSchemaMapping(int iIndex)
+  {
+    _il.enter(String.valueOf(iIndex));
+    String sMapping = _up.getProperty(sSCHEMA_MAPPING_KEY+String.valueOf(iIndex));
+    _il.exit(sMapping);
+    return sMapping;
+  } /* getSchemaMapping */
   
+  /*------------------------------------------------------------------*/
+  /** set a schema mapping (schema \t mapped schema).
+   * @param iIndex index of the schema mapping.
+   * @param sSchemaMapping schema mapping (schema \t mapped schema) or
+   *   null for for remove mapping.
+   */
+  public void setSchemaMapping(int iIndex, String sSchemaMapping)
+  {
+    if (sSchemaMapping != null)
+      _up.setProperty(sSCHEMA_MAPPING_KEY+String.valueOf(iIndex),sSchemaMapping);
+    else
+      _up.remove(sSCHEMA_MAPPING_KEY+String.valueOf(iIndex));
+  } /* setSchemaMapping */
+  
+  private static String sMRU_FILE_KEY = "mru.file.entry";
   /*------------------------------------------------------------------*/
   /** get one file of the the list of most recently used files.
    @param iIndex Index of the connection to be returned. 
@@ -488,9 +558,9 @@ public class UserProperties extends Properties
    */
   public String getMruFile(int iIndex)
   {
-  	_il.enter(String.valueOf(iIndex));
-  	String sFile = _up.getProperty("mru.file.entry"+iIndex, "");
-  	_il.exit(sFile);
+    _il.enter(String.valueOf(iIndex));
+  	String sFile = _up.getProperty(sMRU_FILE_KEY+String.valueOf(iIndex), "");
+    _il.exit(sFile);
   	return sFile;
   } /* getMruFile */
   
@@ -503,12 +573,21 @@ public class UserProperties extends Properties
   {
   	_il.enter(String.valueOf(iIndex),sFile);
   	if (iIndex >= 0 && iIndex < (MruFile.iNUM_FILES + 1))
-		  _up.setProperty("mru.file.entry"+iIndex, sFile);
+		  _up.setProperty(sMRU_FILE_KEY+String.valueOf(iIndex), sFile);
   	else 
    		_il.event("Invalid index: \""+iIndex+"\"!");
   	_il.exit();
   } /* setMruFile */
 
+  private static String sMRU_DATABASE_KEY = "mru.db";
+  private static String sMRU_DATABASE_DIRECTION_UP = "up";
+  private static String sMRU_DATABASE_DIRECTION_DOWN = "down";
+  private static String sMRU_DATABASE_ENTRY = "entry";
+  private String getMruConnectionKey(boolean bDownload, int iIndex)
+  {
+    return sMRU_DATABASE_KEY + (bDownload?sMRU_DATABASE_DIRECTION_DOWN:sMRU_DATABASE_DIRECTION_UP)+sMRU_DATABASE_ENTRY+String.valueOf(iIndex);
+  } /* getMruConnectionKey */
+  
   /*------------------------------------------------------------------*/
   /** get one connection of the the list of most recently used connections
    @param bDownload true for download connections, false for upload connections.
@@ -519,10 +598,7 @@ public class UserProperties extends Properties
   public String getMruConnection(boolean bDownload, int iIndex)
   {
   	_il.enter(String.valueOf(iIndex));
-    String sDirection = "up";
-    if (bDownload)
-      sDirection = "down";
-  	String sConnection = _up.getProperty("mru.db"+sDirection+".entry"+iIndex, "");
+  	String sConnection = _up.getProperty(getMruConnectionKey(bDownload,iIndex), "");
    	/* check plausibility - does the sConnection have format [JDBC URL]\t[DatabaseUser]? */
    	StringTokenizer stConnectionData = new StringTokenizer(sConnection, "\t");
    	if (!(sConnection.length() > 0 && stConnectionData.countTokens() == 2))
@@ -543,11 +619,8 @@ public class UserProperties extends Properties
   public void setMruConnection(boolean bDownload, int iIndex, String sConnection)
   {
   	_il.enter(String.valueOf(iIndex),sConnection);
-    String sDirection = "up";
-    if (bDownload)
-      sDirection = "down";
   	if (iIndex >= 0 && iIndex < MruConnection.iNUM_CONNECTIONS+1)
-  		_up.setProperty("mru.db"+sDirection+".entry"+iIndex, sConnection);
+  		_up.setProperty(getMruConnectionKey(bDownload,iIndex), sConnection);
   	else 
    		_il.event("Invalid index: \""+iIndex+"\"!");
   	_il.exit();

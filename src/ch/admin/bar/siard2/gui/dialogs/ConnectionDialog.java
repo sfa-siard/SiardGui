@@ -23,8 +23,8 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.dialogs.FS;
-import ch.enterag.utils.logging.IndentLogger;
+import ch.enterag.utils.fx.dialogs.*;
+import ch.enterag.utils.logging.*;
 import ch.admin.bar.siard2.cmd.*;
 import ch.admin.bar.siard2.gui.*;
 
@@ -43,7 +43,7 @@ public abstract class ConnectionDialog
   // padding inside the dialog's VBox
   protected static final double dOUTER_PADDING = 10.0;
   // padding inside
-  protected static final double dINNER_PADDING = 0.0;
+  protected static final double dINNER_PADDING = 10.0;
   // vertical spacing of elements
   protected static final double dVSPACING = 10.0;
   // horizontal spacing of elements
@@ -64,6 +64,8 @@ public abstract class ConnectionDialog
   protected Button _btnDefault = null;
   /** cancel button (= Escape) */
   protected Button _btnCancel = null;
+  /** error message */
+  protected TextField _tfError = null;
   /** VBox for parameters */
   protected VBox _vboxParameters = null;
   protected ComboBox<String> _cbDbScheme = null;
@@ -138,6 +140,32 @@ public abstract class ConnectionDialog
     } // handle
   } // class
   private DragEventHandler _deh = new DragEventHandler();
+
+  protected void persist()
+  {
+    UserProperties up = UserProperties.getUserProperties();
+    String sDbScheme = _mapSchemes.get(getSelectedTitle());
+    up.setDatabaseScheme(sDbScheme);
+    String sDbHost = _tfDbHost.getText();
+    if ((sDbHost != null) && (sDbHost.length() > 0))
+      up.setDatabaseHost(sDbHost);
+    String sDbName = _tfDbName.getText();
+    up.setDatabaseName(sDbName);
+    _sDbUser = _tfDbUser.getText();
+    up.setDatabaseUser(_sDbUser);
+  } /* persist */
+  
+  protected String validate()
+  {
+    String sError = null;
+    String sDbUser = _tfDbUser.getText();
+    if ((sDbUser == null) || (sDbUser.length() == 0))
+    {
+      sError = SiardBundle.getSiardBundle().getConnectionErrorUser();
+      _tfDbUser.requestFocus();
+    }
+    return sError;
+  } /* validate */
   
   /*====================================================================*/
   /** ActionEventHandler handles all action events.
@@ -155,19 +183,15 @@ public abstract class ConnectionDialog
         close();
       else if (ae.getSource() == _btnDefault)
       {
-        UserProperties up = UserProperties.getUserProperties();
-        String sDbScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
-        up.setDatabaseScheme(sDbScheme);
-        String sDbHost = _tfDbHost.getText();
-        if ((sDbHost != null) && (sDbHost.length() == 0))
-          sDbHost = null; // results in default name next time
-        up.setDatabaseHost(sDbHost);
-        String sDbName = _tfDbName.getText();
-        if ((sDbName != null) && (sDbName.length() == 0))
-          sDbName = null; // results in default name next time
-        up.setDatabaseName(sDbName);
-        _iResult = iRESULT_SUCCESS;
-        close();
+        String sError = validate();
+        if (sError == null)
+        {
+          persist();
+          _iResult = iRESULT_SUCCESS;
+          close();
+        }
+        else
+          _tfError.setText(sError);
       }
       else if (ae.getSource() == _btnDbFolder)
       {
@@ -209,15 +233,17 @@ public abstract class ConnectionDialog
         String sOld, String sNew)
     {
       SiardConnection sc = SiardConnection.getSiardConnection();
-      String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
+      String sScheme = _mapSchemes.get(getSelectedTitle());
       if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
       {
         if (sc.isLocal(sScheme))
         {
-          if (_vboxParameters.getChildren().contains(_hboxDbHost))
-            _vboxParameters.getChildren().remove(_hboxDbHost);
-          if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
-            _vboxParameters.getChildren().add(1, _hboxDbFolder);
+          {
+            if (_vboxParameters.getChildren().contains(_hboxDbHost))
+              _vboxParameters.getChildren().remove(_hboxDbHost);
+            if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
+              _vboxParameters.getChildren().add(1, _hboxDbFolder);
+          }
         }
         else
         {
@@ -229,11 +255,31 @@ public abstract class ConnectionDialog
         if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
           _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
       }
-      String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
-      _tfConnectionUrl.setText(sSampleUrl);
+      if (ovs == _tfDbUser)
+      {
+        if (sScheme.equals(UserProperties.sACCESS_DATABASE_SCHEME))
+        {
+          String sDbUser = _tfDbUser.getText();
+          if (sDbUser.length() == 0)
+            _tfDbUser.setText(UserProperties.sACCESS_DATABASE_USER);
+        }
+      }
+      if ((ovs == _cbDbScheme.getSelectionModel().selectedItemProperty()) ||
+          (ovs == _tfDbHost.textProperty()) ||
+          (ovs == _tfDbFolder.textProperty()) ||
+          (ovs == _tfDbName.textProperty()))
+      {
+        if (_tfConnectionUrl != null)
+        {
+          String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
+          _tfConnectionUrl.setText(sSampleUrl);
+        }
+      }
+      if (_tfError != null)
+        _tfError.setText("");
     } /* changed */
   } /* class */
-  private StringChangeListener _scl = new StringChangeListener();
+  protected StringChangeListener _scl = new StringChangeListener();
   
   /*====================================================================*/
   /** PastingTextField implements non-editable field which can receive
@@ -264,13 +310,35 @@ public abstract class ConnectionDialog
     {
       Clipboard cb = Clipboard.getSystemClipboard();
       String sPasted = cb.getString();
-      System.out.println("pasted: "+sPasted);
       File file = new File(sPasted);
+      // if we have a file, it gets priority over the string
+      List<File> listFiles = cb.getFiles();
+      if (listFiles.size() == 1)
+        file = listFiles.get(0);
       if (file.isDirectory())
         changeText(file.getAbsolutePath());
     }
   } /* class */ 
   /*====================================================================*/
+  
+  /*------------------------------------------------------------------*/
+  private String getSelectedTitle()
+  {
+    String sTitle = _cbDbScheme.getSelectionModel().getSelectedItem();
+    if (sTitle == null)
+    {
+      UserProperties up = UserProperties.getUserProperties();
+      String sScheme = up.getDatabaseScheme();
+      for (Iterator<String> iterScheme = _mapSchemes.keySet().iterator(); iterScheme.hasNext(); )
+      {
+        String sTitleTry = iterScheme.next();
+        if (_mapSchemes.get(sTitleTry).equals(sScheme))
+          sTitle = sTitleTry;
+      }
+      _cbDbScheme.getSelectionModel().select(sTitle);
+    }
+    return sTitle;
+  } /* getSelectedTitle */
   
   /*------------------------------------------------------------------*/
   /** compute the maximum pref width of the given labels and set their
@@ -416,6 +484,7 @@ public abstract class ConnectionDialog
     _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(_scl);
     HBox.setHgrow(_cbDbScheme, Priority.ALWAYS);
     Label lblDbSchemeLabel = createLabel(sb.getConnectionDbSchemeLabel(),_cbDbScheme);
+    /* select the element for the connection URL in combo box */
     
     _tfDbHost = new TextField(up.getDatabaseHost());
     _tfDbHost.textProperty().addListener(_scl);
@@ -423,18 +492,11 @@ public abstract class ConnectionDialog
     Label lblDbHostLabel = createLabel(sb.getConnectionDbHostLabel(),_tfDbHost);
     
     _tfDbFolder = new PastingTextField(up.getDatabaseFolder().getAbsolutePath());
-    _tfDbFolder.setPrefHeight(FxSizes.getNodeHeight(_tfDbHost));
-    _tfDbFolder.prefWidthProperty().bind(_tfDbHost.widthProperty());
-    _tfDbFolder.setPadding(_tfDbHost.getPadding()); // has been set by getNodeHeight
+    _tfDbFolder.textProperty().addListener(_scl);
+    HBox.setHgrow(_tfDbFolder, Priority.ALWAYS);
     _tfDbFolder.setOnDragOver(_deh);
     _tfDbFolder.setOnDragDropped(_deh);
     
-/*    _lblDbFolder = new Label(up.getDatabaseFolder().getAbsolutePath());
-    _lblDbFolder.setStyle(FxStyles.sSTYLE_BACKGROUND_WHITE);
-    _lblDbFolder.setAlignment(Pos.BASELINE_LEFT);
-    _lblDbFolder.textProperty().addListener(_scl);
-    _lblDbFolder.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
-*/
     _btnDbFolder = new Button(sb.getConnectionDbFolderButton());
     _btnDbFolder.setOnAction(_aeh);
     _btnDbFolder.setAlignment(Pos.BASELINE_RIGHT);
@@ -468,7 +530,10 @@ public abstract class ConnectionDialog
    */
   private TextField createTextFieldConnectionUrl()
   {
-    TextField tf = new TextField();
+    String sScheme = _mapSchemes.get(getSelectedTitle());
+    SiardConnection sc = SiardConnection.getSiardConnection();
+    String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
+    TextField tf = new TextField(sSampleUrl);
     tf.setPrefWidth(dWIDTH_URL);
     if (_sConnectionUrl != null)
       tf.setText(_sConnectionUrl);
@@ -476,8 +541,8 @@ public abstract class ConnectionDialog
   } /* createTextFieldConnectionUrl */
   
   /*------------------------------------------------------------------*/
-  /** create the HBox with the OK button.
-   * @return HBox with OK button.
+  /** create the HBox with the error message, Cancel and OK button.
+   * @return HBox with the error message, Cancel and OK button.
    */
   private HBox createHBoxButtons()
   {
@@ -492,13 +557,19 @@ public abstract class ConnectionDialog
     _btnCancel.setCancelButton(true);
     _btnCancel.setOnAction(_aeh);
     dMinWidth += dHSPACING + _btnCancel.getLayoutBounds().getWidth();
+    _tfError = new TextField("");
+    _tfError.setBackground(Background.EMPTY);
+    _tfError.setStyle(FxStyles.sSTYLE_ERROR);
+    HBox.setHgrow(_tfError, Priority.ALWAYS);
     /* HBox for buttons */
     HBox hboxButton = new HBox();
     hboxButton.setPadding(new Insets(dINNER_PADDING));
     hboxButton.setSpacing(dHSPACING);
-    hboxButton.setAlignment(Pos.TOP_RIGHT);
+    // hboxButton.setAlignment(Pos.TOP_LEFT);
+    hboxButton.getChildren().add(_tfError);
     hboxButton.getChildren().add(_btnDefault);
     hboxButton.getChildren().add(_btnCancel);
+    HBox.setMargin(_tfError, new Insets(dOUTER_PADDING));
     HBox.setMargin(_btnDefault, new Insets(dOUTER_PADDING));
     HBox.setMargin(_btnCancel, new Insets(dOUTER_PADDING));
     hboxButton.setMinWidth(dMinWidth);
@@ -520,6 +591,7 @@ public abstract class ConnectionDialog
     SiardBundle sb = SiardBundle.getSiardBundle();
     _tfConnectionUrl = createTextFieldConnectionUrl();
     _tfConnectionUrl.setTooltip(new Tooltip(sb.getConnectionUrlTooltip()));
+    _tfConnectionUrl.textProperty().addListener(_scl);
     double dMinWidth = _tfConnectionUrl.getPrefWidth();
     Label lblConnectionUrl = createLabel(sb.getConnectionUrlLabel(),_tfConnectionUrl);
     if (dMinWidth < lblConnectionUrl.getPrefWidth())
@@ -546,10 +618,14 @@ public abstract class ConnectionDialog
       String sLoadViewsAsTablesLabel, String sLoadViewsAsTablesTooltip)
   {
     SiardBundle sb = SiardBundle.getSiardBundle();
+    UserProperties up = UserProperties.getUserProperties();
     _tfDbUser = new TextField();
     if (_sDbUser != null)
       _tfDbUser.setText(_sDbUser);
+    else
+      _tfDbUser.setText(up.getDatabaseUser());
     _tfDbUser.setTooltip(new Tooltip(sb.getConnectionDbUserTooltip()));
+    _tfDbUser.textProperty().addListener(_scl);
     Label lblDbUser = createLabel(sb.getConnectionDbUserLabel()+":",_tfDbUser);
     _pfDbPassword = new PasswordField();
     _pfDbPassword.setTooltip(new Tooltip(sb.getConnectionDbPasswordTooltip()));
@@ -700,15 +776,6 @@ public abstract class ConnectionDialog
     initOwner(stageOwner);
     /* modality */
     initModality(Modality.APPLICATION_MODAL);
-    /* select the element for the connection URL in combo box */
-    String sScheme = UserProperties.getUserProperties().getDatabaseScheme();
-    if (sScheme != null)
-    {
-      SiardConnection sc = SiardConnection.getSiardConnection();
-      _cbDbScheme.getSelectionModel().select(sc.getTitle(sScheme));
-    }
-    else
-      _cbDbScheme.getSelectionModel().select(0);
   } /* constructor DownloadConnectionDialog */
   
 } /* class ConnectionDialog */

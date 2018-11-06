@@ -117,9 +117,8 @@ public class UploadDownloadAction
         }
         else
         {
-          /* meta data only file will be temporary */
+          /* temporary meta data file */
           fileArchive = File.createTempFile("mdo",".siard");
-          fileArchive.deleteOnExit();
         }
       }
       catch (IOException ie) { _il.exception(ie); }
@@ -134,13 +133,28 @@ public class UploadDownloadAction
         {
           Archive archive = ArchiveImpl.newInstance();
           archive.create(fileArchive);
+          if (dcd.isMetaDataOnly())
+            fileArchive.deleteOnExit();
+          /* if there is a meta data only archive, use its meta data as a template */
+          if (SiardGui.getSiardGui().getArchive() != null)
+          {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            SiardGui.getSiardGui().getArchive().exportMetaData(baos);
+            ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+            baos.close();
+            archive.importMetaDataTemplate(bais);
+            bais.close();
+          }
           /* show download dialog */
           DownloadDialog dd = DownloadDialog.showDownloadDialog(
             stage,conn,archive,dcd.isMetaDataOnly(),dcd.isViewsAsTables());
-          if (dd.wasSuccessful() && (dcd.isMetaDataOnly() || dd.getArchive().isValid()))
+          if (dd.wasSuccessful() && (dd.getArchive().isValid() || dcd.isMetaDataOnly()))
           {
-            dd.getArchive().close();
-            dd.getArchive().open(fileArchive);
+            if (dd.getArchive().isValid())
+            {
+              dd.getArchive().close();
+              dd.getArchive().open(fileArchive);
+            }
             SiardGui.getSiardGui().setArchive(dd.getArchive());
             if (!dcd.isMetaDataOnly())
             {
