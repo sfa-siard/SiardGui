@@ -217,6 +217,8 @@ public class SiardGui extends Application
         if (!fileJar.getAbsolutePath().equals(fileInstalled.getAbsolutePath()))
           bRunningFromFolder = false;
       }
+      else
+        bRunningFromFolder = true; // store properties when debugging
     }
     return bRunningFromFolder;
   } /* isRunningFrom */
@@ -274,6 +276,8 @@ public class SiardGui extends Application
   private void storeProperties()
   {
     _il.enter();
+    /* store schema mappings in user properties */
+    SchemaMapping.getInstance().store();
     /* store MRU connections in user properties */
     MruConnection.getMruConnection(true).store();
     MruConnection.getMruConnection(false).store();

@@ -192,7 +192,7 @@ public class MainMenuBar
       (MruConnection.getMruConnection(true).getMruConnections() == 0);
     _menuDownloadMru.setDisable(bDisableMruDownloads);
     _miUpload.setDisable((!bAvailable) || (!bValid));
-    boolean bDisableMruUploads = ((!bAvailable) || (!bValid)) || 
+    boolean bDisableMruUploads = _miUpload.isDisable() || 
       (MruConnection.getMruConnection(false).getMruConnections() == 0);
     _menuUploadMru.setDisable(bDisableMruUploads);
     _miOpen.setDisable(bAvailable && bChanged);  

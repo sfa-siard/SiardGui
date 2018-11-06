@@ -43,7 +43,7 @@ public abstract class ConnectionDialog
   // padding inside the dialog's VBox
   protected static final double dOUTER_PADDING = 10.0;
   // padding inside
-  protected static final double dINNER_PADDING = 0.0;
+  protected static final double dINNER_PADDING = 10.0;
   // vertical spacing of elements
   protected static final double dVSPACING = 10.0;
   // horizontal spacing of elements
@@ -140,6 +140,20 @@ public abstract class ConnectionDialog
     } // handle
   } // class
   private DragEventHandler _deh = new DragEventHandler();
+
+  protected void persist()
+  {
+    UserProperties up = UserProperties.getUserProperties();
+    String sDbScheme = _mapSchemes.get(getSelectedTitle());
+    up.setDatabaseScheme(sDbScheme);
+    String sDbHost = _tfDbHost.getText();
+    if ((sDbHost != null) && (sDbHost.length() > 0))
+      up.setDatabaseHost(sDbHost);
+    String sDbName = _tfDbName.getText();
+    up.setDatabaseName(sDbName);
+    _sDbUser = _tfDbUser.getText();
+    up.setDatabaseUser(_sDbUser);
+  } /* persist */
   
   protected String validate()
   {
@@ -172,14 +186,7 @@ public abstract class ConnectionDialog
         String sError = validate();
         if (sError == null)
         {
-          UserProperties up = UserProperties.getUserProperties();
-          String sDbScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
-          up.setDatabaseScheme(sDbScheme);
-          String sDbHost = _tfDbHost.getText();
-          if ((sDbHost != null) && (sDbHost.length() > 0))
-            up.setDatabaseHost(sDbHost);
-          String sDbName = _tfDbName.getText();
-          up.setDatabaseName(sDbName);
+          persist();
           _iResult = iRESULT_SUCCESS;
           close();
         }
@@ -226,7 +233,7 @@ public abstract class ConnectionDialog
         String sOld, String sNew)
     {
       SiardConnection sc = SiardConnection.getSiardConnection();
-      String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
+      String sScheme = _mapSchemes.get(getSelectedTitle());
       if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
       {
         if (sc.isLocal(sScheme))
@@ -247,6 +254,9 @@ public abstract class ConnectionDialog
         }
         if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
           _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
+      }
+      if (ovs == _tfDbUser)
+      {
         if (sScheme.equals(UserProperties.sACCESS_DATABASE_SCHEME))
         {
           String sDbUser = _tfDbUser.getText();
@@ -254,14 +264,19 @@ public abstract class ConnectionDialog
             _tfDbUser.setText(UserProperties.sACCESS_DATABASE_USER);
         }
       }
-      if ((ovs == _tfDbHost.textProperty()) ||
+      if ((ovs == _cbDbScheme.getSelectionModel().selectedItemProperty()) ||
+          (ovs == _tfDbHost.textProperty()) ||
           (ovs == _tfDbFolder.textProperty()) ||
           (ovs == _tfDbName.textProperty()))
       {
-        String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
-        _tfConnectionUrl.setText(sSampleUrl);
+        if (_tfConnectionUrl != null)
+        {
+          String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
+          _tfConnectionUrl.setText(sSampleUrl);
+        }
       }
-      _tfError.setText("");
+      if (_tfError != null)
+        _tfError.setText("");
     } /* changed */
   } /* class */
   protected StringChangeListener _scl = new StringChangeListener();
@@ -305,6 +320,25 @@ public abstract class ConnectionDialog
     }
   } /* class */ 
   /*====================================================================*/
+  
+  /*------------------------------------------------------------------*/
+  private String getSelectedTitle()
+  {
+    String sTitle = _cbDbScheme.getSelectionModel().getSelectedItem();
+    if (sTitle == null)
+    {
+      UserProperties up = UserProperties.getUserProperties();
+      String sScheme = up.getDatabaseScheme();
+      for (Iterator<String> iterScheme = _mapSchemes.keySet().iterator(); iterScheme.hasNext(); )
+      {
+        String sTitleTry = iterScheme.next();
+        if (_mapSchemes.get(sTitleTry).equals(sScheme))
+          sTitle = sTitleTry;
+      }
+      _cbDbScheme.getSelectionModel().select(sTitle);
+    }
+    return sTitle;
+  } /* getSelectedTitle */
   
   /*------------------------------------------------------------------*/
   /** compute the maximum pref width of the given labels and set their
@@ -447,11 +481,6 @@ public abstract class ConnectionDialog
 
     _cbDbScheme = new ComboBox<String>(olScheme);
     _cbDbScheme.setTooltip(new Tooltip(sb.getConnectionDbSchemeTooltip()));
-    String sScheme = UserProperties.getUserProperties().getDatabaseScheme();
-    if (sScheme != null)
-      _cbDbScheme.getSelectionModel().select(sc.getTitle(sScheme));
-    else
-      _cbDbScheme.getSelectionModel().select(0);
     _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(_scl);
     HBox.setHgrow(_cbDbScheme, Priority.ALWAYS);
     Label lblDbSchemeLabel = createLabel(sb.getConnectionDbSchemeLabel(),_cbDbScheme);
@@ -501,8 +530,8 @@ public abstract class ConnectionDialog
    */
   private TextField createTextFieldConnectionUrl()
   {
+    String sScheme = _mapSchemes.get(getSelectedTitle());
     SiardConnection sc = SiardConnection.getSiardConnection();
-    String sScheme = _mapSchemes.get(_cbDbScheme.getSelectionModel().getSelectedItem());
     String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
     TextField tf = new TextField(sSampleUrl);
     tf.setPrefWidth(dWIDTH_URL);
@@ -589,9 +618,12 @@ public abstract class ConnectionDialog
       String sLoadViewsAsTablesLabel, String sLoadViewsAsTablesTooltip)
   {
     SiardBundle sb = SiardBundle.getSiardBundle();
+    UserProperties up = UserProperties.getUserProperties();
     _tfDbUser = new TextField();
     if (_sDbUser != null)
       _tfDbUser.setText(_sDbUser);
+    else
+      _tfDbUser.setText(up.getDatabaseUser());
     _tfDbUser.setTooltip(new Tooltip(sb.getConnectionDbUserTooltip()));
     _tfDbUser.textProperty().addListener(_scl);
     Label lblDbUser = createLabel(sb.getConnectionDbUserLabel()+":",_tfDbUser);

@@ -46,6 +46,20 @@ public class UploadConnectionDialog
   } /* getSchemasMap */
   
   @Override
+  protected void persist()
+  {
+    super.persist();
+    Map<String,String> mapSchemas = new HashMap<String,String>();
+    for (Iterator<Label> iterSchema = _mapSchemas.keySet().iterator(); iterSchema.hasNext(); )
+    {
+      Label lblSchema = iterSchema.next();
+      TextField tfSchema = _mapSchemas.get(lblSchema);
+      mapSchemas.put(lblSchema.getText(), tfSchema.getText());
+    }
+    SchemaMapping.getInstance().setSchemaMapping(mapSchemas);
+  }
+  
+  @Override
   protected String validate()
   {
     String sError = super.validate();
@@ -62,6 +76,7 @@ public class UploadConnectionDialog
     }
     return sError;
   }
+  
   /*------------------------------------------------------------------*/
   /** create a VBox for the schema mapping.
    * @return VBox for the schema mapping. 
@@ -69,6 +84,7 @@ public class UploadConnectionDialog
   private VBox createVBoxSchemas()
   {
     SiardBundle sb = SiardBundle.getSiardBundle();
+    SchemaMapping sm = SchemaMapping.getInstance();
     VBox vbox = new VBox();
     vbox.setPadding(new Insets(dINNER_PADDING));
     vbox.setSpacing(dVSPACING);
@@ -79,12 +95,19 @@ public class UploadConnectionDialog
       dMinWidth = lblTitle.getPrefWidth();
     vbox.getChildren().add(lblTitle);
     double dLabelWidth = 0;
-    _mapSchemas = new HashMap<Label,TextField>();
+    Set<String> setSchemas = new HashSet<String>();
     MetaData md = _archive.getMetaData(); 
     for (int iSchema = 0; iSchema < md.getMetaSchemas(); iSchema++)
     {
       String sSchema = md.getMetaSchema(iSchema).getName();
-      TextField tfSchema = new TextField(sSchema);
+      setSchemas.add(sSchema);
+    }
+    Map<String,String> mapSchemas = sm.getSchemaMapping(setSchemas);
+    _mapSchemas = new HashMap<Label,TextField>();
+    for (int iSchema = 0; iSchema < md.getMetaSchemas(); iSchema++)
+    {
+      String sSchema = md.getMetaSchema(iSchema).getName();
+      TextField tfSchema = new TextField(mapSchemas.get(sSchema));
       tfSchema.textProperty().addListener(_scl);
       Label lblSchema = createLabel(sSchema,tfSchema);
       if (dLabelWidth < lblSchema.getPrefWidth())
