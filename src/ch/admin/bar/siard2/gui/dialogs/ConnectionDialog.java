@@ -335,6 +335,7 @@ public abstract class ConnectionDialog
         if (_mapSchemes.get(sTitleTry).equals(sScheme))
           sTitle = sTitleTry;
       }
+      _cbDbScheme.getSelectionModel().clearSelection();
       _cbDbScheme.getSelectionModel().select(sTitle);
     }
     return sTitle;
