@@ -72,12 +72,11 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             </div>  
             <div class="mod mod-text">
               <section class="clearfix">
-                <p>Les menus ci-après concernent l'installation:
-                  <ul>
-                    <li><a href="#install"><em>Installer</em></a>: installation de la copie actuellement en fonction de <em>SIARD Suite</em>,</li>
-                    <li><a href="#uninstall"><em>Désinstaller</em></a>: désinstallation de la copie actuellement installée de <em>SIARD Suite</em>.</li>
-                  </ul>
-                </p>
+                <p>Les menus ci-après concernent l'installation:</p>
+                <ul>
+                  <li><a href="#install"><em>Installer</em></a>: installation de la copie actuellement en fonction de <em>SIARD Suite</em>,</li>
+                  <li><a href="#uninstall"><em>Désinstaller</em></a>: désinstallation de la copie actuellement installée de <em>SIARD Suite</em>.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -98,16 +97,15 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="install">Installer</a></h2>
+                <h2><a id="install">Installer</a></h2>
                 <p>Le menu <em>Outils/Installer</em> permet l'installation d'une nouvelle version de <em>SIARD Suite</em>. Pour autant qu'une ancienne version ait été installée, cette dernière sera tout d'abord effacée.</p>
                 <p>Le menu <em>Outils/Installer</em> est désactivé si la version de l'instance actuellement exécutée de <em>SIARD Suite</em> est plus petite ou identique à la version de l'instance installée.</p>
-                <p>Dans le cas contraire, <em>Outils/Installer</em> exécute les tâches suivantes:
-                  <ul>
-                    <li>copiage des fichiers de l'instance actuellement exécutée dans un répertoire d'installation choisi par l'utilisateur,</li>
-                    <li>création d'un fichier personnel avec les paramètres relatifs à la version et au répertoire de la nouvelle instance installée, et</li>
-                    <li>création d'un raccourci sur le bureau pour l'exécution de <em>SIARD Suite</em>. Ceci n'est pas possible pour tous les systèmes d'exploitation, car par ex. les distributions LINUX utilisent un grand nombre de bureaux variables.</li>  
-                  </ul>
-                </p>
+                <p>Dans le cas contraire, <em>Outils/Installer</em> exécute les tâches suivantes:</p>
+                 <ul>
+                   <li>copiage des fichiers de l'instance actuellement exécutée dans un répertoire d'installation choisi par l'utilisateur,</li>
+                   <li>création d'un fichier personnel avec les paramètres relatifs à la version et au répertoire de la nouvelle instance installée, et</li>
+                   <li>création d'un raccourci sur le bureau pour l'exécution de <em>SIARD Suite</em>. Ceci n'est pas possible pour tous les systèmes d'exploitation, car par ex. les distributions LINUX utilisent un grand nombre de bureaux variables.</li>  
+                 </ul>
                 <p style="text-align:center;"> 
                   <img alt="SIARD Desktop Icon" class="siardgui-icon" src="../siardgui.png"/>
                 </p>
@@ -118,16 +116,15 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="uninstall">Désinstaller</a></h2> 
+                <h2><a id="uninstall">Désinstaller</a></h2> 
                 <p>Le menu <em>Outils/Désinstaller</em> élimine une version de <em>SIARD Suite</em> installée auparavant, pour autant qu'il en existe une.</p>
                 <p>Le menu <em>Outils/Désinstaller</em> est désactivé si aucun paramètre personnel n'a été trouvé.</p>
-                <p>Dans le cas contraire, <em>Outils/Désinstaller</em> exécute les tâches suivantes:
-                  <ul>
-                    <li>élimination du raccourci pour <em>SIARD Suite</em> du bureau, pour autant qu'il ait été trouvé,</li>
-                    <li>effacement du répertoire d'installation et des fichiers de programmes sauf si l'instance actuellement exécutée a été lancée depuis là - ce répertoire doit alors être effacé manuellement plus tard, et</li>
-                    <li>Effacement des paramètres personnels pour autant qu'il ait été requis.</li>
-                  </ul>
-                </p>
+                <p>Dans le cas contraire, <em>Outils/Désinstaller</em> exécute les tâches suivantes:</p>
+                <ul>
+                  <li>élimination du raccourci pour <em>SIARD Suite</em> du bureau, pour autant qu'il ait été trouvé,</li>
+                  <li>effacement du répertoire d'installation et des fichiers de programmes sauf si l'instance actuellement exécutée a été lancée depuis là - ce répertoire doit alors être effacé manuellement plus tard, et</li>
+                  <li>Effacement des paramètres personnels pour autant qu'il ait été requis.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -139,12 +136,11 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p><em>SIARD Suite</em> lit et écrit ses paramètres depuis un fichier <em>SIARD Suite_2.1.properties</em> qui se trouve dans le répertoire de base <em>.java</em> de l'utilisateur.<p>
                 <p>Ce fichier de base de l'utilisateur est défini sur la valeur de la propriété system JAVA <em>user.home</em>.
                   Pour autant qu'elle n'ait pas été redirigée manuellement par un argument JVM -D, cette propriété système a la même valeur que la variable d'environnement <em>%USERPROFILE%</em> sur la plate-forme Windows ou que la variable d'environnement <em>$HOME</em> (synonyme avec "~") sur les plates-formes LINUX/UNIX.</p>
-                <p>Normalement, on trouve ainsi les paramètres sous
-                  <ul>
-                    <li><em>C:\Users\&lt;User&gt;\.java\siard_suite_2.1.properties</em> pour Windows,</li>
-                    <li><em>/home/&lt;User&gt;/.java/siard_suite_2.1.properties</em> pour la plupart des distributions LINUX.</li>
-                  </ul>
-                </p>
+                <p>Normalement, on trouve ainsi les paramètres sous</p>
+                <ul>
+                  <li><em>C:\Users\&lt;User&gt;\.java\siard_suite_2.1.properties</em> pour Windows,</li>
+                  <li><em>/home/&lt;User&gt;/.java/siard_suite_2.1.properties</em> pour la plupart des distributions LINUX.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
