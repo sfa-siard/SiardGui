@@ -112,8 +112,8 @@ public class SiardGui extends Application
   {
     Runtime rt = Runtime.getRuntime();
     System.out.println(
-      "Used Memory: "+swOpen.formatLong(rt.totalMemory() - rt.freeMemory())+
-      ", Free Memory: "+swOpen.formatLong(rt.freeMemory())+
+      "Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
       ", Open: "+swOpen.formatMs()+
       ", Display: "+swDisplay.formatMs()+
       ", Save: "+swSave.formatMs()+
