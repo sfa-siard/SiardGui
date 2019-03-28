@@ -99,6 +99,27 @@ public class SiardGui extends Application
   { 
     _archive = archive;
   }
+
+  public StopWatch swOpen = StopWatch.getInstance();
+  public StopWatch swDisplay = StopWatch.getInstance();
+  public StopWatch swValid = StopWatch.getInstance();
+  public StopWatch swSave = StopWatch.getInstance();
+  
+  /*------------------------------------------------------------------*/
+  /** printStatus prints memory and stop watches.
+   */
+  public void printStatus()
+  {
+    Runtime rt = Runtime.getRuntime();
+    System.out.println(
+      "Used Memory: "+swOpen.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+swOpen.formatLong(rt.freeMemory())+
+      ", Open: "+swOpen.formatMs()+
+      ", Display: "+swDisplay.formatMs()+
+      ", Save: "+swSave.formatMs()+
+      ", Valid: "+swValid.formatMs());
+  } /* printStatus */
+  
   
   /*------------------------------------------------------------------*/
   /** setTitle sets the title with file name and change indicator */
@@ -371,10 +392,16 @@ public class SiardGui extends Application
    */
   public void openArchive(String sFile)
   {
+    swOpen.start();
     OpenSaveAction.newOpenSaveAction().open(sFile);
+    swOpen.stop();
+    printStatus();
     setTitle();
     MainMenuBar.getMainMenuBar().restrict();
+    swDisplay.start();
     MainPane.getMainPane().setArchive();
+    swDisplay.stop();
+    printStatus();
   } /* openArchive */
   
   /*------------------------------------------------------------------*/
@@ -429,9 +456,15 @@ public class SiardGui extends Application
     try
     {
       // force apply/reset on unsaved changes to meta data
+      swSave.start();
       MainPane.getMainPane().refreshLanguage();
+      swSave.stop();
+      printStatus();
+      swValid.start();
       if (_archive.isValid())
       {
+        swValid.stop();
+        printStatus();
         if (!_archive.isMetaDataUnchanged())
         {
           int iResult = MB.show(getStage(), sb.getCloseTitle(),
@@ -443,6 +476,8 @@ public class SiardGui extends Application
       }
       else
       {
+        swValid.stop();
+        printStatus();
         if (!_archive.isMetaDataUnchanged())
         {
           int iResult = MB.show(getStage(), sb.getCloseTitle(),
