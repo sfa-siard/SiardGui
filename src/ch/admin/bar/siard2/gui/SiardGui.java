@@ -28,6 +28,7 @@ import ch.enterag.utils.fx.tasks.*;
 import ch.enterag.utils.io.*;
 import ch.enterag.utils.logging.*;
 import ch.admin.bar.siard2.api.*;
+import ch.admin.bar.siard2.api.primary.*;
 import ch.admin.bar.siard2.gui.actions.*;
 import ch.admin.bar.siard2.gui.dialogs.*;
 
@@ -102,7 +103,6 @@ public class SiardGui extends Application
 
   public StopWatch swOpen = StopWatch.getInstance();
   public StopWatch swDisplay = StopWatch.getInstance();
-  public StopWatch swValid = StopWatch.getInstance();
   public StopWatch swSave = StopWatch.getInstance();
   
   /*------------------------------------------------------------------*/
@@ -112,14 +112,14 @@ public class SiardGui extends Application
   {
     Runtime rt = Runtime.getRuntime();
     System.out.println(
-      "Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      "GUI: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
       ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
       ", Open: "+swOpen.formatMs()+
       ", Display: "+swDisplay.formatMs()+
       ", Save: "+swSave.formatMs()+
-      ", Valid: "+swValid.formatMs());
+      ", Restrict: "+MainMenuBar.getMainMenuBar()._swRestrict.formatMs()+
+      ", Valid: "+((ArchiveImpl)getArchive())._swValid.formatMs());
   } /* printStatus */
-  
   
   /*------------------------------------------------------------------*/
   /** setTitle sets the title with file name and change indicator */
@@ -460,11 +460,8 @@ public class SiardGui extends Application
       MainPane.getMainPane().refreshLanguage();
       swSave.stop();
       printStatus();
-      swValid.start();
       if (_archive.isValid())
       {
-        swValid.stop();
-        printStatus();
         if (!_archive.isMetaDataUnchanged())
         {
           int iResult = MB.show(getStage(), sb.getCloseTitle(),
@@ -476,8 +473,6 @@ public class SiardGui extends Application
       }
       else
       {
-        swValid.stop();
-        printStatus();
         if (!_archive.isMetaDataUnchanged())
         {
           int iResult = MB.show(getStage(), sb.getCloseTitle(),

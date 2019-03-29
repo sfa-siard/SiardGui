@@ -58,6 +58,21 @@ public class MetaDataEditor
   private Button _btnApply = null;
   private Button _btnReset = null;
   
+  public StopWatch swMetaData = StopWatch.getInstance();
+  public StopWatch swRestrict = StopWatch.getInstance();
+  /*------------------------------------------------------------------*/
+  /** printStatus prints memory and stop watches.
+   */
+  public void printStatus()
+  {
+    Runtime rt = Runtime.getRuntime();
+    System.out.println(
+      "      Editor: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
+      ", MetaData: "+swMetaData.formatMs()+
+      ", Restrict: "+swRestrict.formatMs());
+  } /* printStatus */
+  
   /*------------------------------------------------------------------*/
   /** change event from text input control.
    * @param ov observable value.
@@ -351,6 +366,7 @@ public class MetaDataEditor
     _bEditable = false;
     if (_oMetaData instanceof MetaData)
     {
+      swMetaData.start();
       MetaData md = (MetaData)_oMetaData;
       displayProperty(MetaData.class,"Version",false,false,false);
       displayProperty(MetaData.class,"DbName",true,false,true);
@@ -369,6 +385,8 @@ public class MetaDataEditor
       displayProperty(MetaData.class,"DatabaseProduct",false,false,false);
       displayProperty(MetaData.class,"Connection",false,false,false);
       displayProperty(MetaData.class,"DatabaseUser",false,false,false);
+      swMetaData.stop();
+      printStatus();
     }
     else if (_oMetaData instanceof MetaSchema)
     {
@@ -417,7 +435,6 @@ public class MetaDataEditor
       displayProperty(MetaView.class,"Query",true,true,false);
       displayProperty(MetaView.class,"Rows",false,false,false);
       displayProperty(MetaView.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaRoutine)
     {
@@ -441,7 +458,6 @@ public class MetaDataEditor
       displayProperty(MetaAttribute.class,"DefaultValue",false,false,false);
       displayProperty(MetaAttribute.class,"Cardinality",false,false,false);
       displayProperty(MetaAttribute.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaColumn)
     {
@@ -481,7 +497,6 @@ public class MetaDataEditor
       displayProperty(MetaColumn.class,"DefaultValue",false,false,false);
       displayProperty(MetaColumn.class,"Cardinality",false,false,false);
       displayProperty(MetaColumn.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaUniqueKey)
     {
@@ -566,7 +581,10 @@ public class MetaDataEditor
     {
       displayButtons(dPropertyWidth);
       _bChanged = false;
+      swRestrict.start();
       MainMenuBar.getMainMenuBar().restrict();
+      swRestrict.stop();
+      printStatus();
     }
     setMinWidth(computeMinWidth(getMinHeight()));
     setMinHeight(computeMinHeight(getMinWidth()));

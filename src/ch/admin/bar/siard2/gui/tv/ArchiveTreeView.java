@@ -4,6 +4,8 @@ import java.io.*;
 import javafx.beans.value.*;
 import javafx.scene.control.*;
 import javafx.util.*;
+
+import ch.enterag.utils.*;
 import ch.enterag.utils.fx.*;
 import ch.enterag.utils.fx.controls.*;
 import ch.enterag.utils.logging.*;
@@ -16,6 +18,23 @@ public class ArchiveTreeView
 {
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(ArchiveTreeView.class.getName());
+  
+  public StopWatch swDetails = StopWatch.getInstance();
+  public StopWatch swRestrict = StopWatch.getInstance();
+  
+  /*------------------------------------------------------------------*/
+  /** printStatus prints memory and stop watches.
+   */
+  public void printStatus()
+  {
+    Runtime rt = Runtime.getRuntime();
+    System.out.println(
+      "  TV: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
+      ", Details: "+swDetails.formatMs()+
+      ", Restrict: "+swRestrict.formatMs());
+  } /* printStatus */
+  
   /*==================================================================*/
   private class MetaPrivilegeTreeItem
     extends DynamicTreeItem<Object>
@@ -605,7 +624,7 @@ public class ArchiveTreeView
     @Override
     public void updateItem(Object oItem, boolean bEmpty)
     {
-      super.updateItem(oItem,bEmpty);
+     super.updateItem(oItem,bEmpty);
       String sText = "";
       if (!bEmpty)
       {
@@ -889,6 +908,7 @@ public class ArchiveTreeView
       ;// sg.storeMetadata(ctiOld.getValue());
     if (sg != null)
     {
+      swDetails.start();
       if (tiNew != null)
       {
         Object oMetaData = tiNew.getValue();
@@ -937,7 +957,12 @@ public class ArchiveTreeView
       }
       else
         sg.showDetails(null,null);
+      swDetails.stop();
+      printStatus();
+      swRestrict.start();
       MainMenuBar.getMainMenuBar().restrict();
+      swRestrict.stop();
+      printStatus();
     }
   } /* changed */
   

@@ -10,12 +10,12 @@ Created    : 10.08.2017, Hartwig Thomas, Enter AG, Rüti ZH
 package ch.admin.bar.siard2.gui.details;
 
 import java.io.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
 import ch.admin.bar.siard2.api.*;
-import ch.admin.bar.siard2.gui.SiardGui;
+import ch.admin.bar.siard2.gui.*;
+import ch.enterag.utils.*;
 import ch.enterag.utils.fx.*;
 import ch.enterag.utils.fx.controls.*;
 
@@ -38,6 +38,21 @@ public class DetailsScrollPane
   private static final double dINNER_PADDING = 10.0;
   // vertical spacing of elements
   private static final double dVSPACING = 10.0;
+  
+  public StopWatch swMetaEditor = StopWatch.getInstance();
+  public StopWatch swJavaFx = StopWatch.getInstance();
+  /*------------------------------------------------------------------*/
+  /** printStatus prints memory and stop watches.
+   */
+  public void printStatus()
+  {
+    Runtime rt = Runtime.getRuntime();
+    System.out.println(
+      "    Details: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
+      ", MetaEditor: "+swMetaEditor.formatMs()+
+      ", JavaFx: "+swJavaFx.formatMs());
+  } /* printStatus */
   
   /*------------------------------------------------------------------*/
   /** set new meta data to display in the details scroll pane.
@@ -62,7 +77,10 @@ public class DetailsScrollPane
     if (_oMetaData instanceof MetaData)
     {
       MetaData md = (MetaData)_oMetaData;
+      swMetaEditor.start();
       _mde.setMetaData(md);
+      swMetaEditor.stop();
+      printStatus();
       if (_clsTableData.equals(MetaSchema.class))
         _oltv = MetaDataTableFactory.newMetaSchemasTableView(md);
       else if (_clsTableData.equals(MetaUser.class))
@@ -145,6 +163,7 @@ public class DetailsScrollPane
     }
     else
       _mde.setMetaData(_oMetaData);
+    swJavaFx.start();
     setFocused(true);
     double dMinWidth = 2*dINNER_PADDING;
     double dMinHeight = 2*dINNER_PADDING;
@@ -170,6 +189,8 @@ public class DetailsScrollPane
       _vbox.setMinHeight(dMinHeight);
       VBox.setVgrow(_oltv, Priority.ALWAYS);
     }
+    swJavaFx.stop();
+    printStatus();
   } /* reset */
 
   /*------------------------------------------------------------------*/
