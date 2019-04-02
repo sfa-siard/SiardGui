@@ -14,8 +14,6 @@ import javafx.beans.value.*;
 import javafx.event.*;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
-
-import ch.enterag.utils.StopWatch;
 import ch.enterag.utils.fx.*;
 import ch.admin.bar.siard2.api.*;
 
@@ -62,8 +60,6 @@ public class MainMenuBar
   private MenuItem _miHelp = null;
   private MenuItem _miInfo = null;
 
-  public StopWatch _swRestrict = StopWatch.getInstance();
-  
   /*==================================================================*/
   private class ToggleChangeListener
     implements ChangeListener<Toggle>
@@ -178,7 +174,6 @@ public class MainMenuBar
    */
   public void restrict()
   {
-    _swRestrict.start();
     boolean bAvailable = false;
     boolean bChanged = false;
     boolean bValid = false;
@@ -224,7 +219,6 @@ public class MainMenuBar
     _miOptions.setDisable(false);
     _miHelp.setDisable(false);
     _miInfo.setDisable(false);
-    _swRestrict.stop();
   } /* restrict */
   
   /*------------------------------------------------------------------*/

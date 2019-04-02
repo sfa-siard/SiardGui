@@ -102,24 +102,19 @@ public class SiardGui extends Application
   }
 
   public StopWatch swOpen = StopWatch.getInstance();
-  public StopWatch swDisplay = StopWatch.getInstance();
-  public StopWatch swSave = StopWatch.getInstance();
   
   /*------------------------------------------------------------------*/
-  /** printStatus prints memory and stop watches.
+  /** logPerformance prints memory and stop watches.
    */
-  public void printStatus()
+  public void logPerformance()
   {
     Runtime rt = Runtime.getRuntime();
-    System.out.println(
+    _il.info(
       "GUI: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
       ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
       ", Open: "+swOpen.formatMs()+
-      ", Display: "+swDisplay.formatMs()+
-      ", Save: "+swSave.formatMs()+
-      ", Restrict: "+MainMenuBar.getMainMenuBar()._swRestrict.formatMs()+
       ", Valid: "+((ArchiveImpl)getArchive())._swValid.formatMs());
-  } /* printStatus */
+  } /* logPerformance */
   
   /*------------------------------------------------------------------*/
   /** setTitle sets the title with file name and change indicator */
@@ -395,13 +390,10 @@ public class SiardGui extends Application
     swOpen.start();
     OpenSaveAction.newOpenSaveAction().open(sFile);
     swOpen.stop();
-    printStatus();
+    logPerformance();
     setTitle();
     MainMenuBar.getMainMenuBar().restrict();
-    swDisplay.start();
     MainPane.getMainPane().setArchive();
-    swDisplay.stop();
-    printStatus();
   } /* openArchive */
   
   /*------------------------------------------------------------------*/
@@ -456,10 +448,7 @@ public class SiardGui extends Application
     try
     {
       // force apply/reset on unsaved changes to meta data
-      swSave.start();
       MainPane.getMainPane().refreshLanguage();
-      swSave.stop();
-      printStatus();
       if (_archive.isValid())
       {
         if (!_archive.isMetaDataUnchanged())
