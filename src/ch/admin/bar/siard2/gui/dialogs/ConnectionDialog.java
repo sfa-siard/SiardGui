@@ -84,8 +84,6 @@ public abstract class ConnectionDialog
   protected Button _btnDbFolder = null;
   /** map from scheme title to scheme */
   protected Map<String,String> _mapSchemes = new HashMap<String,String>();
-  /** list of sample URL labels */
-  protected Map<String,Label> _mapSampleUrls = new HashMap<String,Label>();
   /** text field for connection URL */
   protected TextField _tfConnectionUrl = null;
   public String getConnectionUrl() { return _iResult == 1? _tfConnectionUrl.getText(): null; }

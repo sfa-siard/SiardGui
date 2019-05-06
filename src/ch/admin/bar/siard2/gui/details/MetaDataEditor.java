@@ -417,7 +417,6 @@ public class MetaDataEditor
       displayProperty(MetaView.class,"Query",true,true,false);
       displayProperty(MetaView.class,"Rows",false,false,false);
       displayProperty(MetaView.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaRoutine)
     {
@@ -441,7 +440,6 @@ public class MetaDataEditor
       displayProperty(MetaAttribute.class,"DefaultValue",false,false,false);
       displayProperty(MetaAttribute.class,"Cardinality",false,false,false);
       displayProperty(MetaAttribute.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaColumn)
     {
@@ -481,7 +479,6 @@ public class MetaDataEditor
       displayProperty(MetaColumn.class,"DefaultValue",false,false,false);
       displayProperty(MetaColumn.class,"Cardinality",false,false,false);
       displayProperty(MetaColumn.class,"Description",true,true,false);
-      
     }
     else if (_oMetaData instanceof MetaUniqueKey)
     {

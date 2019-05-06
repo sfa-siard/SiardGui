@@ -16,6 +16,7 @@ public class ArchiveTreeView
 {
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(ArchiveTreeView.class.getName());
+  
   /*==================================================================*/
   private class MetaPrivilegeTreeItem
     extends DynamicTreeItem<Object>
@@ -605,7 +606,7 @@ public class ArchiveTreeView
     @Override
     public void updateItem(Object oItem, boolean bEmpty)
     {
-      super.updateItem(oItem,bEmpty);
+     super.updateItem(oItem,bEmpty);
       String sText = "";
       if (!bEmpty)
       {

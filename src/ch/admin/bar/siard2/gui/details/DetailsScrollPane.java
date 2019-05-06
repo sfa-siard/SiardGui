@@ -10,12 +10,11 @@ Created    : 10.08.2017, Hartwig Thomas, Enter AG, Rüti ZH
 package ch.admin.bar.siard2.gui.details;
 
 import java.io.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
 import ch.admin.bar.siard2.api.*;
-import ch.admin.bar.siard2.gui.SiardGui;
+import ch.admin.bar.siard2.gui.*;
 import ch.enterag.utils.fx.*;
 import ch.enterag.utils.fx.controls.*;
 

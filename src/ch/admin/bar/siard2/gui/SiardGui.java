@@ -28,6 +28,7 @@ import ch.enterag.utils.fx.tasks.*;
 import ch.enterag.utils.io.*;
 import ch.enterag.utils.logging.*;
 import ch.admin.bar.siard2.api.*;
+import ch.admin.bar.siard2.api.primary.*;
 import ch.admin.bar.siard2.gui.actions.*;
 import ch.admin.bar.siard2.gui.dialogs.*;
 
@@ -99,6 +100,21 @@ public class SiardGui extends Application
   { 
     _archive = archive;
   }
+
+  public StopWatch swOpen = StopWatch.getInstance();
+  
+  /*------------------------------------------------------------------*/
+  /** logPerformance prints memory and stop watches.
+   */
+  public void logPerformance()
+  {
+    Runtime rt = Runtime.getRuntime();
+    _il.info(
+      "GUI: Used Memory: "+StopWatch.formatLong(rt.totalMemory() - rt.freeMemory())+
+      ", Free Memory: "+StopWatch.formatLong(rt.freeMemory())+
+      ", Open: "+swOpen.formatMs()+
+      ", Valid: "+((ArchiveImpl)getArchive())._swValid.formatMs());
+  } /* logPerformance */
   
   /*------------------------------------------------------------------*/
   /** setTitle sets the title with file name and change indicator */
@@ -371,7 +387,10 @@ public class SiardGui extends Application
    */
   public void openArchive(String sFile)
   {
+    swOpen.start();
     OpenSaveAction.newOpenSaveAction().open(sFile);
+    swOpen.stop();
+    logPerformance();
     setTitle();
     MainMenuBar.getMainMenuBar().restrict();
     MainPane.getMainPane().setArchive();
