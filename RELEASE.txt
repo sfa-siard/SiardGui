@@ -1,6 +1,10 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.??
+Corrected validation failure of correctly downloaded databases.
+Added originalQuery to VIEW on download.
+
 2.1.91
 External storage of LOBs enhanced in code and manual. 
 
