@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #=======================================================================
 # siardgui executes lib/siardgui.jar. 
 # Application: Siard2
