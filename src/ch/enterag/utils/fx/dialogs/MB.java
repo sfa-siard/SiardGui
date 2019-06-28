@@ -18,13 +18,14 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.Dialog;
 
 /*====================================================================*/
 /** A trivial dialog for displaying a message and one or two buttons. 
  * @author Hartwig Thomas
  */
 public class MB 
-  extends Stage 
+  extends Dialog 
   implements EventHandler<ActionEvent>
 {
   // "padding" inside the screen */
@@ -71,7 +72,7 @@ public class MB
    */
   private MB(Stage stageOwner, String sTitle, String sPrompt, String sButtonDefault, String sButtonCancel)
   {
-    super();
+    super(stageOwner,sTitle);
     double dMinWidth = FxSizes.getTextWidth(sTitle)+FxSizes.getCloseWidth()+dHSPACING;
     
     /* buttons and their width */
@@ -129,16 +130,6 @@ public class MB
     /* scene */
     Scene scene = new Scene(vbox);
     setScene(scene);
-    /* title */
-    setTitle(sTitle);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
-    /* display on top */
-    toFront();
   } /* constructor */
 
   /*------------------------------------------------------------------*/

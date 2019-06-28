@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.enterag.utils.lang.*;
 import ch.enterag.sqlparser.*;
@@ -37,7 +38,7 @@ import ch.admin.bar.siard2.gui.details.*;
  * @author Hartwig Thomas
  */
 public class ValueDialog
-  extends Stage 
+  extends Dialog 
   implements EventHandler<ActionEvent>
 {
   // padding inside
@@ -187,11 +188,10 @@ public class ValueDialog
    */
   private ValueDialog(Stage stageOwner, String sLocation, Value value, int iMaxInlineSize)
   {
-    super();
+    super(stageOwner,SiardBundle.getSiardBundle().getValueDialogTitle(value.getMetaValue().getAncestorMetaColumn().getParentMetaTable().getName()+sLocation));
     _value = value;
     _iMaxInlineSize = iMaxInlineSize;
     _sLocation = sLocation;
-    SiardBundle sb = SiardBundle.getSiardBundle();
     _vbox = createVBoxDialog();
     /* scene */
     double dWidth = _vbox.getMinWidth()+10.0;
@@ -202,13 +202,6 @@ public class ValueDialog
       dHeight = FxSizes.getScreenBounds().getHeight()/2.0;
     Scene scene = new Scene(_vbox,dWidth,dHeight);
     setScene(scene);
-    /* title */
-    MetaColumn mc = value.getMetaValue().getAncestorMetaColumn();
-    setTitle(sb.getValueDialogTitle(mc.getParentMetaTable().getName()+sLocation));
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
   } /* constructor */
   
   /*------------------------------------------------------------------*/

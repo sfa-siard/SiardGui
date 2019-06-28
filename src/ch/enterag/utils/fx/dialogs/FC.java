@@ -11,7 +11,7 @@ Created    : 21.12.2015, Hartwig Thomas
 package ch.enterag.utils.fx.dialogs;
 
 import java.io.*;
-import java.text.MessageFormat;
+import java.text.*;
 import java.util.*;
 import javafx.beans.value.*;
 import javafx.collections.*;
@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.controls.*;
 
 /*====================================================================*/
@@ -32,7 +33,7 @@ import ch.enterag.utils.fx.controls.*;
  * @author Hartwig Thomas
  */
 public class FC
-  extends Stage 
+  extends Dialog 
   implements EventHandler<ActionEvent>
 {
   private static final double dINNER_PADDING = 10.0;
@@ -668,8 +669,7 @@ public class FC
       File fileInitial, boolean bIncludeHidden, List<ExtensionFilter> listExtensions,
       String sOverwriteQuery, String sYes, String sNo)
   {
-    super();
-    initOwner(stageOwner);
+    super(stageOwner,sTitle);
     _bExisting = bExisting;
     _bFolder = bFolder;
     _bIncludeHidden = bIncludeHidden;
@@ -682,7 +682,6 @@ public class FC
       _sYes = sYes;
       _sNo = sNo;
     }
-    setTitle(sTitle);
     if (!fileInitial.getParentFile().exists())
       fileInitial.getParentFile().mkdirs();
     VBox vbox = createVBox(sMessage,
@@ -692,12 +691,6 @@ public class FC
       sOk,sCancel);
     Scene scene = new Scene(vbox, vbox.getMinWidth()+10.0, vbox.getMinHeight()+10.0);
     setScene(scene);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
-    /* display on top */
-    setAlwaysOnTop(true);
   } /* constructor FS */
 
   /*------------------------------------------------------------------*/

@@ -23,6 +23,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.enterag.utils.logging.*;
 import ch.admin.bar.siard2.cmd.*;
@@ -34,20 +35,10 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public abstract class ConnectionDialog
-  extends Stage 
+  extends Dialog 
 {
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(ConnectionDialog.class.getName());
-  // "padding" inside the screen */
-  protected static final double dSCREEN_PADDING = 10.0;
-  // padding inside the dialog's VBox
-  protected static final double dOUTER_PADDING = 10.0;
-  // padding inside
-  protected static final double dINNER_PADDING = 10.0;
-  // vertical spacing of elements
-  protected static final double dVSPACING = 10.0;
-  // horizontal spacing of elements
-  protected static final double dHSPACING = 10.0;
   // width of JDBC URL input box
   protected static final double dWIDTH_URL = FxSizes.getScreenBounds().getWidth()/2.0;
   
@@ -750,7 +741,7 @@ public abstract class ConnectionDialog
     String sLoadOverwriteLabel, String sLoadOverwriteTooltip,
     String sLoadViewsAsTablesLabel, String sLoadViewsAsTablesTooltip)
   {
-    super();
+    super(stageOwner,sTitle);
     _sConnectionUrl = sConnectionUrl;
     _sDbUser = sDbUser;
     double dMinWidth = FxSizes.getTextWidth(sTitle)+FxSizes.getCloseWidth()+dHSPACING;
@@ -767,14 +758,6 @@ public abstract class ConnectionDialog
     /* scene */
     Scene scene = new Scene(vboxDialog);
     setScene(scene);
-    /* title */
-    setTitle(sTitle);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* init owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
   } /* constructor DownloadConnectionDialog */
   
 } /* class ConnectionDialog */

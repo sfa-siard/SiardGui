@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
+import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.enterag.utils.logging.*;
 import ch.admin.bar.siard2.api.*;
@@ -32,7 +33,7 @@ import ch.admin.bar.siard2.gui.browser.*;
  * @author Hartwig Thomas
  */
 public class MetaDataDialog
-  extends Stage 
+  extends Dialog 
   implements EventHandler<ActionEvent>
 {
   /* counteract Oracle idiocy which in xmlparserv2 overrides standard XML
@@ -44,14 +45,6 @@ public class MetaDataDialog
     System.setProperty("javax.xml.transform.TransformerFactory","com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
     System.setProperty("org.w3c.dom.DOMImplementationSourceList","com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
   }
-  // padding inside the dialog's browser region
-  private static final double dOUTER_PADDING = 10.0;
-  // padding inside
-  private static final double dINNER_PADDING = 0.0;
-  // vertical spacing of elements
-  private static final double dVSPACING = 10.0;
-  // horizontal spacing of elements
-  private static final double dHSPACING = 10.0;
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(MetaDataDialog.class.getName());
   /** archive */
@@ -168,21 +161,14 @@ public class MetaDataDialog
    */
   private MetaDataDialog(Stage stageOwner, Archive archive, String sMetaDataXml, String sMetaDataHtml)
   {
-    super();
+    super(stageOwner,SiardBundle.getSiardBundle().getMetaDataDisplayTitle());
     _sMetaDataXml = sMetaDataXml;
     _sMetaDataHtml = sMetaDataHtml;
     _archive = archive;
-    SiardBundle sb = SiardBundle.getSiardBundle();
     VBox vbox = createVBoxDialog();
     /* scene */
     Scene scene = new Scene(vbox);
     setScene(scene);
-    /* title */
-    setTitle(sb.getMetaDataDisplayTitle());
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
   } /* constructor */
 
   /*------------------------------------------------------------------*/
