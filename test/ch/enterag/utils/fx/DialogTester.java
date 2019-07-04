@@ -102,4 +102,13 @@ public class DialogTester extends Application
     td.showAndWait();
     stage.close();
   } /* start */
+  
+  /**
+   * @param args
+   */
+  public static void main(String[] args)
+  {
+    launch(args);
+  }
+  
 }
