@@ -23,7 +23,6 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import javafx.util.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.controls.*;
 
 /*====================================================================*/
@@ -33,7 +32,7 @@ import ch.enterag.utils.fx.controls.*;
  * @author Hartwig Thomas
  */
 public class FC
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   private static final double dINNER_PADDING = 10.0;

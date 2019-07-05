@@ -23,7 +23,6 @@ import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.dialogs.*;
 import ch.enterag.utils.lang.*;
 import ch.enterag.sqlparser.*;
@@ -38,7 +37,7 @@ import ch.admin.bar.siard2.gui.details.*;
  * @author Hartwig Thomas
  */
 public class ValueDialog
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   // padding inside

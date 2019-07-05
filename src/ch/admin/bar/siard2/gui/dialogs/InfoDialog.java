@@ -19,7 +19,6 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.admin.bar.siard2.gui.*;
 
 /*====================================================================*/
@@ -27,7 +26,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class InfoDialog
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   /*------------------------------------------------------------------*/

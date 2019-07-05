@@ -17,7 +17,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.enterag.utils.fx.dialogs.FS;
 import ch.admin.bar.siard2.gui.*;
 
@@ -26,7 +25,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class OptionDialog
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   // limits for column width

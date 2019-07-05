@@ -18,7 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.admin.bar.siard2.api.*;
 import ch.admin.bar.siard2.gui.*;
 
@@ -27,7 +26,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class SearchDialog
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   private static final double dINNER_PADDING = 10.0;

@@ -18,14 +18,13 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 
 /*====================================================================*/
 /** A trivial dialog for displaying a message and one or two buttons. 
  * @author Hartwig Thomas
  */
 public class MB 
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   // "padding" inside the screen */

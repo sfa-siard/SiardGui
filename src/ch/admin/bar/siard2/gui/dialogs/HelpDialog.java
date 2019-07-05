@@ -28,7 +28,7 @@ import ch.enterag.utils.logging.*;
  * @author Hartwig Thomas
  */
 public class HelpDialog
-  extends Dialog 
+  extends ScrollableDialog 
 {
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(HelpDialog.class.getName());

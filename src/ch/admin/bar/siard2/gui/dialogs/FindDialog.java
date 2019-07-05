@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import ch.enterag.utils.fx.*;
-import ch.enterag.utils.fx.Dialog;
 import ch.admin.bar.siard2.gui.*;
 
 /*====================================================================*/
@@ -24,7 +23,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class FindDialog
-  extends Dialog 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   private static final int iTEXT_COLUMNS = 32;
