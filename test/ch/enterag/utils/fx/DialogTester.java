@@ -11,61 +11,41 @@ import javafx.stage.*;
 
 public class DialogTester extends Application
 {
+  public static final int iLINES = 16;
+  
   public class TestDialog extends Dialog implements EventHandler<ActionEvent>
   {
-    private boolean _bSmall = true;
+    /* _bExit becomes true, when exit button is pressed */
+    private boolean _bExit = false;
+    public boolean isExit() { return _bExit; }
+    /* _bSize becomes true, when size button is pressed */ 
+    private boolean _bSize = false;
+    public boolean isSize() { return _bSize; }
     /** exit button (= Escape) */
     private Button _btnExit = null;
     /** change size button (= Enter) */
     private Button _btnSize = null;
-    /** container of lines and button */
-    private VBox _vbox = null;
-    
-    /** lines for test */
-    private int _iLines = 2;
-    
-    private void changeSize()
-    {
-      _bSmall = !_bSmall;
-      if (_bSmall)
-      {
-        /* delete last lines */
-        for (int iLine = 2*_iLines-1; iLine >= _iLines; iLine--)
-          _vbox.getChildren().remove(iLine);
-        _btnSize.setText("increase");
-      }
-      else
-      {
-        /* insert lines */
-        for (int iLine = _iLines; iLine < 2*_iLines; iLine++)
-        {
-          Text txt = new Text("Line "+String.valueOf(iLine));
-          _vbox.getChildren().add(iLine, txt);
-          VBox.setMargin(txt, new Insets(dOUTER_PADDING,dOUTER_PADDING,dOUTER_PADDING,0));
-        }
-        _btnSize.setText("decrease");
-      }
-    } /* changeSize */
     
     @Override
     public void handle(ActionEvent ae)
     {
       if (ae.getSource() == _btnExit)
-        close();
+        _bExit = true;
       else
-        changeSize();
+        _bSize = true;
+      close();
     } /* handle */
     
     /* test dialog has many lines and two buttons: one for quitting and one for changing size */
-    public TestDialog(Stage stageOwner, String sTitle)
+    public TestDialog(Stage stageOwner, String sTitle, int iLines)
     {
       super(stageOwner, sTitle);
       /* change size button */
-      _btnSize = new Button("increase");
+      _btnSize = new Button("Size");
       _btnSize.setDefaultButton(true); // associate it with Enter key
       _btnSize.setOnAction(this);
       /* exit button */
-      _btnExit = new Button("exit");
+      _btnExit = new Button("Exit");
       _btnExit.setCancelButton(true); // associate with ESC key
       _btnExit.setOnAction(this);
       /* HBox for buttons */
@@ -78,19 +58,19 @@ public class DialogTester extends Application
       hbox.getChildren().add(_btnExit);
       HBox.setMargin(_btnExit, new Insets(dOUTER_PADDING));
       /* VBox for lines and buttons */
-      _vbox = new VBox();
-      _vbox.setPadding(new Insets(dOUTER_PADDING));
-      _vbox.setSpacing(dVSPACING);
-      _vbox.setStyle(FxStyles.sSTYLE_BACKGROUND_LIGHTGREY);
-      for (int iLine = 0; iLine < _iLines; iLine++)
+      VBox vbox = new VBox();
+      vbox.setPadding(new Insets(dOUTER_PADDING));
+      vbox.setSpacing(dVSPACING);
+      vbox.setStyle(FxStyles.sSTYLE_BACKGROUND_LIGHTGREY);
+      for (int iLine = 0; iLine < iLines; iLine++)
       {
         Text txt = new Text("Line "+String.valueOf(iLine));
-        _vbox.getChildren().add(txt);
+        vbox.getChildren().add(txt);
         VBox.setMargin(txt, new Insets(dOUTER_PADDING,dOUTER_PADDING,dOUTER_PADDING,0));
       }
-      _vbox.getChildren().add(hbox);
+      vbox.getChildren().add(hbox);
       /* scene */
-      Scene scene = new Scene(_vbox);
+      Scene scene = new Scene(vbox);
       setScene(scene);
     } /* constructor TestDialog */
 
@@ -98,8 +78,15 @@ public class DialogTester extends Application
   @Override
   public void start(Stage stage) throws Exception
   {
-    TestDialog td = new TestDialog(stage,"DialogTester");
-    td.showAndWait();
+    TestDialog td = null;
+    int iLines = iLINES;
+    for (boolean bExit = false; !bExit; bExit = td.isExit())
+    {
+      td = new TestDialog(stage,"DialogTester",iLines);
+      td.showAndWait();
+      if (td.isSize())
+        iLines = (iLines == iLINES)? 2*iLINES : iLINES;
+    }
     stage.close();
   } /* start */
   
