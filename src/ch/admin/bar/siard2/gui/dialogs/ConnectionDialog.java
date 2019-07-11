@@ -65,6 +65,8 @@ public abstract class ConnectionDialog
   protected TextField _tfDbHost = null;
   /** text field for database name */
   protected TextField _tfDbName = null;
+  /** toggle group for database options */
+  protected ToggleGroup _tgOptions = null;
   /** hbox for database folder */
   protected HBox _hboxDbFolder = null;
   /** text field for folder name */
@@ -132,6 +134,7 @@ public abstract class ConnectionDialog
   protected void persist()
   {
     UserProperties up = UserProperties.getUserProperties();
+    SiardConnection sc = SiardConnection.getSiardConnection();
     String sDbScheme = _mapSchemes.get(getSelectedTitle());
     up.setDatabaseScheme(sDbScheme);
     String sDbHost = _tfDbHost.getText();
@@ -139,6 +142,8 @@ public abstract class ConnectionDialog
       up.setDatabaseHost(sDbHost);
     String sDbName = _tfDbName.getText();
     up.setDatabaseName(sDbName);
+    if (sc.getOptions(sDbScheme) > 1)
+      up.setDatabaseOption(getSelectedOption());
     _sDbUser = _tfDbUser.getText();
     up.setDatabaseUser(_sDbUser);
   } /* persist */
@@ -210,6 +215,7 @@ public abstract class ConnectionDialog
   private class StringChangeListener
     implements ChangeListener<String>
   {
+    boolean _bInListener = false;
     /*------------------------------------------------------------------*/
     /** if the scheme choice changed, redisplay Host/Folder and JDBC URL.
      * @param ovs observable value.
@@ -220,54 +226,95 @@ public abstract class ConnectionDialog
     public void changed(ObservableValue<? extends String> ovs,
         String sOld, String sNew)
     {
-      SiardConnection sc = SiardConnection.getSiardConnection();
-      String sScheme = _mapSchemes.get(getSelectedTitle());
-      if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
+      if (!_bInListener)
       {
-        if (sc.isLocal(sScheme))
+        _bInListener = true;
+        SiardConnection sc = SiardConnection.getSiardConnection();
+        String sScheme = _mapSchemes.get(getSelectedTitle());
+        if (ovs == _cbDbScheme.getSelectionModel().selectedItemProperty())
         {
+          if (_vboxParameters != null)
           {
-            if (_vboxParameters.getChildren().contains(_hboxDbHost))
-              _vboxParameters.getChildren().remove(_hboxDbHost);
-            if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
-              _vboxParameters.getChildren().add(1, _hboxDbFolder);
+            if (sc.isLocal(sScheme))
+            {
+              {
+                if (_vboxParameters.getChildren().contains(_hboxDbHost))
+                  _vboxParameters.getChildren().remove(_hboxDbHost);
+                if (!_vboxParameters.getChildren().contains(_hboxDbFolder))
+                  _vboxParameters.getChildren().add(1, _hboxDbFolder);
+              }
+            }
+            else
+            {
+              if (!_vboxParameters.getChildren().contains(_hboxDbHost))
+                _vboxParameters.getChildren().add(1,_hboxDbHost);
+              if (_vboxParameters.getChildren().contains(_hboxDbFolder))
+                _vboxParameters.getChildren().remove(_hboxDbFolder);
+            }
+          }
+          if (_tfDbName != null)
+          {
+            if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
+              _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
+            else
+              _tfDbName.setText(UserProperties.sDATABASE_NAME);
+          }
+          removeToggleGroup(_tgOptions);
+          _tgOptions = createToggleGroup(sScheme);
+        }
+        if (ovs == _tfDbUser)
+        {
+          if (sScheme.equals(UserProperties.sACCESS_DATABASE_SCHEME))
+          {
+            String sDbUser = _tfDbUser.getText();
+            if (sDbUser.length() == 0)
+              _tfDbUser.setText(UserProperties.sACCESS_DATABASE_USER);
           }
         }
-        else
+        if ((ovs == _cbDbScheme.getSelectionModel().selectedItemProperty()) ||
+            (ovs == _tfDbHost.textProperty()) ||
+            (ovs == _tfDbFolder.textProperty()) ||
+            (ovs == _tfDbName.textProperty()))
         {
-          if (!_vboxParameters.getChildren().contains(_hboxDbHost))
-            _vboxParameters.getChildren().add(1,_hboxDbHost);
-          if (_vboxParameters.getChildren().contains(_hboxDbFolder))
-            _vboxParameters.getChildren().remove(_hboxDbFolder);
+          if (_tfConnectionUrl != null)
+          {
+            int iSelectedOption = getSelectedOption();
+            String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText(),iSelectedOption);
+            _tfConnectionUrl.setText(sSampleUrl);
+          }
         }
-        if (sScheme.equals(UserProperties.sORACLE_DATABASE_SCHEME))
-          _tfDbName.setText(UserProperties.sORACLE_DATABASE_NAME);
+        if (_tfError != null)
+          _tfError.setText("");
+        _bInListener = false;
       }
-      if (ovs == _tfDbUser)
-      {
-        if (sScheme.equals(UserProperties.sACCESS_DATABASE_SCHEME))
-        {
-          String sDbUser = _tfDbUser.getText();
-          if (sDbUser.length() == 0)
-            _tfDbUser.setText(UserProperties.sACCESS_DATABASE_USER);
-        }
-      }
-      if ((ovs == _cbDbScheme.getSelectionModel().selectedItemProperty()) ||
-          (ovs == _tfDbHost.textProperty()) ||
-          (ovs == _tfDbFolder.textProperty()) ||
-          (ovs == _tfDbName.textProperty()))
-      {
-        if (_tfConnectionUrl != null)
-        {
-          String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
-          _tfConnectionUrl.setText(sSampleUrl);
-        }
-      }
-      if (_tfError != null)
-        _tfError.setText("");
     } /* changed */
   } /* class */
   protected StringChangeListener _scl = new StringChangeListener();
+  
+  /*====================================================================*/
+  /** ToggleChangeListener handles change events of database name option.
+   */
+  private class ToggleChangeListener
+    implements ChangeListener<Toggle>
+  {
+    /*------------------------------------------------------------------*/
+    /** if the scheme choice changed, redisplay Host/Folder and JDBC URL.
+     * @param ovs observable value.
+     * @param sOld old string.
+     * @param sNew new string.
+     */
+    @Override
+    public void changed(ObservableValue<? extends Toggle> ovt,
+        Toggle tOld, Toggle tNew)
+    {
+      SiardConnection sc = SiardConnection.getSiardConnection();
+      String sScheme = _mapSchemes.get(getSelectedTitle());
+      int iSelectedOption = getSelectedOption();
+      String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText(),iSelectedOption);
+      _tfConnectionUrl.setText(sSampleUrl);
+    } /* changed */
+  } /* class */
+  protected ToggleChangeListener _tcl = new ToggleChangeListener();
   
   /*====================================================================*/
   /** PastingTextField implements non-editable field which can receive
@@ -323,11 +370,27 @@ public abstract class ConnectionDialog
         if (_mapSchemes.get(sTitleTry).equals(sScheme))
           sTitle = sTitleTry;
       }
-      _cbDbScheme.getSelectionModel().clearSelection();
       _cbDbScheme.getSelectionModel().select(sTitle);
     }
     return sTitle;
   } /* getSelectedTitle */
+  
+  private int getSelectedOption()
+  {
+    int iSelectedOption = 0;
+    if (_tgOptions != null)
+    {
+      RadioButton rbSelected = (RadioButton)_tgOptions.getSelectedToggle();
+      SiardConnection sc = SiardConnection.getSiardConnection();
+      String sScheme = _mapSchemes.get(getSelectedTitle());
+      for (int iOption = 0; iOption < sc.getOptions(sScheme); iOption++)
+      {
+        if (sc.getOption(sScheme, iOption).equals(rbSelected.getText()))
+          iSelectedOption = iOption;
+      }
+    }
+    return iSelectedOption;
+  } /* getSelectedOption */
   
   /*------------------------------------------------------------------*/
   /** compute the maximum pref width of the given labels and set their
@@ -380,6 +443,40 @@ public abstract class ConnectionDialog
     }
     return dMaxMinWidth;
   } /* getMaxPaneMinWidth */
+
+  protected void removeToggleGroup(ToggleGroup tg)
+  {
+    /* remove radio buttons from HBox */
+    if (tg != null)
+    {
+      HBox hbox = (HBox)_tfDbName.getParent();
+      for (int iOption = 0; iOption < tg.getToggles().size(); iOption++)
+        hbox.getChildren().remove((RadioButton)tg.getToggles().get(iOption));
+    }
+  }
+  
+  protected ToggleGroup createToggleGroup(String sScheme)
+  {
+    ToggleGroup tg = null;
+    UserProperties up = UserProperties.getUserProperties();
+    SiardConnection sc = SiardConnection.getSiardConnection();
+    int iOptions = sc.getOptions(sScheme);
+    if (iOptions > 1)
+    {
+      HBox hbox = (HBox)_tfDbName.getParent();
+      tg = new ToggleGroup();
+      for (int iOption = 0; iOption < iOptions; iOption++)
+      {
+        RadioButton rb = new RadioButton();
+        rb.setText(sc.getOption(sScheme,iOption));
+        rb.setToggleGroup(tg);
+        rb.selectedProperty().set(iOption == up.getDatabaseOption());
+        hbox.getChildren().add(rb);
+      }
+      tg.selectedToggleProperty().addListener(_tcl);
+    }
+    return tg;    
+  } /* createToggleGroup */
   
   /*------------------------------------------------------------------*/
   /** create a label for the given node.
@@ -444,6 +541,33 @@ public abstract class ConnectionDialog
   } /* createHBox */
   
   /*------------------------------------------------------------------*/
+  /** create a horizontal box with label and text and options
+   * @param lbl Label.
+   * @param tf TextField
+   * @param tg ToggleGroup with RadioButtons
+   * @return horizontal box.
+   */
+  protected HBox createHBox(Label lbl, TextField tf, ToggleGroup tg)
+  {
+    HBox hbox = new HBox();
+    lbl.setAlignment(Pos.BASELINE_RIGHT);
+    hbox.setPadding(new Insets(dINNER_PADDING));
+    hbox.setSpacing(dHSPACING);
+    hbox.setAlignment(Pos.TOP_LEFT);
+    hbox.getChildren().add(lbl);
+    hbox.getChildren().add(tf);
+    double dWidth = tf.getPrefWidth();
+    for (int iToggle = 0; iToggle < tg.getToggles().size(); iToggle++)
+    {
+      RadioButton rb = (RadioButton)tg.getToggles().get(iToggle);
+      hbox.getChildren().add(rb);
+      dWidth = dWidth + dHSPACING + rb.getPrefWidth();
+    }
+    hbox.setMinWidth(lbl.getPrefWidth() + dHSPACING + dWidth);
+    return hbox;
+  } /* createHBox */
+  
+  /*------------------------------------------------------------------*/
   /** create the VBox containing the parameters database server and
    * database name.
    * @return parameters VBox.
@@ -457,20 +581,26 @@ public abstract class ConnectionDialog
     vbox.setSpacing(dVSPACING);
     vbox.setAlignment(Pos.TOP_LEFT);
     
+    String sScheme = up.getDatabaseScheme();
+    String sTitle = null;
     ObservableList<String> olScheme = FXCollections.observableArrayList();
     SiardConnection sc = SiardConnection.getSiardConnection();
     String[] asScheme = sc.getSchemes();
     for (int iScheme = 0; iScheme < asScheme.length; iScheme++)
     {
-      String sScheme = asScheme[iScheme];
-      String sTitle = sc.getTitle(sScheme);
-      olScheme.add(sTitle);
-      _mapSchemes.put(sTitle, sScheme);
+      String sSch = asScheme[iScheme];
+      String sTit = sc.getTitle(sSch);
+      if (sSch.equals(sScheme))
+        sTitle = sTit;
+      olScheme.add(sTit);
+      _mapSchemes.put(sTit, sSch);
     }
 
     _cbDbScheme = new ComboBox<String>(olScheme);
     _cbDbScheme.setTooltip(new Tooltip(sb.getConnectionDbSchemeTooltip()));
+    _cbDbScheme.getSelectionModel().select(sTitle);
     _cbDbScheme.getSelectionModel().selectedItemProperty().addListener(_scl);
+    
     HBox.setHgrow(_cbDbScheme, Priority.ALWAYS);
     Label lblDbSchemeLabel = createLabel(sb.getConnectionDbSchemeLabel(),_cbDbScheme);
     /* select the element for the connection URL in combo box */
@@ -492,10 +622,28 @@ public abstract class ConnectionDialog
     _btnDbFolder.setMinWidth(FxSizes.getNodeWidth(_btnDbFolder));
     Label lblDbFolderLabel = createLabel(sb.getConnectionDbFolderLabel(),_tfDbFolder);
 
-    _tfDbName = new TextField(up.getDatabaseName());
+    _tfDbName = new TextField(up.getDatabaseName(sScheme));
     _tfDbName.textProperty().addListener(_scl);
     HBox.setHgrow(_tfDbName, Priority.ALWAYS);
     Label lblDbNameLabel = createLabel(sb.getConnectionDbNameLabel(),_tfDbName);
+
+    int iOptions = sc.getOptions(sScheme);
+    RadioButton rbSelected = null;
+    if (iOptions > 1)
+    {
+      _tgOptions = new ToggleGroup();
+      for (int iOption = 0; iOption < iOptions; iOption++)
+      {
+        RadioButton rb = new RadioButton();
+        rb.setToggleGroup(_tgOptions);
+        rb.selectedProperty().set(iOption == up.getDatabaseOption());
+        rb.setText(sc.getOption(sScheme, iOption));
+        if (iOption == up.getDatabaseOption())
+          rbSelected = rb;
+      }
+      _tgOptions.selectToggle(rbSelected);
+      _tgOptions.selectedToggleProperty().addListener(_tcl);
+    }
     
     getMaxLabelPrefWidth(lblDbSchemeLabel,lblDbHostLabel,lblDbNameLabel,lblDbFolderLabel);
     
@@ -504,9 +652,15 @@ public abstract class ConnectionDialog
     _hboxDbHost = createHBox(lblDbHostLabel, _tfDbHost);
     vbox.getChildren().add(_hboxDbHost);
     _hboxDbFolder = createHBox(lblDbFolderLabel, _tfDbFolder, _btnDbFolder);
-    vbox.getChildren().add(_hboxDbFolder);
-    HBox hboxDbName = createHBox(lblDbNameLabel, _tfDbName);
-    vbox.getChildren().add(hboxDbName);
+    if (sc.isLocal(sScheme))
+      vbox.getChildren().add(_hboxDbFolder);
+    HBox hboxDbName = null;
+    if (iOptions == 1)
+      hboxDbName = createHBox(lblDbNameLabel, _tfDbName);
+    else
+      hboxDbName = createHBox(lblDbNameLabel, _tfDbName, _tgOptions);
+    if (!sc.isLocal(sScheme))
+      vbox.getChildren().add(hboxDbName);
     
     double dMinWidth = getMaxPaneMinWidth(hboxDbScheme,_hboxDbHost,_hboxDbFolder,hboxDbName);
     vbox.setMinWidth(dMinWidth);
@@ -520,8 +674,9 @@ public abstract class ConnectionDialog
   private TextField createTextFieldConnectionUrl()
   {
     String sScheme = _mapSchemes.get(getSelectedTitle());
+    int iOption = getSelectedOption();
     SiardConnection sc = SiardConnection.getSiardConnection();
-    String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText());
+    String sSampleUrl = sc.getSampleUrl(sScheme, _tfDbHost.getText(), _tfDbFolder.getText(), _tfDbName.getText(),iOption);
     TextField tf = new TextField(sSampleUrl);
     tf.setPrefWidth(dWIDTH_URL);
     if (_sConnectionUrl != null)

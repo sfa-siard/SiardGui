@@ -347,18 +347,22 @@ public class UserProperties extends Properties
   public static final String sACCESS_DATABASE_USER = "Admin";
   public String getDatabaseScheme() { return getString(sDATABASE_SCHEME_KEY,sDATABASE_SCHEME); }
   public void setDatabaseScheme(String sDatabaseScheme) { setString(sDATABASE_SCHEME_KEY, sDatabaseScheme); }
-
+  
   private static final String sDATABASE_HOST_KEY = "database.host";
   private static final String sDATABASE_HOST = "dbserver.enterag.ch";
   public String getDatabaseHost() { return getString(sDATABASE_HOST_KEY,sDATABASE_HOST); }
   public void setDatabaseHost(String sDatabaseHost) { setString(sDATABASE_HOST_KEY, sDatabaseHost); }
 
   private static final String sDATABASE_NAME_KEY = "database.name";
-  private static final String sDATABASE_NAME = "testdb";
+  public static final String sDATABASE_NAME = "testdb";
   public static final String sORACLE_DATABASE_NAME = "orcl";
-  public String getDatabaseName() { return getString(sDATABASE_NAME_KEY,getDatabaseScheme().equals(sORACLE_DATABASE_SCHEME)?sORACLE_DATABASE_NAME:sDATABASE_NAME); }
+  public String getDatabaseName(String sScheme) { return getString(sDATABASE_NAME_KEY,sScheme.equals(sORACLE_DATABASE_SCHEME)?sORACLE_DATABASE_NAME:sDATABASE_NAME); }
   public void setDatabaseName(String sDatabaseName) { setString(sDATABASE_NAME_KEY, sDatabaseName); }
   
+  private static final String sDATABASE_OPTION_KEY = "database.option";
+  public int getDatabaseOption() { return getInt(sDATABASE_OPTION_KEY, 0); }
+  public void setDatabaseOption(int iDatabaseOption) { setInt(sDATABASE_OPTION_KEY,iDatabaseOption); }
+
   private static final String sDATABASE_FOLDER_KEY = "database.folder";
   private static final String sDATABASE_FOLDER = "db";
   public File getDatabaseFolder()

@@ -2,6 +2,8 @@ package ch.admin.bar.siard2.gui.dialogs;
 
 import javafx.application.*;
 import javafx.stage.*;
+
+import ch.admin.bar.siard2.gui.UserProperties;
 import ch.enterag.utils.*;
 
 public class DownloadConnectionDialogTester 
@@ -35,6 +37,7 @@ public class DownloadConnectionDialogTester
   public void start(Stage stage) throws Exception
   {
     _stage = stage;
+    UserProperties.getUserProperties().load();
     DownloadConnectionDialog dcd = DownloadConnectionDialog.showDownloadConnectionDialog(
       _stage, null, null);
     System.out.println("Result: "+String.valueOf(dcd.getResult()));
@@ -44,6 +47,7 @@ public class DownloadConnectionDialogTester
       System.out.println("DB User: "+dcd.getDbUser());
       System.out.println("DB Password: "+dcd.getDbPassword());
       System.out.println("Meta Data Only: "+String.valueOf(dcd.isMetaDataOnly()));
+      UserProperties.getUserProperties().store();
     }
     _stage.close();
   } /* start */
