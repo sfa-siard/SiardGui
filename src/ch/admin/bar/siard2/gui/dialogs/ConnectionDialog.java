@@ -444,6 +444,10 @@ public abstract class ConnectionDialog
     return dMaxMinWidth;
   } /* getMaxPaneMinWidth */
 
+  /*------------------------------------------------------------------*/
+  /** remove the given toggle group.
+   * @param tg toggle group to remove, or null.
+   */
   protected void removeToggleGroup(ToggleGroup tg)
   {
     /* remove radio buttons from HBox */
@@ -453,8 +457,13 @@ public abstract class ConnectionDialog
       for (int iOption = 0; iOption < tg.getToggles().size(); iOption++)
         hbox.getChildren().remove((RadioButton)tg.getToggles().get(iOption));
     }
-  }
+  } /* removeToggleGroup */
   
+  /*------------------------------------------------------------------*/
+  /** create a toggle group for the given database scheme.
+   * @param sScheme database scheme.
+   * @return toggle group, or null, if no toggle group is associated with the scheme.
+   */
   protected ToggleGroup createToggleGroup(String sScheme)
   {
     ToggleGroup tg = null;
@@ -650,7 +659,8 @@ public abstract class ConnectionDialog
     HBox hboxDbScheme = createHBox(lblDbSchemeLabel, _cbDbScheme);
     vbox.getChildren().add(hboxDbScheme);
     _hboxDbHost = createHBox(lblDbHostLabel, _tfDbHost);
-    vbox.getChildren().add(_hboxDbHost);
+    if (!sc.isLocal(sScheme))
+      vbox.getChildren().add(_hboxDbHost);
     _hboxDbFolder = createHBox(lblDbFolderLabel, _tfDbFolder, _btnDbFolder);
     if (sc.isLocal(sScheme))
       vbox.getChildren().add(_hboxDbFolder);
@@ -659,8 +669,7 @@ public abstract class ConnectionDialog
       hboxDbName = createHBox(lblDbNameLabel, _tfDbName);
     else
       hboxDbName = createHBox(lblDbNameLabel, _tfDbName, _tgOptions);
-    if (!sc.isLocal(sScheme))
-      vbox.getChildren().add(hboxDbName);
+    vbox.getChildren().add(hboxDbName);
     
     double dMinWidth = getMaxPaneMinWidth(hboxDbScheme,_hboxDbHost,_hboxDbFolder,hboxDbName);
     vbox.setMinWidth(dMinWidth);
