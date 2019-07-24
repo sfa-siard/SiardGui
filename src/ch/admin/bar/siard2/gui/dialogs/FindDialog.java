@@ -23,12 +23,9 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class FindDialog
-  extends Stage 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
-  private static final double dINNER_PADDING = 10.0;
-  private static final double dVSPACING = 10.0;
-  private static final double dHSPACING = 10.0;
   private static final int iTEXT_COLUMNS = 32;
   private boolean _bCanceled = true; // just closing with the close button is canceling
   public boolean isCanceled() { return _bCanceled; }
@@ -161,20 +158,11 @@ public class FindDialog
    */
   private FindDialog(Stage stageOwner, String sFindString, boolean bMatchCase)
   {
-    super();
-    SiardBundle sb = SiardBundle.getSiardBundle();
-    VBox vbox = createVBox(sb, sFindString, bMatchCase);
+    super(stageOwner,SiardBundle.getSiardBundle().getFindTitle());
+    VBox vbox = createVBox(SiardBundle.getSiardBundle(), sFindString, bMatchCase);
     /* scene */
     Scene scene = new Scene(vbox, vbox.getMinWidth()+10.0, vbox.getMinHeight()+10.0);
     setScene(scene);
-    /* title */
-    setTitle(sb.getFindTitle());
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* init owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
   } /* constructor */
 
   /*------------------------------------------------------------------*/

@@ -28,19 +28,9 @@ import ch.admin.bar.siard2.gui.*;
  @author Hartwig Thomas
  */
 public abstract class LoadDialog
-  extends Stage
+  extends ScrollableDialog
   implements EventHandler<WindowEvent>
 {
-  // "padding" inside the screen */
-  protected static final double dSCREEN_PADDING = 10.0;
-  // padding inside the dialog's VBox
-  protected static final double dOUTER_PADDING = 10.0;
-  // padding inside
-  protected static final double dINNER_PADDING = 0.0;
-  // vertical spacing of elements
-  protected static final double dVSPACING = 10.0;
-  // horizontal spacing of elements
-  protected static final double dHSPACING = 10.0;
   // archive
   private Archive _archive = null;
   public Archive getArchive() { return _archive; }
@@ -245,7 +235,7 @@ public abstract class LoadDialog
   protected LoadDialog(Stage stageOwner, Connection conn, Archive archive, 
     boolean bMetaDataOnly, boolean bViewsAsTables, String sTitle)
   {
-    super();
+    super(stageOwner,sTitle);
     _archive = archive;
     _psOut = System.out;
     _psErr = System.err;
@@ -263,14 +253,6 @@ public abstract class LoadDialog
     /* scene */
     Scene scene = new Scene(vboxDialog);
     setScene(scene);
-    /* title */
-    setTitle(sTitle);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
     /* start download task */
     _btnDefault.setDisable(true);
     _btnCancel.setDisable(false);

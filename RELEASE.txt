@@ -1,6 +1,11 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.111
+Corrected NullPointerException for linked tables in MS Access (Issue 10).
+Made dialogs scrollable for small screens.
+Introduced choice in connection dialog for Oracle for entering SID or Service name.
+
 2.1.107
 Corrected validation error (Issue 8).
 Added originalQuery for VIEWs on download (Issue 9). 

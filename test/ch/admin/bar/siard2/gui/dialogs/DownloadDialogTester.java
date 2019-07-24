@@ -48,7 +48,7 @@ extends Application
     if (sError == null)
     {
       Connection conn = DriverManager.getConnection(sUrl, sUser, sPassword);
-      File fileArchive = new File("logs/sample.siard");
+      File fileArchive = new File("tmp/sample.siard");
       if (fileArchive.exists())
         fileArchive.delete();
       try

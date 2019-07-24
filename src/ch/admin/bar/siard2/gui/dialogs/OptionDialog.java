@@ -25,17 +25,9 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class OptionDialog
-  extends Stage 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
-  // padding inside the dialog's VBox
-  private static final double dOUTER_PADDING = 10.0;
-  // padding inside
-  private static final double dINNER_PADDING = 0.0;
-  // vertical spacing of elements
-  private static final double dVSPACING = 10.0;
-  // horizontal spacing of elements
-  private static final double dHSPACING = 10.0;
   // limits for column width
   private static final int iMIN_COLUMN_WIDTH = 4;
   private static final int iMAX_COLUMN_WIDTH = 80;
@@ -220,20 +212,11 @@ public class OptionDialog
    */
   private OptionDialog(Stage stageOwner)
   {
-    super();
-    SiardBundle sb = SiardBundle.getSiardBundle();
+    super(stageOwner,SiardBundle.getSiardBundle().getOptionTitle());
     VBox vbox = createVBoxDialog();
     /* scene */
     Scene scene = new Scene(vbox, vbox.getMinWidth()+10.0, vbox.getMinHeight()+10.0);
     setScene(scene);
-    /* title */
-    setTitle(sb.getOptionTitle());
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* init owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
   } /* constructor */
   
   /*------------------------------------------------------------------*/

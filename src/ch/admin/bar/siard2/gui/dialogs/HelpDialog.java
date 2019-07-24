@@ -28,10 +28,8 @@ import ch.enterag.utils.logging.*;
  * @author Hartwig Thomas
  */
 public class HelpDialog
-  extends Stage 
+  extends ScrollableDialog 
 {
-  // padding inside the dialog's browser region
-  private static final double dOUTER_PADDING = 10.0;
   /** logger */  
   private static IndentLogger _il = IndentLogger.getIndentLogger(HelpDialog.class.getName());
 
@@ -42,8 +40,7 @@ public class HelpDialog
    */
   private HelpDialog(Stage stageOwner, String sUrl)
   {
-    super();
-    SiardBundle sb = SiardBundle.getSiardBundle();
+    super(stageOwner,SiardBundle.getSiardBundle().getHelpTitle());
     /* browser region */
     BrowserRegion br = BrowserRegion.newBrowserRegion(sUrl);
     br.setPrefSize(0.7*FxSizes.getScreenBounds().getWidth(),
@@ -53,12 +50,6 @@ public class HelpDialog
     /* scene */
     Scene scene = new Scene(br);
     setScene(scene);
-    /* title */
-    setTitle(sb.getHelpTitle());
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
   } /* constructor */
   
   /*------------------------------------------------------------------*/

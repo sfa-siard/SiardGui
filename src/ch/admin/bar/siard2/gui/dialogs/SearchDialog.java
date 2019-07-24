@@ -26,7 +26,7 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class SearchDialog
-  extends Stage 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   private static final double dINNER_PADDING = 10.0;
@@ -222,20 +222,12 @@ public class SearchDialog
    */
   private SearchDialog(Stage stageOwner, MetaTable mt, String sFindString, boolean bMatchCase)
   {
-    super();
+    super(stageOwner,SiardBundle.getSiardBundle().getSearchTitle(mt.getName()));
     SiardBundle sb = SiardBundle.getSiardBundle();
     VBox vbox = createVBox(sb, mt, sFindString, bMatchCase);
     /* scene */
     Scene scene = new Scene(vbox, vbox.getMinWidth()+10.0, vbox.getMinHeight()+10.0);
     setScene(scene);
-    /* title */
-    setTitle(sb.getSearchTitle(mt.getName()));
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* init owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
   } /* constructor */
   
   /*------------------------------------------------------------------*/

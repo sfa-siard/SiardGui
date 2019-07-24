@@ -26,20 +26,9 @@ import ch.admin.bar.siard2.gui.*;
  * @author Hartwig Thomas
  */
 public class InfoDialog
-  extends Stage 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
-  // "padding" inside the screen */
-  private static final double dSCREEN_PADDING = 10.0;
-  // padding inside the dialog's VBox
-  private static final double dOUTER_PADDING = 10.0;
-  // padding inside
-  private static final double dINNER_PADDING = 0.0;
-  // vertical spacing of elements
-  private static final double dVSPACING = 10.0;
-  // horizontal spacing of elements
-  private static final double dHSPACING = 10.0;
-  
   /*------------------------------------------------------------------*/
   /** close dialog when the OK button is pressed.
    */
@@ -277,10 +266,8 @@ public class InfoDialog
    */
   private InfoDialog(Stage stageOwner)
   {
-    super();
-    SiardBundle sb = SiardBundle.getSiardBundle();
-    String sInfoTitle = sb.getInfoTitle();
-    double dMinWidth = FxSizes.getTextWidth(sInfoTitle)+FxSizes.getCloseWidth()+dHSPACING;
+    super(stageOwner,SiardBundle.getSiardBundle().getInfoTitle());
+    double dMinWidth = FxSizes.getTextWidth(SiardBundle.getSiardBundle().getInfoTitle())+FxSizes.getCloseWidth()+dHSPACING;
     VBox vboxDialog = createVBoxDialog();
     if (dMinWidth < vboxDialog.getMinWidth())
       dMinWidth = vboxDialog.getMinWidth();
@@ -293,14 +280,6 @@ public class InfoDialog
     /* scene */
     Scene scene = new Scene(vboxDialog);
     setScene(scene);
-    /* title */
-    setTitle(sInfoTitle);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
   } /* constructor InfoDialog */
   
   /*------------------------------------------------------------------*/

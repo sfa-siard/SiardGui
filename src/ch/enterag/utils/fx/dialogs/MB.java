@@ -24,7 +24,7 @@ import ch.enterag.utils.fx.*;
  * @author Hartwig Thomas
  */
 public class MB 
-  extends Stage 
+  extends ScrollableDialog 
   implements EventHandler<ActionEvent>
 {
   // "padding" inside the screen */
@@ -71,7 +71,7 @@ public class MB
    */
   private MB(Stage stageOwner, String sTitle, String sPrompt, String sButtonDefault, String sButtonCancel)
   {
-    super();
+    super(stageOwner,sTitle);
     double dMinWidth = FxSizes.getTextWidth(sTitle)+FxSizes.getCloseWidth()+dHSPACING;
     
     /* buttons and their width */
@@ -129,16 +129,6 @@ public class MB
     /* scene */
     Scene scene = new Scene(vbox);
     setScene(scene);
-    /* title */
-    setTitle(sTitle);
-    /* style */
-    initStyle(StageStyle.UTILITY);
-    /* owner */
-    initOwner(stageOwner);
-    /* modality */
-    initModality(Modality.APPLICATION_MODAL);
-    /* display on top */
-    toFront();
   } /* constructor */
 
   /*------------------------------------------------------------------*/
