@@ -1,6 +1,9 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.114
+Corrected NullPointerException for multi-table views in MS Access (Issue 10).
+
 2.1.111
 Corrected NullPointerException for linked tables in MS Access (Issue 10).
 Made dialogs scrollable for small screens.
