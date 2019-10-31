@@ -24,6 +24,8 @@ Class-Path: jfxrt.jar
   jaxb-impl.jar
   jaxb-core.jar
   jaxb-api.jar
+  jdbcpostgres.jar
+  postgresql-42.2.5.jar
   jdbcoracle.jar
   ojdbc6.jar
   xdb6.jar

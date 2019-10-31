@@ -106,6 +106,13 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="jarjdbcmysqltest" value="jdbcmysql-test.jar"/>
   <property name="cpjdbcmysql" value="${dirlib}/${jarjdbcmysql};${dirlib}/${jarmysqljdbc}"/>
   <property name="cpjdbcmysql-test" value="${dirlib}/${jarjdbcmysqltest}"/>
+  <!-- jdbcpostgres jars -->
+  <property name="jarpostgresjdbc" value="postgresql-42.2.5.jar"/>
+  <property name="jarjson" value="json-simple-1.1.1.jar"/>
+  <property name="jarjdbcpostgres" value="jdbcpostgres.jar"/>
+  <property name="jarjdbcpostgrestest" value="jdbcpostgres-test.jar"/>
+  <property name="cpjdbcpostgres" value="${dirlib}/${jarjdbcpostgres};${dirlib}/${jarpostgresjdbc}"/>
+  <property name="cpjdbcpostgres-test" value="${dirlib}/${jarjdbcpostgrestest};${dirlib}/${jarjson}"/>
   <!-- siardapi -->
   <property name="jarsiardapi" value="siardapi.jar"/>
   <property name="cpsiardapi" value="${dirlib}/${jarsiardapi}"/> 
@@ -234,6 +241,8 @@ Created    : 01.06.2017, Hartwig Thomas
     <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false"/>
     <!-- TODO: get most recently released version of jdbcoracle.jar -->
     <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false"/>
+    <!-- TODO: get most recently released version of jdbcpostgres.jar -->
+    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false"/>
     <!-- stage all changes -->
     <echo message="${ant.project.name}: git add -A"/>
     <exec executable="${git}" output="${fileadd}" failonerror="true">
@@ -332,6 +341,7 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcmysql}"/>
         <pathelement path="${cpjdbcdb2}"/>
         <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
         <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
@@ -383,6 +393,7 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcmysql}"/>
         <pathelement path="${cpjdbcdb2}"/>
         <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
         <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
@@ -407,6 +418,7 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcmysql}"/>
         <pathelement path="${cpjdbcdb2}"/>
         <pathelement path="${cpjdbcoracle}"/>
+        <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
         <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
