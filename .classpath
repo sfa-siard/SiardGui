@@ -44,5 +44,7 @@
 	<classpathentry kind="lib" path="lib/xmlparserv2.jar"/>
 	<classpathentry kind="lib" path="lib/xsdlib-2010.1.jar"/>
 	<classpathentry kind="lib" path="lib/zip64.jar"/>
+	<classpathentry kind="lib" path="lib/jdbcpostgres.jar"/>
+	<classpathentry kind="lib" path="lib/postgresql-42.2.5.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
