@@ -1,6 +1,9 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.119
+PostgreSQL integration
+
 2.1.116
 Corrected NullPointerException for views based on views in MS Access (Issue 10).
 
