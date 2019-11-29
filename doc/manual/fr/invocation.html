@@ -55,7 +55,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <h2 id="br1" class="hidden">Breadcrumbs</h2>
             <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
               <li><a href="./index.html">SIARD Suite 2.1 - Manuel</a><span class="icon icon--greater"></span></li>
-              <li class="active" aria-selected="true">SIARD Suite 2.1 - Appel des lignes de commandes</em></li>
+              <li class="active" aria-selected="true">SIARD Suite 2.1 - Appel des lignes de commandes</li>
             </ol>
           </div>
         </div>
@@ -72,12 +72,11 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <div class="mod mod-text">
               <section class="clearfix">
                 <p>Les fonctions de téléchargement et de chargement de <em>SIARD Suite</em>
-                  peuvent être appelées depuis la ligne de commande:
-                  <ul>
-                    <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: télécharger une archive SIARD,</li>
-                    <li><a href="#siardtodb"><em>SiardToDb</em></a>: charger une archive SIARD.</li>
-                  </ul>
-                </p>
+                  peuvent être appelées depuis la ligne de commande:</p>
+                <ul>
+                  <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: télécharger une archive SIARD,</li>
+                  <li><a href="#siardtodb"><em>SiardToDb</em></a>: charger une archive SIARD.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -85,14 +84,12 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="siardfromdb">SiardFromDb</a></h2>
-                <p><em>SiardFromDb</em> est un programme de lignes de commande qui télécharge une base de données dans une archive SIARD. Avec <em>SiardFromDb</em>, on peut
-                  <ul> 
-                    <li>créer une archive SIARD (métadonnées et données primaires) depuis une base de données (Option <em>-s</em>) et/ou  </li>
-                    <li>créer un XML de métadonnées SIARD avec la définition du schéma de la base de données (option <em>-e</em>).</li>
-                  </ul>
-          
-                </p>
+                <h2><a id="siardfromdb">SiardFromDb</a></h2>
+                <p><em>SiardFromDb</em> est un programme de lignes de commande qui télécharge une base de données dans une archive SIARD. Avec <em>SiardFromDb</em>, on peut</p>
+                <ul> 
+                  <li>créer une archive SIARD (métadonnées et données primaires) depuis une base de données (Option <em>-s</em>) et/ou  </li>
+                  <li>créer un XML de métadonnées SIARD avec la définition du schéma de la base de données (option <em>-e</em>).</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -125,12 +122,24 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>&lt;external LOB folder&gt;</td><td>Répertoire où les données de la plus grande colonne LOB (large object) de la base de donnée sont à enregistrer en externe (les contenus du même nom seront écrasés!)</td></tr>
                   <tr><td>&lt;mime type&gt;</td><td>Type MIME des données de la plus grande colonne LOB de la base de données (influence le choix de l'extension des LOBs enregistrés en externe).</td></tr>
                   <tr><td valign="top">&lt;JDBC URL&gt;</td><td>URL JDBC de la base de donnée qui doit être téléchargée<br/>
-                    par ex. pour <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
-                    pour <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
-                    pour <em>H2 database</em>: jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb<br/>
-                    pour <em>MySQL</em>: jdbc:mysql://dbserver.enterag.ch:3306/testdb<br/>
-                    pour <em>Oracle</em>: jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl<br/>
-                    pour <em>SQL Server</em>: jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</td></tr>
+                    par ex.
+                    <dl>
+	                    <dt>pour <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>pour <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>pour <em>H2 database</em></dt>
+	                      <dd><em>jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb</em></dd>
+	                    <dt>pour <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>pour <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>pour <em>Postgres</em></dt>
+	                      <dd><em>jdbc:postgres://dbserver.enterag.ch:5432/testdb</em></dd>
+	                    <dt>pour <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em></dd>
+                    </dl> 
+                  </td></tr>
                   <tr><td>&lt;database user&gt;</td><td>Utilisateur base de données</td></tr>
                   <tr><td>&lt;database password&gt;</td><td>Mot de passe base de données</td></tr>
                   <tr><td>&lt;siard file&gt;</td><td>Nom du fichier .siard à créer</td></tr>
@@ -150,7 +159,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>Le processus d'archivage est soit complètement réussi ou complètement raté.</p>
                 <p>Pour de grosses bases de données, il est recommandé de télécharger d'abord l'XML des métadonnées. Celui-ci contient toutes les métadonnées et les grandeurs de tableaux et aide ainsi à évaluer le temps d'exécution du download.
                   Par ailleurs, il faudrait utiliser l'option <em>-q 0</em> pour de grands tableaux, car il est impossible d'évaluer combien de secondes durera une requête de taille.</p>
-                <p>La conversion de TIMEs et TIMESTAMPs dans la base de données dépend du fuseau horaire local. Si l'heure 15:30 à Zürich est archivée, l'heure UTC 14:30 est enregistrée dans l'archive SIARD - en hiver. Pour empêcher cette conversion, il faut lancer <em>SiardFromDb</em> avec l'option <pre>-Duser.timezone=GMT</pre> qui indique à SIARD d'interpréter toutes les heures des bases de données comme heures UTC.</p>
+                <p>La conversion de TIMEs et TIMESTAMPs dans la base de données dépend du fuseau horaire local. Si l'heure 15:30 à Zürich est archivée, l'heure UTC 14:30 est enregistrée dans l'archive SIARD - en hiver. Pour empêcher cette conversion, il faut lancer <em>SiardFromDb</em> avec l'option</p>
+                <pre>-Duser.timezone=GMT</pre>
+                <p>qui indique à SIARD d'interpréter toutes les heures des bases de données comme heures UTC.</p>
                 
                 <p class="pull-right">
                   <small>
@@ -169,7 +180,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                   
-                <h2><a name="siardtodb">SiardToDb</a></h2>
+                <h2><a id="siardtodb">SiardToDb</a></h2>
                 <p><em>SiardToDb</em> est un programme de lignes de commandes qui charge une archive SIARD dans une base de données en vue de recherches.</p>
 
                 <p class="pull-right">
@@ -200,12 +211,24 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>&lt;query timeout&gt;</td><td>Timeout en secondes pour une requête (query) (0 pour illimité)</td></tr>
                   <tr><td>&lt;siard file&gt;</td><td>Nom du fichier .siard à charger</td></tr>
                   <tr><td valign="top">&lt;URL JDBC URL&gt;</td><td>URL JDBC de la base de données cible<br/>
-                    par ex. pour <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
-                    pour <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
-                    pour <em>H2 database</em>: jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb<br/>
-                    pour <em>MySQL</em>: jdbc:mysql://dbserver.enterag.ch:3306/testdb<br/>
-                    pour <em>Oracle</em>: jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl<br/>
-                    pour <em>SQL Server</em>: jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</td></tr>
+                    par ex.
+                    <dl>
+	                    <dt>pour <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>pour <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>pour <em>H2 database</em></dt>
+	                      <dd><em>jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb</em></dd>
+	                    <dt>pour <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>pour <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>pour <em>Postgres</em></dt>
+	                      <dd><em>jdbc:postgres://dbserver.enterag.ch:5432/testdb</em></dd>
+	                    <dt>pour <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em></dd>
+                    </dl> 
+                  </td></tr>
                   <tr><td>&lt;database user&gt;</td><td>Utilisateur base de données</td></tr>
                   <tr><td>&lt;database password&gt;</td><td>Mot de passe base de données</td></tr>
                   <tr><td>&lt;schema&gt;</td><td>Nom du schéma dans l'archive SIARD</td></tr>
@@ -225,7 +248,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>D'éventuels compromis sont éventuellement faits lors du chargement.
                   Avec MS Access, les tableaux tombent dans la même MDB/ACCDB. Avec Oracle, tous les noms plus longs que 30 caractères sont raccourcis. Pour éviter des conflits, les noms des tableaux et des colonnes sont complétés par un compteur (par ex. "Un nom de tableau beaucoup trop long" dans un tableau deviendra "Un nom de tableau beaucoup tr0" dans Oracle). </p>
                   <p>Lorsque le maximum de précision et le nombre maximal de décimales sont plus petits que nécessaire (par ex. dans MS Access), des valeurs de plus faible précision seront chargées. SIARD fait recours à ce qui est possible dans la base de données système cible. Si on consulte les métadonnées de la base de données au moyen de <em>SiardGui</em>, on pourra attribuer les descriptions et les valeurs correctes.</p>
-                <p>La conversion de TIMEs et TIMESTAMPs dans la base de données dépend des fuseaux horaires locaux. L'heure UTC 14:30 dans l'archive SIARD sera, lors du chargement à Zurich, chargée comme heure locale 14:30 dans la base de données. Pour éviter cette conversion, <em>SiardToDb</em> doit être lancé avec l'option <pre>-Duser.timezone=GMT</pre> qui indique à SIARD d'interpréter toutes les heures de la base de données comme heures UTC.</p>
+                <p>La conversion de TIMEs et TIMESTAMPs dans la base de données dépend des fuseaux horaires locaux. L'heure UTC 14:30 dans l'archive SIARD sera, lors du chargement à Zurich, chargée comme heure locale 14:30 dans la base de données. Pour éviter cette conversion, <em>SiardToDb</em> doit être lancé avec l'option</p>
+                <pre>-Duser.timezone=GMT</pre>
+                <p>qui indique à SIARD d'interpréter toutes les heures de la base de données comme heures UTC.</p>
                 
                 <p class="pull-right">
                   <small>

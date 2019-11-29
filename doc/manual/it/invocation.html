@@ -73,28 +73,26 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <div class="mod mod-text">
               <section class="clearfix">
                 <p>Le funzioni di download e upload di <em>SIARD Suite</em>
-                  possono essere avviate dalla riga di comando: 
-                  <ul>
-                    <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: scaricare un archivio SIARD,</li>
-                    <li><a href="#siardtodb"><em>SiardToDb</em></a>: caricare un archivio SIARD.</li>
-                  </ul>
-                </p>
+                  possono essere avviate dalla riga di comando:</p> 
+                <ul>
+                  <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: scaricare un archivio SIARD,</li>
+                  <li><a href="#siardtodb"><em>SiardToDb</em></a>: caricare un archivio SIARD.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="siardfromdb">SiardFromDb</a></h2>
+                <h2><a id="siardfromdb">SiardFromDb</a></h2>
                 <p><em>SiardFromDb</em> è un programma di riga di comando 
                   che consente di scaricare una banca dati in un archivio SIARD. 
-                  Con <em>SiardFromDb</em> è possibile generare
-                  <ul>
-                    <li>un archivio SIARD (metadati e dati primari) 
-                      da una banca dati (opzione <em>-s</em>), e/o</li>
-                    <li>dei metadati SIARD XML con la definizione di uno 
-                      schema di banca dati (opzione <em>-e</em>).</li>  
-                  </ul>
-                </p>
+                  Con <em>SiardFromDb</em> è possibile generare</p>
+                <ul>
+                  <li>un archivio SIARD (metadati e dati primari) 
+                    da una banca dati (opzione <em>-s</em>), e/o</li>
+                  <li>dei metadati SIARD XML con la definizione di uno 
+                    schema di banca dati (opzione <em>-e</em>).</li>  
+                </ul>
                 
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
@@ -128,12 +126,24 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>&lt;external LOB folder&gt;</td><td>Cartella dove devono essere salvati i dati della colonna LOB (large object) più grande della banca dati esterna (i contenuti con lo stesso nome vengono sovrascritti!)</td></tr>
                   <tr><td>&lt;mime type&gt;</td><td>Tipo MIME die dati della colonna LOB più grande (influisce sulla scelta dell'estensione del nome die LOB memorizzati esternamente)</td></tr>
                   <tr><td valign="top">&lt;JDBC URL&gt;</td><td>URL JDBC della banca dati che deve essere scaricata<br/>
-                    p. es. per <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
-                    per <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
-                    per <em>H2 database</em>: jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb<br/>
-                    per <em>MySQL</em>: jdbc:mysql://dbserver.enterag.ch:3306/testdb<br/>
-                    per <em>Oracle</em>: jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl<br/>
-                    per <em>SQL Server</em>: jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</td></tr>
+                    p. es.
+                    <dl>
+	                    <dt>per <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>per <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>per <em>H2 database</em></dt>
+	                      <dd><em>jdbc:h2:D:/Projekte/SIARD2/JdbcH2/data/testdb</em></dd>
+	                    <dt>per <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>per <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>per <em>Postgres</em></dt>
+	                      <dd><em>jdbc:postgres://dbserver.enterag.ch:5432/testdb</em></dd>
+	                    <dt>per <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em></dd>
+                    </dl>
+                  </td></tr>
                   <tr><td>&lt;database user&gt;</td><td>Utente della banca dati</td></tr>
                   <tr><td>&lt;database password&gt;</td><td>Password della banca dati</td></tr>
                   <tr><td>&lt;siard file&gt;</td><td>Nome del file .siard che dev'essere generato</td></tr>
@@ -163,9 +173,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>La conversione di TIMEs e TIMESTAMPs nella banca dati, dipende dal 
                   fuso orario locale. Se è archiviato l'orario 15:30 a Zurigo, 
                   allora viene registrato nell'archivio SIARD l'orario UTC 14:3, in inverno. 
-                  Per evitare questa conversione, occorre avviare  <em>SiardFromDb</em> con l'opzione 
+                  Per evitare questa conversione, occorre avviare  <em>SiardFromDb</em> con l'opzione</p> 
                   <pre>-Duser.timezone=GMT</pre>
-                  che costringe SIARD a interpretare tutti gli orari della banca dati come orari UTC.</p>
+                  <p>che costringe SIARD a interpretare tutti gli orari della banca dati come orari UTC.</p>
                 
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
@@ -186,7 +196,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="siardtodb">SiardToDb</a></h2>
+                <h2><a id="siardtodb">SiardToDb</a></h2>
                 <p><em>SiardToDb</em> è un programma di riga di comando, 
                   che carica un archivio SIARD a scopo di ricerca in un'istanza banca dati.</p>
 
@@ -213,7 +223,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <tr><td>-o</td><td>sovrascrivere (overwrite) i tipi e/o le tabelle con lo stesso nome in una banca dati, se esistono</td></tr>
                   <tr><td>&lt;login timeout&gt;</td><td>Timeout in secondi per l'accesso (login) (0 per illimitato)</td></tr>
                   <tr><td>&lt;query timeout&gt;</td><td>Timeout in secondi per un'interrogazione (query) (0 per illimitato)</td></tr>
-                  <tr><td>&lt;siard file&gt;</td><td>Nome del file .siard da caricare</td></tr></tr>
+                  <tr><td>&lt;siard file&gt;</td><td>Nome del file .siard da caricare</td></tr>
                   <tr><td valign="top">&lt;JDBC URL&gt;</td><td>URL JDBC della banca dati destinataria<br/>
                     p. es. per <em>MS Access</em>: jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb<br/>
                     per <em>DB/2</em>: jdbc:dbserver.enterag.ch:50000/testdb<br/>
@@ -265,9 +275,9 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   dipende dal fuso orario locale. Se è archiviato l'orario 15:30 
                   a Zurigo, allora viene registrato nell'archivio SIARD 
                   l'orario UTC 14:3, in inverno. Per evitare questa conversione, 
-                  occorre avviare  <em>SiardToDb</em> con l'opzione 
+                  occorre avviare  <em>SiardToDb</em> con l'opzione</p> 
                   <pre>-Duser.timezone=GMT</pre>
-                  che costringe SIARD a interpretare tutti gli orari della banca dati come orari UTC.</p>
+                  <p>che costringe SIARD a interpretare tutti gli orari della banca dati come orari UTC.</p>
 
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>

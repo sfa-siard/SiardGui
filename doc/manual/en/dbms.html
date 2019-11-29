@@ -73,14 +73,13 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <div class="mod mod-text">
               <section class="clearfix">
                 <p>There are some areas where the various database management
-                  systems (DBMS) are treated differently in <em>SIARD Suite</em>:
-                  <ul>
-                    <li><a href="#jdbcurl">JDBC URL for connecting to a database</a>,</li>
-                    <li><a href="#datatypes">Handling of proprietary data types</a>,</li>
-                    <li><a href="#prepdownload">Preparation of a database for download</a>,</li>
-                    <li><a href="#prepupload">Preparation of a database for upload</a>.</li>
-                  </ul>
-                </p>
+                  systems (DBMS) are treated differently in <em>SIARD Suite</em>:</p>
+                <ul>
+                  <li><a href="#jdbcurl">JDBC URL for connecting to a database</a>,</li>
+                  <li><a href="#datatypes">Handling of proprietary data types</a>,</li>
+                  <li><a href="#prepdownload">Preparation of a database for download</a>,</li>
+                  <li><a href="#prepupload">Preparation of a database for upload</a>.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -88,7 +87,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="jdbcurl">JDBC URL for connecting to a database</a></h2>
+                <h2><a id="jdbcurl">JDBC URL for connecting to a database</a></h2>
                 <p><em>SIARD Suite</em> documents the standard JDBC URL for connecting
                   to a supported database system. However, there are many variations
                   how database management systems embed platform (e.g. Windows login) or network security
@@ -109,6 +108,8 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                     <dd><a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html</a></dd>
                   <dt>Oracle</dt>
                     <dd><a href="http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm">http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm</a></dd>
+                  <dt>PostgreSQL</dt>
+                    <dd><a href="https://jdbc.postgresql.org/documentation/head/connect.html">https://jdbc.postgresql.org/documentation/head/connect.html</a></dd>
                   <dt>SQL Server</dt>
                     <dd><a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url">https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url</a></dd>  
                 </dl>
@@ -123,7 +124,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="datatypes">Handling of proprietary data types</a></h2>
+                <h2><a id="datatypes">Handling of proprietary data types</a></h2>
                 <p>The proprietary data types are mapped to SQL:2008 data types by the
                   JDBC wrapper for each DBMS. The mapping is documented in the LibreOffice tables
                   <em>Jdbc&lt;DBMS&gt;-TypeInfo.ods</em> in the folder <em>doc/datatypes</em>.</p>
@@ -134,7 +135,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="prepdownload">Preparation of a database for download</a></h2>
+                <h2><a id="prepdownload">Preparation of a database for download</a></h2>
                 <p><em>SIARD Suite</em> will download everything that is readable by the database user
                   used for the connection. Choosing a suitable database user for the download
                   determines the extent of the database being archived. Often a suitable
@@ -159,7 +160,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="prepupload">Preparation of a database for upload</a></h2>
+                <h2><a id="prepupload">Preparation of a database for upload</a></h2>
                 <p>For uploading a database to a DBMS using <em>SIARD Suite</em>, suitable 
                   database schemas must be available on the target DBMS. 
                   Those schemas can then be used in the schema mapping part of the 

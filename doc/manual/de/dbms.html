@@ -74,15 +74,14 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
               <section class="clearfix">
                 <p>Die verschiedenen Datenbank Management Systeme (DBMS) werden 
                   in <em>SIARD Suite</em> hauptsächlich in den folgenden Bereichen 
-                  unterschiedlich behandelt: 
-                  <ul>
-                    <li><a href="#jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a>,</li>
-                    <li><a href="#datatypes">Umgang mit proprietären Datentypen</a>,</li>
-                    <li><a href="#prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a>,</li>
-                    <li><a href="#prepupload">Vorbereiten einer Datenbank für das Hochladen</a>.</li>
-                    
-                  </ul>
-                </p>
+                  unterschiedlich behandelt:</p> 
+                <ul>
+                  <li><a href="#jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a>,</li>
+                  <li><a href="#datatypes">Umgang mit proprietären Datentypen</a>,</li>
+                  <li><a href="#prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a>,</li>
+                  <li><a href="#prepupload">Vorbereiten einer Datenbank für das Hochladen</a>.</li>
+                  
+                </ul>
                 
                 <p class="pull-right">
                   <small>
@@ -90,7 +89,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a></h2>
+                <h2><a id="jdbcurl">JDBC-URL für die Verbindung zu einer Datenbank</a></h2>
                 <p><em>SIARD Suite</em> dokumentiert die Standard-JDBC-URL für die
                   Verbindung zu einem unterstützten Datenbank Management System.
                   Es gibt aber viele Variationen, wie DBMS Plattform- (z.B. Windows Login)
@@ -113,6 +112,8 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                     <dd><a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html</a></dd>
                   <dt>Oracle</dt>
                     <dd><a href="http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm">http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm</a></dd>
+                  <dt>PostgreSQL</dt>
+                    <dd><a href="https://jdbc.postgresql.org/documentation/head/connect.html">https://jdbc.postgresql.org/documentation/head/connect.html</a></dd>
                   <dt>SQL Server</dt>
                     <dd><a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url">https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url</a></dd>  
                 </dl>
@@ -129,7 +130,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="datatypes">Umgang mit proprietären Datentypen</a></h2>
+                <h2><a id="datatypes">Umgang mit proprietären Datentypen</a></h2>
                 <p>Die proprietären Datentypen werden in der jeweiligen JDBC-Hülle 
                   auf SQL:2008 Datentypen abgebildet. Die Abbildung ist in den
                   Tabellen <em>Jdbc&lt;DBMS&gt;-TypeInfo.ods</em> im LibreOffice Calc Format
@@ -141,7 +142,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a></h2>
+                <h2><a id="prepdownload">Vorbereiten einer Datenbank für das Herunterladen</a></h2>
                 <p><em>SIARD Suite</em> lädt alle Daten herunter, die für den Datenbank-User
                   sichtbar sind, welcher für die Verbindung benutzt wird. Die Wahl eines
                   geeigneten Datenbank-User bestimmt deshalb den Umfang der archivierten
@@ -169,7 +170,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h2><a name="prepupload">Vorbereiten einer Datenbank für das Hochladen</a></h2>
+                <h2><a id="prepupload">Vorbereiten einer Datenbank für das Hochladen</a></h2>
                 <p>Für das Hochladen einer Datenbank in eine Instanz eines DBMS
                   mit <em>SIARD Suite</em> müssen geeignete Datenbank-Schemas in
                   der Zieldatenbank zur Verfügung stehen.
