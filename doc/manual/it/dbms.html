@@ -74,20 +74,19 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
               <section class="clearfix">
                 <p>I diversi sistemi di gestione banche dati (DBMS Datenbank Management Systeme) 
                   vengono trattati differentemente in <em>SIARD Suite</em> 
-                  principalmente nei seguenti ambiti: 
-                  <ul>
-                    <li><a href="#jdbcurl">URL JDBC per la connessione a una banca dati</a>,</li>
-                    <li><a href="#datatypes">Trattamento dei tipi di dati proprietari</a>,</li>
-                    <li><a href="#prepdownload">Preparazione di una banca dati per il download</a>,</li>
-                    <li><a href="#prepupload">Preparazione di una banca dati per l'upload</a>.</li>
-                  </ul>
-                </p>
+                  principalmente nei seguenti ambiti:</p> 
+                <ul>
+                  <li><a href="#jdbcurl">URL JDBC per la connessione a una banca dati</a>,</li>
+                  <li><a href="#datatypes">Trattamento dei tipi di dati proprietari</a>,</li>
+                  <li><a href="#prepdownload">Preparazione di una banca dati per il download</a>,</li>
+                  <li><a href="#prepupload">Preparazione di una banca dati per l'upload</a>.</li>
+                </ul>
                 
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="jdbcurl">URL JDBC per la connessione a una banca dati</a></h2>
+                <h2><a id="jdbcurl">URL JDBC per la connessione a una banca dati</a></h2>
                 <p><em>SIARD Suite</em> documenta la URL JDBC standard per la 
                   connessione a un sistema supportato di gestione banche dati (DBMS). 
                   Ci sono comunque differenti modi di come delle piattaforme 
@@ -110,6 +109,8 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                     <dd><a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html</a></dd>
                   <dt>Oracle</dt>
                     <dd><a href="http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm">http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm</a></dd>
+                  <dt>PostgreSQL</dt>
+                    <dd><a href="https://jdbc.postgresql.org/documentation/head/connect.html">https://jdbc.postgresql.org/documentation/head/connect.html</a></dd>
                   <dt>SQL Server</dt>
                     <dd><a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url">https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url</a></dd>  
                 </dl>
@@ -123,7 +124,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="datatypes">Trattamento dei tipi di dati proprietari</a></h2>
+                <h2><a id="datatypes">Trattamento dei tipi di dati proprietari</a></h2>
                 <p>I tipi di dati proprietari vengono riportati nel relativo 
                   involucro JDBC sui tipi di dati SQL:2008. Il riporto è 
                   documentato nelle tabelle <em>Jdbc&lt;DBMS&gt;-TypeInfo.ods</em>
@@ -133,7 +134,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="prepdownload">Preparazione di una banca dati per il download</a></h2>
+                <h2><a id="prepdownload">Preparazione di una banca dati per il download</a></h2>
                 <p><em>SIARD Suite</em> scarica tutti i dati visibili all'utente 
                   banca dati che viene utilizzato. La scelta di un utente 
                   banca dati adatto determina quindi le dimensioni della banca 
@@ -160,7 +161,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
                 </p>
                 
-                <h2><a name="prepupload">Preparazione di una banca dati per l'upload</a></h2>
+                <h2><a id="prepupload">Preparazione di una banca dati per l'upload</a></h2>
                 <p>Per l'upload di una banca dati in un'istanza DBMS con 
                   <em>SIARD Suite</em>, devono essere a disposizione degli 
                   schemi adatti nella banca dati destinataria. Questi schemi 
