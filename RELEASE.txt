@@ -1,6 +1,11 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.123
+PostgreSQL integrated in documentation.
+Endhanced support for MS ACCESS views.
+Corrected Oracle driver.
+
 2.1.120
 Upgrade of MS Access. Can now download from Nordwind. 
 
