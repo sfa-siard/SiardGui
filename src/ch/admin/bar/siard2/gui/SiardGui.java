@@ -682,8 +682,8 @@ public class SiardGui extends Application
       UserProperties up = UserProperties.getUserProperties();
       _il.event("InstalledVersion: "+up.getInstalledVersion(null));
       _il.event("InstalledPath: "+up.getInstalledPath(null));
-      System.out.println("InstalledVersion: "+up.getInstalledVersion(null));
-      System.out.println("InstalledPath: "+up.getInstalledPath(null));
+      //System.out.println("InstalledVersion: "+up.getInstalledVersion(null));
+      //System.out.println("InstalledPath: "+up.getInstalledPath(null));
       if ((compareVersion(up.getInstalledVersion(null)) == 0) && 
            isRunningFrom(up.getInstalledPath(null)))
       {
