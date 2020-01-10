@@ -12,7 +12,6 @@
 	<classpathentry kind="lib" path="lib/ini4j-0.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/mslinks.jar"/>
 	<classpathentry kind="lib" path="lib/activation-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-4.5.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.3.jar"/>
@@ -46,5 +45,6 @@
 	<classpathentry kind="lib" path="lib/zip64.jar"/>
 	<classpathentry kind="lib" path="lib/jdbcpostgres.jar"/>
 	<classpathentry kind="lib" path="lib/postgresql-42.2.5.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.18.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
