@@ -1,6 +1,9 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.130
+Corrected type mapping of Oracle driver.
+
 2.1.126
 Fixed problem with Postgres domains/types in schema public having an SQL keyword as name.
 (DVD Retail database added as test.)
