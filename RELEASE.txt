@@ -1,6 +1,9 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.132
+Corrected upload of large arrays in Oracle driver.
+
 2.1.130
 Corrected type mapping of Oracle driver.
 
