@@ -470,7 +470,7 @@ public class UserProperties extends Properties
     File fileLobsFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
         File.separator+sLOBS_FOLDER);
     fileLobsFolder = getFile(sLOBS_FOLDER_KEY, fileLobsFolder);
-    fileLobsFolder.getParentFile().mkdirs();
+    fileLobsFolder.mkdirs();
     _il.exit(fileLobsFolder);
     return fileLobsFolder;
   } /* getLobsFolder */
@@ -487,7 +487,7 @@ public class UserProperties extends Properties
     File fileImportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
         File.separator+sMETADATA_FOLDER);
     fileImportMetadataFolder = getFile(sMETADATA_IMPORT_KEY, fileImportMetadataFolder);
-    fileImportMetadataFolder.getParentFile().mkdirs();
+    fileImportMetadataFolder.mkdirs();
     _il.exit(fileImportMetadataFolder);
     return fileImportMetadataFolder;
   } /* getImportMetadataFolder */
@@ -503,7 +503,7 @@ public class UserProperties extends Properties
     File fileExportMetadataFolder = new File(SiardGui.getDefaultDataDirectory().getAbsolutePath() + 
         File.separator+sMETADATA_FOLDER);
     fileExportMetadataFolder = getFile(sMETADATA_EXPORT_KEY, fileExportMetadataFolder);
-    fileExportMetadataFolder.getParentFile().mkdirs();
+    fileExportMetadataFolder.mkdirs();
     _il.exit(fileExportMetadataFolder);
     return fileExportMetadataFolder;
   } /* getExportMetadataFolder */
