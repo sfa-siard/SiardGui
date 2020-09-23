@@ -1,6 +1,10 @@
 Release Notes for SiardGui 2.1
 ==============================
 
+2.1.134
+Creation of subfolders for meta data and LOBs when they are needed (Issue 18)
+MS Access Views with complex scripts will generate an error but download continues without them (Issue 17).
+
 2.1.132
 Corrected upload of large arrays in Oracle driver.
 
