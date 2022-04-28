@@ -269,29 +269,9 @@ Created    : 01.06.2017, Hartwig Thomas
     </fail>
   </target>
   
-  <!-- update from remote master -->
-  <property name="filepull" value="${dirtmp}/pull.txt"/>
-  <target name="pull" depends="commit" if="git">
-    <!-- pull master branch
-    <echo message="${ant.project.name}: git pull origin master"/>
-    <exec executable="${git}" output="${filepull}">
-      <arg value="pull"/>
-      <arg value="origin"/>
-      <arg value="master"/>
-    </exec>
-    -->
-  <!-- pull dev branch -->
-    <echo message="${ant.project.name}: git pull origin ${branch}"/>
-    <exec executable="${git}" output="${filepull}" failonerror="true">
-      <arg value="pull"/>
-      <arg value="origin"/>
-      <arg value="${branch}"/>
-    </exec>
-  </target>
-  
   <!-- increment revision and update manifest -->
   <property name="filerevisionproperties" value="${dirtmp}/revision.properties"/> 
-  <target name="revision" depends="pull">
+  <target name="revision" depends="check">
     <echo message="${ant.project.name}: revision"/>
     <copy file="${filerevoldproperties}" tofile="${filerevisionproperties}" overwrite="true"/>
     <replaceregexp file="${filerevisionproperties}" 
