@@ -465,28 +465,9 @@ Created    : 01.06.2017, Hartwig Thomas
       </zipfileset>
     </zip>
   </target>
-
-  <!-- push to remote dev branch -->
-  <property name="filepush" value="${dirtmp}/push.txt"/>
-  <target name="push" depends="zip" if="git" unless="branch.master">
-    <!-- commit -->
-    <echo message="${ant.project.name}: git commit -am &quot;Build: ${version}.${revision}&quot;"/>
-    <exec executable="${git}" output="${filecommit}" failonerror="true">
-      <arg value="commit"/>
-      <arg value="-am" />
-      <arg value="Build: ${version}.${revision}" />
-    </exec>
-    <!-- push to remote -->
-    <echo message="${ant.project.name}: git push origin ${branch}"/>
-    <exec executable="${git}" output="${filepush}" failonerror="true">
-      <arg value="push"/>
-      <arg value="origin"/>
-      <arg value="${branch}"/>
-    </exec>
-  </target>
   
   <!-- deploy to file system -->
-  <target name="deploy" depends="push" if="dirdeploy">
+  <target name="deploy" if="dirdeploy">
     <echo message="${ant.project.name}: deploy"/>
     <delete dir="${dirdeploy}/${zipfolder}"/>
     <unzip dest="${dirdeploy}" src="${dirdist}/${distribution}" />
