@@ -80,12 +80,6 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="jardb2jdbc" value="db2jcc4.jar"/>
   <property name="cpjdbcdb2" value="${dirlib}/${jarjdbcdb2};${dirlib}/${jardb2jdbc}"/>
   <property name="cpjdbcdb2-test" value="${dirlib}/${jarjdbcdb2test}"/>
-  <!-- jdbch2 jars -->
-  <property name="jarh2jdbc" value="h2-1.3.176.jar"/>
-  <property name="jarjdbch2" value="jdbch2.jar"/>
-  <property name="jarjdbch2test" value="jdbch2-test.jar"/>
-  <property name="cpjdbch2" value="${dirlib}/${jarjdbch2};${dirlib}/${jarh2jdbc}"/> 
-  <property name="cpjdbch2-test" value="${dirlib}/${jarjdbch2test}"/>
   <!-- jdbcmssql jars -->
   <property name="jarmssqljdbc" value="sqljdbc41.jar"/>
   <property name="jarjdbcmssql" value="jdbcmssql.jar"/>
@@ -266,7 +260,6 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcoracle}"/>
         <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
-        <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
         <pathelement path="${cpsqlparser}"/>
         <pathelement path="${cpenterutils}"/>
@@ -318,7 +311,6 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcoracle}"/>
         <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
-        <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
         <pathelement path="${cpsqlparser}"/>
         <pathelement path="${cpenterutils}"/>
@@ -343,7 +335,6 @@ Created    : 01.06.2017, Hartwig Thomas
         <pathelement path="${cpjdbcoracle}"/>
         <pathelement path="${cpjdbcpostgres}"/>
         <pathelement path="${cpjdbcmssql}"/>
-        <pathelement path="${cpjdbch2}"/>
         <pathelement path="${cpjdbcbase}"/>
         <pathelement path="${cpsqlparser}"/>
         <pathelement path="${cpenterutils}"/>
