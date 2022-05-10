@@ -6,10 +6,10 @@ name: Java CI
 on:
   push:
     branches:
-      - master
+      - main
       - dev/pitc-*
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
