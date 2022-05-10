@@ -234,7 +234,7 @@ Created    : 01.06.2017, Hartwig Thomas
   <!-- build the SiardGui classes -->
   <property name="dirbuildgui" value="${dirbuildclasses}/${dirgui}"/>
   <property name="dirbuildres" value="${dirbuildgui}/res"/>
-  <target name="build" depends="init,revision">
+  <target name="build" depends="init">
     <echo message="${ant.project.name}: build"/>
     <!-- without this, the package-info class is not generated! -->
     <touch>
@@ -270,10 +270,22 @@ Created    : 01.06.2017, Hartwig Thomas
       <fileset dir="${dirres}"/>
     </copy>
   </target>
+
+  <!-- create the JAR file without the manifest file to run the tests -->
+  <property name="jarfile" value="${ant.project.name}.jar"/>
+  <target name="jar-test" depends="build">
+    <echo message="${ant.project.name}: jar"/>
+    <jar jarfile="${dirdist}/${jarfile}">
+      <fileset dir="${dirbuildclasses}">
+        <include name="**/*.class"/>
+        <include name="**/res/*.*"/>
+      </fileset>
+    </jar>
+  </target>
   
   <!-- create the JAR file containing all classes -->
   <property name="jarfile" value="${ant.project.name}.jar"/>
-  <target name="jar" depends="build">
+  <target name="jar" depends="revision, test">
     <echo message="${ant.project.name}: jar"/>
     <jar jarfile="${dirdist}/${jarfile}"
        manifest="${filemanifest}">
@@ -285,7 +297,7 @@ Created    : 01.06.2017, Hartwig Thomas
   </target>
 	
   <!-- run tests and create splash.png -->
-  <target name="test" depends="jar">
+  <target name="test" depends="jar-test">
     <!-- build the tests -->
     <echo message="${ant.project.name}: tests"/>
     <!-- build the tests -->
@@ -344,7 +356,7 @@ Created    : 01.06.2017, Hartwig Thomas
 
   <!-- create the ZIP file with binaries for Windows and LINUX -->
   <!-- folders in the distribution -->
-  <target name="zip" depends="test">
+  <target name="release" depends="jar">
     <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
     <zip zipfile="${dirdist}/${distribution}">
       <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">

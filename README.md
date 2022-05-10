@@ -14,10 +14,10 @@ Run tests with
 ant test
 ```
 
-Build the project with
+Create a release
 
 ```shell
-ant build
+ant release
 ```
 
 Start the GUI
