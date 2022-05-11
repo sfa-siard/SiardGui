@@ -234,7 +234,7 @@ Created    : 01.06.2017, Hartwig Thomas
   <!-- build the SiardGui classes -->
   <property name="dirbuildgui" value="${dirbuildclasses}/${dirgui}"/>
   <property name="dirbuildres" value="${dirbuildgui}/res"/>
-  <target name="build" depends="init">
+  <target name="build" depends="init,copy-dependencies">
     <echo message="${ant.project.name}: build"/>
     <!-- without this, the package-info class is not generated! -->
     <touch>
@@ -399,5 +399,22 @@ Created    : 01.06.2017, Hartwig Thomas
     <unzip dest="${dirdeploy}" src="${dirdist}/${distribution}" />
   	<chmod dir="${dirdeploy}" perm="ugo+rx" includes="**/*.sh"/>
   </target>
-  
+
+  <!-- copy dependencies from local file system -->
+  <target name="copy-dependencies" depends="check">
+    <echo message="Copy jar files from dependency projects on local file system"/>
+    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../SiardCmd/dist/siardcmd.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcBase/dist/jdbcbase.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcAccess/dist/jdbcaccess.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcDb2/dist/jdbcdb2.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcH2/dist/jdbch2.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false"/>
+  </target>
 </project>
