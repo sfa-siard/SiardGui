@@ -403,18 +403,18 @@ Created    : 01.06.2017, Hartwig Thomas
   <!-- copy dependencies from local file system -->
   <target name="copy-dependencies" depends="check">
     <echo message="Copy jar files from dependency projects on local file system"/>
-    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../SiardCmd/dist/siardcmd.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcBase/dist/jdbcbase.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcAccess/dist/jdbcaccess.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcDb2/dist/jdbcdb2.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcH2/dist/jdbch2.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false"/>
-    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false"/>
+    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../SiardCmd/dist/siardcmd.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcBase/dist/jdbcbase.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcAccess/dist/jdbcaccess.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcDb2/dist/jdbcdb2.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcH2/dist/jdbch2.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
   </target>
 </project>
