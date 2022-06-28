@@ -1,13 +1,13 @@
 Manifest-Version: 1.0
 Created-By: Hartwig Thomas, Enter AG, Rüti ZH, Switzerland
 Specification-Title: SIARD Suite
-Specification-Version: 2.1
+Specification-Version: 2.2
 Specification-Vendor: Swiss Federal Archives, Berne, Switzerland
 Implementation-Title: SIARD Suite
-Implementation-Version: 2.1.150
+Implementation-Version: 2.2.2
 Implementation-Vendor: Swiss Federal Archives, Berne, Switzerland
 Built-By: Hartwig Thomas, Enter AG, Rüti ZH, Switzerland
-Built-Date: 05. May 2022
+Built-Date: 25. May 2022
 Main-Class: ch.admin.bar.siard2.gui.SiardGui
 Class-Path: jfxrt.jar
   mslinks.jar
