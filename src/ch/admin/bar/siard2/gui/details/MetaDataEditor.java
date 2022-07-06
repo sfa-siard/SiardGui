@@ -359,10 +359,7 @@ public class MetaDataEditor
       displayProperty(MetaData.class,"ArchiverContact",true,true,false);
       displayProperty(MetaData.class,"DataOwner",true,false,true);
       displayProperty(MetaData.class,"DataOriginTimespan",true,false,true);
-      boolean bEditable = false;
-      if (!md.getArchive().isValid())
-        bEditable = true;
-      displayProperty(MetaData.class,"LobFolder",bEditable,false,false);
+      displayProperty(MetaData.class,"LobFolder",true,false,false);
       displayProperty(MetaData.class,"ProducerApplication",false,false,false);
       displayProperty(MetaData.class,"ArchivalDate",false,false,false);
       displayProperty(MetaData.class,"ClientMachine",false,false,false);
@@ -446,31 +443,8 @@ public class MetaDataEditor
       MetaColumn mc = (MetaColumn)_oMetaData;
       displayProperty(MetaColumn.class,"Name",false,false,false);
       displayProperty(MetaColumn.class,"Position",false,false,false);
-      boolean bEditable = false;
-      try
-      {
-        boolean bInvalid = !mc.getParentMetaTable().getParentMetaSchema().getParentMetaData().getArchive().isValid();
-        if (bInvalid)
-        {
-          int iPreType = mc.getPreType();
-          boolean bLob = 
-             (iPreType == Types.BINARY) ||
-             (iPreType == Types.VARBINARY) ||
-             (iPreType == Types.BLOB) ||
-             (iPreType == Types.CHAR) ||
-             (iPreType == Types.VARCHAR) ||
-             (iPreType == Types.CLOB) ||
-             (iPreType == Types.NCHAR) ||
-             (iPreType == Types.NVARCHAR) ||
-             (iPreType == Types.NCLOB) ||
-             (iPreType == Types.SQLXML);
-          if (bLob)
-            bEditable = true;
-        }
-      }
-      catch(IOException ie) {}
-      displayProperty(MetaColumn.class,"LobFolder",bEditable,false,false);
-      displayProperty(MetaColumn.class,"MimeType",bEditable,false,false);
+      displayProperty(MetaColumn.class,"LobFolder",true,false,false);
+      displayProperty(MetaColumn.class,"MimeType",true,false,false);
       displayProperty(MetaColumn.class,"Type",false,false,false);
       displayProperty(MetaColumn.class,"TypeSchema",false,false,false);
       displayProperty(MetaColumn.class,"TypeName",false,false,false);
