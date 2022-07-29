@@ -7,9 +7,8 @@
 # Created    : 01.03.2018, Marcel BÃ¼chler
 # Updated    : 2022-07-28, Yanick Minder, Puzzle ITC
 #=======================================================================
-. .\path_to_java_windows.ps1
 
-
+$javaExe = "jre\bin\javaw.exe"
 # logging properties relative to script location
 $REL_LOGGING_PROPERTIES = 'etc\logging.properties'
 # jar file relative to script location

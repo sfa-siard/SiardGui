@@ -7,7 +7,7 @@
 # Created    : 01.03.2018, Marcel BÃ¼chler
 #=======================================================================
 
-. .\path_to_java_windows.ps1
+$javaExe = "jre\bin\javaw.exe"
 $REL_LOGGING_PROPERTIES = 'etc\logging.properties'
 # jar file relative to script location
 $REL_JAR_FILE = 'lib\siardcmd.jar'
