@@ -499,12 +499,12 @@ Created    : 01.06.2017, Hartwig Thomas
         <exclude name="${jarhamcrest}"/>
         <exclude name="${jarjunit4}"/>
       </zipfileset>
-      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
-        <exclude name="**/*.cmd"/>
-        <exclude name="**/*.ps1"/>
-      </zipfileset>
       <zipfileset dir="${dirjre}/jre-linux-32" prefix="${zipfolder}/${dirjre}">
         <include name="**/*"/>
+        <exclude name="**/bin/java"/>
+      </zipfileset>
+      <zipfileset filemode="755" dir="${dirjre}/jre-linux-32" prefix="${zipfolder}/${dirjre}">
+        <include name="**/bin/java"/>
       </zipfileset>
       <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
         <include name="**/*.sh"/>
@@ -539,12 +539,12 @@ Created    : 01.06.2017, Hartwig Thomas
         <exclude name="${jarhamcrest}"/>
         <exclude name="${jarjunit4}"/>
       </zipfileset>
-      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
-        <exclude name="**/*.cmd"/>
-        <exclude name="**/*.ps1"/>
-      </zipfileset>
       <zipfileset dir="${dirjre}/jre-linux-64" prefix="${zipfolder}/${dirjre}">
         <include name="**/*"/>
+        <exclude name="**/bin/java"/>
+      </zipfileset>
+      <zipfileset filemode="755" dir="${dirjre}/jre-linux-64" prefix="${zipfolder}/${dirjre}">
+        <include name="**/bin/java"/>
       </zipfileset>
       <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
         <include name="**/*.sh"/>
