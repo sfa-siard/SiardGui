@@ -22,6 +22,7 @@ Created    : 01.06.2017, Hartwig Thomas
   <property name="dirtest" value="test/"/>
   <property name="dirbin" value="bin"/>
   <property name="dirlib" value="lib"/>
+  <property name="dirjre" value="jre"/>
   <property name="dirdoc" value="doc"/>
   <property name="diretc" value="etc"/>
   <property name="dirhxd" value="hxd"/>
@@ -127,6 +128,12 @@ Created    : 01.06.2017, Hartwig Thomas
 	<property name="jarjunit4" value="junit-4.12.jar"/>
   <property name="cpjunit" value="${dirlib}/${jarhamcrest};${dirlib}/${jarjunit4}"/>
 
+  <!--JRE Zip locations-->
+  <property name="jre-win32" value="${dirjre}/jre-win-32-bit.zip"/>
+  <property name="jre-win64" value="${dirjre}/jre-win-64-bit.zip"/>
+  <property name="jre-linux32" value="${dirjre}/jre-linux-32-bit.tar.gz"/>
+  <property name="jre-linux64" value="${dirjre}/jre-linux-64-bit.tar.gz"/>
+
   <!-- delete build folders -->
   <property name="dirbuild" value="build"/>
   <property name="dirbuildclasses" value="${dirbuild}/classes"/>
@@ -137,6 +144,10 @@ Created    : 01.06.2017, Hartwig Thomas
     <delete dir="${dirbuildtests}"/>
     <delete dir="${dirtmp}"/>
     <delete dir="${dirdist}"/>
+    <delete dir="${dirjre}/jre-win-32"/>
+    <delete dir="${dirjre}/jre-win-64"/>
+    <delete dir="${dirjre}/jre-linux-32"/>
+    <delete dir="${dirjre}/jre-linux-64"/>
   </target>
   
   <!-- create build folders -->
@@ -218,7 +229,7 @@ Created    : 01.06.2017, Hartwig Thomas
     </propertyfile>
     <property file="${filerevisionproperties}"/>
     <echo message="revision: ${revision}" />
-    <property name="distribution" value="SIARD-Suite-${version}.${revision}.zip"/>
+    <property name="distribution" value="SIARD-Suite-${version}.${revision}"/>
     <replaceregexp file="${filemanifest}" 
       match="^Implementation-Version: .*$" 
       replace="Implementation-Version: ${version}.${revision}"
@@ -352,11 +363,55 @@ Created    : 01.06.2017, Hartwig Thomas
   	</java>
   </target>
 
-  <!-- create the ZIP file with binaries for Windows and LINUX -->
+  <target name="unzip-jre-win-32">
+    <unzip dest="${dirjre}/jre-win-32-unzipped" src="${jre-win32}" />
+    <copy todir="${dirjre}/jre-win-32">
+      <fileset dir="${dirjre}/jre-win-32-unzipped">
+        <include name="**/*"/>
+      </fileset>
+      <cutdirsmapper dirs="1"/>
+    </copy>
+    <delete dir="${dirjre}/jre-win-32-unzipped"/>
+  </target>
+
+  <target name="unzip-jre-win-64">
+    <unzip dest="${dirjre}/jre-win-64-unzipped" src="${jre-win64}" />
+    <copy todir="${dirjre}/jre-win-64">
+      <fileset dir="${dirjre}/jre-win-64-unzipped">
+        <include name="**/*"/>
+      </fileset>
+      <cutdirsmapper dirs="1"/>
+    </copy>
+    <delete dir="${dirjre}/jre-win-64-unzipped"/>
+  </target>
+
+  <target name="unzip-jre-linux-32">
+    <untar dest="${dirjre}/jre-linux-32-unzipped" src="${jre-linux32}" compression="gzip"/>
+    <copy todir="${dirjre}/jre-linux-32">
+      <fileset dir="${dirjre}/jre-linux-32-unzipped">
+        <include name="**/*"/>
+      </fileset>
+      <cutdirsmapper dirs="1"/>
+    </copy>
+    <delete dir="${dirjre}/jre-linux-32-unzipped"/>
+  </target>
+
+  <target name="unzip-jre-linux-64">
+    <untar dest="${dirjre}/jre-linux-64-unzipped" src="${jre-linux64}" compression="gzip"/>
+    <copy todir="${dirjre}/jre-linux-64">
+      <fileset dir="${dirjre}/jre-linux-64-unzipped">
+        <include name="**/*"/>
+      </fileset>
+      <cutdirsmapper dirs="1"/>
+    </copy>
+    <delete dir="${dirjre}/jre-linux-64-unzipped"/>
+  </target>
+
+  <!-- create the ZIP file with binaries for Windows 32 Bit -->
   <!-- folders in the distribution -->
-  <target name="release" depends="jar">
+  <target name="release-win-32" depends="jar, unzip-jre-win-32">
     <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
-    <zip zipfile="${dirdist}/${distribution}">
+    <zip zipfile="${dirdist}/${distribution}-win-32.zip">
       <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
         <include name="${jarfile}"/>
       </zipfileset>
@@ -366,6 +421,90 @@ Created    : 01.06.2017, Hartwig Thomas
       </zipfileset>
       <zipfileset dir="${dirbin}" prefix="${zipfolder}">
         <exclude name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset dir="${dirjre}/jre-win-32" prefix="${zipfolder}/${dirjre}">
+        <include name="**/*"/>
+      </zipfileset>
+      <!--<zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+        <include name="**/*.sh"/>
+      </zipfileset>-->
+      <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
+        <include name="**/*.*"/>
+        <exclude name="developer/**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirhxd}" prefix="${zipfolder}/${dirhxd}">
+        <exclude name="*.ini"/>
+      </zipfileset>
+      <zipfileset dir="${diretc}" prefix="${zipfolder}/${diretc}">
+        <exclude name="debug.properties"/>
+        <exclude name="testing.properties"/>
+      </zipfileset>
+      <zipfileset dir="${dirtestfiles}" prefix="${zipfolder}/${dirtestfiles}">
+        <include name="*.siard"/>
+      </zipfileset>
+      <zipfileset dir="." prefix="${zipfolder}">
+        <include name="*.txt"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <!-- create the ZIP file with binaries for Windows 32 Bit -->
+  <!-- folders in the distribution -->
+  <target name="release-win-64" depends="jar, unzip-jre-win-64">
+    <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
+    <zip zipfile="${dirdist}/${distribution}-win-64.zip">
+      <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
+        <include name="${jarfile}"/>
+      </zipfileset>
+      <zipfileset dir="${dirlib}" prefix="${zipfolder}/${dirlib}">
+        <exclude name="${jarhamcrest}"/>
+        <exclude name="${jarjunit4}"/>
+      </zipfileset>
+      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+        <exclude name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset dir="${dirjre}/jre-win-64" prefix="${zipfolder}/${dirjre}">
+        <include name="**/*"/>
+      </zipfileset>
+      <!--<zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+        <include name="**/*.sh"/>
+      </zipfileset>-->
+      <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
+        <include name="**/*.*"/>
+        <exclude name="developer/**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirhxd}" prefix="${zipfolder}/${dirhxd}">
+        <exclude name="*.ini"/>
+      </zipfileset>
+      <zipfileset dir="${diretc}" prefix="${zipfolder}/${diretc}">
+        <exclude name="debug.properties"/>
+        <exclude name="testing.properties"/>
+      </zipfileset>
+      <zipfileset dir="${dirtestfiles}" prefix="${zipfolder}/${dirtestfiles}">
+        <include name="*.siard"/>
+      </zipfileset>
+      <zipfileset dir="." prefix="${zipfolder}">
+        <include name="*.txt"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <target name="release-linux-32" depends="jar, unzip-jre-linux-32">
+    <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
+    <zip zipfile="${dirdist}/${distribution}-linux-32.zip">
+      <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
+        <include name="${jarfile}"/>
+      </zipfileset>
+      <zipfileset dir="${dirlib}" prefix="${zipfolder}/${dirlib}">
+        <exclude name="${jarhamcrest}"/>
+        <exclude name="${jarjunit4}"/>
+      </zipfileset>
+      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+        <exclude name="**/*.cmd"/>
+        <exclude name="**/*.ps1"/>
+      </zipfileset>
+      <zipfileset dir="${dirjre}/jre-linux-32" prefix="${zipfolder}/${dirjre}">
+        <include name="**/*"/>
       </zipfileset>
       <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
         <include name="**/*.sh"/>
@@ -389,19 +528,55 @@ Created    : 01.06.2017, Hartwig Thomas
       </zipfileset>
     </zip>
   </target>
-  
-  <!-- deploy to file system -->
-  <target name="deploy" if="dirdeploy">
-    <echo message="${ant.project.name}: deploy"/>
-    <delete dir="${dirdeploy}/${zipfolder}"/>
-    <unzip dest="${dirdeploy}" src="${dirdist}/${distribution}" />
-  	<chmod dir="${dirdeploy}" perm="ugo+rx" includes="**/*.sh"/>
+
+  <target name="release-linux-64" depends="jar, unzip-jre-linux-64">
+    <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
+    <zip zipfile="${dirdist}/${distribution}-linux-64.zip">
+      <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
+        <include name="${jarfile}"/>
+      </zipfileset>
+      <zipfileset dir="${dirlib}" prefix="${zipfolder}/${dirlib}">
+        <exclude name="${jarhamcrest}"/>
+        <exclude name="${jarjunit4}"/>
+      </zipfileset>
+      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+        <exclude name="**/*.cmd"/>
+        <exclude name="**/*.ps1"/>
+      </zipfileset>
+      <zipfileset dir="${dirjre}/jre-linux-64" prefix="${zipfolder}/${dirjre}">
+        <include name="**/*"/>
+      </zipfileset>
+      <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+        <include name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
+        <include name="**/*.*"/>
+        <exclude name="developer/**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirhxd}" prefix="${zipfolder}/${dirhxd}">
+        <exclude name="*.ini"/>
+      </zipfileset>
+      <zipfileset dir="${diretc}" prefix="${zipfolder}/${diretc}">
+        <exclude name="debug.properties"/>
+        <exclude name="testing.properties"/>
+      </zipfileset>
+      <zipfileset dir="${dirtestfiles}" prefix="${zipfolder}/${dirtestfiles}">
+        <include name="*.siard"/>
+      </zipfileset>
+      <zipfileset dir="." prefix="${zipfolder}">
+        <include name="*.txt"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <target name="release-all" depends="release-linux-32, release-linux-64, release-win-64, release-win-32">
+    <echo>Create all releases....</echo>
   </target>
 
   <!-- copy dependencies from local file system -->
   <target name="copy-dependencies" depends="check">
     <echo message="Copy jar files from dependency projects on local file system"/>
-    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+   <!-- <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
@@ -413,6 +588,6 @@ Created    : 01.06.2017, Hartwig Thomas
     <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
-    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>-->
   </target>
 </project>
