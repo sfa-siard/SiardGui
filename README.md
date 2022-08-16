@@ -1,7 +1,7 @@
-# SIARD Suite - Programs for reading and writing files in the SIARD Format 2.1
+# SIARD Suite - Programs for reading and writing files in the SIARD Format 2.2
 
 This package contains interactive and command-line programs for reading 
-and writing files in the SIARD Format 2.1
+and writing files in the SIARD Format 2.2
 
 ## Getting started (for devs)
 
