@@ -2,10 +2,10 @@
 <html lang="fr">
 <!-- ===================================================================
 Manual of SIARD Suite in French: Chapter Introduction.
-Application: SIARD Suite 2.1
+Application: SIARD Suite 2.2
 Platform   : HTML5
 ========================================================================
-Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
 ==================================================================== -->
   <head>
     <title>SIARD Suite - Introduction</title>
@@ -42,7 +42,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
             <span class="header-logo">
               <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
             </span>
-            <h1 class="header-title">SIARD Suite 2.1 - Manuel</h1>
+            <h1 class="header-title">SIARD Suite 2.2 - Manuel</h1>
           </div>
         </div>
       </header>
@@ -54,7 +54,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
           <div class="col-sm-12">
             <h2 id="br1" class="hidden">Breadcrumbs</h2>
             <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
-              <li><a href="./index.html">SIARD Suite 2.1 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuel</a><span class="icon icon--greater"></span></li>
               <li class="active" aria-selected="true">Introduction</li>
             </ol>
           </div>
@@ -66,7 +66,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
           <div class="col-sm-12 main-column" id="content" role="main">
             <div class="contentHead">
               <div class="mod mod-contentpage">
-                <h1>SIARD Suite 2.1 - Introduction</h1>
+                <h1>SIARD Suite 2.2 - Introduction</h1>
               </div>
             </div>  
             <div class="mod mod-text">
@@ -78,9 +78,11 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 <p>Sur mandat des Archives fédérales suisses, <a href="http://ww.enterag.ch/" target="_blank">Enter AG</a> a développé en 2007 le <em>format SIARD</em> et <em>SIARD Suite 1.0</em>, et en 2016-2018 la version présente <em>SIARD Suite 2.1</em>.</p>
                 <p>En collaboration avec le projet européen <a href="http://www.eark-project.com/" target="_blank">E-ARK</a> 
                   et la<a href="https://kost-ceco.ch/" target="_blank">KOST</a>, la version 2.1 du format SIARD a été spécifiée.
-                  Comme déjà pour la version 1.0, le <em>format SIARD 2.1</em> a été homologué comme standard eCH-0165 par l'association <a href="https://www.ech.ch/" target="_blank">eCH E-Government Standards</a>.</p> 
-                <p><em>SIARD Suite 2.1</em> est l'implémentation de référence pour l'archivage de bases de données relationnelles en <em>format SIARD 2.1</em> standardisé.</p>
-                <p>Le présent document constitue le manuel de <em>SIARD Suite 2.1</em>.</p>
+                  Comme déjà pour la version 1.0, le <em>format SIARD 2.1</em> a été homologué comme standard eCH-0165 par l'association <a href="https://www.ech.ch/" target="_blank">eCH E-Government Standards</a>.
+                  En 2021, le conseil d'administration de DILCIS a développé et approuvé le format SIARD amélioré 2.2. Puzzle ITC
+                  a été chargé par les Archives fédérales suisses de développer SIARD Suite 2.2 conformément au format amélioré.</p>
+                <p><em>SIARD Suite 2.2</em> est l'implémentation de référence pour l'archivage de bases de données relationnelles en <em>format SIARD 2.2</em> standardisé.</p>
+                <p>Le présent document constitue le manuel de <em>SIARD Suite 2.2</em>.</p>
 
                 <p class="pull-right">
                   <small>
@@ -88,17 +90,22 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   </small>
                 </p>
                 
-                <h3>Nouveautés de la version 2.1</h3>
-                <p>Les nouveautés les plus importantes du <em>format SIARD 2.1</em> comparé à la version 1.0 sont</p>
+                <h3>Nouveautés de la version 2.2</h3>
+                <p>Les nouveautés les plus importantes du <em>format SIARD 2.2</em> comparé à la version 2.1 concernent:</p>
                 <ul>
-                  <li>la conformité avec SQL:2008, en particulier le support de nouveaux types de données
-                    (DISTINCT, UDT, ARRAY)</li>
-                  <li>possibilité de délocaliser de gros objets dans des fichiers externes</li>
-                  <li>support de la compression reversible "deflate" des données SIARD</li>
+                  <li>
+                    Large Objects (LOBs) référencés par des DATALINKs et stockés en tant que fichiers externes dans la
+                    base de données comme spécifié dans la norme SQL;
+                  </li>
+                  <li>
+                    Large Objects (LOBs) stockés en externe dans l'archive SIARD et segmentés à travers plusieurs
+                    dossiers et parties de fichiers.
+                  </li>
                 </ul>
-                <p>Les fichiers SIARD comformes au format 1.0 peuvent être lus par les programmes de <em>SIARD Suite 2.1</em>.
-                  Dès que l'on effectue des modifications et qu'on les enregistre, ces dernières sont converties au format 2.1.</p>
-                <p><em>SIARD Suite 2.1</em> est l'implémentation de référence pour l'archivage de bases de données relationnelles en <em>format SIARD 2.1</em> standardisé.</p>
+                <p>Les fichiers SIARD comformes aux formats SIARD antérieurs à 2.2 peuvent être lus par <em>SIARD Suite 2.2</em>.
+                  Dès que l'on effectue des modifications et qu'on les enregistre, ces dernières sont converties au format 2.2.</p>
+                <p><em>SIARD Suite 2.2</em> est l'implémentation de référence pour l'archivage de bases de données relationnelles en
+                  <em>format SIARD 2.2</em> standardisé.</p>
 
                 <p class="pull-right">
                   <small>
@@ -107,7 +114,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                 </p>
                 
                 <h3>Droits d'auteur</h3>
-                <p><em>SIARD Suite</em> est un développement d'Enter AG pour les Archives fédérales suisses. 
+                <p><em>SIARD Suite</em> est un développement d'Enter AG et de Puzzle ITC GmbH pour les Archives fédérales suisses.
                    Les détenteurs des droits ont publiés <em>SIARD Suite</em> comme logiciel libre sous la  
                   <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">licence CDDL-1.0</a>
                   (dans la distribution SIARD comme <em>doc/licenses/CDDL-1.0.txt</em>).</p>                
@@ -177,7 +184,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                     Licence: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
                     dans la distribution SIARD comme <em>doc/licenses/CDDL-1.0.txt</em>
                   </dd>
-                  <dt>JTS Topology Suite (version 1.14 - de H2 et MySQL nécessaire pour l'expansion GEOMETRY)</dt>
+                  <dt>JTS Topology Suite (version 1.14 - de MySQL nécessaire pour l'expansion GEOMETRY)</dt>
                   <dd>de Martin Davis <a href="http://tsusiatsoftware.net/" target="_blank">http://tsusiatsoftware.net/</a><br/>
                     Licence: <a href="http://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt" target="_blank">GNU Library General Public License (LGPLv2.0)</a>
                     dans la distribution SIARD comme <em>doc/licenses/LGPLv2.0.txt</em>.
@@ -226,17 +233,6 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2017
                   <dd>de Microsoft <a href="https://msdn.microsoft.com/library/mt484311.aspx" target="_blank">https://msdn.microsoft.com/library/mt484311.aspx</a><br/> 
                     Licence: <a href="https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774" target="_blank">Microsoft License</a> 
                     dans la distribution SIARD comme <em>doc/licenses/license41.txt</em>.
-                  </dd>
-                  <dt>JdbcH2</dt>
-                  <dd>des Archives fédérales suisses<br/>
-                    Licence: <a href="http://opensource.org/licenses/CDDL-1.0" target="_blank">CDDL-1.0 license</a> 
-                    dans la distribution SIARD comme <em>doc/licenses/CDDL-1.0.txt</em>
-                  </dd>
-                  <dt>H2 database (Version 1.3.176)</dt>
-                  <dd>de Thomas Müller <a href="http://www.h2database.com/" target="_blank">http://www.h2database.com/</a><br/> 
-                    Licence: licence double <a href="https://opensource.org/licenses/eclipse-1.0.txt" target="_blank">Eclipse Public License v1.0 (EPL1.0)</a> et 
-                    <a href="https://www.mozilla.org/media/MPL/2.0/index.815ca599c9df.txt" target="_blank">Mozilla Public License 2.0 (MPL2.0)</a> 
-                    dans la distribution SIARD comme <em>doc/licenses/EPL1.0.txt</em> und <em>doc/licenses/MPL2.0.txt</em>.
                   </dd>
                   <dt>JdbcDb2</dt>
                   <dd>des Archives fédérales suisses<br/>

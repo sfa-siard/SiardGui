@@ -64,11 +64,13 @@ public class SiardGui extends Application
   public static List<String> getCreators() { return listCREATORS; }
   private static final List<String> listCONTRIBUTORS = Arrays.asList(new String[]{
       "Marcel Büchler",
-      "Krystyna Ohnesorge"
+      "Krystyna Ohnesorge",
+      "Max Burri",
+      "Jan Walker"
     });
   public static List<String> getContributors() { return listCONTRIBUTORS; }
   private static final List<String> listPROVENANCES = Arrays.asList(new String[]{
-      "Enter AG, Rüti ZH, Switzerland",
+      "Puzzle ITC GmbH, Berne, Switzerland",
       "Swiss Federal Archives, Berne, Switzerland"
     });
   public static List<String> getProvenances() { return listPROVENANCES; }
@@ -78,7 +80,7 @@ public class SiardGui extends Application
     "SIARD Suite",MF.getSpecificationVersion(),
     "SiardGui",MF.getImplementationVersion(),
     "Program to download, view, upload database content and database edit meta data in a .siard file",
-    "Swiss Federal Archives, Berne, Switzerland, 2007-2017");
+    "Swiss Federal Archives, Berne, Switzerland, 2007-2022");
 
   /** splash stage */
   private Stage _stageSplash = null;

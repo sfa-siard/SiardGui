@@ -8,7 +8,7 @@ Platform   : JAVA, ANT
 Copyright  : 2016, Enter AG, Rüti ZH, Switzerland
 Created    : 01.06.2017, Hartwig Thomas
 ==================================================================== -->
-<project basedir="." default="build" name="siardgui" xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project basedir="." default="build" name="siardgui">
   <!-- build properties contain local settings. They must reside in
 	   the same folder as this build.xml. Use build.properties.template
 	   as a guide for creating the local copy.
@@ -171,7 +171,6 @@ Created    : 01.06.2017, Hartwig Thomas
     <property name="zipfolder" value="siard_suite-${version}"/>
     <echo message="version: ${version}"/>
     <echo message="revold: ${revold}"/>
-    <echo message="distribution: ${distribution}"/>
     <echo message="zipfolder: ${zipfolder}"/>
     <!-- fail if build.properties are not configured -->
     <fail  message="External build.properties not configured correctly!">
@@ -203,7 +202,6 @@ Created    : 01.06.2017, Hartwig Thomas
     </condition>
     <echo message="branch: ${branch}"/>
     <echo message="branch.master: ${branch.master}"/>
-    <echo message="build.properties.configured: ${build.properties.configured}"/>
   </target>
   
   <!-- increment revision and update manifest -->
