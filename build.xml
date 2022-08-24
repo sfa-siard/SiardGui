@@ -143,7 +143,7 @@ Created    : 01.06.2017, Hartwig Thomas
     <delete dir="${dirbuildclasses}"/>
     <delete dir="${dirbuildtests}"/>
     <delete dir="${dirtmp}"/>
-    <delete dir="${dirdist}"/>
+
     <delete dir="${dirjre}/jre-win-32"/>
     <delete dir="${dirjre}/jre-win-64"/>
     <delete dir="${dirjre}/jre-linux-32"/>
@@ -419,7 +419,7 @@ Created    : 01.06.2017, Hartwig Thomas
       	<exclude name="${jarhamcrest}"/>
       	<exclude name="${jarjunit4}"/>
       </zipfileset>
-      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+      <zipfileset dir="${dirbin}/bundled-jre" prefix="${zipfolder}">
         <exclude name="**/*.sh"/>
       </zipfileset>
       <zipfileset dir="${dirjre}/jre-win-32" prefix="${zipfolder}/${dirjre}">
@@ -448,7 +448,7 @@ Created    : 01.06.2017, Hartwig Thomas
     </zip>
   </target>
 
-  <!-- create the ZIP file with binaries for Windows 32 Bit -->
+  <!-- create the ZIP file with binaries for Windows 64 Bit -->
   <!-- folders in the distribution -->
   <target name="release-win-64" depends="jar, unzip-jre-win-64">
     <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
@@ -460,7 +460,7 @@ Created    : 01.06.2017, Hartwig Thomas
         <exclude name="${jarhamcrest}"/>
         <exclude name="${jarjunit4}"/>
       </zipfileset>
-      <zipfileset dir="${dirbin}" prefix="${zipfolder}">
+      <zipfileset dir="${dirbin}/bundled-jre" prefix="${zipfolder}">
         <exclude name="**/*.sh"/>
       </zipfileset>
       <zipfileset dir="${dirjre}/jre-win-64" prefix="${zipfolder}/${dirjre}">
@@ -489,6 +489,8 @@ Created    : 01.06.2017, Hartwig Thomas
     </zip>
   </target>
 
+  <!-- create the ZIP file with binaries for Linux 32 Bit -->
+  <!-- folders in the distribution -->
   <target name="release-linux-32" depends="jar, unzip-jre-linux-32">
     <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
     <zip zipfile="${dirdist}/${distribution}-linux-32.zip">
@@ -506,7 +508,7 @@ Created    : 01.06.2017, Hartwig Thomas
       <zipfileset filemode="755" dir="${dirjre}/jre-linux-32" prefix="${zipfolder}/${dirjre}">
         <include name="**/bin/java"/>
       </zipfileset>
-      <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+      <zipfileset filemode="755" dir="${dirbin}/bundled-jre" prefix="${zipfolder}">
         <include name="**/*.sh"/>
       </zipfileset>
       <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
@@ -529,6 +531,8 @@ Created    : 01.06.2017, Hartwig Thomas
     </zip>
   </target>
 
+  <!-- create the ZIP file with binaries for Linux 64 Bit -->
+  <!-- folders in the distribution -->
   <target name="release-linux-64" depends="jar, unzip-jre-linux-64">
     <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
     <zip zipfile="${dirdist}/${distribution}-linux-64.zip">
@@ -546,7 +550,7 @@ Created    : 01.06.2017, Hartwig Thomas
       <zipfileset filemode="755" dir="${dirjre}/jre-linux-64" prefix="${zipfolder}/${dirjre}">
         <include name="**/bin/java"/>
       </zipfileset>
-      <zipfileset filemode="755" dir="${dirbin}" prefix="${zipfolder}">
+      <zipfileset filemode="755" dir="${dirbin}/bundled-jre" prefix="${zipfolder}">
         <include name="**/*.sh"/>
       </zipfileset>
       <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
@@ -569,7 +573,44 @@ Created    : 01.06.2017, Hartwig Thomas
     </zip>
   </target>
 
-  <target name="release-all" depends="release-linux-32, release-linux-64, release-win-64, release-win-32">
+  <!-- create the ZIP file with binaries for systems with JRE pre-installed -->
+  <target name="release-without-jre" depends="jar">
+    <echo message="${ant.project.name}: ${distribution} in ${zipfolder}"/>
+    <zip zipfile="${dirdist}/${distribution}.zip">
+      <zipfileset dir="${dirdist}" prefix="${zipfolder}/${dirlib}">
+        <include name="${jarfile}"/>
+      </zipfileset>
+      <zipfileset dir="${dirlib}" prefix="${zipfolder}/${dirlib}">
+        <exclude name="${jarhamcrest}"/>
+        <exclude name="${jarjunit4}"/>
+      </zipfileset>
+      <zipfileset dir="${dirbin}/system-jre" prefix="${zipfolder}">
+        <exclude name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset filemode="755" dir="${dirbin}/system-jre" prefix="${zipfolder}">
+        <include name="**/*.sh"/>
+      </zipfileset>
+      <zipfileset dir="${dirdoc}" prefix="${zipfolder}/${dirdoc}">
+        <include name="**/*.*"/>
+        <exclude name="developer/**/*.*"/>
+      </zipfileset>
+      <zipfileset dir="${dirhxd}" prefix="${zipfolder}/${dirhxd}">
+        <exclude name="*.ini"/>
+      </zipfileset>
+      <zipfileset dir="${diretc}" prefix="${zipfolder}/${diretc}">
+        <exclude name="debug.properties"/>
+        <exclude name="testing.properties"/>
+      </zipfileset>
+      <zipfileset dir="${dirtestfiles}" prefix="${zipfolder}/${dirtestfiles}">
+        <include name="*.siard"/>
+      </zipfileset>
+      <zipfileset dir="." prefix="${zipfolder}">
+        <include name="*.txt"/>
+      </zipfileset>
+    </zip>
+  </target>
+
+  <target name="release-all" depends="release-linux-32, release-linux-64, release-win-64, release-win-32, release-without-jre">
     <echo>Create all releases....</echo>
   </target>
 
