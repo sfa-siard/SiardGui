@@ -42,20 +42,24 @@ More information about the build process can be found in
 Azul Zulu 1.8 Fx for Windows (64-bit)
 
 ```bash
+mkdir "./jre"
 wget https://cdn.azul.com/zulu/bin/zulu8.64.0.15-ca-fx-jre8.0.342-win_x64.zip -O ./jre/jre-win-64-bit.zip
 ```
 
 Azul Zulu 1.8 FX for Windows (32-bit)
 ```bash
+mkdir "./jre"
 wget https://cdn.azul.com/zulu/bin/zulu8.64.0.15-ca-fx-jre8.0.342-win_i686.zip -O ./jre/jre-win-32-bit.zip
 ```
 
 Linux Azul Zulu 1.8 (64-bit)
 ```bash
+mkdir "./jre"
 wget https://cdn.azul.com/zulu/bin/zulu8.64.0.15-ca-fx-jre8.0.342-linux_x64.tar.gz -O ./jre/jre-linux-64-bit.tar.gz
 ```
 
 Linux Azul Zulu 1.8 (32-bit)
 ```bash
+mkdir "./jre"
 wget https://cdn.azul.com/zulu/bin/zulu8.64.0.15-ca-fx-jre8.0.342-linux_i686.tar.gz -O ./jre/jre-linux-32-bit.tar.gz
 ```
