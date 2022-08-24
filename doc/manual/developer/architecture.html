@@ -2,10 +2,11 @@
 <html lang="en">
 <!-- ===================================================================
 Developers' Manual of SiardGui: Architecture
-Application: SIARD Suite 2.1
+Application: SIARD Suite 2.2
 Platform   : HTML5
 ========================================================================
 Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
+             Puzzle ITC GmbH, Belpstrasse 37 3007 Berne, 2022
 ==================================================================== -->
   <head>
     <title>SiardGui - Developers' Manual - Architecture</title>
@@ -74,7 +75,7 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
                 <h3>Global Architecture</h3>
                 
                 <p>The SIARD project interacts with files containing 
-                  archived relational databases in the SIARD Format 2.1 
+                  archived relational databases in the SIARD Format 2.1 and 2.2
                   using the SIARD API.</p>
                 <p>The SIARD project interacts with relational databases 
                   using the <a href="http://download.oracle.com/otndocs/jcp/jdbc-4_1-mrel-spec/index.html" target="_blank">JDBC API (4.1)</a> 
@@ -100,15 +101,13 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
                   <dt>SiardCmd</dt>
                   <dd>command-line executables for downloading and uploading relational databases</dd>
                   <dt>SiardApi</dt>
-                  <dd>API for reading an writing files in the SIARD Format 2.1</dd>
+                  <dd>API for reading an writing files in the SIARD Format 1.0 (read-only), 2.1 (read-only) and 2.2 (read and write). </dd>
                   <dt>Zip64File</dt>
                   <dd>implementation of the ZIP 64 standard</dd>
                   <dt>JdbcAccess</dt>
                   <dd>JDBC interface (pure Java) to MS Access databases</dd>
                   <dt>JdbcDb2</dt>
                   <dd>JDBC interface to DB/2 databases</dd>
-                  <dt>JdbcH2</dt>
-                  <dd>JDBC interface to H2 databases</dd>
                   <dt>JdbcMsSql</dt>
                   <dd>JDBC interface to MS SQL Server databases</dd>
                   <dt>JdbcMySql</dt>

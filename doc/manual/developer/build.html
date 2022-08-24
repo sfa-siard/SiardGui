@@ -2,10 +2,11 @@
 <html lang="en">
 <!-- ===================================================================
 Developers' Manual of SiardGui: Build
-Application: SIARD Suite 2.1
+Application: SIARD Suite 2.2
 Platform   : HTML5
 ========================================================================
 Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
+             Puzzle ITC GmbH, Belpstrasse 37 3007 Berne, 2022
 ==================================================================== -->
   <head>
     <title>SiardGui - Developers' Manual - Build</title>
@@ -58,26 +59,12 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
               <section class="clearfix">
                 <h2>Building the Project</h2>
                 <h3>Configuring the Build Process</h3>
-                <p>Before any build is executed, the file <em>build.properties.template</em>
-                  must be copied and the copy must be named <em>build.properties</em>.
-                <p>This file must be edited using a text editor to reflect 
+                <p>Before any build is executed edit <em>build.properties</em> to reflect
                   the local environment. (These property files as well as 
                   the files with a <em>.txt</em> extension are assumed to 
                   be in <em>ISO-8859-1</em> encoding, whereas all other text files 
                   are assumed to be encoded in <em>UTF-8</em>.) 
-                <p>If the property <em>git</em> is left undefined, no
-                  interaction with any repositories takes place during the build.
-                  It is possible, nevertheless, to create the project binaries
-                  from the downloaded source code.</p>
-                <p>If the property <em>git</em> is defined but the project's
-                  remote origin is the master branch (from the original git clone), 
-                  each build will merge the remote master branch with the 
-                  local repository and the current working copy, before 
-                  the build is executed.</p>
-                <p>If the project's origin is a development branch, the
-                  source code that was successfully tested and built will be
-                  pushed to that (remote) development branch.</p>
-                  
+
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Top of page</a></small>
                 </p>
@@ -105,8 +92,6 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
                     ot insufficient</dd>
                   <dt>clean</dt><dd>deletes all folders and files which will be produced by the build</dd>
                   <dt>init</dt><dd>creates empty folders for build results</dd>
-                  <dt>commit</dt><dd>adds and commits changes in the working copy to the local repository</dd>
-                  <dt>pull</dt><dd>updates working copy from master and development branch</dd>
                   <dt>revision</dt><dd>increments the revision number and writes it and the build date to <em>src/META-INF/MANIFEST.MF</em>.
                   <dt>generate</dt><dd>generates JAVA source files automatically from non-JAVA sources (using JAXB, ANTLR4, ...)</dd>
                   <dt>build</dt><dd>compiles the sources to the <em>build/classes</em> folder</dd>
@@ -114,8 +99,7 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
                   <dt>test</dt><dd>compiles the (JUnit) tests to the <em>build/tests</em> and runs them using the JAR file in the <em>dist</em> folder.</dd>
                   <dt>javadoc</dt><dd>creates Javadoc documentation in the folder <em>doc/javadoc</em> of published APIs of the project</dd>
                   <dt>zip</dt><dd>zips the JAR and all other supporting documents of the binary release into the <em>dist</em> folder</dd>
-                  <dt>push</dt><dd>pushes the tested sources of the build to the development branch, if the current project is not on the master branch</dd>
-                  <dt>deploy</dt><dd>unzips the binary release to a temporary location from which it can be run</dd>   
+                  <dt>deploy</dt><dd>unzips the binary release to a temporary location from which it can be run</dd>
                 </dl>
                 <p>It is sufficient to run the <em>deploy</em> task in order to achieve a complete build.</p>
                 <p>After a fresh clone of the remote master branch, it is advisable to run the <em>generate</em> task if there is one defined.
@@ -126,25 +110,12 @@ Copyright  : Enter AG, Joweid Zentrum 1, 8036 Rüti ZH, Switzerland, 2018
                 </p>
                 
                 <h3>Creating a Remote Development Branch</h3>
-                <p>Names of development branches should start with <em>dev</em>,
-                  indicate the institution and - possibly - the person 
-                  or task. Thus <em>dev/enter</em>, <em>dev/bar/marcel</em>
-                  or <em>dev/enter/bug945</em> are good names for development 
-                  branches.</p>
-                <p>In order to create a branch <em>dev/enter</em> the command</p>
-                <pre>git checkout -b dev/enter</pre>
-                <p>must be executed in the project folder <em>SiardGui</em>.</p>
-                <p>The currently active branch is found in <em>.git/HEAD</em>,
-                  which has the content</p>
-                <pre>ref: refs/heads/dev/enter</pre>
-                <p>as a result ot the previous command.</p>
-                <p>This command will then create a branch with the same 
-                  name in the remote repository:</p>
-                <pre>git push origin dev/enter</pre>
-                <p>When changes are pushed to the remote origin, the 
-                  local changes will be merged to the branch with the 
-                  same name.</p>
-
+                <p>Names of development branches should represent the work package covered with this branch. Good examples are:</p>
+                <ul>
+                  <li><pre>feature/siard-2.2-format</pre></li>
+                  <li><pre>issue/34-timezone-support</pre></li>
+                </ul>
+                <p>Refer to <a href="https://git-scm.com/">the official git website</a> to learn how to create, push, pull and merge feature branches.</p>
                 <p class="pull-right">
                   <small><a href="#" class="icon icon--before icon--power hidden-print">Top of page</a></small>
                 </p>
