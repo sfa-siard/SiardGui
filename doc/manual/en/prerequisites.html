@@ -72,7 +72,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
             </div>  
             <div class="mod mod-text">
               <section class="clearfix">
-                <p>A JAVA installation is a prerequisite for using <em>SIARD Suite</em>.
+                <p>A JAVA Runtime Environment (JRE) is a prerequisite for using <em>SIARD Suite</em>.
                   A suitable database system infrastructure is a prerequisite for loading 
                   or storing database content</p>
                 
@@ -83,16 +83,16 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
                 </p>
                 
                 <h2>JAVA</h2>
-                <p>Users of the <em>SIARD Suite</em> must install JAVA in advance. The minimum 
-                  technical requirement is JRE 1.8.</p>
-                <p>JAVA is freely available from <a href="http://www.java.com/" target="_blank">http://www.java.com/</a> (JRE – JAVA Runtime Environment) 
-                  or <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 
-                  (JDK - JAVA Development Kit). <em>SIARD Suite</em> makes use of features
-                  of JavaFX, which are part of the JAVA SE distribution but not yet
-                  integrated in OpenJDK. Therefore one cannot use OpenJDK (http://openjdk.java.net/)
-                  instead.</p>
-                <p>To find out whether JAVA 1.8 or higher is available under Windows, 
-                  proceed as follows: in the Windows "Start" menu item, type the command "cmd"
+                <p>
+                  Users can either download a <em>SIARD Suite</em> release package which includes a bundled
+                  JRE or, alternatively, install a JRE on their operating system. JAVA is freely available
+                  from <a href="http://www.java.com/" target="_blank">http://www.java.com/</a> (JRE – JAVA Runtime Environment)
+                  or from <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>
+                  (JDK - JAVA Development Kit). Note: <em>SIARD Suite</em> makes use of features
+                  of JavaFX which was integrated only in versions 8-10 of the JAVA distribution.
+                </p>
+                <p>To find out whether a suitable JAVA version (8-10) is available under Windows,
+                  proceed as follows: In the Windows "Start" menu item, type the command "cmd"
                   and enter "java -version" in the command window.</p>
                 <p class="pull-right">
                   <small>
@@ -104,7 +104,7 @@ Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
                 <p>In former versions of <em>SIARD Suite</em> a dependency on ODBC
                   necessitated the use of 32-bit JAVA for accessing MS Access databases.
                   <em>SIARD Suite 2.2</em> does not use ODBC for accessing MS Access databases anymore.
-                  Therefore those databases can be accessed on any platform (e.g. LINUX)
+                  Therefore, those databases can be accessed on any platform (e.g. LINUX)
                   and <em>SIARD Suite 2.2</em> is compatible with 32-bit JAVA as well as
                   64-bit JAVA. It is recommended to choose the JAVA architecture
                   according to the architecture of your operating system.</p>
