@@ -63,7 +63,7 @@ public class SiardGui extends Application
   });
   public static List<String> getCreators() { return listCREATORS; }
   private static final List<String> listCONTRIBUTORS = Arrays.asList(new String[]{
-      "Marcel Büchler",
+      "Nora Wyler",
       "Krystyna Ohnesorge",
       "Max Burri",
       "Jan Walker"
