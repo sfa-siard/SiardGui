@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ===================================================================
+Manual of SIARD Suite in Italian: Chapter Execution.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Avvio di SiardGui</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body onload="adaptImages();">
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Selezione della lingua</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/execution.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/execution.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a lang="it" title="Italiano selezionato" aria-label="Italiano selezionato" class="active">IT</a></li>
+                <li><a href="../en/execution.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manuale</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuale</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Avvio di <em>SiardGui</em></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Avvio di <em>SiardGui</em></h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>L'applicazione <em>SiardGui</em> comprende un'interfaccia 
+                  grafico interattivo (GUI - Graphical User Interface). 
+                  Con l'ausilio di SiardGui è possibile: 
+                  <ul>
+                    <li>Scaricare una banca dati e salvarla in un archivio SIARD,</li>
+                    <li>Mostrare, cercare, ordinare, completare e modificare i 
+                      metadati in un archivio SIARD, fintanto che i dati 
+                      primari restano invariati,</li>
+                    <li>Mostrare, cercare e ordinare i dati primari in un archivio SIARD,</li>
+                    <li>Caricare un archivio SIARD in un'istanza banca dati a scopo di ricerca,</li>
+                    <li>Scaricare i metadati per un archivio SIARD (senza dati primari),
+                      da una banca dati, per dare una prima occhiata al procedimento d'archiviazione,</li>
+                    <li>Importare una versione campione di metadati di un 
+                      archivio SIARD con le descrizioni esistenti.</li>
+                  </ul>
+                </p>
+                <p><em>SiardGui</em> è l'applicazione centrale, con la quale 
+                  i dati vengono elaborati in <em>formato SIARD</em>. I dati 
+                  primari non possono essere modificati. <em>SiardGui</em> non 
+                  è adatto per ricerche complesse; a questo scopo si consiglia 
+                  di caricare l'archivio SIARD in un'istanza banca dati, 
+                  nella quale si potrà disporre della piena funzionalità delle ricerche SQL.</p>
+                <p>La conversione di campi di banca dati del tipo TIME oppure 
+                  TIMESTAMP dipende dal fuso orario locale. Se viene memorizzato 
+                  l'orario 15:30 in una banca dati a Zurigo, allora verrà 
+                  salvato l'orario UTC 14:30 (in inverno!) nei metadati 
+                  dell'archivio SIARD. Se tutti gli orari devono essere 
+                  interpretati nella banca dati come orari UTC, allora 
+                  occorre avviare <em>SiardGui</em> con l'opzione 
+                  <pre>-Duser.timezone=GMT</pre></p>
+                <p><em>SiardGui</em> può essere avviato con il nome di un 
+                  archivio SIARD come unico argomento, che viene aperto 
+                  subito dopo l'avvio. Ciò consente di impostare 
+                  <em>siardgui.cmd</em> come applicazione standard per 
+                  l'apertura di file con l'estensione <em>.siard</em>.
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2>Primo avvio</h2>
+                <p><em>SIARD Suite</em> è disponibile come pacchetto ZIP da scaricare, 
+                  decomprimere ed estrarre. Il file <em>SiardGui.jar</em> si trova nella 
+                  cartella <em>lib</em> del programma. Se JAVA è stato installato 
+                  correttamente, il programma si avvia, sotto Windows, con 
+                  un doppio clic sul file JAR. In alternativa si può avviare 
+                  lo script specifico della piattaforma <em>siardgui.cmd</em>
+                  (Windows) oppure <em>siardgui.sh</em> (LINUX).</p>
+                <p>Nel caso ciò non funzionasse o se si lavora con un altro 
+                  sistema operativo, <em>SiardGui</em> può anche essere avviato 
+                  dalla riga di comando nella cartella <em>lib</em> di 
+                  <em>SIARD Suite</em> come segue:</p> 
+                  <pre>javaw -jar lib/siardgui.jar (Windows)
+java -jar lib/siardgui.jar (tutti i sistemi operativi)</pre>
+                <p>Ciò è possibile a condizione che la cartella <em>bin</em> della 
+                  versione JAVA sia stata aggiunta alla variabile PATH. 
+                  Normalmente ciò è stato già fatto al momento dell'installazione 
+                  di JAVA, altrimenti occorre scrivere il percorso completo 
+                  del programma JAVA: (p.es.</p>
+                  <pre>"C:\Program Files\Java\jre1.8.0_144\bin\javaw.exe" -jar lib/siardgui.jar</pre> 
+                  <p>comprese le virgolette).</p>
+                <p>Al primo avvio di <em>SiardGui</em> appare un messaggio come questo:</p>
+                <p><img alt="Message Initial Installation" src="initialnew.png"/></p>
+                <p>Dato che <em>SiardGui</em> ancora non conosce la lingua 
+                  dell'utente, quella in cui appare questo messaggio dipende 
+                  dalla lingua selezionata nel sistema operativo e al momento 
+                  dell'installazione di JAVA.</p>
+                <p>Rispondendo con <em>Sì</em>, si ha la possibilità d'indicare 
+                  una cartella vuota o nuova, nella quale può essere collocata 
+                  una copia di SIARD. Una volta installata, <em>SiardGui</em>
+                  potrà essere avviata dalla cartella scelta oppure tramite 
+                  un doppio clic sulla nuova icona installata sul desktop.</p>
+                <p>Indipendentemente da come <em>SiardGui</em> sia stata avviata, 
+                  sia da una chiavetta USB, da un CD-ROM, oppure se installata 
+                  sul pc dell'utente, appare sempre la seguente finestra principale.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2>Finestra principale</h2>
+                <p>La finestra principale è composta dal menu (in alto), 
+                  dall'albero di navigazione (a sinistra), dal contenuto 
+                  (a destra) e dalla riga di stato (in basso).</p>
+                <img class="screen" alt="Empty main window" src="mainempty.png"/>
+                <p>Il bordo che divide l'albero di navigazione e il contenuto, 
+                  può essere spostato a piacimento, e anche l'estensione 
+                  dell'intera finestra può essere adattata a piacimento 
+                  (comunque non può essere inferiore alla grandezza minima). 
+                  Caricando un file SIARD in <em>SiardGui</em>, la finestra principale 
+                  appare come segue:</p>
+                <img class="screen" alt="Main window with opened SIARD file" src="mainopened.png"/>
+                <p>La struttura a sinistra serve a navigare nei metadati, mentre 
+                  nella sezione a destra, in alto, si possono immettere o 
+                  modificare i metadati modificabili dell'oggetto banca dati 
+                  selezionato a sinistra, nell'albero di navigazione.</p>
+                  
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h3><em>Riprendi</em> e <em>Annulla</em></h3>
+                <p>Con il pulsante <em>Riprendi</em> si copiano le modifiche 
+                  effettuate nei metadati nell'archivio SIARD attualmente aperto. 
+                  Premendo invece <em>Annulla</em>, tutte le modifiche effettuate 
+                  dall'ultimo <em>Riprendi</em>, sono annullate.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h3>Tabella dei sotto-oggetti</h3>
+                <p>Nel contenuto viene mostrata una tabella dei sotto-oggetti 
+                  più importanti sotto i metadati modificabili. Cliccando sul 
+                  titolo di una colonna, la tabella viene ordinata secondo 
+                  questa colonna. Se le tabelle, gli schemi e le colonne 
+                  non hanno un ordine naturale nei metadati, allora <em>SiardGui</em>
+                  le visualizzerà di regola in ordine alfabetico. Per questo 
+                  motivo questa possibilità di ordinare i dati è molto 
+                  utile cercando di orientarsi in grandi schemi di banca dati.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2>Tabella con i dati primari</h2>
+                <p>Sotto <em>rows</em> vengono mostrati i dati primari per 
+                  ogni tabella. Dato che le tabelle possono diventare molto 
+                  grandi, non è possibile, e neanche utile, caricare e mostrare 
+                  tutti i record in una volta. Se viene selezionato <em>rows</em>
+                  viene invece mostrata una panoramica di 50 record al massimo, 
+                  distribuiti su tutta la tabella, quindi si può scegliere 
+                  quale ramo dev'essere mostrato in dettaglio, fino a raggiungere 
+                  il livello al quale viene mostrato ogni singolo record.</p>
+                <p>Cliccando sul titolo di una colonna di una view di dati primari, 
+                  tutta la tabella viene ordinata (in un file XML temporaneo, 
+                  che viene cancellato chiudendo il programma). Il processo di 
+                  ordinamento può durare un pò, ma è molto utile per trovare 
+                  dei singoli record in base a un valore di colonna.</p>
+                <p>La larghezza della colonna di una view di dati primari, 
+                  può essere modificata tirando la barra di divisione 
+                  tra i titoli delle colonne.</p>
+                <p>La rappresentazione del valore di un cella nella tabella, 
+                  è utile solo per brevi valori, perciò si può visualizzare una 
+                  versione più dettagliata del valore facendo un 
+                  doppio clic sulla cella.</p>
+                <img class="screen" alt="Simple value display" src="valuesimple.png"/>
+                <p>In questo modo viene visualizzato completamente un valore semplice, 
+                  che può essere copiato negli appunti.</p>
+                <p>Testi lunghi (p.es. VARCHAR, CLOB o valori XML) vengono 
+                  visualizzati in editor di testo esterno, che può essere configurato 
+                  nel menu <em>Strumenti / Opzioni</em>. Sotto Windows l'applicazione 
+                  editor standard è <em>Notepad</em>.</p>
+                <img class="screen" alt="Long text display" src="valuexml.png"/>
+                <p>Valori binari lunghi (p.es. VARBINARY o valori BLOB) vengono 
+                  visualizzati in editor binario esterno, che può essere 
+                  configurato nel menu <em>Strumenti / Opzioni</em>. Sotto 
+                  Windows è preconfigurato il programma freeware <em>HxD</em>,
+                  che viene fornito come parte di SIARD.</p>
+                <img class="screen" alt="Long binary display" src="valuebinary.png"/>
+                <p>Se si sa che una colonna BLOB contiene valori di un tipo 
+                  particolare, come p.es. dati PDF o d'immagine, allora 
+                  si può configurare un editor binario al posto di un display 
+                  esadecimale che raffigura bene questo tipo di dati.</p>
+                <p>Tipi di dati definiti dall'utente (UDTs - user-defined data types) 
+                  sono mostrati gerarchicamente con i nomi degli attributi in 
+                  grigio e i valori in bianco.</p>
+                <img class="screen" alt="Simple UDT value" src="valueudtsimple.png"/>
+                <p>Ognuno di questi valori può poi a sua volta essere mostrato 
+                  in dettaglio con un doppio clic.</p>
+                <img class="screen" alt="Complex UDT value with binary attribute" src="valueudtcomplex.png"/>
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archivio federale svizzero</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licenza</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

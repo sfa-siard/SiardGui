@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter External LOBs.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - External LOBs</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/external.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/external.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/external.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">External LOBs</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - External LOBs</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>The standard of the SIARD Format 2.2 states that large objects (LOBs)
+                  of a database may be stored in the external file system instead
+                  of inside the SIARD archive. The storage location must be
+                  specified in the metadata of the SIARD archive.</p>
+                <p>If some LOBs are to be stored externally, the corresponding
+                  LOB columns must first be associated with suitable external
+                  storage locations. Afterwards the database can be downloaded.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="mdonly">Download only metadata</a></h2>
+                <p>In order to associate storage locations with database columns,
+                  the metadata of a database must be downloaded first.</p>
+                <img class="screen" alt="Download metadata only example" src="mdonly.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                  
+                <h2><a id="extloc">Specify External Storage Locations</a></h2>
+                <p>The metadata fields "LOB Folder" and "MIME Type" can now be 
+                  entered.</p>
+                <p>The storage location of a LOB column may be specified
+                  as an absolute <em>file:</em>-URI. However, it is recommended to specify all
+                  LOB storage locations relative to a global URI in the global section
+                  of the SIARD metadata. In addition, it makes sense to specify the global
+                  metadata for database name etc. at the same time:</p>
+                <img class="screen" alt="Global External Location for LOB Storage" src="extglob.png"/>
+                <p><br/><em>N.B.: All LOB Folder locations must end with a slash indicating that they
+                  refer to existing directories in the file system.</em></p>
+                <p>The global external storage location may be specified as an
+                  absolute <em>file:</em>-URI. However, that would prevent moving the
+                  SIARD archive together with its external LOBs to a different location.
+                  Therefore, it is recommended to specify the external storage location
+                  relative to the directory where the SIARD archive resides, which is
+                  indicated by "../". In the example the global storage location
+                  is given as "../lobs/". Therefore all external LOBs will be stored in
+                  locations relative to the folder <em>lobs</em> in the directory where the
+                  SIARD archive is stored.<br/></p>
+                  
+                <p>The storage location of a specific LOB column
+                  is then specified relative to the global external storage location:</p>
+                <img class="screen" alt="Local External Location for PNG Storage" src="extpng.png"/>
+                <p><br/>The value "png/" in this example directs <em>SIARD Suite</em> to store and load
+                  externally stored LOBs of the <em>CPNG</em> column of the table <em>tblobsimple</em>
+                  in the existing external folder <em>lobs/png/</em> relative to 
+                  the location where the SIARD file is stored.</p>
+                <p>N.B.: If a maximum number of LOBs per folder is specified in the options
+                  dialog, the individual LOB files will not be stored in <em>lobs/png</em> directly,
+                  but rather in numbered subfolders of <em>lobs/png/</em> which contain
+                  at most the configured maximum number of LOBs.</p>  
+                <p>For externally stored LOB columns, a MIME type ("image/png" in the example) may be specified.
+                  This MIME type will be used by <em>SIARD Suite</em> to determine a suitable file name extension
+                  for the large objects (e.g. <em>.png</em> for MIME type <em>image/png</em>).</p>
+                  
+                <p>In a database more than one LOB column can be stored externally:</p>
+                <img class="screen" alt="Local External Location for FLAC Storage" src="extflac.png"/>
+                <p><br/>After these preparations it is advisable to display and store the metadata
+                  thus modified as an XML file.</p>
+                 
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                  
+                <h2><a id="extdown">Download LOBs to External Locations</a></h2>
+                <p>If such prepared metadata is available (e.g. imported from
+                  an external XML or downloaded as "metadata only") when a database
+                  is downloaded, it is used as "template" metadata. I.e. all
+                  entries for global metadata, descriptions, LOB folders etc. of
+                  the template are copied for the download of the primary data:</p>
+                <img class="screen" alt="Store SIARD archive with External LOBs Storage" src="extstore.png"/>
+                <br/>
+                <img class="screen" alt="Stored SIARD archive with External LOBs Storage" src="extstored.png"/>
+                <p><br/>In this example a small SIARD file is stored referencing the BLOBs in the 
+                  subfolders <em>lobs/png/</em> and <em>lobs/flac/</em> of its parent folder <em>db/</em>:                   
+                <img class="screen" alt="Externally Stored Files" src="extfiles.png"/>
+                <p><br/>N.B.: The Windows Explorer shows embedded metadata of the
+                  FLAC files from the BLOBs, because the file name extension <em>.flac</em> is
+                  known to it.</p>
+                
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

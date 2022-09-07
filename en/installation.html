@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter Installation.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Installation</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/installation.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/installation.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/installation.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Installation</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Installation</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>The following menu items are concerned with installation issues:
+                  <ul>
+                    <li><a href="#install"><em>Install</em></a>: installing the currently running copy of <em>SIARD Suite</em>,</li>
+                    <li><a href="#uninstall"><em>Uninstall</em></a>: uninstalling the currently installed copy of <em>SIARD Suite</em>.</li>
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2>What Does Installation Mean?</h2>
+                <p><em>SIARD Suite</em> can be deployed on any platform which satisfies
+                  the aforementioned <a href="prerequisites.html">prerequisites</a>.
+                  Therefore, installation is not implemented by a separate platform-specific
+                  installation program (e.g. setup.exe) but inside the <em>SIARD Suite</em>
+                  itself.</p>
+                <p>In fact installation really means the copying of the program
+                  files e.g. from a removable medium or another temporary location to some 
+                  fixed location (network or fixed disk) and the saving of some properties
+                  in the user's personal "home" directory which contains the state
+                  based on past executions (e.g. <em>C:\Users\&lt;User&gt;\.java\siard_suite-2.2.properties</em>).</p>
+                <p>Thus it is possible to run <em>SIARD Suite</em> without "installing" it.
+                  It will then just be executed directly from the temporary location
+                  without changing another installed version linked to the personal
+                  state properties.</p>
+                <p>In particular a new version can be executed alongside an old version
+                  that is already installed.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="install">Install</a></h2>
+                <p>The menu item <em>Tools/Install</em> permits installation
+                  of a new version of <em>SIARD Suite</em> and removes a previously installed version 
+                  if there is one.</p>
+                <p>The menu item <em>Tools/Install</em> will be disabled if the version number
+                  of the currently running instance of <em>SIARD Suite</em> is less or equal to the version
+                  of the installed instance.</p>
+                <p>Otherwise executing <em>Tools/Install</em> will
+                  <ul>
+                    <li>copy the files of the currently running instance to a 
+                      folder to be chosen by the user,</li>
+                    <li>create a personal state properties file, containing the 
+                      version and location of the installed instance, and</li>
+                    <li>attempt to create a shortcut for running <em>SIARD Suite</em> on 
+                      the desktop. This will not always work on all operating systems, 
+                      because LINUX distributions use a wide variety of ever-changing 
+                      desktops.</li>
+                  </ul> 
+                </p>
+                <p style="text-align:center;"> 
+                  <img alt="SIARD Desktop Icon" class="siardgui-icon" src="../siardgui.png"/>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a name="uninstall">Uninstall</a></h2> 
+                <p>The menu item <em>Tools/Unistall</em> removes a previously installed 
+                  version of <em>SIARD Suite</em> if there is one.</p>
+                <p>The menu item <em>Tools/Uninstall</em> will be disabled, if no personal
+                  state properties file can be found.</p>
+                <p>Otherwise executing <em>Tools/Uninstall</em> will remove
+                  <ul>
+                    <li>desktop shortcut for running <em>SIARD Suite</em>, if one can be found,</li>
+                    <li>the folder with the program files unless the currently
+                      running instance is the installed instance. This folder
+                      must then be removed manually, and</li>
+                    <li>the personal state properties file, if its removal was requested.</li>
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2>SIARD state properties</h2>
+                <p><em>SIARD Suite</em> reads and writes its state properties from
+                  a file <em>siard_suite_2.2.properties</em> which is located in the folder
+                  <em>.java</em> in the user's home directory.<p>
+                <p>The user's home directory is identified as the JAVA system property <em>user.home</em>.
+                  Unless it is redirected manually using a JVM -D argument, this
+                  system property has the same value as the environment variable <em>%USERPROFILE%</em>
+                  on Windows platforms or the environment variable <em>$HOME</em> (synonymous with "~")
+                  on LINUX/UNIX platforms.</p>
+                <p>The personal properties file is therefore usually
+                  <ul>
+                    <li><em>C:\Users\&lt;User&gt;\.java\siard_suite_2.2.properties</em> on Windows,</li>
+                    <li><em>/home/&lt;User&gt;/.java/siard_suite_2.2.properties</em> on most LINUX distributions.</li>
+                  </ul>
+                </p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

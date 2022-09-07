@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ===================================================================
+Manual of SIARD Suite in Italian: Chapter Quick Start.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Introduzione all' archiviazione di banchi dati</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Selezione della lingua</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/quickstart.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/quickstart.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a lang="it" title="Italiano selezionato" aria-label="Italiano selezionato" class="active">IT</a></li>
+                <li><a href="../en/quickstart.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manuale</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuale</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Introduzione all' archiviazione di banchi dati</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Introduzione all' archiviazione di banchi dati</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Questa è una breve descrizione di come le banche dati possono 
+                  essere archiviate con <em>SIARD Suite</em>. Viene inoltre 
+                  anche fatto cenno a dei temi riguardanti l'organizzazione, 
+                  rilevanti per l'archiviazione di banche dati.</p>
+                <ol>
+                  <li>Chiarisci quali parti della banca dati devono essere archiviati.
+                    Se necessario, devono essere interpellate anche le persone 
+                    responsabili, per esempio il servizio di valutazione dell'archivio.</li>
+                    
+                  <li>Prepara la banca dati per l'archiviazione: allestisci un nuovo 
+                    utente sulla banca dati, che possiede soltanto diritti di lettura 
+                    sugli oggetti da archiviare. Se necessario, fai una copia della 
+                    banca dati (o delle parti che servono) o allestisci delle 
+                    views. Durante l'archiviazione la banca dati non deve modificarsi, 
+                    altrimenti l'archiviazione fallisce. Non archiviare mai da un sistema live.</li>
+                      
+                  <li>Scarica la banca dati con <em>SIARD Suite</em>.</li>
+                  
+                  <li>Controllo della qualità: controlla il file SIARD per 
+                    assicurarti che tutti gli oggetti necessari siano archiviati. 
+                    Fai delle prove su campioni per assicurare la qualità dei dati.</li>
+                  
+                  <li>Controllo esteso della qualità: carica i dati SIARD 
+                    in un sistema di banca dati. Fai alcune ricerche sulla 
+                    banca dati originale e sulla banca dati di archivio e confronta i risultati.</li>
+                      
+                  <li>Completa i dati SIARD con dei metadati.</li>
+                  
+                  <li>Definisci quale documentazione esterna dev'essere 
+                    archiviata con il file SIARD, per garantire 
+                    l'intelligibilità (p.es. la tabella dei codici, 
+                    la documentazione di sistema, il diagramma Entity-Relationship ...).</li>
+                </ol>
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archivio federale svizzero</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licenza</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

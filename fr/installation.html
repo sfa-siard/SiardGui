@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<!-- ===================================================================
+Manual of SIARD Suite in French: Chapter Installation.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Installation</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+  
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sélection de la langue</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/installation.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a lang="fr" title="Français selectionné" aria-label="Français selectionné" class="active">FR</a></li>
+                <li><a href="../it/installation.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/installation.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite - Manuel</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Installation</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Installation</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Les menus ci-après concernent l'installation:</p>
+                <ul>
+                  <li><a href="#install"><em>Installer</em></a>: installation de la copie actuellement en fonction de <em>SIARD Suite</em>,</li>
+                  <li><a href="#uninstall"><em>Désinstaller</em></a>: désinstallation de la copie actuellement installée de <em>SIARD Suite</em>.</li>
+                </ul>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2>Que signifie Installation?</h2>
+                <p><em>SIARD Suite</em> peut être utilisé sur toutes les plates-formes qui satisfont aux <a href="prerequisites.html">conditions d'utilisation</a> susmentionnées. C'est la raison pour laquelle l'installation n'est pas réalisé dans un programme d'installation spécifique à une plate-forme (par ex. setup.exe) mais dans <em>SIARD Suite</em>.</p>
+                <p>L'installation consiste à copier les fichiers de programmes par ex. depuis un support de données ou depuis un répertoire temporaire dans un répertoire fixe (réseau ou disque dur) et à enregistrer quelques paramètres dans le répertoire propre à l'utilisateur qui garde en mémoire l'état des appels du programme (par ex. <em>C:\Users\&lt;User&gt;\.java\siard_suite-2.2.properties</em>).</p>
+                <p>Il est ainsi possible d'exécuter <em>SIARD Suite</em> sans "l'installer".
+                   Il est ensuite simplement exécuté depuis le répertoire temporaire et ne modifie aucun paramètre spécifique à l'utilisateur.</p>
+                <p>Une nouvelle version peut notamment être exécutée à côté d'une ancienne version.</p>
+                  
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="install">Installer</a></h2>
+                <p>Le menu <em>Outils/Installer</em> permet l'installation d'une nouvelle version de <em>SIARD Suite</em>. Pour autant qu'une ancienne version ait été installée, cette dernière sera tout d'abord effacée.</p>
+                <p>Le menu <em>Outils/Installer</em> est désactivé si la version de l'instance actuellement exécutée de <em>SIARD Suite</em> est plus petite ou identique à la version de l'instance installée.</p>
+                <p>Dans le cas contraire, <em>Outils/Installer</em> exécute les tâches suivantes:</p>
+                 <ul>
+                   <li>copiage des fichiers de l'instance actuellement exécutée dans un répertoire d'installation choisi par l'utilisateur,</li>
+                   <li>création d'un fichier personnel avec les paramètres relatifs à la version et au répertoire de la nouvelle instance installée, et</li>
+                   <li>création d'un raccourci sur le bureau pour l'exécution de <em>SIARD Suite</em>. Ceci n'est pas possible pour tous les systèmes d'exploitation, car par ex. les distributions LINUX utilisent un grand nombre de bureaux variables.</li>  
+                 </ul>
+                <p style="text-align:center;"> 
+                  <img alt="SIARD Desktop Icon" class="siardgui-icon" src="../siardgui.png"/>
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="uninstall">Désinstaller</a></h2> 
+                <p>Le menu <em>Outils/Désinstaller</em> élimine une version de <em>SIARD Suite</em> installée auparavant, pour autant qu'il en existe une.</p>
+                <p>Le menu <em>Outils/Désinstaller</em> est désactivé si aucun paramètre personnel n'a été trouvé.</p>
+                <p>Dans le cas contraire, <em>Outils/Désinstaller</em> exécute les tâches suivantes:</p>
+                <ul>
+                  <li>élimination du raccourci pour <em>SIARD Suite</em> du bureau, pour autant qu'il ait été trouvé,</li>
+                  <li>effacement du répertoire d'installation et des fichiers de programmes sauf si l'instance actuellement exécutée a été lancée depuis là - ce répertoire doit alors être effacé manuellement plus tard, et</li>
+                  <li>Effacement des paramètres personnels pour autant qu'il ait été requis.</li>
+                </ul>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2>Paramètres de SIARD</h2>
+                <p><em>SIARD Suite</em> lit et écrit ses paramètres depuis un fichier <em>SIARD Suite_2.2.properties</em> qui se trouve dans le répertoire de base <em>.java</em> de l'utilisateur.<p>
+                <p>Ce fichier de base de l'utilisateur est défini sur la valeur de la propriété system JAVA <em>user.home</em>.
+                  Pour autant qu'elle n'ait pas été redirigée manuellement par un argument JVM -D, cette propriété système a la même valeur que la variable d'environnement <em>%USERPROFILE%</em> sur la plate-forme Windows ou que la variable d'environnement <em>$HOME</em> (synonyme avec "~") sur les plates-formes LINUX/UNIX.</p>
+                <p>Normalement, on trouve ainsi les paramètres sous</p>
+                <ul>
+                  <li><em>C:\Users\&lt;User&gt;\.java\siard_suite_2.2.properties</em> pour Windows,</li>
+                  <li><em>/home/&lt;User&gt;/.java/siard_suite_2.2.properties</em> pour la plupart des distributions LINUX.</li>
+                </ul>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archives fédérales suisses</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licence</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

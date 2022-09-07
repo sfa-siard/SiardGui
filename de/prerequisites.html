@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- ===================================================================
+Manual of SIARD Suite in German: Chapter Voraussetzungen.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Voraussetzungen</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachauswahl</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a lang="de" title="Deutsch ausgewählt" aria-label="Deutsch ausgewählt" class="active">DE</a></li>
+                <li><a href="../fr/prerequisites.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/prerequisites.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/prerequisites.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Handbuch</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Handbuch</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Voraussetzungen</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Voraussetzungen</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Voraussetzung für die Benutzung der <em>SIARD Suite</em> ist ein
+                  JAVA Runtime Environment (JRE). Voraussetzung zum Laden aus oder
+                  zu einem Datenbank-System ist eine entsprechende Infrastruktur.
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2>JAVA</h2>
+                <p>
+                  Sie können entweder ein <em>SIARD-Suite</em>-Paket herunterladen, das ein gebündeltes JRE
+                  enthält, oder alternativ ein JRE auf Ihrem Betriebssystem installieren. JAVA ist frei
+                  erhältlich unter <a href="http://www.java.com/" target="_blank">http://www.java.com/</a>
+                  (JRE – JAVA Runtime Environment) oder unter <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a>
+                  (JDK - JAVA Development Kit). Achtung: <em>SIARD Suite</em> nutzt JavaFX,
+                  welches nur in Versionen 8-10 der JAVA-Distribution integriert ist.
+                </p>
+                <p>
+                  Ob eine geeignete JAVA-Version (8-10) unter Windows verfügbar ist, kann wie folgt
+                  überprüft werden: Unter dem Menüpunkt "Start" den Befehl "cmd" eintippen und "java -version"
+                  im Befehlsfenster eingeben.
+                </p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Architektur (32-bit/64-bit)</h3>
+                <p>In früheren Versionen von <em>SIARD Suite</em> bestand eine
+                  Abhängigkeit zu ODBC. Dies hatte zur Folge, dass nur die
+                  32-bit-Version von JAVA benutzt werden konnte, um auf MS Access
+                  Datenbanken zuzugreifen. <em>SIARD Suite 2.2</em> benutzt ODBC
+                  nicht mehr für die Verbindung zu MS Access Datenbanken. Auf solche
+                  Datenbanken kann deshalb neu auch auf anderen Plattformen (z.B. LINUX)
+                  und mit 64-bit JAVA zugegriffen werden. Es wird empfohlen, die
+                  JAVA-Architektur entsprechend der Architektur des Betriebssystems
+                  zu wählen.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2>Datenbanken</h2>
+                <p><em>SIARD Suite 2.2</em> unterstützt zum Zeitpunkt dieser Auslieferung
+                  die folgenden Datenbanksysteme:</p>
+                 <ul>
+                   <li>MS Access 2007 oder höher</li>
+                   <li>DB/2 8 oder höher</li>
+                   <li>MySQL (oder MariaDB) 5.5 oder höher</li>
+                   <li>Oracle 10 oder höher</li>
+                   <li>PostgreSQL 11 oder höher</li>
+                   <li>SQL Server 2012 oder höher</li>
+                 </ul>
+                <p>Zu einem späteren Zeitpunkt können weitere Datenbanksysteme 
+                  eingebunden werden. Die JDBC-Treiber der Datenbankhersteller
+                  sind normalerweise nicht SQL:2008-konform. Die meisten implementieren
+                  nicht einmal den JDBC 4 Standard auf den Gebieten der Datenbankmetadaten
+                  oder der komplexen Datentypen korrekt. Deshalb muss für jedes
+                  Datenbanksystem eine JDBC-Hülle entwickelt werden, welche wenigstens 
+                  soweit konform zu den Standards it, wie dies von <em>SIARD Suite</em> 
+                  benötigt wird.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Zum Seitenanfang
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Schweizerisches Bundesarchiv</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Lizenz</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

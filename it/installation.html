@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ===================================================================
+Manual of SIARD Suite in Italian: Chapter Installation.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Installazione</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Selezione della lingua</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/installation.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/installation.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a lang="it" title="Italiano selezionato" aria-label="Italiano selezionato" class="active">IT</a></li>
+                <li><a href="../en/installation.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manuale</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuale</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Installazione</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Installazione</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>I seguenti punti di menu riguardano l'installazione: 
+                  <ul>
+                    <li><a href="#install"><em>Installa</em></a>: installa la copia attualmente in uso di <em>SIARD Suite</em>,</li>
+                    <li><a href="#uninstall"><em>Disinstalla</em></a>: disinstalla la copia di <em>SIARD Suite</em> attualmente installata.</li>
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2>Che significa Installazione?</h2>
+                <p><em>SIARD Suite</em> può essere installato su tutte le piattaforme
+                  che soddisfano i <a href="prerequisites.html">presupposti</a>
+                  citati, perciò l'installazione non è realizzata in un programma
+                  d'installazione separato e specifico della piattaforma utilizzata
+                  (p.es. setup.exe), ma in <em>SIARD Suite</em> stessa.
+                
+                <p>Installare significa copiare i file di programma p.es. 
+                  da un supporto di memoria esterno o da un altro posto 
+                  temporaneo, su un posto fisso (rete o harddisk) e salvare 
+                  alcune impostazioni nella cartella personale dell'utente, 
+                  che registrano lo stato di precedenti avvii del programma 
+                  (p.es..: <em>C:\Users\&lt;User&gt;\.java\siard_suite-2.2.properties</em>).</p>
+                  
+                <p>E' quindi possibile avviare <em>SIARD Suite</em> senza "installarla". 
+                  In questo caso il programma viene avviato direttamente dal posto 
+                  temporaneo e non modifica alcuna impostazione dell'utente.</p>
+                  
+                <p>In particolare una nuova versione può essere eseguita 
+                  contemporaneamente a una versione già installata in precedenza.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="install">Installa</a></h2>
+                <p>Il punto di menu <em>Strumenti/Installa</em> consente l'installazione 
+                  di una nuova versione di <em>SIARD Suite</em>. Se sul sistema 
+                  era presente una versione più vecchia, questa viene prima cancellata.</p>
+
+                <p>Il punto di menu <em>Strumenti/Installa</em> è disattivato, 
+                  se la versione dell'istanza attuale di <em>SIARD Suite</em>
+                  è inferiore o uguale alla versione dell'istanza installata.</em>
+                    
+                <p>Altrimenti, <em>Strumenti/Installa</em> esegue: 
+                  <ul>
+                    <li>Copia i files dell'istanza attuale in una cartella 
+                      d'installazione scelta dall'utente,</li>
+                    <li>Crea un file personale con impostazioni contenenti la 
+                      versione e la cartella dell'istanza appena installata, e</li>
+                    <li>Crea un collegamento sul desktop per eseguire <em>SIARD Suite</em>.
+                      Ciò non è possibile per tutti i sistemi operativi, come p.es. 
+                      per le distribuzioni LINUX, che usano un grande 
+                      numero di Desktops, sempre diversi.</li>
+                  </ul>
+                </p>
+                <p style="text-align:center;"> 
+                  <img alt="SIARD Desktop Icon" class="siardgui-icon" src="../siardgui.png"/>
+                </p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="uninstall">Disinstalla</a></h2>
+                <p>Il punto di menu <em>Strumenti/Disinstalla</em> elimina 
+                  una versione di <em>SIARD Suite</em> installata in 
+                  precedenza, sempre che ne esista una.</p>
+                <p>Il punto di menu <em>Strumenti/Disinstalla</em> è disattivato,
+                  se non viene trovata nessuna impostazione personale.</p>
+                <p>Altrimenti, <em>Strumenti/Disinstalla</em> esegue:  
+                  <ul>
+                    <li>Elimina il collegamento di <em>SIARD Suite</em> dal desktop, 
+                      sempre che ne venga trovato uno,</li>
+                    <li>Elimina la cartella d'installazione con i files di 
+                      programma, eccetto che nel caso in cui l'istanza attuale 
+                      sia stata avviata da lì. In questo caso occorre 
+                      cancellare manualmente questa cartella più tardi, e</li>
+                    <li>Elimina le impostazioni personali, se la cancellazione 
+                      ne è stata desiderata.</li>
+                  </ul>
+                </p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2>Impostazioni SIARD</h2>
+                <p><em>SIARD Suite</em> legge e scrive le sue impostazioni dal 
+                  file <em>siard_suite_2.2.properties</em>, che si trova
+                  nella cartella <em>.java</em> nella cartella home dell'utente.
+                
+                <p>La cartella home dell'utente viene definita dal valore 
+                  <em>user.home</em> delle proprietà di sistema JAVA. 
+                  Se questa non viene deviata manualmente con un argomento 
+                  JVM –D, questa proprietà di sistema ha lo stesso valore 
+                  della variabile <em>%USERPROFILE%</em> delle piattaforme 
+                  Windows oppure la variabile <em>$HOME</em> (sinonimo con "~") 
+                  sulle piattaforme LINUX/UNIX.</p>
+                
+                <p>Di regola le impostazioni si trovano quindi sotto 
+                  <ul>
+                    <li><em>C:\Users\&lt;User&gt;\.java\siard_suite_2.2.properties</em> per Windows,</li>
+                    <li><em>/home/&lt;User&gt;/.java/siard_suite_2.2.properties</em> per la gran parte delle distribuzioni LINUX.</li>
+                  </ul>
+                </p>
+
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archivio federale svizzero</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licenza</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

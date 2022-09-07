@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter Menu.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Menu</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body onload="adaptImages();">
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/menu.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/menu.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/menu.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Menu of <em>SiardGui</em></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Menu of <em>SiardGui</em></h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>The following menu items are available in <em>SiardGui</em>:</p>
+                <ul>
+                  <li><a href="#download"><em>File / Download ...</em></a></li>
+                  <li><a href="#downloadmru"><em>File / Recent downloads</em></a></li>
+                  <li><a href="#upload"><em>File / Upload ...</em></a></li>
+                  <li><a href="#uploadmru"><em>File / Recent uploads</em></a></li>
+                  <li><a href="#open"><em>File / Open ...</em></a></li>
+                  <li><a href="#openmru"><em>File / Recently opened</em></a></li>
+                  <li><a href="#save"><em>File / Save</em></a></li>
+                  <li><a href="#close"><em>File / Close</em></a></li>
+                  <li><a href="#displaymd"><em>File / Display meta data ...</em></a></li>
+                  <li><a href="#augmendmd"><em>File / Augment meta data ...</em></a></li>
+                  <li><a href="#exit"><em>File / Exit</em></a></li>
+                  <li><a href="#copyall"><em>Edit / Copy all</em></a></li>
+                  <li><a href="#copy"><em>Edit / Copy</em></a></li>
+                  <li><a href="#export"><em>Edit / Export table ...</em></a></li>
+                  <li><a href="#find"><em>Edit / Find in meta data ...</em></a></li>
+                  <li><a href="#findnext"><em>Edit / Find next in meta data</em></a></li>
+                  <li><a href="#search"><em>Edit / Search in primary data ...</em></a></li>
+                  <li><a href="#searchnext"><em>Edit / Search next in primary data</em></a></li>
+                  <li><a href="#install"><em>Tools / Install ...</em></a></li>
+                  <li><a href="#uninstall"><em>Tools / Uninstall</em></a></li>
+                  <li><a href="#language"><em>Tools / Language</em></a></li>
+                  <li><a href="#integrity"><em>Tools / Check integrity ...</em></a></li>
+                  <li><a href="#options"><em>Tools / Options ...</em></a></li>
+                  <li><a href="#help"><em>? / Help</em></a></li>
+                  <li><a href="#info"><em>? / Info</em></a></li>
+                </ul>
+                <p>The menu items are disabled when they are not applicable to
+                  the current situation. Thus, initially, only <em>Download ...</em>
+                  and <em>Open ...</em> are available.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="download"><em>File / Download ...</em></a></h2>
+                <p>When this menu item is chosen, a dialog is displayed where the
+                  connection data for the database can be entered.</p>
+                <img class="screen" alt="Download connection dialog" src="conndown.png"/>
+                <p>The long text entry field in the middle must be filled with
+                  a JDBC URL and the database user for archival with password
+                  should be given. If only the meta data are to be downloaded
+                  (e.g. for a preliminary examination of the extent of the database)
+                  the box <em>Meta data only</em> must be checked. If views are
+                  to be archived as tables, the box <em>Archive views as tables</em>
+                  must be checked.</p>
+                <p>The server name, database name and database folder above
+                  only serve to help construct a correct URL for the target database 
+                  management system (DBMS). Changing them changes the sample URLs 
+                  displayed for each DBMS. Clicking on the <em>copy URL</em> Button 
+                  next to the sample URL copies it to the input field for the JDBC URL.</p>
+                <img class="screen" alt="Download connection dialog" src="conndowndb.png"/>
+                <p>However, any string can be entered as JDBC URL manually.
+                  This allows for site-specific security configurations such as
+                  Windows login or Kerberos. The vendor-specific definitions
+                  of JDBC URLs must be consulted if the simple standard presented
+                  here is insufficient (v. <a href="dbms.html#jdbcurl" target="_blank">Database Management Systems</a>).</p>
+                <p>It is generally inadvisable to use the database administrator user 
+                  (DBA, root, dbo, SYSTEM, sa, dbadmin, ...) for downloading a SIARD archive. The extent of the SIARD
+                  archive is defined by the objects to which the archiving database user
+                  has read-access. The global database administrator usually has read access to all databases
+                  on the system as well as numerous system tables that should not be archived.
+                  Therefore it is important to <a href="dbms.html#prepdownload" target="_blank">prepare the download</a>
+                  by choosing or creating a suitable archiving user.</p>
+                <p>If the connection cannot be established, the dialog is redisplayed
+                  until a valid JDBC URL has been entered or <em>Cancel</em> was
+                  pressed. If <em>Meta data only</em> was checked, a temporary SIARD file
+                  is created automatically which will be deleted when the program
+                  terminates. (However, the downloaded meta data can be edited,
+                  displayed, and exported before closing the file.) Otherwise the 
+                  name and location of the SIARD archive to be created must be chosen.</p>
+                <img class="screen" alt="File selector for SIARD file as download target" src="downfile.png"/>
+                <p>Then the download starts.</p>
+                <img class="screen" alt="Download progress" src="downloading.png"/>
+                <p>If the download was successful, the dialog can be closed pressing
+                  <em>OK</em> and the data downloaded are shown in the main window.
+                  There additional meta data should be specified giving at least
+                  a name for the database, the data owner prior to archiving
+                  and the time span during which the data was created.</p>
+                <p>Also, if the connection could be established successfully,
+                  the JDBC URL used is entered in a list of most recently used
+                  connection strings, which is available under the next menu item.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="downloadmru"><em>File / Recent downloads</em></a></h2>
+                <p>The most recently used connection data for download is available using this menu
+                item. Choosing one of them opens the connection dialog with the
+                JDBC URL and the database user filled in. Only the password must
+                still be entered.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="upload"><em>File / Upload ...</em></a></h2>
+                <p>When this menu item is chosen, a dialog is displayed, where the
+                  connection data for the database can be entered.</p>
+                <img class="screen" alt="Upload connection dialog" src="connupdb.png"/>
+                <p>The JDBC URL can be combined using database host, database name and 
+                  database folder and then copied in the same way as for the
+                  download connection dialog. As the content of the SIARD file
+                  is independent of the DBMS from which it was downloaded,
+                  the data can be uploaded to a different DBMS.</p>
+                <p>In addition one can check the option that database tables
+                  and types with the same name may be overwritten. This is dangerous
+                  if one connects using a database administrator account with very
+                  many privileges. On the other hand it is useful if a previous
+                  upload is to be repeated.</p>
+                <p>If <em>Schema only</em> is checked, only the schemas, types
+                  and empty tables are created without uploading any primary data.</p>
+                <p>On the bottom of the dialog a list of all schemas in the SIARD file is displayed.
+                  Here the names of the schemas of the DBMS can be entered
+                  that shall receive the data of the schemas of the SIARD archive.
+                  These or schemas must have been created 
+                  <a href="dbms.html#prepupload" target="_blank">prior to the upload</a>.
+                  The database user entered in this dialog must have the privilege
+                  to create types and tables in these schemas.
+                  The database user entered must have the privilege of creating
+                  types and tables in the schemas entered here. It is therefore often
+                  easiest to choose the root user for the upload.</p>
+                <p>If the target DBMS does not support UDTs or ARRAYs, the data
+                  will be "flattened" on upload, i.e. each UDT or ARRAY is uploaded
+                  by creating a separate column for each component.</p>
+                <img class="screen" alt="Upload progress" src="uploading.png"/>
+                <p>When the creation and upload of types and tables was successful
+                  the upload is considered as successful. Some types or tables may
+                  have been renamed to accommodate length limitations etc. of the
+                  target DBMS. In that case the long suffix is replaced by a number.</p>
+                <img class="screen" alt="Upload success dialog" src="uploaded.png"/>
+                <p>An attempt is only made at the end to enable the constraints.
+                  This may fail because one DBMS may have more strict rules than
+                  the other. Such a failure is displayed in the <em>Err</em> of the
+                  upload dialog.</p>
+                <img class="screen" alt="Upload constraint error" src="uploaderr.png"/>
+                <p>If the upload was successful, the JDBC URL used is entered in 
+                  a list of most recently used connection strings, which is available 
+                  under the next menu item.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="uploadmru"><em>File / Recent uploads</em></a></h2>
+                <p>The most recently used connection data for upload is available using this menu
+                item. Choosing one of them opens the connection dialog with the
+                JDBC URL and the database user filled in. Only the password and the
+                schema mapping must still be entered.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="open"><em>File / Open ...</em></a></h2>
+                <p>Choosing this menu item opens a file selector where an existing
+                  SIARD file can be chosen. After it is opened it is displayed in
+                  the main window where meta data can be amended and the primary
+                  data can be browsed.</p>
+                <p>If a SIARD file could be opened or downloaded successfully, its 
+                  name is added to a list of most recently used files which is available
+                  under the next menu item.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="openmru"><em>File / Recently opened</em></a></h2>
+                <p>Choosing one of the most recently used files opens it immediately
+                  in the main window.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="save"><em>File / Save</em></a></h2>
+                <p>If the meta data of the SIARD file has been changed, the changes 
+                  are only written to the disk when they are explicitly saved.</p>
+                <p>Temporary SIARD files created by downloading with option <em>Meta data only</em>
+                  cannot be saved. However, their meta data can be edited, displayed 
+                  and exported before closing the file.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="close"><em>File / Close</em></a></h2>
+                <p>Closing a SIARD archive makes it possible to download or open
+                  another one.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="displaymd"><em>File / Display meta data ...</em></a></h2>
+                <p>The meta data of the SIARD archive displayed in the main window
+                  can be examined as a human-readable document, when this menu item
+                  is chosen.</p>
+                <img class="screen" alt="Meta data summary" src="metadata.png"/>
+                <p>An HTML version of the meta data XML is displayed which was
+                  generated using the currently selected meta data XSL (XML Stylesheet 
+                  Language) transformation to HTML. By default a simple transformation is
+                  found in <em>etc/metadata.xsl</em>. But other more extensively
+                  designed ones can be given under <em>Tools / Options</em>.</p>
+                <p>The original meta data XML can be saved to an external file by
+                  pressing the button <em>Save XML</em> below.
+                  If the button <em>Save HTML</em> is pressed instead, the HTML
+                  version is saved instead which is the result of the XSL transformation
+                  of the original XML.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="augmendmd"><em>File / Augment meta data ...</em></a></h2>
+                <p>Externally saved meta data can be very useful when the "same" database
+                  is archived at a later date. Then it is not necessary to
+                  enter all descriptions of all tables and columns manually again. Instead one
+                  can augment the SIARD archive by externally saved meta data where
+                  these descriptions have been entered before.</p>
+                <p>After choosing a meta data XML file for augmenting the current
+                  SIARD archive, all descriptions are copied from the external XML
+                  to the open SIARD archive where the names of database objects
+                  (schema, table, column, ...) match. Accordingly, even if the current database
+                  is slightly different from the database documented in the imported
+                  meta data, most of the descriptions will be copied.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="exit"><em>File / Exit</em></a></h2>
+                <p>Choosing this menu item closes any open file and exits the
+                  program.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="copyall"><em>Edit / Copy all</em></a></h2>
+                <p>Choosing this menu item copies the table displayed in the right
+                  area to the clipboard. This may be a list of sub-objects or an 
+                  extract of primary data.</p>
+                <img class="screen" alt="Copy all schemas in Calc" src="copyallmeta.png"/>
+                <p>The content of the clipboard can be pasted into any other application
+                  which can accept text or tabular data. The table cells are separated by tabs.
+                  Therefore pasting into MS Excel or LibreOffice Calc will create
+                  an accessible tabular copy.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="copy"><em>Edit / Copy</em></a></h2>
+                <p>This menu item becomes activated if a cell in the table is clicked.
+                  Choosing it then copies the single record which contains the selected
+                  cell.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="export"><em>Edit / Export table ...</em></a></h2>
+                <p>Sometimes it is necessary to work on the whole table in a different
+                  application. For this purpose any table can be exported as an HTML
+                  file which essentially only contains a table.</p>
+                <p>The HTML format was chosen because it can be opened in MS Excel or
+                  LibreOffice Calc just like a CVS file. On the other hand, it does
+                  not have some of the weaknesses of a CVS file and it permits
+                  tables in tables for UDT values and links to external files for
+                  large object values (CLOB, BLOB, XML, ...).</p>
+                <p>When this menu item is chosen, target HTML file must be specified
+                  using a file selector dialog. The large object files, however,
+                  are stored in a special LOBs folder which can be modified under
+                  <em>Tools / Options ...</em></p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="find"><em>Edit / Find in meta data ...</em></a></h2>
+                <p>If there are many tables and columns, it is often difficult
+                  to find a particular piece of meta data again. With the help
+                  of the function <em>Find in meta data ...</em> all meta data
+                  can be found that contain a piece of text.</p>
+                <img class="screen" alt="Find dialog" src="find.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="findnext"><em>Edit / Find next in meta data</em></a></h2>
+                <p>Using <em>Find next in meta data</em> or <em>Shift-F3</em>
+                  all occurrences of the find string can be visited.</p>
+                <img class="screen" alt="Find next result" src="findnext.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="search"><em>Edit / Search in primary data ...</em></a></h2>
+                <p>Similarly it is sometimes desirable to search primary data tables
+                  for a particular string.</p>
+                <img class="screen" alt="Search dialog" src="search.png"/>
+                <p>The dialog for entering the string is more complex. The search
+                  is limited to simple columns. A subset of simple columns to be 
+                  searched can be selected. The search executed is a simple text search (numbers 
+                  and dates are treated like the texts that are displayed in the table).
+                  Also the search proceeds sequentially and may take some time for
+                  a large table. In order to search faster or for data in objects of
+                  large or complex types (CLOB, BLOB, XML, UDT, ARRAY, ...), it is preferable to upload
+                  the database to a DBMS and use SQL for the search.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="searchnext"><em>Edit / Search next in primary data</em></a></h2>
+                <p>Choosing <em>Search next in primary data</em> or pressing F3
+                  locates the next occurrence of the entered string.</p>
+                <img class="screen" alt="Search next result" src="searchnext.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="install"><em>Tools / Install ...</em></a></h2>
+                <p>As has been mentioned in the chapter <a href="installation.html" target="_blank">Installation</a>
+                  <em>SIARD Suite</em> can be installed anytime provided no installed
+                  version exists or the installed version has a lower version number.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="uninstall"><em>Tools / Uninstall</em></a></h2>
+                <p>An installation of <em>SIARD Suite</em> can be removed by
+                  choosing this menu item. Before proceeding
+                  the user is asked whether the personal preferences should also
+                  be removed or be kept for later installations of <em>SIARD Suite</em>.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="language"><em>Tools / Language</em></a></h2>
+                <p>Any of the supported user interface languages can be chosen here.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="integrity"><em>Tools / Check integrity</em></a></h2>
+                <p>If the SIARD archive contains a message digest over the primary
+                  data, this is recomputed and compared to the value stored.</p>
+                <p><em>SIARD Suite</em> computes and stores the message digest 
+                  in the meta data immediately after the first download.
+                  If the SIARD file was unzipped and some data was changed and the data 
+                  then rezipped the integrity check will fail.</p>
+                <p>However, it is quite easy to compute a message digest over the
+                  primary data and stick it the meta data. Thus the integrity check
+                  at best proves that changes were not made <em>manually</em> but
+                  rather using some program.</p>
+                <p>A better approach is to store all message digests generated at
+                  the time of download in a separate tightly managed database. Then
+                  the message digest in the meta data is first compared to the message
+                  digest in the external database. Only if it is unchanged, can
+                  the integrity check here be considered proof that the primary data 
+                  was not changed after the download.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="options"><em>Tools / Options ...</em></a></h2>
+                <p>The options dialog permits changing some values which will be stored
+                  as personal configuration values. Only if these values are changed
+                  in an installed instance of <em>SIARD Suite</em> will they be stored to the 
+                  personal preferences when the program terminates.
+                  Otherwise changes are only valid until the end of the session.</p>
+                <img class="screen" alt="Options dialog" src="options.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="help"><em>? / Help</em></a></h2>
+                <p>This menu item displays this manual.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id ="info"><em>? / Info</em></a></h2>
+                <p>This menu item displays the copyright notice for <em>SIARD Suite</em></p>
+                <img class="screen" alt="Info dialog" src="info.png"/>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de">
+<!-- ===================================================================
+Manual of SIARD Suite in German: Chapter Invocation.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Befehlszeilenaufruf</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Sprachauswahl</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a lang="de" title="Deutsch ausgewählt" aria-label="Deutsch ausgewählt" class="active">DE</a></li>
+                <li><a href="../fr/invocation.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/invocation.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/invocation.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Handbuch</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Handbuch</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Befehlszeilenaufruf</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Befehlszeilenaufruf</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Die Funktionen des Herunterladens und Hinaufladens der <em>SIARD Suite</em>
+                  können von der Befehlszeile aufgerufen werden:</p>
+                <ul>
+                  <li><a href="#siardfromdb"><em>SiardFromDb</em></a>: herunterladen eines SIARD-Archivs,</li>
+                  <li><a href="#siardtodb"><em>SiardToDb</em></a>: hinaufladen eiens SIARD-Archivs.</li>
+                </ul>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a id="siardfromdb">SiardFromDb</a></h2>
+                <p><em>SiardFromDb</em> ist ein Befehlszeilenprogramm welches eine Datenbank 
+                  in ein SIARD-Archiv herunterlädt. Mit <em>SiardFromDb</em> kann man</p>
+                <ul> 
+                  <li>ein SIARD-Archive (Metadaten und Primärdaten) aus einer Datenbank (Option <em>-s</em>), und/oder</li>
+                  <li>eine SIARD Metadaten XML mit der Definition des Datenbankschemas (option <em>-e</em>).</li>
+                </ul>
+                <p>erzeugen.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Aufruf</h3>
+                <pre>java -cp &lt;siardpath&gt;/lib/siardcmd.jar ch.admin.bar.siard2.cmd.SiardFromDb [-h] |
+[-o] [-v] [-l=&lt;login timeout&gt;] [-q=&lt;query timeout&gt;] [-i=&lt;import meta data&gt;] [-x=&lt;external lob folder&gt;] [-m=&lt;mime type&gt;]
+-j=&lt;JDBC URL&gt; -u=&lt;database user&gt; -p=&lt;database password&gt; -s=&lt;siard file&gt; -e=&lt;export meta data&gt;"
+                </pre>
+                <p>Als &lt;siardpath&gt; ist der Ordner anzugeben, wo <em>SIARD Suite</em> installiert
+                  wurde. Die Datei <em>siardcmd.jar</em> befindet sich im Unterordner <em>lib</em> mit
+                  ihrer Klasse <em>ch.admin.bar.siard2.cmd.SiardFromDb</em>, deren <em>main()</em>
+                  mit <em>java</em> aufgerufen wird (unter Windows ist stattdessen <em>javaw</em> zu benutzen).</p>
+                <p>Die Aufrufsyntax wird angezeigt, wenn die Option <em>-h (help)</em> als Argument
+                  der Befehlszeile steht.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Argumente</h3>
+                <table>
+                  <tr><th>Argument</th><th>Bedeutung</th></tr>
+                  <tr><td>-o</td><td>Überschreiben (overwrite) der Ausgabe Datei(en), wenn sie existieren</td></tr>
+                  <tr><td>-v</td><td>Views (Ansichten) als Tabellen archivieren</td></tr>
+                  <tr><td>&lt;login timeout&gt;</td><td>Timeout in Sekunden für die Anmeldung (login) (0 für unbeschränkt)</td></tr>
+                  <tr><td>&lt;query timeout&gt;</td><td>Timeout in Sekunden für die Abfrage (0 für unbeschränkt)</td></tr>
+                  <tr><td>&lt;import meta data&gt;</td><td>Name der Metadaten XML-Datei, die als Muster zu berücksichtigen ist</td></tr>
+                  <tr><td>&lt;external LOB folder&gt;</td><td>Ordner wo die Daten der grössten LOB (large object) Spalte der Datenbank extern zu speichern sind (gleichnamige Inhalte werden überschrieben!)</td></tr>
+                  <tr><td>&lt;mime type&gt;</td><td>MIME-Typ der Daten der grössten LOB-Spalte der Datenbank (beeinflusst die Wahl der Namenerweiterung der extern gespeicherten LOBs)</td></tr>
+                  <tr><td valign="top">&lt;JDBC URL&gt;</td><td>JDBC URL der Datenbank, die heruntergeladen werden soll<br/>
+                    z.B.
+                    <dl>
+	                    <dt>für <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>für <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>für <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>für <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>für <em>Postgres</em></dt>
+	                      <dd><em>jdbc:postgresql://dbserver.enterag.ch:5432/testdb</em></dd>
+	                    <dt>für <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em></dd>
+                    </dl> 
+                  </td></tr>
+                  <tr><td>&lt;database user&gt;</td><td>Datenbank User</td></tr>
+                  <tr><td>&lt;database password&gt;</td><td>Datenbank Passwort</td></tr>
+                  <tr><td>&lt;siard file&gt;</td><td>Name der zu erzeugenden .siard Datei</td></tr>
+                  <tr><td>&lt;export meta data&gt;</td><td>Name der zu exportierenden .xml Metadaten-Datei</td></tr>
+                </table>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Bemerkungen</h3>
+                <p>Entweder die SIARD Datei oder die Exportdatei für Metadaten oder beide müssen gegeben sein.</p>
+                <p>Das Programm <em>SiardFromDb</em> sollte gegen einen Datenbank-Snapshot aufgerufen werden, 
+                  der sich während des Archivierungsprozesses nicht ändert.</p>
+                <p>Die Option <em>Views als Tabellen archivieren</em> hat normalerweise
+                  redundante Speicherung derselben Daten zur Folge und ist deshalb
+                  nicht empfohlen. Sie ist dann nützlichm wenn der für das Archvieren
+                  genutzte Datenbank-User die Inhalte der Views (Ansichten) anzeigen kann,
+                  nicht aber die der Basistabellen.</p>
+                <p>Der Archivierungsprozess ist entweder gänzlich erfolgreich oder er scheitert gänzlich.</p>
+                <p>Für grosse Datenbanken wird empfohlen, zuerst die Metadaten-XML herunterzuladen.
+                  Diese enthält alle Metadaten und Tabellengrössen und hilft so der
+                  Abschätzung der für den Download benötigten Ausführungszeit.
+                  Ausserdem sollte man die Option <em>-q 0</em> für grosse Tabellen verwenden,
+                  da es unmöglich ist, abzuschätzen, wie viele Sekunden eine Grössenabfrage dauern
+                  wird.</p>
+                <p>Die Konversion von TIMEs und TIMESTAMPs in der Datenbank hängt von
+                  der lokalen Zeitzone ab. Wenn die Zeit 15:30 in Zürich archiviert wird,
+                  wird die UTC-Zeit 14:30 im SIARD-Archiv gespeichert - im Winter.
+                  Um diese Konversion zu unterdrücken, muss <em>SiardFromDb</em> 
+                  mit der Option</p> 
+                  <pre>-Duser.timezone=GMT</pre>
+                  <p>gestartet werden, welche SIARD veranlasst, alle Datenbankzeiten als UTC-Zeiten zu interpretieren.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Archivbenutzer</h3>
+                <p>Es ist generell keine gute Idee, den Datenbankadministrator (DBA,
+                  root, dbo, ...) mit allen Rechten für das Herunterladen eines SIARD-Archivs zu benutzen.
+                  Der Umfang der im SIARD-Archiv gespeicherten Daten ist durch die Objekte definiert,
+                  auf welche der Archibbenutzer lesend zugreifen darf. Der globale DBA 
+                  kann normalerweise alle Datenbanken auf dem System und ausserdem viele
+                  Systemtabellen lesen, die nicht zu archivieren sind.
+                  Deshalb ist es wichtig, einen passenden, allenfalls neu zu erzeugenden, Archivbenutzer für das Herunterladen 
+                  zu benutzen.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h2><a id="siardtodb">SiardToDb</a></h2>
+                <p><em>SiardToDb</em> ist ein Befehlszeilenprogramm welches ein SIARD-Archiv 
+                  zu Recherchezwecken in eine Datenbank-Instanz lädt.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Aufruf</h3>
+                <pre>java -cp &lt;siardpath&gt;/lib/siardcmd.jar ch.admin.bar.siard2.cmd.SiardToDb [-h]
+[-o] [-l=&lt;login timeout&gt;] [-q=&lt;query timeout&gt;]
+-s=&lt;siard file&gt; -j=&lt;JDBC URL&gt; -u=&lt;database user&gt; -p=&lt;database password&gt;
+[&lt;schema&gt; &lt;mappedschema&gt;]*</pre>
+                <p>Als &lt;siardpath&gt; ist der Ordner anzugeben, wo <em>SIARD Suite</em> installiert
+                  wurde. Die Datei <em>siardcmd.jar</em> befindet sich im Unterordner <em>lib</em> mit
+                  ihrer Klasse <em>ch.admin.bar.siard2.cmd.SiardToDb</em>, deren <em>main()</em>
+                  mit <em>java</em> aufgerufen wird (unter Windows ist stattdessen <em>javaw</em> zu benutzen).</p>
+                <p>Die Aufrufsyntax wird angezeigt, wenn die Option <em>-h (help)</em> als Argument
+                  der Befehlszeile steht.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Argumente</h3>
+                <table>
+                  <tr><th>Argument</th><th>Bedeutung</th></tr>
+                  <tr><td>-o</td><td>Überschreiben (overwrite) von gleichnamigen Typen und/oder Tabellen in der Datenbank, sofern solche existieren</td></tr>
+                  <tr><td>&lt;login timeout&gt;</td><td>Timeout in Sekunden für die Anmeldung (login) (0 für unbeschränkt)</td></tr>
+                  <tr><td>&lt;query timeout&gt;</td><td>Timeout in Sekunden für eine Abfrage (query) (0 für unbeschränkt)</td></tr>
+                  <tr><td>&lt;siard file&gt;</td><td>Name der hochzuladenden .siard Datei</td></tr>
+                  <tr><td valign="top">&lt;JDBC URL&gt;</td><td>JDBC URL der Zieldatenbank<br/>
+                    z.B.
+                    <dl>
+	                    <dt>für <em>MS Access</em></dt>
+	                      <dd><em>jdbc:access:D:\Projekte\SIARD2\JdbcAccess\testfiles\testdb.mdb</em></dd>
+	                    <dt>für <em>DB/2</em></dt>
+	                      <dd><em>jdbc:dbserver.enterag.ch:50000/testdb</em></dd>
+	                    <dt>für <em>MySQL</em></dt>
+	                      <dd><em>jdbc:mysql://dbserver.enterag.ch:3306/testdb</em></dd>
+	                    <dt>für <em>Oracle</em></dt>
+	                      <dd><em>jdbc:oracle:thin:@dbserver.enterag.ch:1521:orcl</em></dd>
+	                    <dt>für <em>Postgres</em></dt>
+	                      <dd><em>jdbc:postgres://dbserver.enterag.ch:5432/testdb</em></dd>
+	                    <dt>für <em>SQL Server</em></dt>
+	                      <dd><em>jdbc:sqlserver://dbserver.enterag.ch\testdb:1433</em></dd>
+                    </dl>
+                  </td></tr>
+                  <tr><td>&lt;database user&gt;</td><td>Datenbank User</td></tr>
+                  <tr><td>&lt;database password&gt;</td><td>Datenbank Passwort</td></tr>
+                  <tr><td>&lt;schema&gt;</td><td>Schemaname im SIARD-Archiv</td></tr>
+                  <tr><td>&lt;mappedschema&gt;</td><td>in der Datenbank zu benutzender Schemaname</td></tr>
+                </table>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Zum Seitenanfang</a>
+                  </small>
+                </p>
+                
+                <h3>Bemerkungen</h3>
+                <p>Da ältere Datenbanken nicht SQL:2008-konform sind, ist es unvermeidlich,
+                  dass etliche manuelle Vorbereitung für das Hochladen durchgeführt wird.
+                  Es gibt keine Schema-Objekte in MS Access. Benutzer und Schemas sind
+                  untrennbar in Oracle. Schemaobjekte und Datenbanken sind dasselbe in MySQL.
+                  Deshalb müssen alle Schemas vor dem Hochladen manuell erzeugt werden.
+                  Ausserdem muss der Datenbankbenutzer das Recht haben, Tabellen und Typen
+                  in diesen Schemas zu erzeugen.
+                  Da dies nicht immer einfach möglich ist, werden Datenbankschemas entsprechend
+                  der Abbildungsliste auf der Befehlszeile den Schemanamen zugeordnet.</p> 
+                <p>Das Hochladen erzeugt nur Tabellen und Typen und versucht Eindeutigkeits-
+                  und Fremdschlüssel zu aktivieren. Keine anderen Objekte werden in der
+                  Zieldatenbank erzeugt. Falls die Schlüssel nicht aktiviert werden konnten,
+                  wird eine Warnung ausgegeben, das Hochladen aber trotzdem als erfolgreich
+                  abgeschlossen betrachtet. Auch ohne diese Schlüssel kann man SQL SELECT
+                  Abfragen der Datenbank ausführen.</p>
+                <p>Ausserdem werden beim Hinaufladen evtl. gewisse Abstriche gemacht.
+                  Bei MS Access landen alle Tabellen in derselben MDB/ACCDB. Bei Oracle 
+                  werden alle Namen, die länger sind als 30 Zeichen gekürzt. Zur 
+                  Vermeidung von Kollisionen werden Tabellen- und Spaltennamen um 
+                  einen Zähler ergänzt. (So wird etwa aus der Tabelle 
+                  „Ein viel zu langer Tabellenname für Oracle“ zum Beispiel 
+                  „Ein viel zu langer Tabellen01“.)
+                <p>Wo die maximale Präzision und die maximale Anzahl Dezimalstellen 
+                  (etwa unter MS Access) kleiner ist als benötigt, werden die Werte 
+                  mit geringerer Präzision hinaufgeladen. SIARD behilft sich so gut 
+                  es eben im Zieldatenbanksystem möglich ist. Wenn man die Metadaten der
+                  Datenbank mittels <em>SiardGui</em> konsultiert, wird man die 
+                  korrekten Bezeichnungen und Werte zuordnen können.</p>
+                <p>Die Konversion von TIMEs und TIMESTAMPs in der Datenbank hängt 
+                  von der lokalen Zeitzone ab. Die UTC Zeit 14:30 im SIARD Archiv 
+                  wird beim Hochladen in Zürich als lokale Zeit 15:30 in die Datenbank
+                  geladen – im Winter. Um diese Konversion zu unterdrücken, muss
+                  <em>SiardToDb</em> mit der Option</p>
+                  <pre>-Duser.timezone=GMT</pre>
+                  <p>gestartet werden, welche SIARD veranlasst, alle Datenbankzeiten als UTC-Zeiten zu interpretieren.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Zum Seitenanfang
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Schweizerisches Bundesarchiv</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Lizenz</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

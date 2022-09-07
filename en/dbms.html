@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in English: Chapter DBMS.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - DBMS</title>
+    <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/dbms.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/dbms.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a href="../it/dbms.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a lang="en" title="English selected" aria-label="English selected" class="active">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manual</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manual</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">DBMS</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>Database Management Systems</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>There are some areas where the various database management
+                  systems (DBMS) are treated differently in <em>SIARD Suite</em>:</p>
+                <ul>
+                  <li><a href="#jdbcurl">JDBC URL for connecting to a database</a>,</li>
+                  <li><a href="#datatypes">Handling of proprietary data types</a>,</li>
+                  <li><a href="#prepdownload">Preparation of a database for download</a>,</li>
+                  <li><a href="#prepupload">Preparation of a database for upload</a>.</li>
+                </ul>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="jdbcurl">JDBC URL for connecting to a database</a></h2>
+                <p><em>SIARD Suite</em> documents the standard JDBC URL for connecting
+                  to a supported database system. However, there are many variations
+                  how database management systems embed platform (e.g. Windows login) or network security
+                  (e.g. Kerberos) into their access control. It is not possible here
+                  to document every specialty of every DBMS. However, as long as an
+                  acceptable JDBC URL is used, a connection to a database can be 
+                  established using <em>SIARD Suite</em>. For details about an acceptable
+                  JDBC URL for a DBMS its native documentation must be consulted.</p>
+                <dl>
+                  <dt>MS Access</dt>
+                    <dd>The JDBC implementation for MS Access only permits a single type of
+                      JDBC URL: jdbc:access:&lt;path to mdb/accdb&gt;</dd>
+                  <dt>DB/2</dt>
+                    <dd><a href="https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.7.0/com.ibm.db2.luw.apdv.java.doc/src/tpc/imjcc_r0052342.html">https://www.ibm.com/support/knowledgecenter/en/SSEPGG_9.7.0/com.ibm.db2.luw.apdv.java.doc/src/tpc/imjcc_r0052342.html</a></dd>
+                  <dt>MySQL</dt>
+                    <dd><a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html</a></dd>
+                  <dt>Oracle</dt>
+                    <dd><a href="http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm">http://docs.oracle.com/cd/B28359_01/java.111/b31224/jdbcthin.htm</a></dd>
+                  <dt>PostgreSQL</dt>
+                    <dd><a href="https://jdbc.postgresql.org/documentation/head/connect.html">https://jdbc.postgresql.org/documentation/head/connect.html</a></dd>
+                  <dt>SQL Server</dt>
+                    <dd><a href="https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url">https://docs.microsoft.com/en-us/sql/connect/jdbc/building-the-connection-url</a></dd>  
+                </dl>
+                <p>When connecting to a database using <em>SIARD Suite</em> fails, try
+                  a  native connection not involving <em>SIARD Suite</em> first.
+                  When that is successful but the JDBC URL still fails to connect
+                  to the database, try the same JDBC URL using <a href="http://squirrel-sql.sourceforge.net/" target="_blank">SQuirreL</a>.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="datatypes">Handling of proprietary data types</a></h2>
+                <p>The proprietary data types are mapped to SQL:2008 data types by the
+                  JDBC wrapper for each DBMS. The mapping is documented in the LibreOffice tables
+                  <em>Jdbc&lt;DBMS&gt;-TypeInfo.ods</em> in the folder <em>doc/datatypes</em>.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="prepdownload">Preparation of a database for download</a></h2>
+                <p><em>SIARD Suite</em> will download everything that is readable by the database user
+                  used for the connection. Choosing a suitable database user for the download
+                  determines the extent of the database being archived. Often a suitable
+                  "technical user" of a database application associated with the database
+                  has exactly the access rights needed for the archival of the database.</p>
+                <p>However, if no such user is available, one should <em>not</em> use the
+                  master database user (database administrator, DBA, dbo, root, SYSTEM, sa, ...)
+                  for the download because this master database user can read many system
+                  tables that should not be archived with the database. Instead, it is
+                  recommended, to create a new database user for the purpose of archiving
+                  a database. This <em>archival user</em> then should be granted read access to
+                  all schemas, tables, views, and types needed for archival. The documentation
+                  of the DBMS in question must be consulted to learn how to create such
+                  a user and grant the necessary rights.</p>
+                <p>After a suitable archival user has been determined or created,
+                  the download of the database can proceed using the credentials of
+                  the archival user.</p>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Top of page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="prepupload">Preparation of a database for upload</a></h2>
+                <p>For uploading a database to a DBMS using <em>SIARD Suite</em>, suitable 
+                  database schemas must be available on the target DBMS. 
+                  Those schemas can then be used in the schema mapping part of the 
+                  upload dialog (or in the schema mapping part of the arguments of 
+                  the command-line application <em>SiardToDb</em>).</p>
+                <p>Ideally the target schemas are empty. However, due to security constraints
+                  one does not always have the choice to choose or create schemas freely.
+                  If the target schemas are not empty, <em>SIARD Suite</em> will only upload
+                  the database if either no name collisions of tables and types
+                  prevail, or else the "overwrite" option has been checked.</p>
+                <p>The database user chosen for the upload of a database must have
+                  the privilege to create types and tables and insert data into them.
+                  The DBMS documentation must be consulted for information as to how
+                  the database schemas can be created and how the database user
+                  can be granted the privilege to create types and tables in them
+                  and insert data into them. If one has access to the master database user (database administrator, DBA, dbo, root, ...)
+                  it may be convenient to use it for upload of a database. However,
+                  in that case the "overwrite" option should not be selected.
+                  Otherwise there is too great a risk that vital tables or types
+                  are overwritten.</p>
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">
+                    Top of page
+                  </a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Swiss Federal Archives</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">License</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

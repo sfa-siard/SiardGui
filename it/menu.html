@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="it">
+<!-- ===================================================================
+Manual of SIARD Suite in Italian: Chapter Menu.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - Menu di SiardGui</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body onload="adaptImages();">
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Selezione della lingua</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/menu.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a href="../fr/menu.html" lang="fr" title="Français" aria-label="Français">FR</a></li>
+                <li><a lang="it" title="Italiano selezionato" aria-label="Italiano selezionato" class="active">IT</a></li>
+                <li><a href="../en/menu.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite 2.2 - Manuale</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuale</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">Menu di <em>SiardGui</em></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - Menu di <em>SiardGui</em></h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>In <em>SiardGui</em> sono disponibili i seguenti punti di menu: 
+                  <ul>
+                    <li><a href="#download"><em>File / Scarica ...</em></a></li>
+                    <li><a href="#downloadmru"><em>File / Scaricato da poco</em></a></li>
+                    <li><a href="#upload"><em>File / Carica ...</em></a></li>
+                    <li><a href="#uploadmru"><em>File / Caricato da poco</em></a></li>
+                    <li><a href="#open"><em>File / Apri ...</em></a></li>
+                    <li><a href="#openmru"><em>File / Aperto da poco</em></a></li>
+                    <li><a href="#save"><em>File / Salva</em></a></li>
+                    <li><a href="#close"><em>File / Chiudi</em></a></li>
+                    <li><a href="#displaymd"><em>File / Mostra i metadati ...</em></a></li>
+                    <li><a href="#augmendmd"><em>File / Arricchisci i metadati ...</em></a></li>
+                    <li><a href="#exit"><em>File / Esci</em></a></li>
+                    <li><a href="#copyall"><em>Modifica / Copia tutto</em></a></li>
+                    <li><a href="#copy"><em>Modifica / Copia</em></a></li>
+                    <li><a href="#export"><em>Modifica / Esporta tabella ...</em></a></li>
+                    <li><a href="#find"><em>Modifica / Trova nei metadati ...</em></a></li>
+                    <li><a href="#findnext"><em>Modifica / Riferimento successivo nei metadati</em></a></li>
+                    <li><a href="#search"><em>Modifica / Cerca nei dati di tabella ...</em></a></li>
+                    <li><a href="#searchnext"><em>Modifica / Riferimento successivo nella tabella</em></a></li>
+                    <li><a href="#install"><em>Strumenti / Installa ...</em></a></li>
+                    <li><a href="#uninstall"><em>Strumenti / Disinstalla</em></a></li>
+                    <li><a href="#language"><em>Strumenti / Lingua</em></a></li>
+                    <li><a href="#integrity"><em>Strumenti / Esamina integrità ...</em></a></li>
+                    <li><a href="#options"><em>Strumenti / Opzioni ...</em></a></li>
+                    <li><a href="#help"><em>? / Guida</em></a></li>
+                    <li><a href="#info"><em>? / Info</em></a></li>
+                  </ul>
+                </p>
+                <p>I punti di menu sono disattivati, se non possono essere 
+                  utilizzati nella situazione attuale. Per questo motivo 
+                  all'inizio sono disponibili soltanto i comandi <em>Scarica ...</em>
+                  e <em>Apri ...</em>.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="download"><em>File / Scarica ...</em></a></h2>
+                <p>Selezionando questo punto di menu appare una finestra di 
+                  dialogo nella quale possono essere immessi i dati di 
+                  connessione per la banca dati.</p>
+                <img class="screen" alt="Download connection dialog" src="conndown.png"/>
+                <p>Il lungo campo d'immissione testo al centro della maschera 
+                  dev'essere compilato con una URL JDBC, dopo di che occorre 
+                  digitare il nome utente e la sua password. Se bisogna 
+                  scaricare solo i metadati (p.es. solo per farsi un'idea 
+                  della dimensione della banca dati), occorre che sia 
+                  cliccata la casellina "Solo metadati". Se le schermate 
+                  devono essere scaricate come tabelle (p.es. se sono visibili per 
+                  l'utente solo le schermate, ma non le tabelle di base), 
+                  occorre cliccare sulla casellina "Archivia le schermate come tabelle".</p>
+                <p>Il nome del server, la cartella e il nome della banca dati 
+                  servono solo a compilare la URL corretta per il Datenbank 
+                  Management System (DBMS), ovvero il sistema di management 
+                  della banca dati. Se questi valori vengono modificati, 
+                  allora vengono modificate anche le URL di esempio, che 
+                  vengono mostrate per ogni DBMS supportato da SIARD. 
+                  Attivando il pulsante <em>Copia URL</em> che si trova 
+                  accanto alla URL di esempio, questa viene copiata nel 
+                  campo d'immissione per la URL JDBC.</p>
+                <img class="screen" alt="Download connection dialog" src="conndowndb.png"/>
+                <p>Può comunque essere immessa qualsiasi stringa di caratteri 
+                  come URL JDBC. In questo si può tener conto delle configurazioni 
+                  di sicurezza specifiche, come l'accesso Windows oppure Kerberos. 
+                  Le definizioni specifiche delle URL JDBC devono essere 
+                  consultate nella documentazione del fornitore del DBMS, 
+                  se gli standard qui presentati sono insufficienti (v. <a href="dbms.html#jdbcurl" target="_blank">Sistema di gestione banche dati</a>).</p>
+                <p>In generale non è una buona idea usare l'amministratore 
+                  banca dati (DBA, root, dbo, SYSTEM, sa, dbadmin, ...) per 
+                  scaricare un archivio SIARD. SIARD carica tutti i dati come 
+                  se fosse una banca dati nell'archivio, alla quale l'utente 
+                  banca dati attuale può aver accesso con diritti di lettura. 
+                  L'amministratore banca dati può avere accesso con diritti 
+                  di lettura a tutte le banche dati del DBMS e a molte tabelle 
+                  di sistema, che non devono essere archiviate. Perciò è importante 
+                  trovare o generare un utente adatto per l'archiviazione come 
+                  descritto in <a href="dbms.html#prepdownload" target="_blank">Preparazione per scaricare</a>.</p>
+                <p>Se la connessione alla banca dati non avviene, il dialogo 
+                  resta visualizzato fino a quando viene immessa una URL JDBC 
+                  valida o fino a quando non si preme <em>Annulla</em>. Se era 
+                  selezionata la casellina <em>Solo metadati</em>, viene creato 
+                  un archivio SIARD temporaneo che viene cancellato non appena 
+                  il programma viene chiuso (i metadati scaricati possono 
+                  però essere modificati, visualizzati ed esportati, 
+                  prima di chiudere l'archivio.) Altrimenti occorre selezionare 
+                  il nome e la cartella dove dev'essere allestito l'archivio SIARD.</p>
+                <img class="screen" alt="File selector for SIARD file as download target" src="downfile.png"/>
+                <p>Quindi il download ha inizio.</p>
+                <img class="screen" alt="Download progress" src="downloading.png"/>
+                <p>Se il download è riuscito, la finestra di dialogo può essere 
+                  chiusa premendo <em>OK</em>. I dati scaricati appaiono quindi 
+                  nella finestra principale, dove dovrebbero essere immessi 
+                  ulteriori metadati, almeno un nome per la banca dati, il 
+                  proprietario dei dati primari dell'archiviazione e la data 
+                  di creazione dei dati.</p>
+                <p>La URL JDBC appare quindi nella lista dei dati di collegamento 
+                  usati di recente e potrà essere selezionata nel punto di 
+                  menu descritto di seguito.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="downloadmru"><em>File / Scaricato da poco</em></a></h2>
+                <p>Qui vengono mostrati gli ultimi dati di collegamento usati 
+                  per il download. Selezionando un'iscrizione, appare una 
+                  finestra di connessione già precompilata con la URL JDBC e 
+                  l'utente banca dati, e occorre digitare ancora solo la password.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="upload"><em>File / Carica ...</em></a></h2>
+                <p>Selezionando questo punto di menu, appare una finestra 
+                  di dialogo per poter immettere i dati di collegamento alla banca dati.</p>
+                <img class="screen" alt="Upload connection dialog" src="connupdb.png"/>
+                <p>La URL JDBC può essere composta e copiata alla stessa maniera 
+                  dal server banca dati, dal nome della banca dati e dalla 
+                  cartella della banca dati, come nella finestra di dialogo 
+                  per il download. Dato che il contenuto dei files SIARD è 
+                  indipendente dal DBMS, possono essere caricati anche i 
+                  dati di un'istanza di un altro DBMS.</p>
+                <p>Inoltre si può definire se tipi o tabelle con lo stesso 
+                  nome devono essere sovrascritte. Ciò è comunque sconsigliabile 
+                  se si è connessi come amministratore banca dati con diversi diritti, 
+                  è però utile se si vuole caricare ripetutamente la stessa banca dati.</p>
+                <p>Se è cliccato <em>Solo schema</em>, vengono creati solo gli 
+                  schemi della banca dati (tipi e tabelle vuote), senza 
+                  che i dati primari vengano caricati.</p>
+                <p>In basso alla finestra è riportata una lista di tutti 
+                  gli schemi presenti nel file SIARD. Qui si può stabilire 
+                  in quali schemi dell'istanza banca dati devono essere 
+                  caricati dal file SIARD. Questi schemi devono essere allestiti 
+                  prima del <a href="dbms.html#prepupload" target="blanks">upload</a>.
+                  L'utente banca dati, iscritto in questa finestra di dialogo, 
+                  deve avere il diritto di creare in questi schemi tipi e tabelle. 
+                  Quindi la cosa più facile è spesso quella di utilizzare un 
+                  amministratore banca dati che abbia tutti i diritti di scrittura.</p>
+                <p>Nel caso in cui il DBMS non supporti alcuna UDTs o ARRAYs, 
+                  i dati saranno caricati "spianati", ovvero ogni UDT o ARRAY 
+                  viene caricato creando per ogni componente una colonna separata.</p>
+                <img class="screen" alt="Upload progress" src="uploading.png"/>
+                <p>Se i tipi e le tabelle vengono create e i dati primari 
+                  caricati, allora il upload è avvenuto con successo. 
+                  E' possibile che alcuni tipi e tabelle siano state rinominate, 
+                  a causa delle limitazioni di lunghezza nel sistema di 
+                  destinazione. In questi casi il suffisso soppresso di un 
+                  lungo nome viene sostituito da un numero.</p>
+                <img class="screen" alt="Upload success dialog" src="uploaded.png"/>
+                <p>Solo alla fine del upload si cercherà di attivare le 
+                  limitazioni (univocità, riferimenti), cosa che comunque 
+                  potrebbe fallire, in quanto diverse DBMS seguono regole più 
+                  severe diverse dallo standard SQL:2008. Questo fallimento 
+                  viene notificato nella scheda <em>Err</em> della finestra di 
+                  dialogo del upload.</p>
+                <img class="screen" alt="Upload constraint error" src="uploaderr.png"/>
+                <p>Se il download è riuscito, l'URL JDBC viene elencata in una 
+                  lista dei dati di collegamento utilizzati di recente, 
+                  che può essere selezionata nel seguente punto di menu.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="uploadmru"><em>File / Caricato da poco</em></a></h2>
+                <p>Sotto questo punto di menu sono disponibili le URS JDBC 
+                  di collegamento usate di recente per il caricamento di 
+                  banche dati. Selezionandone una, si apre la finestra di 
+                  dialogo di collegamento con la URL JDBC e i dati utenti 
+                  corrispondenti. Occorre quindi completare con la password 
+                  e l'assegnazione dello schema.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="open"><em>File / Apri ...</em></a></h2>
+                <p>Cliccando su questo punto di menu, appare una lista nella 
+                  quale si può selezionare un file SIARD già esistente, il 
+                  quale viene aperto nella finestra principale, dove sarà 
+                  possibile modificare e completare i metadati. I dati 
+                  primari possono essere visualizzati.</p>
+                <p>Se un file SIARD viene aperto o scaricato, il nome viene 
+                  elencato nella lista dei file usati di recente, e può essere 
+                  selezionato nel punto di menu seguente.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="openmru"><em>File / Aperto da poco</em></a></h2>
+                <p>Per selezionare un file aperto di recente e aprirlo nella finestra principale.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="save"><em>File / Salva</em></a></h2>
+                <p>Se i metadati di un file SIARD vengono modificati, questi vengono 
+                  salvati sul supporto di memoria, solo su richiesta esplicita.</p>
+                <p>I file SIARD temporanei, creati tramite il download con l'opzione 
+                  <em>Solo metadati</em>, non possono essere salvati. I vostri 
+                  metadati possono però essere visualizzati, modificati ed 
+                  esportati prima di chiudere il file.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="close"><em>File / Chiudi</em></a></h2>
+                <p>Dopo aver chiuso un archivio SIARD, se ne può scaricare o aprire un altro.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="displaymd"><em>File / Mostra i metadati ...</em></a></h2>
+                <p>Selezionando questo punto di menu, i metadati dell'archivio 
+                  SIARD nella finestra principale possono essere visualizzati 
+                  come documento HTML leggibile.</p>
+                <img class="screen" alt="Meta data summary" src="metadata.png"/>
+                <p>Viene visualizzata una versione HTML dei metadati, che è stata 
+                  generata con il file XSL attualmente creato (XML Stylesheet) 
+                  dalla XML metadati. Come standard si applica una semplice 
+                  trasformazione <em>etc/metadata.xsl</em>, mentre altre trasformazioni 
+                  XLS, più elaborate, possono essere selezionate in un 
+                  file HTML sotto <em>Strumenti / Opzioni</em>.</p>
+                <p>I metadati originali XML possono essere salvati come file 
+                  esterno tramite il pulsante <em>Salva XML</em>. Premendo 
+                  invece il pulsante <em>Salva HTML</em>, viene salvato 
+                  il file HTML trasformato, generato tramite la trasformazione 
+                  XSL dai metadati XLM originari.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="augmendmd"><em>File / Arricchisci i metadati ...</em></a></h2>
+                <p>I metadati salvati esternamente possono essere molto utili, 
+                  se la stessa banca dati viene di nuovo archiviata in un 
+                  secondo momento, dato che non sarà più necessario immettere 
+                  di nuovo tutte le descrizioni di tabelle e colonne, ma basterà 
+                  arricchire l'archivio SIARD con i metadati salvati esternamente, 
+                  che contengono queste descrizioni.</p>
+                <p>Dopo aver selezionato un file con dei metadati XML per 
+                  arricchire l'archivio SIARD attualmente visualizzato, 
+                  tutte le descrizioni vengono copiate, dove i nomi degli 
+                  oggetti della banca dati (schema, tabella, colonna, ...) 
+                  corrispondono. Quindi, se la banca dati attuale differisce 
+                  lievemente nella struttura dalla banca dati documentata 
+                  nei metadati, la maggior parte delle descrizioni viene 
+                  comunque ripresa.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="exit"><em>File / Esci</em></a></h2>
+                <p>Selezionando questo punto di menu, un archivio SIARD 
+                  eventualmente aperto viene chiuso e il programma terminato.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="copyall"><em>Modifica / Copia tutto</em></a></h2>
+                <p>Selezionando questo punto di menu, la tabella, indicata in 
+                  basso a destra sotto i metadati, viene copiata negli appunti. 
+                  Questa può essere una lista di suboggetti o un estratto dei dati primari.</p>
+                  
+                <img class="screen" alt="Copy all schemas in Calc" src="copyallmeta.png"/>
+                <p>Il contenuto degli appunti può essere inserito e incollato in 
+                  qualsiari altra applicazione in grado di rappresentare 
+                  testo o dati tabellari. Le celle della tabella sono separate 
+                  da tabulatori, motivo per cui inserendo il contenuto degli 
+                  appunti in una tabella MS Excel o LibreOffice Calc, si 
+                  genera una buona copia tabellare.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="copy"><em>Modifica / Copia</em></a></h2>
+                <p>Questo punto di menu può essere selezionato se si clicca 
+                  su una cella della tabella. Selezionandolo, vengono copiate 
+                  negli appunti singole righe della tabella, che quindi 
+                  conterrà la cella scelta.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="export"><em>Modifica / Esporta tabella ...</em></a></h2>
+                <p>Qualche volta è comodo poter elaborare un'intera tabella 
+                  in un'altra applicazione. A questo scopo si può esportare 
+                  l'intera tabella come file HTML, che contiene essenzialmente 
+                  soltanto una tabella.</p>
+                <p>Come formato per l'esportazione è stato scelto l'HTML, 
+                  perché può essere aperto come un file CSV in MS Excel o 
+                  LibreOffice Calc, evitando però alcuni punti deboli 
+                  propri del formato CSV, consentendo cosi tabelle per 
+                  valori UDT e links su dati esterni per valori 
+                  Large Object (CLOB, BLOB, XML, ...).</p>
+                <p>Selezionando questo punto di menu, il file HTML dev'essere 
+                  specificato con l'ausilio di un selettore di file. I valori 
+                  Large Object vengono salvati in una speciale cartella LOB, 
+                  modificabile sotto <em>Strumenti  / Opzioni ...</em>.</p>
+                  
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="find"><em>Modifica / Trova nei metadati ...</em></a></h2>
+                <p>Se la banca dati contiene molte tabelle e colonne, è spesso 
+                  difficile trovare di nuovo un valore specifico di metadati. 
+                  Con l'aiuto di questa funzione si possono invece trovare 
+                  tutti i metadati che contengono una stringa di caratteri.</p>
+                <img class="screen" alt="Find dialog" src="find.png"/>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="findnext"><em>Modifica / Riferimento successivo nei metadati</em></a></h2>
+                <p>Con questo punto di menu o con <em>Shift-F3</em>, si 
+                  possono cercare tutti i riferimenti della stringa di caratteri.</p>
+                <img class="screen" alt="Find next result" src="findnext.png"/>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="search"><em>Modifica / Cerca nei dati di tabella ...</em></a></h2>
+                <p>In maniera analoga, è spesso auspicabile, poter cercare i 
+                  dati primari di una tabella per stringa di caratteri.</p>
+                <img class="screen" alt="Search dialog" src="search.png"/>
+                <p>La finestra di dialogo per inserire una catena di caratteri 
+                  è un po' complessa. La ricerca è limitata alle colonne semplici 
+                  e si può scegliere una quantità parziale di queste colonne 
+                  semplici. La ricerca è una semplice ricerca di testo (numeri 
+                  e dati vengono trattati come testo che viene mostrato nella 
+                  tabella) e viene eseguita sequenzialmente in tutta la tabella,
+                  e può durare più a lungo nel caso di tabelle grandi. E' possibile 
+                  accellerare la ricerca o cercare in grandi o complessi 
+                  valori di dati (CLOB, BLOB, XML, UDT, ARRAY, ...),
+                  caricando l'archivio SIARD in un'istanza DBMS e utilizzando 
+                  SQL per l'interrogazione.</p>
+                  
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="searchnext"><em>Modifica / Riferimento successivo nella tabella</em></a></h2>
+                <p>Con questo punto di menu o F3, viene visualizzato il riferimento
+                  successivo della stringa di caratteri cercata.</p>
+                <img class="screen" alt="Search next result" src="searchnext.png"/>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="install"><em>Strumenti / Installa ...</em></a></h2>
+                <p>Come già descritto nel capitolo <a href="installation.html" target="_blank">Installazione</a>, 
+                  <em>SIARD Suite</em> può essere installato in qualsiasi momento, 
+                  se ancora non esiste alcuna versione installata o se la 
+                  versione installata ha un numero di versione inferiore 
+                  a quella attualmente avviata.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="uninstall"><em>Strumenti / Disinstalla</em></a></h2>
+                <p>Un'installazione di <em>SIARD Suite</em> può essere eliminata 
+                  selezionando questo punto di menu. Prima della disinstallazione 
+                  viene chiesto all'utente se vuole cancellare anche le 
+                  impostazioni personali di <em>SIARD Suite</em> o se devono 
+                  essere memorizzate per installazioni future di <em>SIARD Suite</em>.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="language"><em>Strumenti / Lingua</em></a></h2>
+                <p>Qui può essere selezionata una delle lingue supportate dall'interfaccia utente.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="integrity"><em>Strumenti / Esamina integrità</em></a></h2>
+                <p>Se l'archivio SIARD contiene un Message digest sui dati primari, 
+                  questo può essere ricalcolato di nuovo tramite questo punto 
+                  di menu e confrontato con il valore memorizzato.</p>
+                <p><em>SIARD Suite</em> calcola il Message Digest immediatamente 
+                  dopo il primo download e lo salva nei metadati. Se l'archivio 
+                  SIARD è stato decompresso (unzippato) e i dati primari 
+                  sono stati modificati, l'esame dell'integrità fallisce.</p>
+                <p>E' però facile per altri programmi, modificare i dati primari 
+                  e salvare i relativi Message Digest nei metadati. L'esame 
+                  dell'integrità dimostra quindi al massimo che nessun dato 
+                  primario è stato modificato <em>a mano</em>.</p>
+                <p>Una migliore garanzia dell'autenticità dei dati archiviati, 
+                  consiste nel salvare tutti i  Message Digests generati durante 
+                  il download in una banca dati separata e severamente controllata. 
+                  Quindi il Message Digest, salvato in precedenza nei metadati, 
+                  dovrebbe essere confrontato di volta in volta con quello della 
+                  banca dati esterna. Solo se questo è rimasto invariato, l'esame 
+                  dell'integrità qui disponibile può essere assunta come prova 
+                  che i dati primari non sono più stati modificati dopo il download.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="options"><em>Strumenti / Opzioni ...</em></a></h2>
+                <p>Questo dialogo permette di modificare alcuni dati personali 
+                  di configurazione. Se questi vengono modificati in un'istanza 
+                  di <em>SIARD Suite</em>, saranno allora salvati nelle impostazioni 
+                  personali al momento della chiusura del programma, altrimenti 
+                  restano validi solo per la seduta attuale.</p>
+                  
+                <img class="screen" alt="Options dialog" src="options.png"/>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="help"><em>? / Guida</em></a></h2>
+                <p>Questo punto di menu visualizza il presente manuale.</p>
+                
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+                
+                <h2><a name="info"><em>? / Info</em></a></h2>
+                <p>Questo punto di menu visualizza l'impressum di <em>SIARD Suite</em>.</p>
+                <img class="screen" alt="Info dialog" src="info.png"/>
+
+                <p class="pull-right">
+                  <small><a href="#" class="icon icon--before icon--power hidden-print">Inizio pagina</a></small>
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archivio federale svizzero</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licenza</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

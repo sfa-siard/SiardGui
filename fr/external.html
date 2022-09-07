@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ===================================================================
+Manual of SIARD Suite in French: Chapter External LOBs.
+Application: SIARD Suite 2.2
+Platform   : HTML5
+========================================================================
+Copyright  : Swiss Federal Archives, Berne, Switzerland, 2022
+==================================================================== -->
+  <head>
+    <title>SIARD Suite - LOBs externes</title>
+        <!-- character set -->
+    <meta charset="utf-8" />
+    <!-- Icon -->
+    <link rel="icon" type="image/gif" href="../icon.gif" />
+    <!-- Global style sheet -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/css/print.css">
+    <link rel="stylesheet" href="../siard.css" />
+    <!-- Global script collection -->
+    <script type="text/javascript" src="../siard.js" ></script>
+  </head>
+  <body>
+
+    <div class="container container-main">
+      <header>
+        <div class="clearfix">
+          <section class="nav-services clearfix">
+            <h2 class="sr-only">Language selection</h2>
+            <nav class="nav-lang">
+              <ul>
+                <li><a href="../de/external.html" lang="de" title="Deutsch" aria-label="Deutsch">DE</a></li>
+                <li><a lang="fr" title="Français selectionné" aria-label="Français selectionné" class="active">FR</a></li>
+                <li><a href="../it/external.html" lang="it" title="Italiano" aria-label="Italiano">IT</a></li>
+                <li><a href="../en/external.html" lang="en" title="English" aria-label="English">EN</a></li>
+              </ul>
+            </nav>
+          </section>
+        </div>
+          
+        <div class="clearfix">
+          <div class="table-row">
+            <span class="header-logo">
+              <img src="../assets/img/swiss.svg" onerror="this.onerror=null; this.src='../assets/img/swiss.png'" alt="Confederatio Helvetica" />
+            </span>
+            <h1 class="header-title">SIARD Suite - Manuel</h1>
+          </div>
+        </div>
+      </header>
+      
+      <div class="nav-main navbar" id="main-navigation"></div>
+    
+      <div class="container-fluid hidden-xs">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 id="br1" class="hidden">Breadcrumbs</h2>
+            <ol class="breadcrumb" role="navigation" aria-labelledby="br1">
+              <li><a href="./index.html">SIARD Suite 2.2 - Manuel</a><span class="icon icon--greater"></span></li>
+              <li class="active" aria-selected="true">LOBs externes</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12 main-column" id="content" role="main">
+            <div class="contentHead">
+              <div class="mod mod-contentpage">
+                <h1>SIARD Suite 2.2 - LOBs externes</h1>
+              </div>
+            </div>  
+            <div class="mod mod-text">
+              <section class="clearfix">
+                <p>Le Standard SIARD format 2.2 spécifie que de gros objets (LOBs)
+                  d'une base de données peuvent êtres enregistrés dans le système 
+                  externe de fichiers. L'emplacement doit être spécifié dans les 
+                  métadonnées de l'archive SIARD.</p>
+                <p>Afin que les objets puissent être enregistrés de manière 
+                  externe dans des colonnes LOBs de la base de données, 
+                  les colonnes correspondantes doivent tout d'abord être mises 
+                  en relation avec des répertoires externes appropriés. 
+                  La base de données peut ensuite être téléchargée.</p>
+                                    
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                
+                <h2><a id="mdonly">Téléchargement des métadonnées</a></h2>
+                <p>Pour relier des répertoires avec des colonnes de base 
+                  de données, les métadonnées de la base de données 
+                  correspondante doivent être d'abord téléchargées.</p>
+                <img class="screen" alt="Example de téléchargement de métadonnées" src="mdonly.png"/>
+                
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                  
+                <h2><a id="extloc">Indiquer des emplacements externes</a></h2>
+                <p>Les champs de métadonnées "répertoire pour LOBs" et "type MIME" 
+                peuvent à présent être remplis.</p>
+                <p>L'emplacement d'une colonne LOB peut être indiqué comme 
+                  "file:-URI" absolu. Il est toutefois recommandé de spécifier 
+                  tous les emplacements LOB de manière relative à un URI 
+                  global dans la partie globale des métadonnées SIARD. 
+                  En outre, il est judicieux d'indiquer en même temps les 
+                  médadonnées globales pour des noms des bases de données, etc.:</p> 
+                <img class="screen" alt="Emplacement global externe pour LOBs" src="extglob.png"/>
+
+                <p><br/><em>N.B.: Tous les répertoires LOB doivent se terminer 
+                  par une barre oblique qui indique qu'il s'agit de répertoires 
+                  externes existants dans le système de fichiers.</em></p>
+                <p>L'emplacement global externe pourrait être indiqué comme 
+                  <em>file:-URI</em> absolu. Ceci pourrait cependant empêcher 
+                  que l'archive SIARD avec ses fichiers LOB puisse être 
+                  déplacée dans un autre endroit. C'est pourquoi il est 
+                  recommandé de spécifier de manière relative l'emplacement 
+                  global externe où l'archive SIARD est enregistrée. 
+                  Ceci est caractérisé par "../". Dans l'exemple ci-dessus, 
+                  l'emplacement global pour LOBs est spécifié comme "../lob/". 
+                  Tous les LOBs externes seront ainsi enregistrés dans des 
+                  répertoires de manière relative au dossier <em>lobs/</em>
+                   dans le répertoire où l'archive SIARD se trouve.<br/></p>
+
+                <p>Le répertoire pour une colonne LOB externe est ainsi 
+                  indiqué de manière relative à l'emplacement global:</p>
+                <img class="screen" alt="Répertoire local externe pour PNG BLOBs" src="extpng.png"/>
+
+                <p><br/>Dans cet exemple, la valeur "pgn/" indique à SIARD Suite,
+                   d'enregistrer les LOBS de la colonne <em>CPNG</em> du 
+                   tableau <em>tblobsimple</em>, enregistré en externe dans 
+                   le dossier externe existant <em>lobs/png/</em>, dans le 
+                   dossier où l'archive SIARD est enregistrée.</p>
+
+                <p>N.B.: Si le nombre maximum de LOBs par dossier a été 
+                  défini dans les options, les fichiers individuels LOB 
+                  seront enregistrés dans des sous-dossiers numérotés 
+                  de <em>lobs/png/</em>, contenant chaque fois au maximum 
+                  le nombre de fichiers LOB indiqué.</p>
+                <p>Pour des colonnes LOB enregistrées en externe, un type 
+                  MIME (dans l'exemple "image/png") peut être indiqué. 
+                  Ce dernier est utilisé par SIARD-Suite pour définir 
+                  une extension de fichier adéquate (comme <em>.png</em> 
+                  pour un type MIME <em>image/png</em>).</p>
+                <p>Dans une base de données, il est possible d'enregistrer 
+                  plus d'une colonne LOB:</p>
+                <img class="screen" alt="Répertoire local externe pour FLAC BLOBs" src="extflac.png"/>
+                <p><br/>Après ces modifications, il est recommandé d'afficher 
+                  les métadonnées modifiées et de les sauvegarder comme XML.</p>
+                 
+                <p class="pull-right">
+                  <small>
+                    <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                  </small>
+                </p>
+                  
+                <h2><a id="extdown">Téléchargement de LOBs à enregistrer en externe</a></h2>
+                <p>Si de telles métadonnées préparées existent (importées d'un 
+                  fichier XML externe ou téléchargées comme "seulement métadonnées"),
+                  elles seront utilisées comme modèles pour le téléchargement 
+                  des données primaires. Cela signifie que les enregistrements 
+                  dans les métadonnées globales seront repris pour toutes les 
+                  descriptions et pour les répertoires LOB externes:</p>
+                <img class="screen" alt="Enregistrer un archive SIARD avec des LOBs externes" src="extstore.png"/>
+                <br/>
+                <img class="screen" alt="Archive SIARD enregistrée avec des LOBS externes" src="extstored.png"/>
+                <p><br/>Dans cet exemple, un petit fichier SIARD est enregistré 
+                  et renvoie aux BLOBs dans des répertoires <em>lobs/png/</em> et 
+                  <em>lobs/flac/</em> dans leur répertoire d'enregistrement <em>db</em>:</p>
+                <img class="screen" alt="Fichiers enregistrés en externe" src="extfiles.png"/>
+                <p>N.B.: Windows Explorer affiche des métadonnées intégrées 
+                  des fichiers FLAC, car l'extension de fichier <em>.flac</em>
+                  est connue et qu'ainsi les métadonnées de ces types de 
+                  fichiers peuvent être identifiées.</p>
+                
+              </section>
+            </div>
+        
+            <div class="clearfix">
+              <p class="pull-right">
+                <small>
+                  <a href="#" class="icon icon--before icon--power hidden-print">Haut de page</a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="container-fluid">
+          <hr class="footer-line">
+          <img src="../assets/img/logo-CH.svg" onerror="this.onerror=null; this.src='../assets/img/logo-CH.png'" />
+          <h1 class="hidden-xs">Archives fédérales suisses</h1>
+          <p class=pull-right><a href="../../../LICENSE.txt" target="_blank">Licence</a></p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
