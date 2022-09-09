@@ -1,26 +1,25 @@
 package ch.admin.bar.siard2.gui.dialogs;
 
+import ch.admin.bar.siard2.gui.SiardBundle;
+import ch.admin.bar.siard2.gui.SiardGui;
 import ch.admin.bar.siard2.gui.math.MaxOf;
+import ch.enterag.utils.fx.FxSizes;
+import ch.enterag.utils.fx.ScrollableDialog;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.*;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.*;
-
-import ch.admin.bar.siard2.gui.*;
-import ch.enterag.utils.fx.*;
-import ch.enterag.utils.logging.*;
+import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 
 public class HelpDialog extends ScrollableDialog {
-
-    private static IndentLogger _il = IndentLogger.getIndentLogger(HelpDialog.class.getName());
-    private static SiardBundle sb = SiardBundle.getSiardBundle();
+    private static final SiardBundle sb = SiardBundle.getSiardBundle();
 
     private HelpDialog(Stage stage) {
         super(stage, sb.getHelpTitle());
