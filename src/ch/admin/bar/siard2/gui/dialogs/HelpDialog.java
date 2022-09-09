@@ -42,6 +42,18 @@ public class HelpDialog extends ScrollableDialog {
         Text txtCopyright = new Text("©" + sdf.format(SiardGui.getPublicationDate()) + " " + SiardGui.getCopyright());
         Text txtSubject = new Text(sb.getInfoSubject());
 
+        double dMinWidth = getdMinWidth(txtTitle, txtCopyright, txtSubject);
+
+        VBox vboxTitle = new VBox();
+        vboxTitle.setPadding(new Insets(dINNER_PADDING));
+        vboxTitle.setSpacing(dHSPACING);
+        vboxTitle.setAlignment(Pos.TOP_CENTER);
+        vboxTitle.getChildren().addAll(txtTitle, txtCopyright, txtSubject);
+        vboxTitle.setMinWidth(dMinWidth);
+        return vboxTitle;
+    } /* createVBoxTitle */
+
+    private double getdMinWidth(Text txtTitle, Text txtCopyright, Text txtSubject) {
         double dMinWidth = 0.0;
         double dTextWidth = FxSizes.getTextWidth(txtTitle.getText());
         if (dMinWidth < dTextWidth)
@@ -54,14 +66,7 @@ public class HelpDialog extends ScrollableDialog {
         dTextWidth = FxSizes.getTextWidth(txtSubject.getText());
         if (dMinWidth < dTextWidth)
             dMinWidth = dTextWidth;
-        /* VBox for title area */
-        VBox vboxTitle = new VBox();
-        vboxTitle.setPadding(new Insets(dINNER_PADDING));
-        vboxTitle.setSpacing(dHSPACING);
-        vboxTitle.setAlignment(Pos.TOP_CENTER);
-        vboxTitle.getChildren().addAll(txtTitle, txtCopyright, txtSubject);
-        vboxTitle.setMinWidth(dMinWidth);
-        return vboxTitle;
-    } /* createVBoxTitle */
+        return dMinWidth;
+    }
 
 }
