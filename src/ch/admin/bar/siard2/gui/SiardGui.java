@@ -636,7 +636,7 @@ public class SiardGui extends Application
    */
   public void help()
   {
-    HelpDialog.showHelpDialog(getStage(),"index.html");
+    HelpDialog.showHelpDialog(getStage());
   } /* help */
   
   /*------------------------------------------------------------------*/
