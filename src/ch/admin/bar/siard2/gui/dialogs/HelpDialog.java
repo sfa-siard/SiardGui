@@ -1,9 +1,9 @@
 package ch.admin.bar.siard2.gui.dialogs;
 
+import ch.admin.bar.siard2.gui.math.MaxOf;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,10 +23,8 @@ public class HelpDialog extends ScrollableDialog {
     private HelpDialog(Stage stage) {
         super(stage, sb.getHelpTitle());
 
-        VBox vboxTitle = systemInfoBox();
-
         StackPane root = new StackPane();
-        root.getChildren().add(vboxTitle);
+        root.getChildren().add(systemInfoBox());
 
         Scene scene = new Scene(root, 480, 320);
         setScene(scene);
@@ -42,31 +40,19 @@ public class HelpDialog extends ScrollableDialog {
         Text txtCopyright = new Text("©" + sdf.format(SiardGui.getPublicationDate()) + " " + SiardGui.getCopyright());
         Text txtSubject = new Text(sb.getInfoSubject());
 
-        double dMinWidth = getdMinWidth(txtTitle, txtCopyright, txtSubject);
-
         VBox vboxTitle = new VBox();
         vboxTitle.setPadding(new Insets(dINNER_PADDING));
         vboxTitle.setSpacing(dHSPACING);
         vboxTitle.setAlignment(Pos.TOP_CENTER);
         vboxTitle.getChildren().addAll(txtTitle, txtCopyright, txtSubject);
-        vboxTitle.setMinWidth(dMinWidth);
+        vboxTitle.setMinWidth(minWidthOf(txtTitle, txtCopyright, txtSubject));
         return vboxTitle;
-    } /* createVBoxTitle */
-
-    private double getdMinWidth(Text txtTitle, Text txtCopyright, Text txtSubject) {
-        double dMinWidth = 0.0;
-        double dTextWidth = FxSizes.getTextWidth(txtTitle.getText());
-        if (dMinWidth < dTextWidth)
-            dMinWidth = dTextWidth;
-
-        dTextWidth = FxSizes.getTextWidth(txtCopyright.getText());
-        if (dMinWidth < dTextWidth)
-            dMinWidth = dTextWidth;
-
-        dTextWidth = FxSizes.getTextWidth(txtSubject.getText());
-        if (dMinWidth < dTextWidth)
-            dMinWidth = dTextWidth;
-        return dMinWidth;
     }
 
+    private double minWidthOf(Text txtTitle, Text txtCopyright, Text txtSubject) {
+        return new MaxOf(FxSizes.getTextWidth(txtTitle.getText()),
+                         FxSizes.getTextWidth(txtCopyright.getText()),
+                         FxSizes.getTextWidth(txtSubject.getText()))
+                .get().doubleValue();
+    }
 }
