@@ -10,8 +10,10 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Separator;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -24,12 +26,14 @@ public class HelpDialog extends ScrollableDialog {
     private HelpDialog(Stage stage) {
         super(stage, sb.getHelpTitle());
 
-        Separator separator =
-                new Separator(Orientation.HORIZONTAL);
-        VBox root = new VBox(systemInfoBox(), separator, manualBox());
+        VBox root = new VBox(systemInfoBox(),
+                             new Separator(Orientation.HORIZONTAL),
+                             manualBox(),
+                             new Separator(Orientation.HORIZONTAL),
+                             okButtonBox());
         root.setSpacing(dHSPACING);
         root.setPadding(new Insets(10.0));
-        Scene scene = new Scene(root, 480, 320);
+        Scene scene = new Scene(root);
         setScene(scene);
     }
 
@@ -39,6 +43,19 @@ public class HelpDialog extends ScrollableDialog {
         VBox box = new VBox(new Text(sb.getManualText()), manualLink);
         box.setAlignment(Pos.TOP_CENTER);
         return box;
+    }
+
+    private Node okButtonBox() {
+        Button btn = new Button(sb.getOk());
+        btn.setDefaultButton(true);
+        btn.setOnAction(actionEvent -> this.close());
+
+        HBox hboxButton = new HBox(btn);
+        hboxButton.setPadding(new Insets(dINNER_PADDING));
+        hboxButton.setSpacing(dHSPACING);
+        hboxButton.setAlignment(Pos.TOP_RIGHT);
+        hboxButton.setMinWidth(FxSizes.getTextWidth(sb.getOk()));
+        return hboxButton;
     }
 
 
