@@ -34,9 +34,9 @@ public class HelpDialog extends ScrollableDialog {
     }
 
     private Node manualBox() {
-        Hyperlink manualLink = new Hyperlink("https://sfa-siard.github.io/SiardGui");
+        Hyperlink manualLink = new Hyperlink(sb.getManualUrl());
         manualLink.setOnAction(actionEvent -> new SiardGui().openBrowser(manualLink.getText()));
-        VBox box = new VBox(new Text("Die ausführliche Dokumentation zu SIARD ist online verfügbar: "), manualLink);
+        VBox box = new VBox(new Text(sb.getManualText()), manualLink);
         box.setAlignment(Pos.TOP_CENTER);
         return box;
     }
