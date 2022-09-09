@@ -37,19 +37,20 @@ public class HelpDialog extends ScrollableDialog {
     }
 
     private VBox systemInfoBox() {
-
-        /* texts in title area */
-        double dMinWidth = 0.0;
         Text txtTitle = new Text(SiardGui.getApplication() + " " + SiardGui.getVersion());
+        SimpleDateFormat sdf = new SimpleDateFormat(sb.getDateFormat());
+        Text txtCopyright = new Text("©" + sdf.format(SiardGui.getPublicationDate()) + " " + SiardGui.getCopyright());
+        Text txtSubject = new Text(sb.getInfoSubject());
+
+        double dMinWidth = 0.0;
         double dTextWidth = FxSizes.getTextWidth(txtTitle.getText());
         if (dMinWidth < dTextWidth)
             dMinWidth = dTextWidth;
-        SimpleDateFormat sdf = new SimpleDateFormat(sb.getDateFormat());
-        Text txtCopyright = new Text("©" + sdf.format(SiardGui.getPublicationDate()) + " " + SiardGui.getCopyright());
+
         dTextWidth = FxSizes.getTextWidth(txtCopyright.getText());
         if (dMinWidth < dTextWidth)
             dMinWidth = dTextWidth;
-        Text txtSubject = new Text(sb.getInfoSubject());
+
         dTextWidth = FxSizes.getTextWidth(txtSubject.getText());
         if (dMinWidth < dTextWidth)
             dMinWidth = dTextWidth;
