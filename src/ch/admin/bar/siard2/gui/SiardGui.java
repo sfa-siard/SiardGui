@@ -11,7 +11,11 @@ Created    : 05.05.2017, Hartwig Thomas, Enter AG, Rüti ZH
 package ch.admin.bar.siard2.gui;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
+
+import com.sun.deploy.uitoolkit.impl.fx.HostServicesFactory;
+import com.sun.javafx.application.HostServicesDelegate;
 import javafx.application.*;
 import javafx.concurrent.*;
 import javafx.geometry.*;
@@ -860,4 +864,8 @@ public class SiardGui extends Application
     System.exit(iReturn);
   } /* main */
 
-} /* class SiardGui */
+  public void openBrowser(String url) {
+    HostServicesDelegate hostServices = HostServicesFactory.getInstance(this);
+    hostServices.showDocument(url);
+  }
+}
