@@ -103,6 +103,10 @@ public class SiardBundle extends FxBundle
     return getProperty("help.manual.url");
   }
 
+  public String getManualUrlTarget() {
+    return getProperty("help.manual.url.target");
+  }
+
   public String getHelpErrorTitle() { return getProperty("help.error.title"); }
   public String getHelpErrorMessage(File fileManual) 
   { 

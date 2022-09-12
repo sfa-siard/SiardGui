@@ -39,7 +39,7 @@ public class HelpDialog extends ScrollableDialog {
 
     private Node manualBox() {
         Hyperlink manualLink = new Hyperlink(sb.getManualUrl());
-        manualLink.setOnAction(actionEvent -> new SiardGui().openBrowser(manualLink.getText()));
+        manualLink.setOnAction(actionEvent -> new SiardGui().openBrowser(sb.getManualUrlTarget()));
         VBox box = new VBox(new Text(sb.getManualText()), manualLink);
         box.setAlignment(Pos.TOP_CENTER);
         return box;
