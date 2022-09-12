@@ -47,9 +47,6 @@ public class SplashPaneTester
     List<String> listUnnamed = getParameters().getUnnamed();
     if ((listUnnamed.size() > 0) && listUnnamed.get(0).equals("exit"))
     {
-      File filePng = new File("doc/manual/splash.png");
-      System.out.println("Saving \""+filePng.getAbsolutePath()+"\" ...");
-      SplashPane.saveSnapshot(filePng);
       stage.close();
       Platform.exit();
     }

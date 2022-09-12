@@ -94,6 +94,19 @@ public class SiardBundle extends FxBundle
   public String getInfoProvenancesLabel() { return getProperty("info.provenances.label"); }
   
   public String getHelpTitle() { return getProperty("help.title"); }
+
+  public String getManualText() {
+    return getProperty("help.manual.text");
+  }
+
+  public String getManualUrl() {
+    return getProperty("help.manual.url");
+  }
+
+  public String getManualUrlTarget() {
+    return getProperty("help.manual.url.target");
+  }
+
   public String getHelpErrorTitle() { return getProperty("help.error.title"); }
   public String getHelpErrorMessage(File fileManual) 
   { 
