@@ -617,7 +617,7 @@ Created    : 01.06.2017, Hartwig Thomas
   <!-- copy dependencies from local file system -->
   <target name="copy-dependencies" depends="check">
     <echo message="Copy jar files from dependency projects on local file system"/>
-   <!-- <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
+    <copy file="../EnterUtilities/dist/enterutils.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../SqlParser/dist/sqlparser.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../Zip64File/dist/zip64.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../SiardApi/dist/siardapi.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
@@ -629,6 +629,6 @@ Created    : 01.06.2017, Hartwig Thomas
     <copy file="../JdbcMsSql/dist/jdbcmssql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../JdbcMySql/dist/jdbcmysql.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
     <copy file="../JdbcOracle/dist/jdbcoracle.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
-    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>-->
+    <copy file="../JdbcPostgres/dist/jdbcpostgres.jar" todir="${dirlib}" failonerror="false" overwrite="true"/>
   </target>
 </project>
