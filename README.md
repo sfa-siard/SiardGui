@@ -1,4 +1,6 @@
-# SIARD Suite - Programs for reading and writing files in the SIARD Format 2.2
+# SIARD GUI - Reading and writing files in SIARD Format 2.2.x
+
+> **NOTICE:** This repository is no longer maintained and has been replaced by SIARD Suite. Please visit [SIARD Suite](https://github.com/sfa-siard/siard-suite) for the latest version and updates.
 
 This package contains interactive and command-line programs for reading 
 and writing files in the SIARD Format 2.2
@@ -62,4 +64,3 @@ Linux Azul Zulu 1.8 (32-bit)
 ```bash
 mkdir "./jre"
 wget https://cdn.azul.com/zulu/bin/zulu8.64.0.15-ca-fx-jre8.0.342-linux_i686.tar.gz -O ./jre/jre-linux-32-bit.tar.gz
-```
